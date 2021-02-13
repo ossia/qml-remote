@@ -14,7 +14,9 @@ Button {
     }
     contentItem:    Image{
         id: reinitializeButton
-        anchors.fill: zone
+        sourceSize.width: 30
+        sourceSize.height: 30
+        clip: true
         source:"Icons/reinitialize_off.svg"
         states: [
                 State {
@@ -26,7 +28,5 @@ Button {
     background: Rectangle{
         id: zone
         color:"#202020"
-        width: 40
-        height: 40
     }
 }

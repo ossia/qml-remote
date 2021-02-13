@@ -8,8 +8,7 @@ import QtQuick.Controls.Styles 1.4
 
 Item {
     id: window
-    height: parent.height
-    width: parent.width
+    anchors.fill: parent
     WebSocket {
         id: socket
         url:"ws://localhost:10212"
@@ -39,25 +38,28 @@ Item {
                          }
         active: false
     }
-    ColumnLayout{
-        Layout.preferredWidth: parent.width
-        Layout.preferredHeight: parent.height
-        spacing: 10
-        RowLayout{
-            spacing: 0
-            Layout.minimumWidth: window.width
-            OssiaVolume{
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-            }
 
-            OssiaSpeed{
-                Layout.alignment: Qt.AlignRight | Qt.AlignTop
-            }
-
-        }
-        TimeSet{}
-        OssiaControlSurfaces{}
+    OssiaVolume{
+        id: ossiaVolume
+        anchors.horizontalCenter: parent.horizontalCenter
     }
+    OssiaSpeed{
+        id: ossiaSpeed
+        anchors.right: parent.right
+    }
+    TimeSet{
+        id: ossiaTimeSet
+        anchors.top: ossiaVolume.bottom
+        anchors.topMargin: 5
+        width: parent.width
+    }
+    /*
+    OssiaControlSurfaces{
+        anchors.top: ossiaTimeSet.bottom
+        anchors.topMargin: 5
+
+    }
+    */
     OssiaTimeLine{
         anchors.bottom: parent.bottom
     }

@@ -8,7 +8,7 @@ ColumnLayout{
             OssiaSlider{
                 id: slider
                 controlName: modelData
-                height: 20; width:200
+                height: 20; width: window.width/4
                 controlColor: "#f6a019"
             }
         }

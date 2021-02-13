@@ -1,18 +1,16 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.15
 
-
-RowLayout{
-    id: area
-    Layout.preferredWidth: window.width
-    //Layout.minimumWidth: window.width
+Item{
     OssiaPlayPauseStop{
-        Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+        id: ossiaPlayPauseStop
+        anchors.left: parent.left
     }
     OssiaTriggers{
-        Layout.alignment: Qt.AlignTop
+        id: ossiaTrigger
+        anchors.left: ossiaPlayPauseStop.right
     }
     OssiaSpeeds{
-        Layout.alignment: Qt.AlignRight | Qt.AlignTop
+        anchors.right: parent.right
     }
 }

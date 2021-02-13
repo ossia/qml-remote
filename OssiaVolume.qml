@@ -3,9 +3,11 @@ import QtQuick.Layouts 1.15
 
 
 OssiaSlider{
+    id: ossiaVolume
+    anchors.horizontalCenter: parent.horizontalCenter
     controlName: "Volume"
     controlUnit: "dB"
-    height: 20; width:200
+    height: 20; width: window.width/4
     controlColor: "#62400a"
 }
 

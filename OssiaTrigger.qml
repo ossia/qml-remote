@@ -15,10 +15,15 @@ Button {
     }
 
     background: Rectangle {
-        implicitWidth: area.width/10
-        implicitHeight: 9*area.height/10
+        implicitWidth: window.width/10
+        implicitHeight: window.height/5
         color: "#303030"
         radius: 10
+        Image{
+            x: 5
+            y: 5
+            source:"Icons/scenario_trigger.svg"
+        }
     }
 }
 

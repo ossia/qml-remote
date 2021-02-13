@@ -6,10 +6,7 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.15
 
 
-ColumnLayout{
-    spacing: -25
-    Layout.maximumWidth: 30
-    Layout.minimumWidth: 35
+Column{
     OssiaPlayPause{}
     OssiaPlayGlob{}
     OssiaStop{}

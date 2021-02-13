@@ -4,6 +4,7 @@ import QtQuick.Window 2.3
 import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
+
 Button {
     onClicked: {
         if(pauseButton.state === ''){
@@ -19,8 +20,11 @@ Button {
     }
     contentItem:    Image{
         id:pauseButton
-        anchors.fill: zone
+        sourceSize.width: 30
+        sourceSize.height: 30
         source: "Icons/connection.svg"
+        clip: true
+
         states: [
             State {
                 name: "play_off"
@@ -35,10 +39,5 @@ Button {
     background: Rectangle{
         id: zone
         color:"#202020"
-        width: 40
-        height: 40
     }
 }
-
-
-

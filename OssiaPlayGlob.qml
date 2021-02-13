@@ -16,6 +16,9 @@ Button {
     contentItem:     Image{
         id: playGlobButton
         anchors.fill: zone
+        sourceSize.width: 30
+        sourceSize.height: 30
+        clip: true
         source:"Icons/play_glob_off.svg"
         states: [
                 State {
@@ -27,7 +30,5 @@ Button {
     background: Rectangle{
         id: zone
         color:"#202020"
-        width: 40
-        height: 40
     }
 }
