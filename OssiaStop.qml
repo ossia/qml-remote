@@ -5,7 +5,11 @@ import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
 Button {
-    onPressed: stopButton.state = 'holdClickPause'
+    onPressed: {
+        stopButton.state = 'holdClickPause'
+        socket.sendTextMessage('{ "Message": "Stop" }')
+    }
+
     onReleased: stopButton.state = ''
 
     contentItem:    Image{

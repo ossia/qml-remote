@@ -7,7 +7,7 @@ RowLayout{
     Layout.preferredWidth: window.width
     //Layout.minimumWidth: window.width
     OssiaPlayPauseStop{
-        Layout.alignment: Qt.AlignTop
+        Layout.alignment: Qt.AlignTop | Qt.AlignLeft
     }
     OssiaTriggers{
         Layout.alignment: Qt.AlignTop

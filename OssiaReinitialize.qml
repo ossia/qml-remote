@@ -5,9 +5,13 @@ import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
 Button {
-    onPressed: reinitializeButton.state = 'holdClickPause'
-    onReleased: reinitializeButton.state = ''
-
+    onPressed: {
+        reinitializeButton.state = 'holdClickPause'
+        socket.sendTextMessage('{ "Message": "Stop" }')
+    }
+    onReleased: {
+        reinitializeButton.state = ''
+    }
     contentItem:    Image{
         id: reinitializeButton
         anchors.fill: zone
