@@ -6,9 +6,13 @@ import QtQuick.Controls.Material 2.3
 
 
 Button {
-    onPressed: playGlobButton.state = 'holdClickPause'
-    onReleased: playGlobButton.state = ''
+    onPressed: {
+        playGlobButton.state = 'holdClickPause'
 
+    }
+    onReleased: {
+        playGlobButton.state = ''
+    }
     contentItem:     Image{
         id: playGlobButton
         anchors.fill: zone
