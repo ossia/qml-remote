@@ -1,0 +1,41 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>OssiaControlSurface.qml</file>
+        <file>OssiaControlSurfaces.qml</file>
+        <file>OssiaPlayGlob.qml</file>
+        <file>OssiaPlayPause.qml</file>
+        <file>OssiaPlayPauseStop.qml</file>
+        <file>OssiaPlayPauseStop2.qml</file>
+        <file>OssiaPosition.qml</file>
+        <file>OssiaPositionPoint.qml</file>
+        <file>OssiaReinitialize.qml</file>
+        <file>OssiaSlider.qml</file>
+        <file>OssiaSliders.qml</file>
+        <file>OssiaSpeed.qml</file>
+        <file>OssiaSpeeds.qml</file>
+        <file>OssiaSqueleton.qml</file>
+        <file>OssiaStop.qml</file>
+        <file>OssiaTimeLine.qml</file>
+        <file>OssiaTrigger.qml</file>
+        <file>OssiaTriggers.qml</file>
+        <file>OssiaVolume.qml</file>
+        <file>TimeSet.qml</file>
+        <file>main.cpp</file>
+        <file>Icons/pause_off.svg</file>
+        <file>Icons/pause_on.svg</file>
+        <file>Icons/play_glob_off.svg</file>
+        <file>Icons/play_glob_on.svg</file>
+        <file>Icons/play_off.svg</file>
+        <file>Icons/play_on.svg</file>
+        <file>Icons/reinitialize_off.svg</file>
+        <file>Icons/reinitialize_on.svg</file>
+        <file>Icons/stop_off.svg</file>
+        <file>Icons/stop_on.svg</file>
+        <file>OssiaTriggers2.qml</file>
+        <file>Ossiawebsocket.qml</file>
+        <file>OssiaTriggerModel.qml</file>
+        <file>Icons/connection.svg</file>
+        <file>Icons/scenario_trigger.svg</file>
+    </qresource>
+</RCC>
