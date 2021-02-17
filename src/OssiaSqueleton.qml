@@ -38,7 +38,11 @@ Item {
                          }
         active: false
     }
-
+    OssiaPlayPauseStop{
+        id: ossiaPlayPauseStop
+        anchors.left: parent.left
+        height: window/5
+    }
     OssiaVolume{
         id: ossiaVolume
         anchors.horizontalCenter: parent.horizontalCenter
@@ -51,15 +55,17 @@ Item {
         id: ossiaTimeSet
         anchors.top: ossiaVolume.bottom
         anchors.topMargin: 5
+        anchors.left: ossiaPlayPauseStop.right
+        anchors.bottom: ossiaPlayPauseStop.bottom
         width: parent.width
+        height: window.height/5
     }
-    /*
     OssiaControlSurfaces{
-        anchors.top: ossiaTimeSet.bottom
-        anchors.topMargin: 5
-
-    }
-    */
+            id: ossiaSliders
+            anchors.top:ossiaPlayPauseStop.bottom
+            anchors.topMargin:  window.height/20
+            height: window.height/1.5
+        }
     OssiaTimeLine{
         anchors.bottom: parent.bottom
     }
