@@ -6,6 +6,11 @@ import QtQuick.Controls.Material 2.3
 
 
 Button {
+    hoverEnabled: true
+    onHoveredChanged: {if (playGlobButton.state === 'hoveredPlayGlob' || playGlobButton.state === 'holdClickPause')
+                            {playGlobButton.state = ''}
+                       else
+                            {playGlobButton.state = 'hoveredPlayGlob'}}
     onPressed: {
         playGlobButton.state = 'holdClickPause'
 
@@ -23,7 +28,12 @@ Button {
                 State {
                     name: "holdClickPause"
                     PropertyChanges { target: playGlobButton; source: "Icons/play_glob_on.svg" }
-                }
+                },
+                State {
+                    name: "hoveredPlayGlob"
+                    PropertyChanges { target: playGlobButton; source: "Icons/play_glob_hover.svg" }
+            }
+
             ]
     }
     background: Rectangle{

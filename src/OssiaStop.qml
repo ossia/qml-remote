@@ -5,6 +5,8 @@ import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
 Button {
+    hoverEnabled: true
+    onHoveredChanged: {if (stopButton.state === 'hoveredStop') {stopButton.state = ''} else {stopButton.state = 'hoveredStop'}}
     onPressed: {
         stopButton.state = 'holdClickPause'
         socket.sendTextMessage('{ "Message": "Stop" }')
@@ -22,7 +24,12 @@ Button {
                 State {
                     name: "holdClickPause"
                     PropertyChanges { target: stopButton; source: "Icons/stop_on.svg" }
+                },
+                State {
+                    name: "hoveredStop"
+                    PropertyChanges { target: stopButton; source: "Icons/stop_hover.svg"}
                 }
+
             ]
     }
     background: Rectangle{

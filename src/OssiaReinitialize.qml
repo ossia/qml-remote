@@ -5,6 +5,8 @@ import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
 Button {
+    hoverEnabled: true
+    onHoveredChanged: {if (reinitializeButton.state === 'hoveredReinitialize') {reinitializeButton.state = ''} else {reinitializeButton.state = 'hoveredReinitialize'}}
     onPressed: {
         reinitializeButton.state = 'holdClickPause'
         socket.sendTextMessage('{ "Message": "Stop" }')
@@ -22,7 +24,12 @@ Button {
                 State {
                     name: "holdClickPause"
                     PropertyChanges { target: reinitializeButton; source: "Icons/reinitialize_on.svg" }
-                }
+                },
+            State {
+                name: "hoveredReinitialize"
+                PropertyChanges {target: reinitializeButton; source: "Icons/reinitialize_hover.svg"}
+            }
+
             ]
     }
     background: Rectangle{

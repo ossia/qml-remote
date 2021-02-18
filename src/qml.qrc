@@ -37,5 +37,11 @@
         <file>OssiaTriggerModel.qml</file>
         <file>Icons/connection.svg</file>
         <file>Icons/scenario_trigger.svg</file>
+        <file>Icons/play_glob_hover.svg</file>
+        <file>Icons/play_hover.svg</file>
+        <file>Icons/stop_hover.svg</file>
+        <file>Icons/reinitialize_hover.svg</file>
+        <file>Icons/pause_disabled.svg</file>
+        <file>Icons/pause_hover.svg</file>
     </qresource>
 </RCC>
