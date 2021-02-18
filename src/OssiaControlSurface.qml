@@ -1,17 +1,26 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.15
 
-ColumnLayout{
+Column{
     spacing: 5
     property string controlSurfaceName: "ControlSurfaceName"
     Text{
         text: controlSurfaceName
         color: "white"
     }
-    RowLayout{
+    Grid{
+        columns: 3
+        spacing: 5
         OssiaSliders{
-            Layout.alignment: Qt.AlignTop
+            id: ossiaSlider
+            //Layout.alignment: Qt.AlignTop
         }
-        OssiaPosition{}
+
+        OssiaPosition{
+            id: positions
+            width: 300
+            height: 150
+            //Layout.alignment: e
+        }
     }
 }

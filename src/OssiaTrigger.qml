@@ -15,7 +15,7 @@ Button {
     }
 
     background: Rectangle {
-        border.color : "black" // separation entre triggers
+        //border.color : "black" // separation entre triggers
         implicitWidth: window.width/10
         implicitHeight: window.height/5
         color: "#303030"
@@ -27,4 +27,3 @@ Button {
         }
     }
 }
-

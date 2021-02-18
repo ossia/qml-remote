@@ -5,13 +5,14 @@ import QtQml.Models 2.15
 
 Rectangle{
     radius:9
-    color: "grey"
-    border.color: "black"
+    color: "#202020"
+    //border.color: "black"
     ListView{
         id:triggerslist
         width: parent.width ;height:parent.height
         orientation: ListView.Horizontal
         clip: true
+        spacing: 5
         snapMode: ListView.SnapToItem
         model:ListModel {
             id: triggerslistModel

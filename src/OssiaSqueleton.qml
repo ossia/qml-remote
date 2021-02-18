@@ -56,17 +56,24 @@ Item {
         anchors.top: ossiaVolume.bottom
         anchors.topMargin: 5
         anchors.left: ossiaPlayPauseStop.right
+        anchors.right: window.right //c'était ça arthur
         anchors.bottom: ossiaPlayPauseStop.bottom
         width: parent.width
         height: window.height/5
     }
     OssiaControlSurfaces{
-            id: ossiaSliders
-            anchors.top:ossiaPlayPauseStop.bottom
-            anchors.topMargin:  window.height/20
-            height: window.height/1.5
+            id: ossiaControlSurface
+            anchors.top: ossiaPlayPauseStop.bottom
+            anchors.bottom: ossiaTimeLine.top
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: parent.height
+            //anchors.margins: 5
+            //height: window.height/1.5
         }
     OssiaTimeLine{
+        id: ossiaTimeLine
         anchors.bottom: parent.bottom
     }
 }

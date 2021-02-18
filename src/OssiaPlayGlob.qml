@@ -15,7 +15,6 @@ Button {
     }
     contentItem:     Image{
         id: playGlobButton
-        anchors.fill: zone
         sourceSize.width: 30
         sourceSize.height: 30
         clip: true

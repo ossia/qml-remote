@@ -8,18 +8,24 @@ import QtQml.Models 2.15
 
 Rectangle{
     id: speedList
-    width: parent.width/4 ;height:parent.height
-    color: "grey"
-    anchors.right: window.right
-    border.color: "black"
+    width: parent.width/4
+    height:parent.height
+    color: "#202020"
+    anchors.right: parent.right
     ListView {
         id: lView
-        width: speedList.width*0.77;height:speedList.height - parent.height/20
+        //width: speedList.width
+        //height:speedList.height
         spacing: 10
         anchors.top: parent.top
-        anchors.topMargin: parent.height/40
+        anchors.bottom: parent.bottom
+        //anchors.topMargin: parent.height/40
         anchors.left: parent.left
-        anchors.leftMargin: 2
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+        anchors.topMargin: 5
+        anchors.bottomMargin: 5
         orientation: ListView.Vertical
                 clip: true
                 snapMode: ListView.SnapToItem
@@ -48,14 +54,22 @@ Rectangle{
 
 
               }
-              delegate:OssiaSlider{
-                  id: speed
-                  controlName: name
-                  height:20; width:speedList.width*0.7
-                  controlColor: "#62400a"
-              }
-        ScrollBar.vertical: ScrollBar { id: scrollBar
+          delegate:OssiaSlider{
+              id: speed
+              controlName: name
+              height:20
+              width: speedList.width*0.8
+              controlColor: "#62400a"
+          }
+        ScrollBar.vertical: ScrollBar {
+            id: scrollBar
+            width: speedList.width/10
+            anchors.right:  parent.right
             policy:  ScrollBar.AlwaysOn
+            contentItem: Rectangle {
+                radius: width / 2
+                color: "#303030"
+            }
         }
     }
 }

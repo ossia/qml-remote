@@ -4,13 +4,13 @@ import QtQuick.Controls 2.15
 Rectangle {
     property string _positionPointName: "PositionName"
     id: background
-    width: 300
-    height: 150
+    //width: 300
+    //height: 150
+
     color: "#363636"
     Rectangle {
         id: zone
-        x: background.width/100
-        y: background.height/100
+
         width: 70*background.width/100
         height: 98*background.height/100
         color: "black"
