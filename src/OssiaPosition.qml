@@ -19,47 +19,31 @@ Rectangle {
             anchors.left: zone.right
             anchors.leftMargin: 5
             anchors.top: zone.top
-
-
             spacing: 20
-
             Repeater {
                 model: ["position1", "ps", "position2"]
                 OssiaPositionPoint{_positionPointName: modelData}
             }
         }
-
-        Rectangle {
-            id: cursor
-            width: 5
-            height: 5
-            color: "white"
-            radius: cursor.width/2
-
-            MouseArea {
-                anchors.fill: parent
-                width: cursor.width * 2
-                height: cursor.height*2
-                drag.target: parent;
-                drag.minimumX: -cursor.x
-                drag.maximumX: zone.width - vertical.width
-                drag.minimumY: -cursor.y
-                drag.maximumY: zone.height - horizontal.height
-            }
+        MouseArea{
+            anchors.fill: parent
             Rectangle {
                 id: vertical
-                y: -cursor.y
-                width: cursor.width
-                height: zone.height
+                anchors.top: parent.top
+                x: parent.mouseX
+                width: 5
+                height: parent.height
                 color: "white"
             }
             Rectangle {
                 id: horizontal
-                x: -cursor.x
-                width: zone.width
-                height: cursor.height
+                anchors.left: parent.left
+                y: parent.mouseY
+                width: parent.width
+                height: 5
                 color: "white"
             }
+
         }
     }
 }
