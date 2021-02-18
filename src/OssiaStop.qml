@@ -6,13 +6,16 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
-    onHoveredChanged: {if (stopButton.state === 'hoveredStop') {stopButton.state = ''} else {stopButton.state = 'hoveredStop'}}
+    onHoveredChanged: {if (stopButton.state === 'hoveredStop' || stopButton.state === 'holdClickPause')
+                            {stopButton.state = ''}
+                       else
+                            {stopButton.state = 'hoveredStop'}}
     onPressed: {
         stopButton.state = 'holdClickPause'
         socket.sendTextMessage('{ "Message": "Stop" }')
     }
 
-    onReleased: stopButton.state = ''
+    onReleased: stopButton.state = 'hoveredStop'
 
     contentItem:    Image{
         id: stopButton

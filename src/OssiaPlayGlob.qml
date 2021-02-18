@@ -16,7 +16,7 @@ Button {
 
     }
     onReleased: {
-        playGlobButton.state = ''
+        playGlobButton.state = 'hoveredPlayGlob'
     }
     contentItem:     Image{
         id: playGlobButton

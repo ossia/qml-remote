@@ -6,13 +6,16 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
-    onHoveredChanged: {if (reinitializeButton.state === 'hoveredReinitialize') {reinitializeButton.state = ''} else {reinitializeButton.state = 'hoveredReinitialize'}}
+    onHoveredChanged: {if (reinitializeButton.state === 'hoveredReinitialize' || reinitializeButton.state === 'holdClickPause')
+                            {reinitializeButton.state = ''}
+                       else
+                            {reinitializeButton.state = 'hoveredReinitialize'}}
     onPressed: {
         reinitializeButton.state = 'holdClickPause'
         socket.sendTextMessage('{ "Message": "Stop" }')
     }
     onReleased: {
-        reinitializeButton.state = ''
+        reinitializeButton.state = 'hoveredReinitialize'
     }
     contentItem:    Image{
         id: reinitializeButton
