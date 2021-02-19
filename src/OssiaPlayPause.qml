@@ -11,23 +11,27 @@ Button {
         pauseButton.state = 'play_off'
     }
 
-    onHoveredChanged: {if (pauseButton.state === 'hoveredPlayOn'  || (pauseButton.state === 'hoveredPlayOff'))
-                            {pauseButton.state = ''}
+    onHoveredChanged: {if (pauseButton.state === 'hoveredPlayOff')
+                            {pauseButton.state = 'play_off'}
                        else if (pauseButton.state === 'play_off')
                             {pauseButton.state = 'hoveredPlayOff'}
                        else if (pauseButton.state === 'play_on')
                             {pauseButton.state = 'hoveredPlayOn'}
+                       else if (pauseButton.state === 'pause_on')
+                            {pauseButton.state = 'hoveredPlayOn'}
+                       else if (pauseButton.state === 'hoveredPlayOn')
+                            {pauseButton.state = 'pause_on'}
     }
     onClicked: {
         if(pauseButton.state === ''){
-            pauseButton.state = 'play_off'
+            pauseButton.state = 'hoveredPlayOff'
                             socket.active = !socket.active
-        } else if(pauseButton.state == 'play_off'){
-            pauseButton.state = 'pause_on'
+        } else if(pauseButton.state == 'hoveredPlayOff'){
+            pauseButton.state = 'hoveredPlayOn'
             playGlob.playClicked()
                             socket.sendTextMessage('{ "Message": "Play" }');
-        } else if(pauseButton.state == 'pause_on'){
-            pauseButton.state = 'play_off'
+        } else if(pauseButton.state == 'hoveredPlayOn'){
+            pauseButton.state = 'hoveredPlayOff'
             playGlob.playClicked()
                             socket.sendTextMessage('{ "Message": "Pause" }');
 }
