@@ -25,11 +25,17 @@ Button {
                        else
                             {playGlobButton.state = 'hoveredPlayGlob'}}
     onPressed: {
-        playGlobButton.state = 'holdClickPause'
+        if (playGlobButton.state === 'pausedPlayGlob')
+            {playGlobButton.state = 'pausedPlayGlob'}
+        else
+            {playGlobButton.state = 'holdClickPause'}
 
     }
     onReleased: {
-        playGlobButton.state = 'hoveredPlayGlob'
+        if (playGlobButton.state === 'pausedPlayGlob')
+            {playGlobButton.state = 'pausedPlayGlob'}
+        else
+            {playGlobButton.state = 'hoveredPlayGlob'}
     }
     contentItem:
         Image{
