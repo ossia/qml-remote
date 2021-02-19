@@ -4,9 +4,13 @@ import QtQuick.Window 2.3
 import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
-
 Button {
     hoverEnabled: true
+
+    function stopClicked(){
+        pauseButton.state = 'play_off'
+    }
+
     onHoveredChanged: {if (pauseButton.state === 'hoveredPlayOn'  || (pauseButton.state === 'hoveredPlayOff'))
                             {pauseButton.state = ''}
                        else if (pauseButton.state === 'play_off')
@@ -14,17 +18,17 @@ Button {
                        else if (pauseButton.state === 'play_on')
                             {pauseButton.state = 'hoveredPlayOn'}
     }
-
     onClicked: {
         if(pauseButton.state === ''){
             pauseButton.state = 'play_off'
                             socket.active = !socket.active
         } else if(pauseButton.state == 'play_off'){
             pauseButton.state = 'pause_on'
-            //OssiaPlayGlob.playGlobButton.state = 'holdClickPause'
+            playGlob.playClicked()
                             socket.sendTextMessage('{ "Message": "Play" }');
         } else if(pauseButton.state == 'pause_on'){
             pauseButton.state = 'play_off'
+            playGlob.playClicked()
                             socket.sendTextMessage('{ "Message": "Pause" }');
 }
 }

@@ -12,6 +12,8 @@ Button {
                             {stopButton.state = 'hoveredStop'}}
     onPressed: {
         stopButton.state = 'holdClickPause'
+        playPause.stopClicked()
+        playGlob.stopClicked()
         socket.sendTextMessage('{ "Message": "Stop" }')
     }
 

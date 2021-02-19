@@ -12,6 +12,8 @@ Button {
                             {reinitializeButton.state = 'hoveredReinitialize'}}
     onPressed: {
         reinitializeButton.state = 'holdClickPause'
+        playPause.stopClicked()
+        playGlob.stopClicked()
         socket.sendTextMessage('{ "Message": "Stop" }')
     }
     onReleased: {

@@ -4,11 +4,24 @@ import QtQuick.Window 2.3
 import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
-
 Button {
+    function playClicked(){
+        if (playGlobButton.state === '')
+            playGlobButton.state = 'pausedPlayGlob'
+        else
+            playGlobButton.state = ''
+    }
+
+    function stopClicked(){
+        playGlobButton.state = 'play_off'
+    }
+
+
     hoverEnabled: true
     onHoveredChanged: {if (playGlobButton.state === 'hoveredPlayGlob' || playGlobButton.state === 'holdClickPause')
                             {playGlobButton.state = ''}
+                       else if (playGlobButton.state === 'pausedPlayGlob')
+                            {playGlobButton.state = 'pausedPlayGlob'}
                        else
                             {playGlobButton.state = 'hoveredPlayGlob'}}
     onPressed: {
@@ -18,7 +31,8 @@ Button {
     onReleased: {
         playGlobButton.state = 'hoveredPlayGlob'
     }
-    contentItem:     Image{
+    contentItem:
+        Image{
         id: playGlobButton
         sourceSize.width: 30
         sourceSize.height: 30
@@ -32,8 +46,11 @@ Button {
                 State {
                     name: "hoveredPlayGlob"
                     PropertyChanges { target: playGlobButton; source: "Icons/play_glob_hover.svg" }
-            }
-
+                },
+                State {
+                    name: "pausedPlayGlob"
+                    PropertyChanges { target: playGlobButton; source: "Icons/pause_disabled.svg" }
+                }
             ]
     }
     background: Rectangle{
