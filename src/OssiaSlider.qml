@@ -15,7 +15,7 @@ Slider {
         width: control.width
     }
     Text {
-        text: control.value.toFixed(3) + ' ' + controlUnit + ' '
+        text: control.value.toFixed(3) + ' ' + controlUnit
         color: "#ffedb6"
         font.bold: true
         width: control.width
