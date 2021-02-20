@@ -10,6 +10,13 @@ Button {
     function stopClicked(){
         pauseButton.state = 'play_off'
     }
+    function playGlobClicked(){
+        pauseButton.state = 'disabledPause'
+    }
+
+    function getState(){
+        return (pauseButton.state === 'disabledPause')
+    }
 
     onHoveredChanged: {if (pauseButton.state === 'hoveredPlayOff')
                             {pauseButton.state = 'play_off'}
@@ -34,7 +41,10 @@ Button {
             pauseButton.state = 'hoveredPlayOff'
             playGlob.playClicked()
                             socket.sendTextMessage('{ "Message": "Pause" }');
-}
+        }
+        else if (pauseButton.state === 'disabledPause'){
+            pauseButton.state = 'disabledPause'
+        }
 }
 
 
@@ -61,6 +71,10 @@ states: [
     State {
         name: "hoveredPlayOn"
         PropertyChanges{target: pauseButton; source: "Icons/pause_hover"}
+    },
+    State {
+        name: "disabledPause"
+        PropertyChanges {target: pauseButton; source: "Icons/pause_disabled.svg"}
     }
 
 ]
