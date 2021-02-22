@@ -14,8 +14,14 @@ Button {
         pauseButton.state = 'disabledPause'
     }
 
-    function getState(){
+    function isDisabled(){
         return (pauseButton.state === 'disabledPause')
+    }
+    function isConnected(){
+        return (pauseButton.state != '')
+    }
+    function isPaused(){
+        return (pauseButton.state === 'hoveredPlayOff')
     }
 
     onHoveredChanged: {if (pauseButton.state === 'hoveredPlayOff')

@@ -6,10 +6,12 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     function playClicked(){
-        if (playGlobButton.state === '')
+        if (playGlobButton.state === '' || !playPause.isPaused())
             playGlobButton.state = 'pausedPlayGlob'
-        else
+        else if (!playPause.isConnected())
             playGlobButton.state = ''
+        else
+            playGlobButton.state ='disabledPlayGlob'
     }
 
     function stopClicked(){
@@ -22,6 +24,8 @@ Button {
                             {playGlobButton.state = ''}
                        else if (playGlobButton.state === 'pausedPlayGlob')
                             {playGlobButton.state = 'pausedPlayGlob'}
+                       else if (playGlobButton.state === 'disabledPlayGlob')
+                            {playGlobButton.state = 'disabledPlayGlob'}
                        else if (playGlobButton.state === 'pausedHover')
                             {playGlobButton.state = 'pausedOn'}
                        else if (playGlobButton.state === 'pausedOn')
@@ -31,6 +35,8 @@ Button {
     onPressed: {
         if (playGlobButton.state === 'pausedPlayGlob')
             {playGlobButton.state = 'pausedPlayGlob'}
+        else if (playGlobButton.state === 'disabledPlayGlob')
+            {playGlobButton.state = 'disabledPlayGlob'}
         else if (playGlobButton.state === 'pausedHover')
             {playGlobButton.state = 'pausedHover'}
         else
@@ -40,14 +46,17 @@ Button {
     onReleased: {
         if (playGlobButton.state === 'pausedPlayGlob')
             {playGlobButton.state = 'pausedPlayGlob'}
-        else if (playPause.getState() && playGlobButton.state === 'hoveredPlayGlob')
+        else if (playGlobButton.state === 'disabledPlayGlob')
+            {playGlobButton.state = 'disabledPlayGlob'}
+        else if (playPause.isDisabled() && playGlobButton.state === 'hoveredPlayGlob')
             {playGlobButton.state = 'pausedHover'}
-        else if (playPause.getState() && playGlobButton.state === 'pausedHover')
+        else if (playPause.isDisabled() && playGlobButton.state === 'pausedHover')
             {playGlobButton.state = 'hoveredPlayGlob'}
         else
             {
                 playGlobButton.state = 'pausedHover'
                 playPause.playGlobClicked()
+
             }
     }
     contentItem:
@@ -81,7 +90,11 @@ Button {
                 State {
                     name: 'pausedOff'
                     PropertyChanges { target: playGlobButton; source: "Icons/pause_off.svg"}
-                }
+                },
+                State {
+                    name: 'disabledPlayGlob'
+                    PropertyChanges {target: playGlobButton; source: "Icons/play_glob_disabled.svg"}
+            }
 
             ]
     }
