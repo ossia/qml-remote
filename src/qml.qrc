@@ -43,6 +43,6 @@
         <file>Icons/reinitialize_hover.svg</file>
         <file>Icons/pause_disabled.svg</file>
         <file>Icons/pause_hover.svg</file>
-        <file>Icons/play_glob_disabled.svg</file>
+        
     </qresource>
 </RCC>
