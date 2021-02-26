@@ -8,7 +8,7 @@ import QtQuick.Layouts 1.15
 
 Column{
     OssiaPlayPause{id: playPause}
-    OssiaPlayGlob{id: playGlob}
+    //OssiaPlayGlob{id: playGlob}
     OssiaStop{id: stop}
     OssiaReinitialize{id: reinitialize}
 }

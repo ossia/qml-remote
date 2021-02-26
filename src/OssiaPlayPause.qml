@@ -7,86 +7,99 @@ import QtQuick.Controls.Material 2.3
 Button {
     hoverEnabled: true
 
-    function stopClicked(){
-        pauseButton.state = 'play_off'
+    function stopClicked() {
+        pauseButton.state = 'playOff'
     }
-    function playGlobClicked(){
-        pauseButton.state = 'disabledPause'
-    }
-
-    function isDisabled(){
-        return (pauseButton.state === 'disabledPause')
-    }
-    function isConnected(){
+    function isConnected() {
         return (pauseButton.state != '')
     }
-    function isPaused(){
+    function isPaused() {
         return (pauseButton.state === 'hoveredPlayOff')
     }
 
-    onHoveredChanged: {if (pauseButton.state === 'hoveredPlayOff')
-                            {pauseButton.state = 'play_off'}
-                       else if (pauseButton.state === 'play_off')
-                            {pauseButton.state = 'hoveredPlayOff'}
-                       else if (pauseButton.state === 'play_on')
-                            {pauseButton.state = 'hoveredPlayOn'}
-                       else if (pauseButton.state === 'pause_on')
-                            {pauseButton.state = 'hoveredPlayOn'}
-                       else if (pauseButton.state === 'hoveredPlayOn')
-                            {pauseButton.state = 'pause_on'}
+    onHoveredChanged: {
+        switch (pauseButton.state) {
+        case 'hoveredPlayOff':
+            pauseButton.state = 'playOff'
+            break
+        case 'playOff':
+            pauseButton.state = 'hoveredPlayOff'
+            break
+        case 'play_on':
+            pauseButton.state = 'hoveredPlayOn'
+            break
+        case 'pauseOn':
+            pauseButton.state = 'hoveredPlayOn'
+            break
+        case 'hoveredPlayOn':
+            pauseButton.state = 'pauseOn'
+            break
+        default:
+            break
+        }
     }
     onClicked: {
-        if(pauseButton.state === ''){
+        switch (pauseButton.state) {
+        case '':
+            //Connexion to the socket
             pauseButton.state = 'hoveredPlayOff'
-                            socket.active = !socket.active
-        } else if(pauseButton.state == 'hoveredPlayOff'){
+            socket.active = !socket.active
+            break
+        case 'hoveredPlayOff':
             pauseButton.state = 'hoveredPlayOn'
-            playGlob.playClicked()
-                            socket.sendTextMessage('{ "Message": "Play" }');
-        } else if(pauseButton.state == 'hoveredPlayOn'){
+            socket.sendTextMessage('{ "Message": "Play" }')
+            //fonction pour modifier timeline
+            break
+        case 'hoveredPlayOn':
             pauseButton.state = 'hoveredPlayOff'
-            playGlob.playClicked()
-                            socket.sendTextMessage('{ "Message": "Pause" }');
+            socket.sendTextMessage('{ "Message": "Pause" }')
+            //fonction pour modifier timeline
+            break
+        default:
+            break
         }
-        else if (pauseButton.state === 'disabledPause'){
-            pauseButton.state = 'disabledPause'
-        }
-}
-
-
-contentItem:    Image{
-id:pauseButton
-sourceSize.width: 30
-sourceSize.height: 30
-source: "Icons/connection.svg"
-clip: true
-
-states: [
-    State {
-        name: "play_off"
-        PropertyChanges { target: pauseButton; source: "Icons/play_off.svg" }
-    },
-    State {
-        name: "pause_on"
-        PropertyChanges { target: pauseButton; source: "Icons/pause_on.svg" }
-    },
-    State {
-        name: "hoveredPlayOff"
-        PropertyChanges{ target: pauseButton; source: "Icons/play_hover"}
-    },
-    State {
-        name: "hoveredPlayOn"
-        PropertyChanges{target: pauseButton; source: "Icons/pause_hover"}
-    },
-    State {
-        name: "disabledPause"
-        PropertyChanges {target: pauseButton; source: "Icons/pause_disabled.svg"}
     }
 
-]
-}
-background: Rectangle{
-id: zone
-color:"#202020"
-}
+    contentItem: Image {
+        id: pauseButton
+        sourceSize.width: 30
+        sourceSize.height: 30
+        source: "Icons/connection.svg"
+        clip: true
+
+        states: [
+            State {
+                name: "playOff"                           //In this state, the button the play symbol, so the timeline should be paused
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/play_glob_off.svg"
+                }
+            },
+            State {
+                name: "pauseOn"                           //In this state, the button display the pause symbol, so the timeline should be playing
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/pause_on.svg"
+                }
+            },
+            State {
+                name: "hoveredPlayOff"                    //In this state the mouse is on the button and the timeline is paused
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/play_glob_hover"
+                }
+            },
+            State {
+                name: "hoveredPlayOn"                      //In this state the mouse is on the button and the timeline is playing
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/pause_hover"
+                }
+            }
+        ]
+    }
+    background: Rectangle {
+        id: zone
+        color: "#202020"
+    }
 }

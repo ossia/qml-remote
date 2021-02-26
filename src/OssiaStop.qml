@@ -6,15 +6,17 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
-    onHoveredChanged: {if (stopButton.state === 'hoveredStop' || stopButton.state === 'holdClickPause')
+    onHoveredChanged: {if (stopButton.state === 'hoveredStop' || stopButton.state === 'stopOn')
                             {stopButton.state = ''}
                        else
                             {stopButton.state = 'hoveredStop'}}
     onPressed: {
-        stopButton.state = 'holdClickPause'
-        playPause.stopClicked()
-        playGlob.stopClicked()
+        stopButton.state = 'stopOn'
+        if (playPause.isConnected()){
+            playPause.stopClicked()
+        }
         socket.sendTextMessage('{ "Message": "Stop" }')
+        //fonction pour arrêter la timeline
     }
 
     onReleased: stopButton.state = 'hoveredStop'
@@ -27,7 +29,7 @@ Button {
         source:"Icons/stop_off.svg"
         states: [
                 State {
-                    name: "holdClickPause"
+                    name: "stopOn"
                     PropertyChanges { target: stopButton; source: "Icons/stop_on.svg" }
                 },
                 State {
