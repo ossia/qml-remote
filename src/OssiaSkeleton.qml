@@ -81,7 +81,7 @@ Item {
     OssiaControlSurfaces {
         id: ossiaControlSurface
         anchors.top: ossiaPlayPauseStop.bottom
-        anchors.bottom: ossiaTimeLine.top
+        anchors.bottom: ossiaTimeline.top
         anchors.topMargin: 5
         anchors.left: parent.left
         anchors.right: parent.right
@@ -89,8 +89,8 @@ Item {
         //anchors.margins: 5
         //height: window.height/1.5
     }
-    OssiaTimeLine {
-        id: ossiaTimeLine
+    OssiaTimeline {
+        id: ossiaTimeline
         anchors.bottom: parent.bottom
 
     }
