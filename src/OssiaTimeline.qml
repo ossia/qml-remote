@@ -5,27 +5,34 @@ import QtQml 2.15
 
 Slider {
     property int totalTime: 10 * 60 * 1000 // assuming totalTime is given by ossia in milliseconds
-    property date currentDate: new Date()
+    property date currentDate: new Date() // useless at some point
     id: time
     value: 0
     implicitWidth: window.width
     implicitHeight: 20
 
-    // Let's say state is an enumerate : Play: 0, Pause: 1, Stop: 2
-    function ossiaChangeState(state) {
-        switch (state) {
-        case 0:
-            /* TODO:
-              * If timeline already playing then nothing
-              * If timeline
-              */
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        default:
-
+    // event:  'play', 'pause', 'stop'
+    function updateTimeline(event) {
+        switch (event) {
+            case 'play':
+                /*
+                  * the foreground gets bigger as the time progresses
+                  * see flick and the commit:
+                  * Add interval position heartbeat for remote control
+                  */
+                time.state = 'playing'
+                break;
+            case 'pause':
+                /*
+                  * the foreground is frozen
+                  */
+                time.state = 'paused'
+                break;
+            case 'stop':
+                time.value = 0
+                time.state = 'paused'
+                break;
+            default:
         }
     }
 
@@ -58,6 +65,8 @@ Slider {
         verticalAlignment: Text.AlignVCenter
     }
 
+
+
     handle: Rectangle {} // No handle
 
     background: Rectangle {
@@ -70,9 +79,19 @@ Slider {
         border.color: "#62400a"
 
         Rectangle {
-            width: time.visualPosition * parent.width - y
+            id: foreground
+            width: time.visualPosition * parent.width - y // Changes with time
             height: parent.height
             color: "#62400a"
         }
     }
+    states: [
+        State {
+            name: "playing"
+            PropertyChanges { target: foreground;}},
+        State {
+            name: "paused"
+            PropertyChanges { target: foreground;}
+        }
+    ]
 }

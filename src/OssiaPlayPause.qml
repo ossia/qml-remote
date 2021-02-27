@@ -7,7 +7,7 @@ import QtQuick.Controls.Material 2.3
 Button {
     hoverEnabled: true // Allows to specify a behavior when going over a button
     function stopClicked() {
-        pauseButton.state = 'playOff';
+        pauseButton.state = 'playDisplayed';
     }
     function isConnected() {
         return (pauseButton.state !== '');
@@ -19,19 +19,19 @@ Button {
     onHoveredChanged: {
         switch (pauseButton.state) {
             case 'hoveredPlayOff':
-                pauseButton.state = 'playOff';
+                pauseButton.state = 'playDisplayed';
                 break;
-            case 'playOff':
+            case 'playDisplayed':
                 pauseButton.state = 'hoveredPlayOff';
                 break;
             case 'play_on':
                 pauseButton.state = 'hoveredPlayOn';
                 break;
-            case 'pauseOn':
+            case 'pauseDisplayed':
                 pauseButton.state = 'hoveredPlayOn';
                 break;
             case 'hoveredPlayOn':
-                pauseButton.state = 'pauseOn';
+                pauseButton.state = 'pauseDisplayed';
                 break;
             default:
         }
@@ -49,12 +49,12 @@ Button {
         case 'hoveredPlayOff':
             pauseButton.state = 'hoveredPlayOn';
             socket.sendTextMessage('{ "Message": "Play" }');
-            //fonction pour modifier timeline : ossiaTimeline
+            ossiaTimeline.updateTimeline('play');
             break;
         case 'hoveredPlayOn':
             pauseButton.state = 'hoveredPlayOff';
             socket.sendTextMessage('{ "Message": "Pause" }');
-            //fonction pour modifier timeline
+            ossiaTimeline.updateTimeline('pause');
             break;
         default:
         }
@@ -69,28 +69,34 @@ Button {
 
         states: [
             State {
-                name: "playOff"                           //In this state, the button the play symbol, so the timeline should be paused
+                /* play symbol is displayed
+                * "paused" is the scenario's state.
+                */
+                name: "playDisplayed"
                 PropertyChanges {
                     target: pauseButton
                     source: "Icons/play_glob_off.svg"
                 }
             },
             State {
-                name: "pauseOn"                           //In this state, the button display the pause symbol, so the timeline should be playing
+                /* pause symbol is displayed
+                * "playing" is the scenario's state.
+                */
+                name: "pauseDisplayed"
                 PropertyChanges {
                     target: pauseButton
                     source: "Icons/pause_on.svg"
                 }
             },
             State {
-                name: "hoveredPlayOff"                    //In this state the mouse is on the button and the timeline is paused
+                name: "hoveredPlayOff"
                 PropertyChanges {
                     target: pauseButton
                     source: "Icons/play_glob_hover"
                 }
             },
             State {
-                name: "hoveredPlayOn"                      //In this state the mouse is on the button and the timeline is playing
+                name: "hoveredPlayOn"
                 PropertyChanges {
                     target: pauseButton
                     source: "Icons/pause_hover"
