@@ -11,6 +11,24 @@ Slider {
     implicitWidth: window.width
     implicitHeight: 20
 
+    // Let's say state is an enumerate : Play: 0, Pause: 1, Stop: 2
+    function ossiaChangeState(state) {
+        switch (state) {
+        case 0:
+            /* TODO:
+              * If timeline already playing then nothing
+              * If timeline
+              */
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        default:
+
+        }
+    }
+
     function msToDate(duration, currentDate) {
         var milliseconds = parseInt((duration % 1000) / 100),
         seconds = Math.floor((duration / 1000) % 60),

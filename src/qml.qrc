@@ -14,7 +14,7 @@
         <file>OssiaSliders.qml</file>
         <file>OssiaSpeed.qml</file>
         <file>OssiaSpeeds.qml</file>
-        <file>OssiaSqueleton.qml</file>
+        <file>OssiaSkeleton.qml</file>
         <file>OssiaStop.qml</file>
         <file>OssiaTimeLine.qml</file>
         <file>OssiaTrigger.qml</file>
@@ -43,7 +43,6 @@
         <file>Icons/reinitialize_hover.svg</file>
         <file>Icons/pause_disabled.svg</file>
         <file>Icons/pause_hover.svg</file>
-	<file>Icons/play_glob_disabled.svg</file>
-        
+        <file>Icons/play_glob_disabled.svg</file>
     </qresource>
 </RCC>

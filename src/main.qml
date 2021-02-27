@@ -9,5 +9,5 @@ Window {
     visible: true
     title: qsTr("Hello World")
     color: "#202020"
-    OssiaSqueleton{}
+    OssiaSkeleton {}
 }

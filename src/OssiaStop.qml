@@ -6,41 +6,50 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
-    onHoveredChanged: {if (stopButton.state === 'hoveredStop' || stopButton.state === 'stopOn')
-                            {stopButton.state = ''}
-                       else
-                            {stopButton.state = 'hoveredStop'}}
+    onHoveredChanged: {
+        if (stopButton.state === 'hoveredStop'
+                || stopButton.state === 'stopOn') {
+            stopButton.state = ''
+        } else {
+            stopButton.state = 'hoveredStop'
+        }
+    }
     onPressed: {
         stopButton.state = 'stopOn'
-        if (playPause.isConnected()){
+        if (playPause.isConnected()) {
             playPause.stopClicked()
         }
         socket.sendTextMessage('{ "Message": "Stop" }')
-        //fonction pour arrêter la timeline
+        // fonction pour stop la timeline
     }
 
     onReleased: stopButton.state = 'hoveredStop'
 
-    contentItem:    Image{
+    contentItem: Image {
         id: stopButton
         sourceSize.width: 30
         sourceSize.height: 30
         clip: true
-        source:"Icons/stop_off.svg"
+        source: "Icons/stop_off.svg"
         states: [
-                State {
-                    name: "stopOn"
-                    PropertyChanges { target: stopButton; source: "Icons/stop_on.svg" }
-                },
-                State {
-                    name: "hoveredStop"
-                    PropertyChanges { target: stopButton; source: "Icons/stop_hover.svg"}
+            State {
+                name: "stopOn"
+                PropertyChanges {
+                    target: stopButton
+                    source: "Icons/stop_on.svg"
                 }
-
-            ]
+            },
+            State {
+                name: "hoveredStop"
+                PropertyChanges {
+                    target: stopButton
+                    source: "Icons/stop_hover.svg"
+                }
+            }
+        ]
     }
-    background: Rectangle{
+    background: Rectangle {
         id: zone
-        color:"#202020"
+        color: "#202020"
     }
 }

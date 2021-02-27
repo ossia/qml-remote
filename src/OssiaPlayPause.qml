@@ -5,58 +5,58 @@ import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 
 Button {
-    hoverEnabled: true
-
+    hoverEnabled: true // Allows to specify a behavior when going over a button
     function stopClicked() {
-        pauseButton.state = 'playOff'
+        pauseButton.state = 'playOff';
     }
     function isConnected() {
-        return (pauseButton.state != '')
+        return (pauseButton.state !== '');
     }
     function isPaused() {
-        return (pauseButton.state === 'hoveredPlayOff')
+        return (pauseButton.state === 'hoveredPlayOff');
     }
 
     onHoveredChanged: {
         switch (pauseButton.state) {
-        case 'hoveredPlayOff':
-            pauseButton.state = 'playOff'
-            break
-        case 'playOff':
-            pauseButton.state = 'hoveredPlayOff'
-            break
-        case 'play_on':
-            pauseButton.state = 'hoveredPlayOn'
-            break
-        case 'pauseOn':
-            pauseButton.state = 'hoveredPlayOn'
-            break
-        case 'hoveredPlayOn':
-            pauseButton.state = 'pauseOn'
-            break
-        default:
-            break
+            case 'hoveredPlayOff':
+                pauseButton.state = 'playOff';
+                break;
+            case 'playOff':
+                pauseButton.state = 'hoveredPlayOff';
+                break;
+            case 'play_on':
+                pauseButton.state = 'hoveredPlayOn';
+                break;
+            case 'pauseOn':
+                pauseButton.state = 'hoveredPlayOn';
+                break;
+            case 'hoveredPlayOn':
+                pauseButton.state = 'pauseOn';
+                break;
+            default:
         }
     }
     onClicked: {
         switch (pauseButton.state) {
         case '':
-            //Connexion to the socket
-            pauseButton.state = 'hoveredPlayOff'
-            socket.active = !socket.active
-            break
+            /* Connection to the websocket
+              * socket is the id of the Websocket
+              * instantiated in OssiaSkeleton
+              */
+            pauseButton.state = 'hoveredPlayOff';
+            socket.active = !socket.active;
+            break;
         case 'hoveredPlayOff':
-            pauseButton.state = 'hoveredPlayOn'
-            socket.sendTextMessage('{ "Message": "Play" }')
+            pauseButton.state = 'hoveredPlayOn';
+            socket.sendTextMessage('{ "Message": "Play" }');
             //fonction pour modifier timeline
-            break
+            break;
         case 'hoveredPlayOn':
-            pauseButton.state = 'hoveredPlayOff'
-            socket.sendTextMessage('{ "Message": "Pause" }')
+            pauseButton.state = 'hoveredPlayOff';
+            socket.sendTextMessage('{ "Message": "Pause" }');
             //fonction pour modifier timeline
-            break
+            break;
         default:
-            break
         }
     }
 
