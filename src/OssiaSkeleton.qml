@@ -63,10 +63,14 @@ Item {
     OssiaVolume {
         id: ossiaVolume
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 5
     }
     OssiaSpeed {
         id: ossiaSpeed
         anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.topMargin: 5
     }
     TimeSet {
         id: ossiaTimeSet

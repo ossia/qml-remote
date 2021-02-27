@@ -54,16 +54,18 @@ Rectangle{
 
 
               }
-          delegate:OssiaSlider{
-              id: speed
-              controlName: name
-              height:20
-              width: speedList.width*0.8
-              controlColor: "#62400a"
+        delegate:OssiaSlider{
+          id: speed
+          controlName: name
+          height:20
+          anchors.right: parent.right
+          anchors.rightMargin: 25
+          anchors.left: parent.left
+          controlColor: "#62400a"
           }
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
-            width: speedList.width/10
+            width: 20
             anchors.right:  parent.right
             policy:  ScrollBar.AlwaysOn
             contentItem: Rectangle {
