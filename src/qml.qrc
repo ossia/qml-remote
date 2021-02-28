@@ -44,5 +44,15 @@
         <file>Icons/pause_disabled.svg</file>
         <file>Icons/pause_hover.svg</file>
         <file>Icons/play_glob_disabled.svg</file>
+        <file>Checkerboard.qml</file>
+        <file>ColorSlider.qml</file>
+        <file>Colorpicker.qml</file>
+        <file>NumberBox.qml</file>
+        <file>Palette.qml</file>
+        <file>Palettes.qml</file>
+        <file>PanelBorder.qml</file>
+        <file>SBPicker.qml</file>
+        <file>OssiaColorpicker.qml</file>
+        <file>OssiaColorPoint.qml</file>
     </qresource>
 </RCC>

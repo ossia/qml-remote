@@ -9,7 +9,7 @@ Column{
         color: "white"
     }
     Grid{
-        columns: 3
+        columns: 5
         spacing: 5
         OssiaSliders{
             id: ossiaSlider
@@ -21,6 +21,10 @@ Column{
             width: 300
             height: 150
             //Layout.alignment: e
+        }
+        OssiaColorpicker{
+            id: ossiaColorpicker
+
         }
     }
 }
