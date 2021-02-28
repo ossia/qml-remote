@@ -13,16 +13,15 @@ Item{
     OssiaTriggers{
         id: ossiaTrigger
         anchors.left: parent.left
-
         anchors.top: parent.top
         anchors.right: ossiaSpeed.left
         anchors.rightMargin: window.width/100
         anchors.bottom: parent.bottom
         //height: window.height/4.94
+
     }
     OssiaSpeeds{
         id:ossiaSpeed
         anchors.right: parent.right
     }
-
 }

@@ -9,35 +9,26 @@ import QtQuick.Controls.Styles 1.4
 Item {
     id: window
     anchors.fill: parent
+
     WebSocket {
         id: socket
         url: "ws://localhost:10212"
         onTextMessageReceived: {
-            console.log(message)
-            if (message === '"Message""DeviceTree""Nodes"{}') {
-                messageBox.text = messageBox.text
-                        + "\n      Received message vc traitement: " + message // nop
+            try{
+                var jsonObject = JSON.parse(message)
+                var typeOfMessage = jsonObject.Message
+                if(typeOfMessage  === "TriggerRemoved" || typeOfMessage === "TriggerAdded"){
+                    ossiaTimeSet.triggerMessageReceived(jsonObject);
+                    var a =JSON.toString(jsonObject.Path);
+                }
+                else if(typeOfMessage  === "IntervalRemoved" || typeOfMessage === "IntervalAdded"){
+                    //ossiaTimeSet.ossiaSpeed.resolveJsonMessage(jsonObject);
+                }
+                //todo: hundle volume and the main speed messages
+               }catch(error ){
+
             }
 
-            var jsonObject = JSON.parse(message)
-            var aString = jsonObject.message
-            messageBox.text = messageBox.text
-                    + "\n       Received message vc traitement: " + aString
-            console.log("Path: \n" + jsonObject.Path[0])
-            name_name.text += "\n" + aString + "\n K " + jsonObject.Path[0]
-            if (aString !== "TriggerRemoved") {
-                walo.insert(0, {
-                                "name": walo.a.toString(),
-                                "color": "#696969",
-                                "jsonObj": jsonObject
-                            })
-                walo.a += 1
-            } else if (aString === "TriggerRemoved") {
-                /* === returns true if both operands are of the same type
-                 * and contain the same value
-                 */
-                walo.get(0).color = "#dcdcdc"
-            }
         }
         onStatusChanged: {
             switch (socket.status) {
@@ -81,6 +72,8 @@ Item {
         anchors.bottom: ossiaPlayPauseStop.bottom
         width: parent.width
         height: window.height / 5
+        signal triggerMessageReceived(var n);
+
     }
     OssiaControlSurfaces {
         id: ossiaControlSurface
