@@ -13,7 +13,7 @@ Column{
     OssiaReinitialize{id: reinitialize}
     //onplayPauseStopMessageReceived(var n){}
     Connections {
-        target: ossiaTimeSet
+        target: ossiaPlayPauseStop
         function onPlayPauseStopMessageReceived(n){
             var messageObject = m.Message
             if(messageObject === "Start"){

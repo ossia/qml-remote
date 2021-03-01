@@ -18,42 +18,55 @@ Rectangle{
 
             ListElement {
                 name: "Trigger133"
+                path: "Trigger133"
             }
             ListElement {
                 name: "Trigger2"
+                path: "Trigger133"
             }
             ListElement {
                 name: "Trigger3"
+                path: "Trigger133"
             }
             ListElement {
                 name: "Trigger133"
+                path:"Trigger133"
             }
             ListElement {
             name: "Trigger2"
+            path: "Trigger133"
             }
             ListElement {
                 name: "Trigger3"
+                path:"Trigger133"
             }
             ListElement {
                 name: "Trigger133"
+                path:"Trigger133"
           }
           ListElement {
               name: "Trigger2"
+              path:"Trigger133"
           }
           ListElement {
               name: "Trigger3"
+              path:"Trigger133"
           }
           ListElement {
               name: "Trigger133"
+              path:"Trigger133"
           }
           ListElement {
               name: "Trigger2"
+              path:"Trigger133"
           }
           ListElement {
               name: "Trigger3"
+              path:"Trigger133"
           }
       }
       delegate:OssiaTrigger{
+          id:path
           height:triggerslist.height
           sliderName: name
           }
@@ -65,17 +78,19 @@ Rectangle{
         function onTriggerMessageReceived(m){
             var messageObject = m.Message
             if(messageObject === "TriggerAdded"){
-                triggerslistModel.insert(0,{ name:JSON.stringify(m.Path)});
+                triggerslistModel.insert(0,{ name:JSON.stringify(m.Name),path:JSON.stringify(m.Path)});
             }
             else if(messageObject === "TriggerRemoved"){
                 function find(cond) {
                   for(var i = 0; i < triggerslistModel.count; ++i) if (cond(triggerslistModel.get(i))) return i;
                   return null
                 }
-                var s = find(function (item) { return item.name === JSON.stringify(m.Path) }) //the index of m.Path in the listmodel
-                triggerslistModel.setProperty(s, "colorstate", "#FF0000")
-                triggerslistModel.setProperty(s, "name", "desactivated")
-                // manque traitement a faire (par exemple changer la couleur d un trigger desactive, et le rendre immodifiable)
+                var s = find(function (item) { return item.path === JSON.stringify(m.Path) }) //the index of m.Path in the listmodel
+                if(s !== null){
+                    triggerslistModel.setProperty(s, "colorstate", "#FF0000")
+                    triggerslistModel.setProperty(s, "name", triggerslistModel.get(s).name + "\n(desactivated)")
+                     // manque traitement a faire (par exemple changer la couleur d un trigger desactive, et le rendre immodifiable)
+                }
             }
           }
         }

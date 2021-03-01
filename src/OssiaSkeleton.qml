@@ -15,6 +15,7 @@ Item {
         url: "ws://localhost:10212"
         onTextMessageReceived: {
             try{
+                console.log(message)
                 var jsonObject = JSON.parse(message)
                 var typeOfMessage = jsonObject.Message
                 if(typeOfMessage  === "TriggerRemoved" || typeOfMessage === "TriggerAdded"){

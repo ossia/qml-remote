@@ -65,7 +65,7 @@ Rectangle{
            OssiaControlSurface{controlSurfaceName: name}
     }
     Connections {
-        target: ossiaTimeSet
+        target: ossiaControlSurface
         function onControlSurfaceMessageReceived(m){
             var messageObject = m.Message
             if(messageObject === "ControlSurfaceAdded"){
