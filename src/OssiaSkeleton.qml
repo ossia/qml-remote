@@ -19,14 +19,20 @@ Item {
                 var typeOfMessage = jsonObject.Message
                 if(typeOfMessage  === "TriggerRemoved" || typeOfMessage === "TriggerAdded"){
                     ossiaTimeSet.triggerMessageReceived(jsonObject);
-                    var a =JSON.toString(jsonObject.Path);
                 }
                 else if(typeOfMessage  === "IntervalRemoved" || typeOfMessage === "IntervalAdded"){
-                    //ossiaTimeSet.ossiaSpeed.resolveJsonMessage(jsonObject);
+                    ossiaTimeSet.intervalMessageReceived(jsonObject);
                 }
-                //todo: hundle volume and the main speed messages
+                else if(typeOfMessage  === "Play" || typeOfMessage === "Pause" || typeOfMessage === "Restart"){
+                    // (Play Pause Stop) are temporary. while waiting for the new version of score
+                    ossiaPlayPauseStop.playPauseStopMessageReceived(jsonObject);
+                }
+                else if(typeOfMessage  === "ControlSurfaceRemoved" || typeOfMessage === "ControlSurfaceAdded"){
+                    //handling the ControlSurface messages
+                    ossiaControlSurface.controlSurfaceMessageReceived(jsonObject);
+                }
+                //TODO: hundle volume and the main speed messages
                }catch(error ){
-
             }
 
         }
@@ -50,6 +56,7 @@ Item {
         id: ossiaPlayPauseStop
         anchors.left: parent.left
         height: window / 5
+        signal playPauseStopMessageReceived(var n);
     }
     OssiaVolume {
         id: ossiaVolume
@@ -73,7 +80,7 @@ Item {
         width: parent.width
         height: window.height / 5
         signal triggerMessageReceived(var n);
-
+        signal intervalMessageReceived(var n);
     }
     OssiaControlSurfaces {
         id: ossiaControlSurface
@@ -85,6 +92,7 @@ Item {
         height: parent.height
         //anchors.margins: 5
         //height: window.height/1.5
+        signal controlSurfaceMessageReceived(var n);
     }
     OssiaTimeline {
         id: ossiaTimeline

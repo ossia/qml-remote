@@ -11,4 +11,23 @@ Column{
     //OssiaPlayGlob{id: playGlob}
     OssiaStop{id: stop}
     OssiaReinitialize{id: reinitialize}
+    //onplayPauseStopMessageReceived(var n){}
+    Connections {
+        target: ossiaTimeSet
+        function onPlayPauseStopMessageReceived(n){
+            var messageObject = m.Message
+            if(messageObject === "Start"){
+                //send signal to playPause Button
+                playPause.clicked();
+            }
+            else if(messageObject === "Stop"){
+                //send signal to stop Button
+                stop.clicked();
+            }
+            else if(messageObject === "Restart"){
+                //send signal to reinitialize Button
+                reinitialize.clicked();
+            }
+          }
+        }
 }

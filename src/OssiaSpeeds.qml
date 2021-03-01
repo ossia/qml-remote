@@ -31,7 +31,7 @@ Rectangle{
                 snapMode: ListView.SnapToItem
 
                 model:ListModel {
-                    id: triggerslist
+                    id: intervalsListModel
 
                     ListElement {
                         name: "Interval1"
@@ -74,4 +74,23 @@ Rectangle{
             }
         }
     }
+    //implementation de la fonction
+    Connections {
+        target: ossiaTimeSet
+        function onIntervalMessageReceived(m){
+            var messageObject = m.Message
+            if(messageObject ===  "IntervalAdded"){
+                intervalsListModel.insert(0,{ name:JSON.stringify(m.Path)});
+            }
+            else if(messageObject === "IntervalRemoved"){
+                function find(cond) {
+                  for(var i = 0; i < intervalsListModel.count; ++i) if (cond(intervalsListModel.get(i))) return i;
+                  return null
+                }
+                var s = find(function (item) { return item.name === JSON.stringify(m.Path) }) //the index of m.Path in the listmodel
+                intervalsListModel.setProperty(s, "name", "desactivated")
+                // manque traitement a faire (passer la bonne vitesse de lecture .. )
+            }
+          }
+        }
 }
