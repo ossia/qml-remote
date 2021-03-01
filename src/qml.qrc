@@ -48,8 +48,6 @@
         <file>ColorSlider.qml</file>
         <file>Colorpicker.qml</file>
         <file>NumberBox.qml</file>
-        <file>Palette.qml</file>
-        <file>Palettes.qml</file>
         <file>PanelBorder.qml</file>
         <file>SBPicker.qml</file>
         <file>OssiaColorpicker.qml</file>
