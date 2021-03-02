@@ -4,8 +4,8 @@ import QtQuick.Controls 2.12
 
 Button {
     property string sliderName: "sliderName"
-
-    id: slider
+    property string ossiaPath: "vide"
+    //id: slider
     contentItem: Text {
         text: sliderName
         color: "#ffffff"
@@ -15,7 +15,6 @@ Button {
     }
 
     background: Rectangle {
-        //border.color : "black" // separation entre triggers
         implicitWidth: window.width/10
         implicitHeight: window.height/5
         color: "#303030"
@@ -25,5 +24,8 @@ Button {
             y: 5
             source:"Icons/scenario_trigger.svg"
         }
+    }
+    onClicked: {
+         socket.sendTextMessage('{ "Message": "Trigger","Path":"'+ ossiaPath + '"}')
     }
 }

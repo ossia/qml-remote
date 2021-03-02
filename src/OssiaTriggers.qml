@@ -66,7 +66,7 @@ Rectangle{
           }
       }
       delegate:OssiaTrigger{
-          id:path
+          ossiaPath:path
           height:triggerslist.height
           sliderName: name
           }
@@ -87,9 +87,7 @@ Rectangle{
                 }
                 var s = find(function (item) { return item.path === JSON.stringify(m.Path) }) //the index of m.Path in the listmodel
                 if(s !== null){
-                    triggerslistModel.setProperty(s, "colorstate", "#FF0000")
-                    triggerslistModel.setProperty(s, "name", triggerslistModel.get(s).name + "\n(desactivated)")
-                     // manque traitement a faire (par exemple changer la couleur d un trigger desactive, et le rendre immodifiable)
+                    triggerslistModel.remove(s)
                 }
             }
           }

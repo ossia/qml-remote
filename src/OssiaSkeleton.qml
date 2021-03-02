@@ -15,7 +15,7 @@ Item {
         url: "ws://localhost:10212"
         onTextMessageReceived: {
             try{
-                console.log(message)
+                //console.log(message)
                 var jsonObject = JSON.parse(message)
                 var typeOfMessage = jsonObject.Message
                 if(typeOfMessage  === "TriggerRemoved" || typeOfMessage === "TriggerAdded"){
@@ -46,7 +46,7 @@ Item {
                     socket.sendTextMessage("Hello World");
                     break;
                 case WebSocket.Closed:
-                    messageBox.text += "\n  Socket closed";
+                    console.log("the webSocket communication has been closed")
                     break;
                 default:
             }
