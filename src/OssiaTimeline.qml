@@ -11,6 +11,15 @@ Slider {
     implicitWidth: window.width
     implicitHeight: 20
 
+    Connections {
+        target: ossiaTimeline
+        function onIntervalsMessageReceived(m) {
+            var IntervalsObject = m.Intervals;
+            var progress = JSON.stringify(IntervalsObject[0].Progress); // The timeline is positioned first
+            time.value = progress
+          }
+    }
+
     // event:  'play', 'pause', 'stop'
     function updateTimeline(event) {
         switch (event) {
@@ -79,7 +88,6 @@ Slider {
         border.color: "#62400a"
 
         Rectangle {
-            id: foreground
             width: time.visualPosition * parent.width - y // Changes with time
             height: parent.height
             color: "#62400a"

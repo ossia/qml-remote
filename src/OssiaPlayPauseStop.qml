@@ -16,15 +16,16 @@ Column{
         target: ossiaPlayPauseStop
         function onPlayPauseStopMessageReceived(n){
             var messageObject = m.Message
-            if(messageObject === "Start"){
+            switch (messageObject) {
+            case "Start":
                 //send signal to playPause Button
                 playPause.clicked();
-            }
-            else if(messageObject === "Stop"){
+                break;
+            case "Stop":
                 //send signal to stop Button
                 stop.clicked();
-            }
-            else if(messageObject === "Restart"){
+                break;
+            case "Restart":
                 //send signal to reinitialize Button
                 reinitialize.clicked();
             }

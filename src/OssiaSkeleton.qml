@@ -14,41 +14,57 @@ Item {
         id: socket
         url: "ws://localhost:10212"
         onTextMessageReceived: {
-            try{
-                console.log(message)
-                var jsonObject = JSON.parse(message)
-                var typeOfMessage = jsonObject.Message
-                if(typeOfMessage  === "TriggerRemoved" || typeOfMessage === "TriggerAdded"){
-                    ossiaTimeSet.triggerMessageReceived(jsonObject);
-                }
-                else if(typeOfMessage  === "IntervalRemoved" || typeOfMessage === "IntervalAdded"){
-                    ossiaTimeSet.intervalMessageReceived(jsonObject);
-                }
-                else if(typeOfMessage  === "Play" || typeOfMessage === "Pause" || typeOfMessage === "Restart"){
-                    // (Play Pause Stop) are temporary. while waiting for the new version of score
-                    ossiaPlayPauseStop.playPauseStopMessageReceived(jsonObject);
-                }
-                else if(typeOfMessage  === "ControlSurfaceRemoved" || typeOfMessage === "ControlSurfaceAdded"){
-                    //handling the ControlSurface messages
-                    ossiaControlSurface.controlSurfaceMessageReceived(jsonObject);
+            try {
+                console.log(message);
+
+                var jsonObject = JSON.parse(message);
+                if (jsonObject.Intervals) {
+                    /* Supposing the timeline receives the progress
+                    * of all the intervals inclunding itself
+                    */
+                    ossiaTimeline.intervalsMessageReceived(jsonObject);
+
+                } else {
+                    var typeOfMessage = jsonObject.Message;
+                    if (typeOfMessage === "TriggerRemoved"
+                            || typeOfMessage === "TriggerAdded") {
+                        ossiaTimeSet.triggerMessageReceived(jsonObject);
+
+                    } else if (typeOfMessage === "IntervalRemoved"
+                               || typeOfMessage === "IntervalAdded") {
+                        ossiaTimeSet.intervalMessageReceived(jsonObject);
+
+                    } else if (typeOfMessage === "Play" || typeOfMessage === "Pause"
+                               || typeOfMessage === "Restart") {
+                        // (Play Pause Stop) are temporary. while waiting for the new version of score
+                        ossiaPlayPauseStop.playPauseStopMessageReceived(jsonObject);
+
+                    } else if (typeOfMessage === "ControlSurfaceRemoved"
+                               || typeOfMessage === "ControlSurfaceAdded") {
+                        //handling the ControlSurface messages
+                        ossiaControlSurface.controlSurfaceMessageReceived(
+                                    jsonObject);
+
+                    }
                 }
                 //TODO: hundle volume and the main speed messages
-               }catch(error ){
-            }
+            } catch (error) {
 
+            }
         }
         onStatusChanged: {
             switch (socket.status) {
-                case WebSocket.Error:
-                    console.log("Error: " + socket.errorString);
-                    break;
-                case WebSocket.Open:
-                    socket.sendTextMessage("Hello World");
-                    break;
-                case WebSocket.Closed:
-                    messageBox.text += "\n  Socket closed";
-                    break;
-                default:
+            case WebSocket.Error:
+                console.log("Error: " + socket.errorString)
+                break
+            case WebSocket.Open:
+                socket.sendTextMessage("Hello World")
+                break
+            case WebSocket.Closed:
+                messageBox.text += "\n  Socket closed"
+                break
+            default:
+
             }
         }
         active: false
@@ -57,7 +73,7 @@ Item {
         id: ossiaPlayPauseStop
         anchors.left: parent.left
         height: window / 5
-        signal playPauseStopMessageReceived(var n);
+        signal playPauseStopMessageReceived(var n)
     }
     OssiaVolume {
         id: ossiaVolume
@@ -80,8 +96,8 @@ Item {
         anchors.bottom: ossiaPlayPauseStop.bottom
         width: parent.width
         height: window.height / 5
-        signal triggerMessageReceived(var n);
-        signal intervalMessageReceived(var n);
+        signal triggerMessageReceived(var n)
+        signal intervalMessageReceived(var n)
     }
     OssiaControlSurfaces {
         id: ossiaControlSurface
@@ -93,11 +109,11 @@ Item {
         height: parent.height
         //anchors.margins: 5
         //height: window.height/1.5
-        signal controlSurfaceMessageReceived(var n);
+        signal controlSurfaceMessageReceived(var n)
     }
     OssiaTimeline {
         id: ossiaTimeline
         anchors.bottom: parent.bottom
-
+        signal intervalsMessageReceived(var n)
     }
 }
