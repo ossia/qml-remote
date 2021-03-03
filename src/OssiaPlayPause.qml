@@ -49,12 +49,10 @@ Button {
         case 'hoveredPlayOff':
             pauseButton.state = 'hoveredPlayOn';
             socket.sendTextMessage('{ "Message": "Play" }');
-            ossiaTimeline.updateTimeline('play');
             break;
         case 'hoveredPlayOn':
             pauseButton.state = 'hoveredPlayOff';
             socket.sendTextMessage('{ "Message": "Pause" }');
-            ossiaTimeline.updateTimeline('pause');
             break;
         default:
         }

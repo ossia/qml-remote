@@ -15,34 +15,15 @@ Slider {
         target: ossiaTimeline
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals;
-            var progress = JSON.stringify(IntervalsObject[0].Progress); // The timeline is positioned first
-            time.value = progress
+            if (IntervalsObject[0]) {
+                var progress = JSON.stringify(IntervalsObject[0].Progress); // The timeline is positioned first
+                time.value = progress
+            }
           }
     }
 
-    // event:  'play', 'pause', 'stop'
-    function updateTimeline(event) {
-        switch (event) {
-            case 'play':
-                /*
-                  * the foreground gets bigger as the time progresses
-                  * see flick and the commit:
-                  * Add interval position heartbeat for remote control
-                  */
-                time.state = 'playing'
-                break;
-            case 'pause':
-                /*
-                  * the foreground is frozen
-                  */
-                time.state = 'paused'
-                break;
-            case 'stop':
-                time.value = 0
-                time.state = 'paused'
-                break;
-            default:
-        }
+    function stopTimeline() {
+        time.value = 0;
     }
 
     function msToDate(duration, currentDate) {
@@ -93,13 +74,5 @@ Slider {
             color: "#62400a"
         }
     }
-    states: [
-        State {
-            name: "playing"
-            PropertyChanges { target: foreground;}},
-        State {
-            name: "paused"
-            PropertyChanges { target: foreground;}
-        }
-    ]
+
 }

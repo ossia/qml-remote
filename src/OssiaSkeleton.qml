@@ -46,6 +46,7 @@ Item {
                                     jsonObject);
 
                     }
+
                 }
                 //TODO: hundle volume and the main speed messages
             } catch (error) {
@@ -54,17 +55,16 @@ Item {
         }
         onStatusChanged: {
             switch (socket.status) {
-            case WebSocket.Error:
-                console.log("Error: " + socket.errorString)
-                break
-            case WebSocket.Open:
-                socket.sendTextMessage("Hello World")
-                break
-            case WebSocket.Closed:
-                messageBox.text += "\n  Socket closed"
-                break
-            default:
-
+                case WebSocket.Error:
+                    console.log("Error: " + socket.errorString);
+                    break;
+                case WebSocket.Open:
+                    socket.sendTextMessage("Hello World");
+                    break;
+                case WebSocket.Closed:
+                    console.log("the webSocket communication has been closed")
+                    break;
+                default:
             }
         }
         active: false
