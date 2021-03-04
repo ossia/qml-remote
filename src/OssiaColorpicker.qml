@@ -21,7 +21,10 @@ Rectangle {
         spacing: 20
         Repeater {
             model: ["color1", "color", "color2"]
-            OssiaColorPoint{_colorPointName: modelData}
+            OssiaColorPoint{
+                _colorPointName: modelData
+                displayedColor: colorpicker.colorValue
+            }
         }
     }
 }

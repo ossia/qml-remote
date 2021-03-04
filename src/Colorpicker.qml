@@ -17,6 +17,7 @@ Rectangle {
     property bool enablePaletteMode : false
     property string switchToColorPickerString: "Palette..."
     property string switchToPalleteString: "Color Picker..."
+    property string currentColorName : colorEditText.text
 
     signal colorChanged(color changedColor)
 
@@ -170,6 +171,7 @@ Rectangle {
                 id: colorEditBox
                 height: 15; width: parent.width
                 TextInput {
+                    id: colorEditText
                     anchors.fill: parent
                     color: "#AAAAAA"
                     selectionColor: "#FF7777AA"

@@ -6,12 +6,14 @@ import QtQuick.Controls 2.15
 Rectangle {
     property string _colorPointName: "ColorPointName"
     id: colorButton
-    width: colorBackground.width/30
+    width: colorBackground.width/45
     height: colorButton.width
     radius: colorButton.width/2
     color: "#a7dd0d"
     border.width: 2
     border.color: "#a7dd0d"
+    //property string displayedColor: "#FFFFFFFF"
+    property color displayedColor: "#FFFFFFFF"
 
     Text {
          id: colorName
@@ -21,15 +23,29 @@ Rectangle {
          text: _colorPointName
          color: "#a7dd0d"
      }
-     Text {
+     /*Text {
          id: colorValue
          anchors.top: colorName.bottom
          anchors.left: colorName.left
          //text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)
          //text: "color"+_fullColorString(colorpicker.colorValue, colorpicker.picker.alphaPicker.alphaSlider.value)
-        text: "yes"
+        text: displayedColor
          color: "#a7dd0d"
-     }
+     }*/
+     PanelBorder {
+         width: 100
+         height: 15
+         anchors.top: colorName.bottom
+         anchors.left: colorName.left
+         visible: enableAlphaChannel
+         Checkerboard { cellSide: 5 }
+         Rectangle {
+             id: colorValue
+             width: parent.width; height: 15
+             border.width: 1; border.color: "black"
+             color: colorButton.displayedColor
+       }
+    }
 
     MouseArea{
         id: colorMouseAreaButton
@@ -42,7 +58,7 @@ Rectangle {
             name: "off"
             PropertyChanges {
                 target: colorValue;
-                text: colorValue.text
+                color: colorValue.color
             }
             PropertyChanges {
                 target: colorButton;
@@ -50,7 +66,7 @@ Rectangle {
             }
             PropertyChanges{
                 target: colorMouseAreaButton;
-                onClicked: colorButton.state = 'on'
+                onClicked: colorButton.state = "on"
             }
         },
         State {
@@ -59,7 +75,7 @@ Rectangle {
                 target: colorValue;
                 //text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)}
                 //text: "color : "+_fullColorString(colorpicker.colorValue, alphaSlider.value)
-                text: "no"
+                color: displayedColor
             }
         }
     ]

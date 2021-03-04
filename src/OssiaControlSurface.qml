@@ -24,7 +24,6 @@ Column{
         }
         OssiaColorpicker{
             id: ossiaColorpicker
-
         }
     }
 }
