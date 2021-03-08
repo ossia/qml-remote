@@ -28,6 +28,7 @@ Rectangle {
         }
         MouseArea{
             anchors.fill: parent
+            drag.target: this
             Rectangle {
                 id: vertical
                 anchors.top: parent.top
@@ -46,7 +47,6 @@ Rectangle {
                 height: 5
                 color: "white"
             }
-
         }
     }
 }
