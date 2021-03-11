@@ -11,9 +11,11 @@ Rectangle {
     color: "#363636"
     Rectangle {
         id: zone
-
-        width: 70*background.width/100
-        height: 98*background.height/100
+        anchors.left: parent.left
+        width: 65*background.width/100
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.margins: 5
         color: "black"
 
         Column {

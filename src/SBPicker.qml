@@ -49,6 +49,7 @@ Item {
         anchors.fill: parent
         x: r
         y: r
+        drag.target: this
         function handleMouse(mouse) {
             if (mouse.buttons & Qt.LeftButton) {
                 pickerCursor.x = Math.max(0, Math.min(width,  mouse.x) - 1 * r);

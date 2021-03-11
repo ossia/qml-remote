@@ -86,6 +86,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 5
+        anchors.rightMargin: 5
     }
     TimeSet {
         id: ossiaTimeSet
