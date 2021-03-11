@@ -1,11 +1,12 @@
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Rectangle {
     property string _positionPointName: "PositionName"
     id: background
-    //width: 300
-    //height: 150
+    width: 300
+    height: 150
 
     color: "#363636"
     Rectangle {
@@ -27,10 +28,12 @@ Rectangle {
         }
         MouseArea{
             anchors.fill: parent
+            drag.target: this
             Rectangle {
                 id: vertical
                 anchors.top: parent.top
-                x: parent.mouseX
+                x: Math.min(Math.max(parent.mouseX - width/2., 0), parent.width - width)
+                //x: parent.mouseX - width/2.
                 width: 5
                 height: parent.height
                 color: "white"
@@ -38,13 +41,12 @@ Rectangle {
             Rectangle {
                 id: horizontal
                 anchors.left: parent.left
-                y: parent.mouseY
+                y: Math.min(Math.max(parent.mouseY - height/2., 0), parent.height  - height)
+                //y: parent.mouseY - height/2.
                 width: parent.width
                 height: 5
                 color: "white"
             }
-
         }
     }
 }
-
