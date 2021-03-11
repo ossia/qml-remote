@@ -5,7 +5,6 @@ import QtQml 2.15
 
 Slider {
     property int totalTime: 10 * 60 * 1000 // assuming totalTime is given by ossia in milliseconds
-    property date currentDate: new Date() // useless at some point
     id: time
     value: 0
     implicitWidth: window.width
@@ -16,17 +15,24 @@ Slider {
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals;
             if (IntervalsObject[0]) {
-                var progress = JSON.stringify(IntervalsObject[0].Progress); // The timeline is positioned first
-                time.value = progress
+                time.value = JSON.stringify(IntervalsObject[0].Progress); // The timeline is positioned first
             }
-          }
+        }
     }
 
+    // Sends a message to Score to update its progress' timeline
+    onMoved: {
+        socket.sendTextMessage(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
+        //console.log(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
+    }
+
+    // This function is called by OssiaStop
     function stopTimeline() {
         time.value = 0;
     }
 
-    function msToDate(duration, currentDate) {
+    // Convert milliseconds to a hh:mm:ss.zz format
+    function msToTime(duration) {
         var milliseconds = parseInt((duration % 1000) / 100),
         seconds = Math.floor((duration / 1000) % 60),
         minutes = Math.floor((duration / (1000 * 60)) % 60),
@@ -36,18 +42,13 @@ Slider {
         minutes = (minutes < 10) ? "0" + minutes : minutes;
         seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-        currentDate.setHours(hours);
-        currentDate.setMinutes(minutes);
-        currentDate.setSeconds(seconds);
-        currentDate.setMilliseconds(milliseconds);
-
         return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
     }
 
     Text {
         // Basically the slider's ratio times the totalTime (ms) gives the elasped time (ms)
         // Which must then be converted into a date type
-        text: msToDate(time.value * totalTime, currentDate)
+        text: msToTime(time.value * totalTime)
         color: "#f0f0f0"
         font.bold: true
         width: time.width
@@ -69,7 +70,7 @@ Slider {
         border.color: "#62400a"
 
         Rectangle {
-            width: time.visualPosition * parent.width - y // Changes with time
+            width: time.visualPosition * parent.width - y
             height: parent.height
             color: "#62400a"
         }
