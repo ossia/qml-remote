@@ -18,6 +18,7 @@ Rectangle {
         anchors.left: colorpicker.right
         anchors.leftMargin: 5
         anchors.top: colorpicker.top
+        anchors.topMargin: 5
         spacing: 20
         Repeater {
             model: ["color1", "color", "color2"]

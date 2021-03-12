@@ -97,7 +97,7 @@ Rectangle {
         Item {
             id: huePicker
             visible: !paletteMode
-            width: 12
+            width: 28
             Layout.fillHeight: true
             Layout.topMargin: colorHandleRadius
             Layout.bottomMargin: colorHandleRadius
@@ -124,7 +124,7 @@ Rectangle {
         Item {
             id: alphaPicker
             visible: enableAlphaChannel
-            width: 12
+            width: 28
             Layout.leftMargin: 4
             Layout.fillHeight: true
             Layout.topMargin: colorHandleRadius
@@ -140,89 +140,6 @@ Rectangle {
             }
             ColorSlider {
                 id: alphaSlider; anchors.fill: parent
-            }
-        }
-
-        // details column
-        Column {
-            id: detailColumn
-            Layout.leftMargin: 4
-            Layout.fillHeight: true
-            Layout.topMargin: colorHandleRadius
-            Layout.bottomMargin: colorHandleRadius
-            Layout.alignment: Qt.AlignRight
-            visible: enableDetails
-
-            // current color/alpha display rectangle
-            PanelBorder {
-                width: parent.width
-                height: 30
-                visible: enableAlphaChannel
-                Checkerboard { cellSide: 5 }
-                Rectangle {
-                    width: parent.width; height: 30
-                    border.width: 1; border.color: "black"
-                    color: colorPicker.colorValue
-                }
-            }
-
-            // "#XXXXXXXX" color value box
-            PanelBorder {
-                id: colorEditBox
-                height: 15; width: parent.width
-                TextInput {
-                    id: colorEditText
-                    anchors.fill: parent
-                    color: "#AAAAAA"
-                    selectionColor: "#FF7777AA"
-                    font.pixelSize: 11
-                    maximumLength: 9
-                    focus: false
-                    text: _fullColorString(colorPicker.colorValue, alphaSlider.value)
-                    selectByMouse: true
-                }
-            }
-
-            // H, S, B color values boxes
-            Column {
-                visible: !paletteMode
-                width: parent.width
-                NumberBox { caption: "H:"; value: hueSlider.value.toFixed(2) }
-                NumberBox { caption: "S:"; value: sbPicker.saturation.toFixed(2) }
-                NumberBox { caption: "B:"; value: sbPicker.brightness.toFixed(2) }
-            }
-
-            // filler rectangle
-            Rectangle {
-                width: parent.width; height: 5
-                color: "transparent"
-            }
-
-            // R, G, B color values boxes
-            Column {
-                width: parent.width
-                NumberBox {
-                    caption: "R:"
-                    value: _getChannelStr(colorPicker.colorValue, 0)
-                    min: 0; max: 255
-                }
-                NumberBox {
-                    caption: "G:"
-                    value: _getChannelStr(colorPicker.colorValue, 1)
-                    min: 0; max: 255
-                }
-                NumberBox {
-                    caption: "B:"
-                    value: _getChannelStr(colorPicker.colorValue, 2)
-                    min: 0; max: 255
-                }
-            }
-
-            // alpha value box
-            NumberBox {
-                visible: enableAlphaChannel
-                caption: "A:"; value: Math.ceil(alphaSlider.value*255)
-                min: 0; max: 255
             }
         }
     }
