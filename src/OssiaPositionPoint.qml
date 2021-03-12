@@ -8,7 +8,6 @@ Rectangle {
     id: positionButton
     width: background.width/30
     height: positionButton.width
-    radius: positionButton.width/2
     color: "#a7dd0d"
     border.width: 2
     border.color: "#a7dd0d"
