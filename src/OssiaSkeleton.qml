@@ -62,7 +62,7 @@ Item {
                     socket.sendTextMessage("Hello World");
                     break;
                 case WebSocket.Closed:
-                    console.log("the webSocket communication has been closed")
+                    console.log("The webSocket communication has been closed")
                     break;
                 default:
             }
@@ -109,7 +109,7 @@ Item {
         anchors.right: parent.right
         height: parent.height
         //anchors.margins: 5
-        //height: window.height/1.5
+        //height: window.height / 1.5
         signal controlSurfaceMessageReceived(var n)
     }
     OssiaTimeline {
