@@ -36,7 +36,7 @@ Rectangle {
          height: 15
          anchors.top: colorName.bottom
          anchors.left: colorName.left
-         visible: enableAlphaChannel
+         //visible: enableAlphaChannel
          Checkerboard { cellSide: 5 }
          Rectangle {
              id: colorValue

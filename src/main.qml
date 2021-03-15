@@ -7,7 +7,7 @@ Window {
     width: 1000
     height: 600
     visible: true
-    title: qsTr("Remote Controll")
+    title: qsTr("Remote Control")
     color: "#202020"
     OssiaSkeleton {}
 }

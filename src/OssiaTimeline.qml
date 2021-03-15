@@ -19,7 +19,7 @@ Slider {
                 var progress = JSON.stringify(IntervalsObject[0].Progress); // The timeline is positioned first
                 time.value = progress
             }
-          }
+        }
     }
 
     function stopTimeline() {
@@ -54,8 +54,6 @@ Slider {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
     }
-
-
 
     handle: Rectangle {} // No handle
 
