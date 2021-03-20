@@ -1,0 +1,31 @@
+name: Build app
+
+on: push
+
+jobs:
+  buster:
+    name: Ubuntu build
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          apt-get update -qq
+          DEBIAN_FRONTEND="noninteractive" apt-get install -qq --force-yes git build-essential qt5-default qtbase5-dev qtdeclarative5-dev libqt5websockets5-dev qtquickcontrols2-5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-extras
+
+      - name: Build
+        run: |
+          mkdir /build
+          cd /build
+          qmake "$GITHUB_WORKSPACE/src"
+          make -j4
+
+      - name: Test
+        run: |
+          cd /build
+          ./PFA11 -platform minimal
