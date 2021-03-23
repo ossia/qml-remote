@@ -13,7 +13,7 @@ Slider {
     // Sends a message to Score to update its progress' timeline
     onMoved: {
         socket.sendTextMessage(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
-        //console.log(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
+        // console.log(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
     }
 
     // Receives a message from Score to update the current value IRT
