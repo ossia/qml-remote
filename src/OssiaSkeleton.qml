@@ -25,7 +25,7 @@ Item {
                     * of all the intervals inclunding itself
                     */
                     ossiaTimeline.intervalsMessageReceived(jsonObject);
-
+                    ossiaTimeSet.intervalMessageReceived(jsonObject);
                 } else {
                     var typeOfMessage = jsonObject.Message;
                     if (typeOfMessage === "TriggerRemoved"
@@ -35,7 +35,8 @@ Item {
 
                     } else if (typeOfMessage === "IntervalRemoved"
                                || typeOfMessage === "IntervalAdded") {
-                        ossiaTimeSet.intervalMessageReceived(jsonObject);
+                        ossiaSpeed.intervalMessageReceived(jsonObject);
+
 
                     } else if (typeOfMessage === "Play" || typeOfMessage === "Pause"
                                || typeOfMessage === "Restart") {
@@ -90,6 +91,7 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 5
         anchors.rightMargin: 5
+        signal intervalMessageReceived(var n)
     }
     TimeSet {
         id: ossiaTimeSet
