@@ -21,6 +21,7 @@ Item {
         }
     }
     Rectangle {
+        id: colorlessGradient
         x: r
         y: r
         width: parent.width - 2 * r
@@ -46,9 +47,7 @@ Item {
         }
     }
     MouseArea {
-        //anchors.fill: parent
-        width: parent.width - 2 * r
-        height : parent.width - 15 * r
+        anchors.fill: colorlessGradient
         x: r
         y: r
         drag.target: this
