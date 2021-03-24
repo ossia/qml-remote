@@ -97,7 +97,9 @@ Rectangle {
         Item {
             id: huePicker
             visible: !paletteMode
-            width: 28
+            width: 25
+            height: picker.height
+            Layout.leftMargin: 4
             Layout.fillHeight: true
             Layout.topMargin: colorHandleRadius
             Layout.bottomMargin: colorHandleRadius
@@ -124,12 +126,13 @@ Rectangle {
         Item {
             id: alphaPicker
             visible: enableAlphaChannel
-            width: 28
+            width: 25
+            height: picker.height
             Layout.leftMargin: 4
             Layout.fillHeight: true
             Layout.topMargin: colorHandleRadius
             Layout.bottomMargin: colorHandleRadius
-            Checkerboard { cellSide: 4 }
+            Checkerboard { cellSide: 5 }
             //  alpha intensity gradient background
             Rectangle {
                 anchors.fill: parent

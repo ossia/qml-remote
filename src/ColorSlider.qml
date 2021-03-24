@@ -20,7 +20,9 @@ Item {
         }
     }
     MouseArea {
-        anchors.fill: parent
+        //anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         drag.target: this
         y: -Math.round(cursorHeight/2)
         height: parent.height+cursorHeight
