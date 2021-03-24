@@ -43,7 +43,7 @@ Rectangle {
 
     RowLayout {
         id: picker
-        anchors.top: enablePaletteMode　? palette_switch.bottom : parent.top
+        anchors.top: enablePaletteMode　? palette_switch.bottom : parent.top;
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.rightMargin: colorHandleRadius
@@ -67,7 +67,7 @@ Rectangle {
 
                 hueColor: {
                     var v = 1.0-hueSlider.value
-                    console.debug("v:"+v)
+                    //console.debug("v:"+v)
 
                     if(0.0 <= v && v < 0.16) {
                         return Qt.rgba(1.0, 0.0, v/0.16, 1.0)
@@ -82,7 +82,7 @@ Rectangle {
                     } else if(0.85 <= v && v <= 1.0) {
                         return Qt.rgba(1.0, 1.0 - (v-0.85)/0.15, 0.0, 1.0)
                     } else {
-                        console.log("hue value is outside of expected boundaries of [0, 1]")
+                        //console.log("hue value is outside of expected boundaries of [0, 1]")
                         return "red"
                     }
                 }

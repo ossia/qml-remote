@@ -20,7 +20,7 @@ Rectangle{
                 name: "Trigger133"
                 path: "Trigger133"
             }
-            ListElement {
+         /*   ListElement {
                 name: "Trigger2"
                 path: "Trigger133"
             }
@@ -63,7 +63,7 @@ Rectangle{
           ListElement {
               name: "Trigger3"
               path:"Trigger133"
-          }
+          }*/
       }
       delegate:OssiaTrigger{
           ossiaPath:path

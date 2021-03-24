@@ -46,14 +46,16 @@ Item {
         }
     }
     MouseArea {
-        anchors.fill: parent
+        //anchors.fill: parent
+        width: parent.width - 2 * r
+        height : parent.width - 15 * r
         x: r
         y: r
         drag.target: this
         function handleMouse(mouse) {
             if (mouse.buttons & Qt.LeftButton) {
-                pickerCursor.x = Math.max(0, Math.min(width,  mouse.x) - 1 * r);
-                pickerCursor.y = Math.max(0, Math.min(height, mouse.y) - 1 * r);
+                pickerCursor.x = Math.max(0, Math.min(width,  mouse.x) );
+                pickerCursor.y = Math.max(0, Math.min(height, mouse.y)); // - 1 * r
             }
         }
         onPositionChanged: handleMouse(mouse)

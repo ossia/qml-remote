@@ -27,5 +27,7 @@ Button {
     }
     onClicked: {
          socket.sendTextMessage('{ "Message": "Trigger","Path":"'+ ossiaPath + '"}')
+         console.log(('{ "Message": "NotreTrigger","Path":"'+ ossiaPath + '"}'));
+        //"Path":"[{"ObjectName":"Scenario::ScenarioDocumentModel","ObjectId":1}
     }
 }
