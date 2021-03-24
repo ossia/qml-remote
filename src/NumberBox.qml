@@ -23,7 +23,7 @@ Row {
         TextInput {
             id: inputBox
             color: "#AAAAAA"; selectionColor: "#FF7777AA"
-            font.pixelSize: 11            
+            font.pixelSize: 11
             maximumLength: 10
             focus: false
             readOnly: true

@@ -21,34 +21,34 @@ Window {
         font.pointSize: 50
     }
     Rectangle {
-            id: up
-            width:  150
-            height: 100
-            color: "orange"
+        id: up
+        width:  150
+        height: 100
+        color: "orange"
         Text {
             id: name_name
             text:socket.status == WebSocket.Open ? qsTr("Sending...") : qsTr("Welcome!")
         }
-       }
+    }
     WebSocket {
         id: socket
         url:"ws://localhost:10212"
         onTextMessageReceived: {
-        console.log(message);
+            console.log(message);
             if(message === '"Message""DeviceTree""Nodes"{}')
-                 messageBox.text = messageBox.text + "\n      Received message vc traitement: " + message;//do nothige
-                   var jsonObject = JSON.parse(message);
-                   var aString = jsonObject.message;
-              messageBox.text = messageBox.text + "\n               Received message vc traitement: " + aString;
+                messageBox.text = messageBox.text + "\n      Received message vc traitement: " + message;//do nothige
+            var jsonObject = JSON.parse(message);
+            var aString = jsonObject.message;
+            messageBox.text = messageBox.text + "\n               Received message vc traitement: " + aString;
             console.log("Path: \n" + jsonObject.Path[0]);
-              name_name.text += "\n" + aString + "\n K "+ jsonObject.Path[0];
-              if( aString !== "TriggerRemoved"){
-              walo.insert(0,{name:walo.a.toString(), color:"#696969",jsonObj:jsonObject})
-                            walo.a+=1;
-              }
-              else if (aString ==="TriggerRemoved"){
+            name_name.text += "\n" + aString + "\n K "+ jsonObject.Path[0];
+            if( aString !== "TriggerRemoved"){
+                walo.insert(0,{name:walo.a.toString(), color:"#696969",jsonObj:jsonObject})
+                walo.a+=1;
+            }
+            else if (aString ==="TriggerRemoved"){
                 walo.get(0).color = "#dcdcdc";
-              }
+            }
         }
         onStatusChanged: if (socket.status == WebSocket.Error) {
                              console.log("Error: " + socket.errorString)
@@ -61,33 +61,33 @@ Window {
     }
 
     Button {
-            id: start
-           text: qsTr("Connexion")
-           x:200
-           onClicked: {
-                if(text === "Connexion"){
-                    socket.active = !socket.active
-                    text = qsTr("Start");
-                }
-               else  if (text === "Start"){
-                    socket.sendTextMessage('{ "Message": "Pause" }');
-                    text = qsTr("Pause");
-                }else if (text === "Pause"){
-                    socket.sendTextMessage('{ "Message": "Play" }');
+        id: start
+        text: qsTr("Connexion")
+        x:200
+        onClicked: {
+            if(text === "Connexion"){
+                socket.active = !socket.active
+                text = qsTr("Start");
+            }
+            else  if (text === "Start"){
+                socket.sendTextMessage('{ "Message": "Pause" }');
+                text = qsTr("Pause");
+            }else if (text === "Pause"){
+                socket.sendTextMessage('{ "Message": "Play" }');
 
-                    text = qsTr("Start");
-                }
-           }
-       }
+                text = qsTr("Start");
+            }
+        }
+    }
 
     Button {
-           text: qsTr("restart ")
-           x:350
+        text: qsTr("restart ")
+        x:350
 
-           onClicked: {
+        onClicked: {
             socket.sendTextMessage('{ "Message": "Stop" }');
             start.text = qsTr("Start");
-           }
+        }
     }
     Button {
         text: qsTr("rsend vitesse")
@@ -95,7 +95,7 @@ Window {
         y:100
 
         onClicked: {
-         socket.sendTextMessage('{"Message": "Transport","Millionds": 40000}');
+            socket.sendTextMessage('{"Message": "Transport","Millionds": 40000}');
             console.log("Trying to send message for Transport\n");
         }
     }
@@ -106,54 +106,54 @@ Window {
         text: socket.status == WebSocket.Open ? qsTr("Sending...") : qsTr("Welcome!")
         anchors.centerIn: parent
     }
-     Slider {
-         anchors.right: parent.right
-         //maximumValue: 600.0
-         from: -120.0
-         value: 68
-         to: 600.0
-         orientation: Qt.Horizontal
-         Layout.fillWidth: true
-         Layout.fillHeight: true
-         live: false
-         snapMode: SnapAlways
-         Text {
-             id: slider
-             anchors.top: parent.top - 1
-             anchors.right:(parent.right + parent.left)/2
-             text: qsTr("MonSLider  ")
-          }
-          onMoved: {
-             slider.text = qsTr(value.toString());
-              socket.sendTextMessage('{"Message": "Transport","Milliseconds": 2000}'+value.toString()+ '}');
+    Slider {
+        anchors.right: parent.right
+        //maximumValue: 600.0
+        from: -120.0
+        value: 68
+        to: 600.0
+        orientation: Qt.Horizontal
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        live: false
+        snapMode: SnapAlways
+        Text {
+            id: slider
+            anchors.top: parent.top - 1
+            anchors.right:(parent.right + parent.left)/2
+            text: qsTr("MonSLider  ")
+        }
+        onMoved: {
+            slider.text = qsTr(value.toString());
+            socket.sendTextMessage('{"Message": "Transport","Milliseconds": 2000}'+value.toString()+ '}');
 
-             /*socket.sendTextMessage(' {    "Message": "IntervalSpeed", "Path": "[{"ObjectName":"Scenario::ScenarioDocumentModel","ObjectId":1},{"ObjectName":"Scenario::BaseScenario","ObjectId":0},{"ObjectName":"Scenario::IntervalModel","ObjectId":0},{"ObjectName":"Scenario","ObjectId":1},{"ObjectName":"Scenario::TimeSyncModel","ObjectId":1}]",
+            /*socket.sendTextMessage(' {    "Message": "IntervalSpeed", "Path": "[{"ObjectName":"Scenario::ScenarioDocumentModel","ObjectId":1},{"ObjectName":"Scenario::BaseScenario","ObjectId":0},{"ObjectName":"Scenario::IntervalModel","ObjectId":0},{"ObjectName":"Scenario","ObjectId":1},{"ObjectName":"Scenario::TimeSyncModel","ObjectId":1}]",
               "Speed": '+value.toString()+ '}');*/
-             console.log(value.toString());
-          }
-     }
-     ListView{
-         y:300
-         width: 600;height: 200
-         orientation: ListView.Horizontal
+            console.log(value.toString());
+        }
+    }
+    ListView{
+        y:300
+        width: 600;height: 200
+        orientation: ListView.Horizontal
 
-         model:ListModel{
-             id:walo
-             property int a:1
-         }
-         delegate: Rectangle{
-             color: model.color
-             border.color : "black"
-             radius: 10
-             property var jsonObj;//stockage du message json responsable de sa creaction
-             width: 200;height: 200
-             Text {
-                 anchors.centerIn: parent
-                 //text: model.name
-                 text:model.jsonObj.Message + " " + model.name.toString();
+        model:ListModel{
+            id:walo
+            property int a:1
+        }
+        delegate: Rectangle{
+            color: model.color
+            border.color : "black"
+            radius: 10
+            property var jsonObj;//stockage du message json responsable de sa creaction
+            width: 200;height: 200
+            Text {
+                anchors.centerIn: parent
+                //text: model.name
+                text:model.jsonObj.Message + " " + model.name.toString();
 
-             }
-         }
-     }
+            }
+        }
+    }
 
 }

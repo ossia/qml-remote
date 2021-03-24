@@ -16,7 +16,7 @@ Item {
         onTextMessageReceived: {
             try {
                 console.log("-----------------------------------------");
-                 console.log(message);
+                console.log(message);
                 console.log("-----------------------------------------");
 
                 var jsonObject = JSON.parse(message);
@@ -59,16 +59,16 @@ Item {
         }
         onStatusChanged: {
             switch (socket.status) {
-                case WebSocket.Error:
-                    console.log("Error: " + socket.errorString);
-                    break;
-                case WebSocket.Open:
-                    socket.sendTextMessage("Hello World");
-                    break;
-                case WebSocket.Closed:
-                    console.log("The webSocket communication has been closed")
-                    break;
-                default:
+            case WebSocket.Error:
+                console.log("Error: " + socket.errorString);
+                break;
+            case WebSocket.Open:
+                socket.sendTextMessage("Hello World");
+                break;
+            case WebSocket.Closed:
+                console.log("The webSocket communication has been closed")
+                break;
+            default:
             }
         }
         active: false

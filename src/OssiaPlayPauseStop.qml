@@ -29,6 +29,6 @@ Column{
                 //send signal to reinitialize Button
                 reinitialize.clicked();
             }
-          }
         }
+    }
 }

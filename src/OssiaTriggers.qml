@@ -15,7 +15,7 @@ Rectangle{
         snapMode: ListView.SnapToItem
         model:ListModel {
             id: triggerslistModel
-/*
+            /*
             ListElement {
                 name: "Trigger133"
                 path: "Trigger133"
@@ -64,12 +64,12 @@ Rectangle{
               name: "Trigger3"
               path:"Trigger133"
           }*/
-      }
-      delegate:OssiaTrigger{
-          ossiaPath:path
-          height:triggerslist.height
-          sliderName: name
-          }
+        }
+        delegate:OssiaTrigger{
+            ossiaPath:path
+            height:triggerslist.height
+            sliderName: name
+        }
     }
 
 
@@ -99,15 +99,15 @@ Rectangle{
             }
             else if(messageObject === "TriggerRemoved"){
                 function find(cond) {
-                  for(var i = 0; i < triggerslistModel.count; ++i) if (cond(triggerslistModel.get(i))) return i;
-                  return null
+                    for(var i = 0; i < triggerslistModel.count; ++i) if (cond(triggerslistModel.get(i))) return i;
+                    return null
                 }
                 var s = find(function (item) { return item.path === JSON.stringify(new_path) }) //the index of m.Path in the listmodel
                 if(s !== null){
                     triggerslistModel.remove(s)
                 }
             }
-          }
         }
+    }
 }
 

@@ -21,43 +21,43 @@ Button {
 
     hoverEnabled: true
     onHoveredChanged: {if (playGlobButton.state === 'hoveredPlayGlob' || playGlobButton.state === 'holdClickPause')
-                            {playGlobButton.state = ''}
-                       else if (playGlobButton.state === 'pausedPlayGlob')
-                            {playGlobButton.state = 'pausedPlayGlob'}
-                       else if (playGlobButton.state === 'disabledPlayGlob')
-                            {playGlobButton.state = 'disabledPlayGlob'}
-                       else if (playGlobButton.state === 'pausedHover')
-                            {playGlobButton.state = 'pausedOn'}
-                       else if (playGlobButton.state === 'pausedOn')
-                            {playGlobButton.state = 'pausedHover'}
-                       else
-                            {playGlobButton.state = 'hoveredPlayGlob'}}
+        {playGlobButton.state = ''}
+        else if (playGlobButton.state === 'pausedPlayGlob')
+        {playGlobButton.state = 'pausedPlayGlob'}
+        else if (playGlobButton.state === 'disabledPlayGlob')
+        {playGlobButton.state = 'disabledPlayGlob'}
+        else if (playGlobButton.state === 'pausedHover')
+        {playGlobButton.state = 'pausedOn'}
+        else if (playGlobButton.state === 'pausedOn')
+        {playGlobButton.state = 'pausedHover'}
+        else
+        {playGlobButton.state = 'hoveredPlayGlob'}}
     onPressed: {
         if (playGlobButton.state === 'pausedPlayGlob')
-            {playGlobButton.state = 'pausedPlayGlob'}
+        {playGlobButton.state = 'pausedPlayGlob'}
         else if (playGlobButton.state === 'disabledPlayGlob')
-            {playGlobButton.state = 'disabledPlayGlob'}
+        {playGlobButton.state = 'disabledPlayGlob'}
         else if (playGlobButton.state === 'pausedHover')
-            {playGlobButton.state = 'pausedHover'}
+        {playGlobButton.state = 'pausedHover'}
         else
-            {playGlobButton.state = 'holdClickPause'}
+        {playGlobButton.state = 'holdClickPause'}
 
     }
     onReleased: {
         if (playGlobButton.state === 'pausedPlayGlob')
-            {playGlobButton.state = 'pausedPlayGlob'}
+        {playGlobButton.state = 'pausedPlayGlob'}
         else if (playGlobButton.state === 'disabledPlayGlob')
-            {playGlobButton.state = 'disabledPlayGlob'}
+        {playGlobButton.state = 'disabledPlayGlob'}
         else if (playPause.isDisabled() && playGlobButton.state === 'hoveredPlayGlob')
-            {playGlobButton.state = 'pausedHover'}
+        {playGlobButton.state = 'pausedHover'}
         else if (playPause.isDisabled() && playGlobButton.state === 'pausedHover')
-            {playGlobButton.state = 'hoveredPlayGlob'}
+        {playGlobButton.state = 'hoveredPlayGlob'}
         else
-            {
-                playGlobButton.state = 'pausedHover'
-                playPause.playGlobClicked()
+        {
+            playGlobButton.state = 'pausedHover'
+            playPause.playGlobClicked()
 
-            }
+        }
     }
     contentItem:
         Image{
@@ -67,36 +67,36 @@ Button {
         clip: true
         source:"Icons/play_glob_off.svg"
         states: [
-                State {
-                    name: "holdClickPause"
-                    PropertyChanges { target: playGlobButton; source: "Icons/play_glob_on.svg" }
-                },
-                State {
-                    name: "hoveredPlayGlob"
-                    PropertyChanges { target: playGlobButton; source: "Icons/play_glob_hover.svg" }
-                },
-                State {
-                    name: "pausedPlayGlob"
-                    PropertyChanges { target: playGlobButton; source: "Icons/pause_disabled.svg" }
-                },
-                State {
-                    name: 'pausedHover'
-                    PropertyChanges { target: playGlobButton; source: "Icons/pause_hover.svg"}
-                },
-                State {
-                    name: 'pausedOn'
-                    PropertyChanges { target: playGlobButton; source: "Icons/pause_on.svg"}
-                },
-                State {
-                    name: 'pausedOff'
-                    PropertyChanges { target: playGlobButton; source: "Icons/pause_off.svg"}
-                },
-                State {
-                    name: 'disabledPlayGlob'
-                    PropertyChanges {target: playGlobButton; source: "Icons/play_glob_disabled.svg"}
+            State {
+                name: "holdClickPause"
+                PropertyChanges { target: playGlobButton; source: "Icons/play_glob_on.svg" }
+            },
+            State {
+                name: "hoveredPlayGlob"
+                PropertyChanges { target: playGlobButton; source: "Icons/play_glob_hover.svg" }
+            },
+            State {
+                name: "pausedPlayGlob"
+                PropertyChanges { target: playGlobButton; source: "Icons/pause_disabled.svg" }
+            },
+            State {
+                name: 'pausedHover'
+                PropertyChanges { target: playGlobButton; source: "Icons/pause_hover.svg"}
+            },
+            State {
+                name: 'pausedOn'
+                PropertyChanges { target: playGlobButton; source: "Icons/pause_on.svg"}
+            },
+            State {
+                name: 'pausedOff'
+                PropertyChanges { target: playGlobButton; source: "Icons/pause_off.svg"}
+            },
+            State {
+                name: 'disabledPlayGlob'
+                PropertyChanges {target: playGlobButton; source: "Icons/play_glob_disabled.svg"}
             }
 
-            ]
+        ]
     }
     background: Rectangle{
         id: zone

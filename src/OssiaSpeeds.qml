@@ -88,32 +88,32 @@ Rectangle {
             var messageObject = m.Message;
 
             switch (messageObject) {
-                case "IntervalAdded":
-                     /* The timeline is a global interval
+            case "IntervalAdded":
+                /* The timeline is a global interval
                       * The name of the timeline changes everytime ossia is refreshed...
                       * The only constant is that it contains "Untitled"
                       * The timeline should not be added with the other speeds */
-                    if (m.Name.includes("Untitled")) {
-                        ossiaTimeline.totalTime = m.DefaultDuration;
-                        /* I have to admit
+                if (m.Name.includes("Untitled")) {
+                    ossiaTimeline.totalTime = m.DefaultDuration;
+                    /* I have to admit
                           * Niveau encapsulation on est bof :shrug:
                           */
 
-                    } else {
-                        intervalsListModel.insert(0, {
-                                                      "name": JSON.stringify(m.Path)
-                                                  });
-                    }
-                    break;
-                case "IntervalRemoved":
-                    var s = find(function (item) {
-                        return item.name === JSON.stringify(m.Path)
-                    }) //the index of m.Path in the listmodel
+                } else {
+                    intervalsListModel.insert(0, {
+                                                  "name": JSON.stringify(m.Path)
+                                              });
+                }
+                break;
+            case "IntervalRemoved":
+                var s = find(function (item) {
+                    return item.name === JSON.stringify(m.Path)
+                }) //the index of m.Path in the listmodel
 
-                    intervalsListModel.setProperty(s, "name", "desactivated")
-                    // manque traitement a faire (passer la bonne vitesse de lecture .. )
-                    break;
-                default:
+                intervalsListModel.setProperty(s, "name", "desactivated")
+                // manque traitement a faire (passer la bonne vitesse de lecture .. )
+                break;
+            default:
             }
 
         }

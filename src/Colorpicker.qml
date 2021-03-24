@@ -9,7 +9,7 @@ Rectangle {
     property color colorValue: paletteMode ?
                                    _rgb(paletts.paletts_color, alphaSlider.value) :
                                    _hsla(hueSlider.value, sbPicker.saturation,
-                                    sbPicker.brightness, alphaSlider.value)
+                                         sbPicker.brightness, alphaSlider.value)
     property bool enableAlphaChannel: true
     property bool enableDetails: true
     property int colorHandleRadius : 8

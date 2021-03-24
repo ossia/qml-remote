@@ -15,14 +15,14 @@ Rectangle {
     property color displayedColor: "#FFFFFFFF"
 
     Text {
-         id: colorName
-         anchors.left: colorButton.right
-         anchors.leftMargin: 5
-         anchors.horizontalCenter: colorButton.horizontalCenter
-         text: _colorPointName
-         color: "#a7dd0d"
-     }
-     /*Text {
+        id: colorName
+        anchors.left: colorButton.right
+        anchors.leftMargin: 5
+        anchors.horizontalCenter: colorButton.horizontalCenter
+        text: _colorPointName
+        color: "#a7dd0d"
+    }
+    /*Text {
          id: colorValue
          anchors.top: colorName.bottom
          anchors.left: colorName.left
@@ -31,19 +31,19 @@ Rectangle {
         text: displayedColor
          color: "#a7dd0d"
      }*/
-     PanelBorder {
-         width: 100
-         height: 15
-         anchors.top: colorName.bottom
-         anchors.left: colorName.left
-         //visible: enableAlphaChannel
-         Checkerboard { cellSide: 5 }
-         Rectangle {
-             id: colorValue
-             width: parent.width; height: 15
-             border.width: 1; border.color: "black"
-             color: colorButton.displayedColor
-       }
+    PanelBorder {
+        width: 100
+        height: 15
+        anchors.top: colorName.bottom
+        anchors.left: colorName.left
+        //visible: enableAlphaChannel
+        Checkerboard { cellSide: 5 }
+        Rectangle {
+            id: colorValue
+            width: parent.width; height: 15
+            border.width: 1; border.color: "black"
+            color: colorButton.displayedColor
+        }
     }
 
     MouseArea{

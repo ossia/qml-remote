@@ -18,22 +18,22 @@ Button {
 
     onHoveredChanged: {
         switch (pauseButton.state) {
-            case 'hoveredPlayOff':
-                pauseButton.state = 'playDisplayed';
-                break;
-            case 'playDisplayed':
-                pauseButton.state = 'hoveredPlayOff';
-                break;
-            case 'play_on':
-                pauseButton.state = 'hoveredPlayOn';
-                break;
-            case 'pauseDisplayed':
-                pauseButton.state = 'hoveredPlayOn';
-                break;
-            case 'hoveredPlayOn':
-                pauseButton.state = 'pauseDisplayed';
-                break;
-            default:
+        case 'hoveredPlayOff':
+            pauseButton.state = 'playDisplayed';
+            break;
+        case 'playDisplayed':
+            pauseButton.state = 'hoveredPlayOff';
+            break;
+        case 'play_on':
+            pauseButton.state = 'hoveredPlayOn';
+            break;
+        case 'pauseDisplayed':
+            pauseButton.state = 'hoveredPlayOn';
+            break;
+        case 'hoveredPlayOn':
+            pauseButton.state = 'pauseDisplayed';
+            break;
+        default:
         }
     }
     onClicked: {

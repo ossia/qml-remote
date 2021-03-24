@@ -15,8 +15,12 @@ OssiaSlider{
 
     // Sends a message to Score to update its progress' timeline
     onMoved: {
-        socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path": "Scenario::ScenarioDocumentModel.1/Scenario::BaseScenario.0/Scenario::IntervalModel.0/", "Speed": ').concat(speed.value));
-        //console.log(('{ "Message": "IntervalSpeed", "Path": "Scenario::ScenarioDocumentModel.1/Scenario::BaseScenario.0/Scenario::IntervalModel.0/", "Speed":').concat(speed.value));
+        console.log("Speeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed")
+        console.log(('{ "Message": "IntervalSpeed", "Path":"Scenario::ScenarioDocumentModel.1/Scenario::BaseScenario.0/Scenario::IntervalModel.0/", "Speed": ').concat(globalSpeed.value*6/720, '}'));
+        console.log("Speeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed")
+        socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":"Scenario::ScenarioDocumentModel.1/Scenario::BaseScenario.0/Scenario::IntervalModel.0/", "Speed": ').concat(globalSpeed.value, '}'));
+
+
     }
 
     Connections {
@@ -25,7 +29,7 @@ OssiaSlider{
             var IntervalsObject = m.Intervals;
             console.log('speed changed on score');
             globalSpeed.value = JSON.stringify(m.Speed)*720/6;
-            }
         }
+    }
 }
 

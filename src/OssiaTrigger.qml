@@ -29,7 +29,7 @@ Button {
         console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         console.log('{ "Message": "Trigger","Path":'+ ossiaPath + '}')
         console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-         socket.sendTextMessage('{ "Message": "Trigger","Path":'+ ossiaPath + '}')
+        socket.sendTextMessage('{ "Message": "Trigger","Path":'+ ossiaPath + '}')
 
         //"Path":"[{"ObjectName":"Scenario::ScenarioDocumentModel","ObjectId":1}
     }

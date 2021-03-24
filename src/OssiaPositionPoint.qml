@@ -13,20 +13,20 @@ Rectangle {
     border.color: "#a7dd0d"
 
     Text {
-         id: positionName
-         anchors.left: positionButton.right
-         anchors.leftMargin: 5
-         anchors.horizontalCenter: positionButton.horizontalCenter
-         text: _positionPointName
-         color: "#a7dd0d"
-     }
-     Text {
-         id: positionValue
-         anchors.top: positionName.bottom
-         anchors.left: positionName.left
-         text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)
-         color: "#a7dd0d"
-     }
+        id: positionName
+        anchors.left: positionButton.right
+        anchors.leftMargin: 5
+        anchors.horizontalCenter: positionButton.horizontalCenter
+        text: _positionPointName
+        color: "#a7dd0d"
+    }
+    Text {
+        id: positionValue
+        anchors.top: positionName.bottom
+        anchors.left: positionName.left
+        text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)
+        color: "#a7dd0d"
+    }
 
     MouseArea{
         id: positionMouseAreaButton
