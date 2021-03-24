@@ -7,7 +7,7 @@ Button {
     property string ossiaPath: "vide"
     //id: slider
     contentItem: Text {
-        text: sliderName
+        text: "name:"+sliderName+"   path:"+ossiaPath
         color: "#ffffff"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -27,7 +27,6 @@ Button {
     }
     onClicked: {
          socket.sendTextMessage('{ "Message": "Trigger","Path":"'+ ossiaPath + '"}')
-         console.log(('{ "Message": "NotreTrigger","Path":"'+ ossiaPath + '"}'));
         //"Path":"[{"ObjectName":"Scenario::ScenarioDocumentModel","ObjectId":1}
     }
 }

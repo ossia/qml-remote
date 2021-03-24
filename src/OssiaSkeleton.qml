@@ -15,7 +15,9 @@ Item {
         url: "ws://localhost:10212"
         onTextMessageReceived: {
             try {
-                console.log(message);
+                console.log("-----------------------------------------");
+                 console.log(message);
+                console.log("-----------------------------------------");
 
                 var jsonObject = JSON.parse(message);
                 if (jsonObject.Intervals) {
@@ -28,6 +30,7 @@ Item {
                     var typeOfMessage = jsonObject.Message;
                     if (typeOfMessage === "TriggerRemoved"
                             || typeOfMessage === "TriggerAdded") {
+
                         ossiaTimeSet.triggerMessageReceived(jsonObject);
 
                     } else if (typeOfMessage === "IntervalRemoved"
