@@ -10,9 +10,9 @@ OssiaSlider{
     from: -120
     value: 100
     to: 600
-     property var path;
+    property var path;
     controlColor: "#62400a"
-    property double totalSpeed: globalSpeed.value*720 - 120; // The total speed goes from -120 to 600
+    property double totalSpeed: globalSpeed.value*6/720; // The total speed goes from -120 to 600
 
     // Sends a message to Score to update its progress' timeline
     onMoved: {
@@ -24,9 +24,12 @@ OssiaSlider{
         function onIntervalMessageReceived(m) {
             var IntervalsObject = m.Intervals;
             console.log('speed changed on score');
-
-            globalSpeed.value = JSON.stringify(m.Speed)*720/6;
-            globalSpeed.path = JSON.stringify(m.Path);
+            console.log(m);
+            console.log('fin de message');
+            if (globalSpeed.path == null){ // The global path is the first one to be created by score
+                globalSpeed.value = JSON.stringify(m.Speed)*720/6;
+                globalSpeed.path = JSON.stringify(m.Path);
+            }
 
         }
     }

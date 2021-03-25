@@ -32,7 +32,6 @@
         <file>Icons/reinitialize_on.svg</file>
         <file>Icons/stop_off.svg</file>
         <file>Icons/stop_on.svg</file>
-        <file>OssiaTriggers2.qml</file>
         <file>OssiaWebSocket.qml</file>
         <file>OssiaTriggerModel.qml</file>
         <file>Icons/connection.svg</file>

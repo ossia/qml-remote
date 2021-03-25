@@ -33,7 +33,7 @@ Rectangle {
         model: ListModel {
             id: intervalsListModel
 
-            ListElement {
+            /*ListElement {
                 name: "Interval1"
             }
             ListElement {
@@ -50,7 +50,7 @@ Rectangle {
             }
             ListElement {
                 name: "Interval6"
-            }
+            }*/
         }
         delegate: OssiaSlider {
             id: speed
@@ -60,6 +60,8 @@ Rectangle {
             anchors.rightMargin: 25
             anchors.left: parent.left
             controlColor: "#62400a"
+            property var path : path;
+            value : value;
         }
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
@@ -72,48 +74,40 @@ Rectangle {
             }
         }
     }
+    property int nb_interval : -1; // the first interval is the timeline's one, it will initialize the counter to 0
     //implementation de la fonction
     Connections {
         target: ossiaTimeSet
 
-        function find(cond) {
-            for (var i = 0; i < intervalsListModel.count; ++i) {
-                if (cond(intervalsListModel.get(i)))
-                    return i;
-            }
-            return null;
-        }
-
         function onIntervalMessageReceived(m) {
-            var messageObject = m.Message;
-
-            switch (messageObject) {
-            case "IntervalAdded":
-                /* The timeline is a global interval
-                      * The name of the timeline changes everytime ossia is refreshed...
-                      * The only constant is that it contains "Untitled"
-                      * The timeline should not be added with the other speeds */
-                if (m.Name.includes("Untitled")) {
-                    ossiaTimeline.totalTime = m.DefaultDuration;
+            var messageObject = m.Message
+            if(messageObject === "IntervalAdded"){
+                if (speedList.nb_interval === -1) {
+                    //ossiaTimeline.totalTime = m.DefaultDuration;
+                    speedList.nb_interval = 0;
                     /* I have to admit
-                          * Niveau encapsulation on est bof :shrug:
-                          */
-
+                          * Niveau encapsulation on est bof :shrug: */
                 } else {
-                    intervalsListModel.insert(0, {
-                                                  "name": JSON.stringify(m.Path)
+                    intervalsListModel.insert(speedList.nb_interval, {
+                                                  name:JSON.stringify(m.Name),path:JSON.stringify(m.Path),value:JSON.stringify(m.Speed)
                                               });
+                    console.log(intervalsListModel[speedList.nb_interval]);
+                    speedList.nb_interval++;
                 }
-                break;
-            case "IntervalRemoved":
+            }
+            else if(messageObject === "IntervalRemoved"){
+                function find(cond) {
+                    for(var i = 0; i < speedList.nb_interval; ++i) if (cond(triggerslistModel.get(i))) return i;
+                    return null
+                }
                 var s = find(function (item) {
-                    return item.name === JSON.stringify(m.Path)
+                    return item.path === JSON.stringify(m.Path)
                 }) //the index of m.Path in the listmodel
-
-                intervalsListModel.setProperty(s, "name", "desactivated")
+                if(s !== null){
+                    intervalsListModel.remove(s);
+                    speedList.nb_interval --;
+                }
                 // manque traitement a faire (passer la bonne vitesse de lecture .. )
-                break;
-            default:
             }
 
         }
