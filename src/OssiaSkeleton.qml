@@ -2,8 +2,8 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtWebSockets 1.0
 //import "content"
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
 import QtQuick.Controls.Styles 1.4
 
 Item {

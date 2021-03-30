@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           apt-get update -qq
-          DEBIAN_FRONTEND="noninteractive" apt-get install -qq --force-yes git build-essential qt5-default qtbase5-dev qtdeclarative5-dev libqt5websockets5-dev qtquickcontrols2-5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-extras
+          DEBIAN_FRONTEND="noninteractive" apt-get install -qq --force-yes git build-essential qt5-default qtbase5-dev qtdeclarative5-dev libqt5websockets5-dev qtquickcontrols2-5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-extras qml-module-qt-websockets qml-module-qtqml-models2 qml-module-qt-labs-qmlmodels
 
       - name: Build
         run: |
@@ -26,6 +26,9 @@ jobs:
           make -j4
 
       - name: Test
+        shell: bash
         run: |
           cd /build
-          ./PFA11 -platform minimal
+          (sleep 5 ; pkill -SIGTERM PFA11) &
+          (./PFA11 -platform minimal || [[ $? == 143 ]] && exit 0 || exit $?)
+
