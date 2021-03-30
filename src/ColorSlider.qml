@@ -20,17 +20,15 @@ Item {
         }
     }
     MouseArea {
-        //anchors.fill: parent
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         drag.target: this
         y: -Math.round(cursorHeight/2)
-        height: parent.height+cursorHeight
         anchors.left: parent.left
         anchors.right: parent.right
         function handleMouse(mouse) {
             if (mouse.buttons & Qt.LeftButton) {
-                pickerCursor.y = Math.max(0, Math.min(height, mouse.y)-cursorHeight)
+                pickerCursor.y = Math.max(0, Math.min(height, mouse.y))
             }
         }
         onPositionChanged: {

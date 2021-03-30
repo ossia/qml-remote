@@ -11,7 +11,6 @@ Rectangle {
     color: "#a7dd0d"
     border.width: 2
     border.color: "#a7dd0d"
-    //property string displayedColor: "#FFFFFFFF"
     property color displayedColor: "#FFFFFFFF"
 
     Text {
@@ -22,21 +21,11 @@ Rectangle {
         text: _colorPointName
         color: "#a7dd0d"
     }
-    /*Text {
-         id: colorValue
-         anchors.top: colorName.bottom
-         anchors.left: colorName.left
-         //text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)
-         //text: "color"+_fullColorString(colorpicker.colorValue, colorpicker.picker.alphaPicker.alphaSlider.value)
-        text: displayedColor
-         color: "#a7dd0d"
-     }*/
     PanelBorder {
         width: 100
         height: 15
         anchors.top: colorName.bottom
         anchors.left: colorName.left
-        //visible: enableAlphaChannel
         Checkerboard { cellSide: 5 }
         Rectangle {
             id: colorValue
@@ -72,8 +61,6 @@ Rectangle {
             name: "on"
             PropertyChanges {
                 target: colorValue;
-                //text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)}
-                //text: "color : "+_fullColorString(colorpicker.colorValue, alphaSlider.value)
                 color: displayedColor
             }
         }

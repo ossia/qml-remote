@@ -17,7 +17,6 @@ Rectangle {
     property bool enablePaletteMode : false
     property string switchToColorPickerString: "Palette..."
     property string switchToPalleteString: "Color Picker..."
-    property string currentColorName : colorEditText.text
 
     signal colorChanged(color changedColor)
 
@@ -43,7 +42,7 @@ Rectangle {
 
     RowLayout {
         id: picker
-        anchors.top: enablePaletteMode　? palette_switch.bottom : parent.top;
+        anchors.top: enablePaletteMode　? palette_switch.bottom : parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.rightMargin: colorHandleRadius
