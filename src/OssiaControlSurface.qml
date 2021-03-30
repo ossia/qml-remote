@@ -8,6 +8,7 @@ Column{
         text: controlSurfaceName
         color: "white"
     }
+    /*
     Grid{
         columns: 5
         spacing: 5
@@ -26,4 +27,5 @@ Column{
             id: ossiaColorpicker
         }
     }
+    */
 }

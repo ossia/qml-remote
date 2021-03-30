@@ -20,6 +20,7 @@ Button {
         }
         socket.sendTextMessage('{ "Message": "Stop" }')
         ossiaTimeline.stopTimeline();
+        ossiaControlSurface .clearListModel();
     }
 
     onReleased: stopButton.state = 'hoveredStop'

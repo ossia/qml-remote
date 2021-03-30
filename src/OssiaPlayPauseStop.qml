@@ -23,6 +23,7 @@ Column{
             case "Stop":
                 //send signal to stop Button
                 stop.clicked();
+                ossiaControlSurfaces.clearListModel();
                 break;
             case "Restart":
                 //send signal to reinitialize Button
