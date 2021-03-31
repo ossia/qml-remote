@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 
 
 ScoreSlider{
-    id: ossiaVolume
+    id: scoreVolume
     anchors.horizontalCenter: parent.horizontalCenter
     controlName: "Volume"
     controlUnit: "dB"

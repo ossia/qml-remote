@@ -20,13 +20,13 @@ ScoreSlider{
     }
 
     Connections {
-        target: ossiaSpeed
+        target: scoreSpeed
         function onIntervalMessageReceived(m) {
             var IntervalsObject = m.Intervals;
             console.log('speed changed on score');
             console.log(m);
             console.log('fin de message');
-            if (globalSpeed.path == null){ // The global path is the first one to be created by score
+            if (globalSpeed.path === null){ // The global path is the first one to be created by score
                 globalSpeed.value = JSON.stringify(m.Speed)*720/6;
                 globalSpeed.path = JSON.stringify(m.Path);
             }

@@ -19,8 +19,8 @@ Button {
             playPause.stopClicked()
         }
         socket.sendTextMessage('{ "Message": "Stop" }')
-        ossiaTimeline.stopTimeline();
-        ossiaControlSurface .clearListModel();
+        scoreTimeline.stopTimeline();
+        scoreControlSurface .clearListModel();
     }
 
     onReleased: stopButton.state = 'hoveredStop'

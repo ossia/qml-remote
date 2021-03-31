@@ -12,7 +12,7 @@ Column{
     ScoreReinitialize{id: reinitialize}
     //onplayPauseStopMessageReceived(var n){}
     Connections {
-        target: ossiaPlayPauseStop
+        target: scorePlayPauseStop
         function onPlayPauseStopMessageReceived(n){
             var messageObject = m.Message
             switch (messageObject) {
@@ -23,7 +23,7 @@ Column{
             case "Stop":
                 //send signal to stop Button
                 stop.clicked();
-                ossiaControlSurfaces.clearListModel();
+                scoreControlSurfaces.clearListModel();
                 break;
             case "Restart":
                 //send signal to reinitialize Button

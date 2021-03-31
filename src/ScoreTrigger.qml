@@ -4,7 +4,7 @@ import QtQuick.Controls 2.12
 
 Button {
     property string sliderName: "sliderName"
-    property string ossiaPath: "vide"
+    property string scorePath: "vide"
     //id: slider
     contentItem: Text {
         text: sliderName
@@ -26,6 +26,6 @@ Button {
         }
     }
     onClicked: {
-        socket.sendTextMessage('{ "Message": "Trigger","Path":'.concat(ossiaPath, '}'))
+        socket.sendTextMessage('{ "Message": "Trigger","Path":'.concat(scorePath, '}'))
     }
 }

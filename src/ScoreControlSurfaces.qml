@@ -5,7 +5,7 @@ import QtQml.Models 2.12
 
 
 Rectangle{
-    id: ossiaControlSurfaces
+    id: scoreControlSurfaces
     radius:6
     color: "#262626"
     //width: parent.width
@@ -31,7 +31,7 @@ Rectangle{
         }
     }
     Connections {
-        target: ossiaControlSurface
+        target: scoreControlSurface
         function onControlSurfaceMessageReceived(m){
             var messageObject = m.Message
             function find(cond) {

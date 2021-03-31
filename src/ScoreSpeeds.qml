@@ -32,25 +32,6 @@ Rectangle {
 
         model: ListModel {
             id: intervalsListModel
-
-            /*ListElement {
-                name: "Interval1"
-            }
-            ListElement {
-                name: "Interval2"
-            }
-            ListElement {
-                name: "Interval3"
-            }
-            ListElement {
-                name: "Interval4"
-            }
-            ListElement {
-                name: "Interval5"
-            }
-            ListElement {
-                name: "Interval6"
-            }*/
         }
         delegate: ScoreSlider {
             id: speed
@@ -77,13 +58,13 @@ Rectangle {
     property int nb_interval : -1; // the first interval is the timeline's one, it will initialize the counter to 0
     //implementation de la fonction
     Connections {
-        target: ossiaTimeSet
+        target: scoreTimeSet
 
         function onIntervalMessageReceived(m) {
             var messageObject = m.Message
             if(messageObject === "IntervalAdded"){
                 if (speedList.nb_interval === -1) {
-                    //ossiaTimeline.totalTime = m.DefaultDuration;
+                    //scoreTimeline.totalTime = m.DefaultDuration;
                     speedList.nb_interval = 0;
                     /* I have to admit
                           * Niveau encapsulation on est bof :shrug: */
@@ -97,7 +78,7 @@ Rectangle {
             }
             else if(messageObject === "IntervalRemoved"){
                 function find(cond) {
-                    for(var i = 0; i < speedList.nb_interval; ++i) if (cond(triggerslistModel.get(i))) return i;
+                    for(var i = 0; i < speedList.nb_interval; ++i) if (cond(intervalsListModel.get(i))) return i;
                     return null
                 }
                 var s = find(function (item) {

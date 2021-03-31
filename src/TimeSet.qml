@@ -5,23 +5,23 @@ import QtQuick.Layouts 1.12
 Item{
     //width: window.width
 
-    //property QQuickAnchorLine margeLeft: ossiaPlayPauseStop.right
-    /*OssiaPlayPauseStop{
-        id: ossiaPlayPauseStop
+    //property QQuickAnchorLine margeLeft: scorePlayPauseStop.right
+    /*ScorePlayPauseStop{
+        id: scorePlayPauseStop
         anchors.left: parent.left
     }*/
    ScoreTriggers{
-        id: ossiaTrigger
+        id: scoreTrigger
         anchors.left: parent.left
         anchors.top: parent.top
-        anchors.right: ossiaSpeed.left
+        anchors.right: scoreSpeed.left
         anchors.rightMargin: window.width/100
         anchors.bottom: parent.bottom
         //height: window.height/4.94
 
     }
     ScoreSpeeds{
-        id:ossiaSpeed
+        id:scoreSpeed
         anchors.right: parent.right
     }
 }

@@ -22,7 +22,7 @@ Rectangle{
             */
         }
         delegate:ScoreTrigger{
-            ossiaPath:path
+            scorePath:path
             height:triggerslist.height
             sliderName: name
         }
@@ -30,7 +30,7 @@ Rectangle{
 
     //implementation de la fonction
     Connections {
-        target: ossiaTimeSet
+        target: scoreTimeSet
         function onTriggerMessageReceived(m){
             var messageObject = m.Message
 

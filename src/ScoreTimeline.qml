@@ -18,7 +18,7 @@ Slider {
 
     // Receives a message from Score to update the current value IRT
     Connections {
-        target: ossiaTimeline
+        target: scoreTimeline
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals;
             if (IntervalsObject[0]) {

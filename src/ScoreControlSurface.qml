@@ -13,7 +13,7 @@ Column{
         columns: 5
         spacing: 5
         OssiaSliders{
-            id: ossiaSlider
+            id: scoreSlider
             //Layout.alignment: Qt.AlignTop
         }
 
@@ -24,7 +24,7 @@ Column{
             //Layout.alignment: e
         }
         OssiaColorpicker{
-            id: ossiaColorpicker
+            id: scoreColorpicker
         }
     }
     */

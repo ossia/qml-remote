@@ -24,29 +24,29 @@ Item {
                     /* Supposing the timeline receives the progress
                     * of all the intervals inclunding itself
                     */
-                    ossiaTimeline.intervalsMessageReceived(jsonObject);
+                    scoreTimeline.intervalsMessageReceived(jsonObject);
                 } else {
                     var typeOfMessage = jsonObject.Message;
                     if (typeOfMessage === "TriggerRemoved"
                             || typeOfMessage === "TriggerAdded") {
 
-                        ossiaTimeSet.triggerMessageReceived(jsonObject);
+                        scoreTimeSet.triggerMessageReceived(jsonObject);
 
                     } else if (typeOfMessage === "IntervalRemoved"
                                || typeOfMessage === "IntervalAdded") {
-                        ossiaSpeed.intervalMessageReceived(jsonObject);
-                        ossiaTimeSet.intervalMessageReceived(jsonObject);
+                        scoreSpeed.intervalMessageReceived(jsonObject);
+                        scoreTimeSet.intervalMessageReceived(jsonObject);
 
 
                     } else if (typeOfMessage === "Play" || typeOfMessage === "Pause"
                                || typeOfMessage === "Restart") {
                         // (Play Pause Stop) are temporary. while waiting for the new version of score
-                        ossiaPlayPauseStop.playPauseStopMessageReceived(jsonObject);
+                        scorePlayPauseStop.playPauseStopMessageReceived(jsonObject);
 
                     } else if (typeOfMessage === "ControlSurfaceRemoved"
                                || typeOfMessage === "ControlSurfaceAdded") {
                         //handling the ControlSurface messages
-                        ossiaControlSurface.controlSurfaceMessageReceived(
+                        scoreControlSurface.controlSurfaceMessageReceived(
                                     jsonObject);
 
                     }
@@ -74,19 +74,19 @@ Item {
         active: false
     }
     ScorePlayPauseStop {
-        id: ossiaPlayPauseStop
+        id: scorePlayPauseStop
         anchors.left: parent.left
         height: window / 5
         signal playPauseStopMessageReceived(var n)
     }
     ScoreVolume {
-        id: ossiaVolume
+        id: scoreVolume
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
     }
     ScoreSpeed {
-        id: ossiaSpeed
+        id: scoreSpeed
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 5
@@ -94,21 +94,21 @@ Item {
         signal intervalMessageReceived(var n)
     }
     TimeSet {
-        id: ossiaTimeSet
-        anchors.top: ossiaVolume.bottom
+        id: scoreTimeSet
+        anchors.top: scoreVolume.bottom
         anchors.topMargin: 5
-        anchors.left: ossiaPlayPauseStop.right
+        anchors.left: scorePlayPauseStop.right
         anchors.right: window.right //c'était ça arthur
-        anchors.bottom: ossiaPlayPauseStop.bottom
+        anchors.bottom: scorePlayPauseStop.bottom
         width: parent.width
         height: window.height / 5
         signal triggerMessageReceived(var n)
         signal intervalMessageReceived(var n)
     }
     ScoreControlSurfaces {
-        id: ossiaControlSurface
-        anchors.top: ossiaPlayPauseStop.bottom
-        anchors.bottom: ossiaTimeline.top
+        id: scoreControlSurface
+        anchors.top: scorePlayPauseStop.bottom
+        anchors.bottom: scoreTimeline.top
         anchors.topMargin: 5
         anchors.left: parent.left
         anchors.right: parent.right
@@ -118,7 +118,7 @@ Item {
         signal controlSurfaceMessageReceived(var n)
     }
     ScoreTimeline {
-        id: ossiaTimeline
+        id: scoreTimeline
         anchors.bottom: parent.bottom
         signal intervalsMessageReceived(var n)
     }
