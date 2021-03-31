@@ -3,3 +3,11 @@ build-PFA11-Desktop_Qt_5_15_2_GCC_64bit-Debug/
 src/PFA11.pro.user*
 
 build-PFA11-Desktop_Qt_5_15_2_GCC_64bit-Debug/*
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/.qmake.stash
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/main.o
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/PFA11.exe
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/qrc_qml.cpp
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/qrc_qml.o
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/Makefile
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/Makefile.Debug
+build-PFA11-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/Makefile.Release
