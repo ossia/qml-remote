@@ -52,7 +52,7 @@ Rectangle {
                 name: "Interval6"
             }*/
         }
-        delegate: OssiaSlider {
+        delegate: ScoreSlider {
             id: speed
             controlName: name
             height: 20

@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.12
 
 
-OssiaSlider{
+ScoreSlider{
     id: ossiaVolume
     anchors.horizontalCenter: parent.horizontalCenter
     controlName: "Volume"

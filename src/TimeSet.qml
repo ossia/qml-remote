@@ -10,7 +10,7 @@ Item{
         id: ossiaPlayPauseStop
         anchors.left: parent.left
     }*/
-    OssiaTriggers{
+   ScoreTriggers{
         id: ossiaTrigger
         anchors.left: parent.left
         anchors.top: parent.top
@@ -20,7 +20,7 @@ Item{
         //height: window.height/4.94
 
     }
-    OssiaSpeeds{
+    ScoreSpeeds{
         id:ossiaSpeed
         anchors.right: parent.right
     }

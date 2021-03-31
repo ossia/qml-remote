@@ -25,7 +25,7 @@ Rectangle {
             spacing: 20
             Repeater {
                 model: ["position1", "ps", "position2"]
-                OssiaPositionPoint{_positionPointName: modelData}
+                ScorePositionPoint{_positionPointName: modelData}
             }
         }
         MouseArea{

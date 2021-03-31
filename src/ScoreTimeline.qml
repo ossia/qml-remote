@@ -28,7 +28,7 @@ Slider {
         }
     }
 
-    // Called by OssiaStop
+    // Called by ScoreStop
     function stopTimeline() {
         time.value = 0;
     }

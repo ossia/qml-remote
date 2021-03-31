@@ -6,10 +6,10 @@ import QtQuick.Layouts 1.12
 
 
 Column{
-    OssiaPlayPause{id: playPause}
-    //OssiaPlayGlob{id: playGlob}
-    OssiaStop{id: stop}
-    OssiaReinitialize{id: reinitialize}
+    ScorePlayPause{id: playPause}
+    //ScorePlayGlob{id: playGlob}
+    ScoreStop{id: stop}
+    ScoreReinitialize{id: reinitialize}
     //onplayPauseStopMessageReceived(var n){}
     Connections {
         target: ossiaPlayPauseStop

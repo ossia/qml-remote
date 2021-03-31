@@ -21,7 +21,7 @@ Rectangle{
                 path: "Trigger133"
             */
         }
-        delegate:OssiaTrigger{
+        delegate:ScoreTrigger{
             ossiaPath:path
             height:triggerslist.height
             sliderName: name

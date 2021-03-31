@@ -73,19 +73,19 @@ Item {
         }
         active: false
     }
-    OssiaPlayPauseStop {
+    ScorePlayPauseStop {
         id: ossiaPlayPauseStop
         anchors.left: parent.left
         height: window / 5
         signal playPauseStopMessageReceived(var n)
     }
-    OssiaVolume {
+    ScoreVolume {
         id: ossiaVolume
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
     }
-    OssiaSpeed {
+    ScoreSpeed {
         id: ossiaSpeed
         anchors.right: parent.right
         anchors.top: parent.top
@@ -105,7 +105,7 @@ Item {
         signal triggerMessageReceived(var n)
         signal intervalMessageReceived(var n)
     }
-    OssiaControlSurfaces {
+    ScoreControlSurfaces {
         id: ossiaControlSurface
         anchors.top: ossiaPlayPauseStop.bottom
         anchors.bottom: ossiaTimeline.top
@@ -117,7 +117,7 @@ Item {
         //height: window.height / 1.5
         signal controlSurfaceMessageReceived(var n)
     }
-    OssiaTimeline {
+    ScoreTimeline {
         id: ossiaTimeline
         anchors.bottom: parent.bottom
         signal intervalsMessageReceived(var n)

@@ -26,7 +26,7 @@ Rectangle{
             id: controlSurfacelist
         }
         delegate:
-            OssiaControlSurface{
+            ScoreControlSurface{
                 controlSurfaceName: name
         }
     }
@@ -56,7 +56,7 @@ Rectangle{
         }
     }
 
-    // Called by OssiaStop
+    // Called by ScoreStop
     function clearListModel() {
         controlSurfacelist.clear()
     }
