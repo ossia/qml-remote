@@ -22,6 +22,8 @@ Button {
         Image{
             x: 5
             y: 5
+            width:20
+            height:20
             source:"Icons/scenario_trigger.png"
         }
     }
