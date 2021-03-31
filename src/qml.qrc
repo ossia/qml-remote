@@ -1,25 +1,25 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>OssiaControlSurface.qml</file>
-        <file>OssiaControlSurfaces.qml</file>
-        <file>OssiaPlayGlob.qml</file>
-        <file>OssiaPlayPause.qml</file>
-        <file>OssiaPlayPauseStop.qml</file>
-        <file>OssiaPlayPauseStop2.qml</file>
-        <file>OssiaPosition.qml</file>
-        <file>OssiaPositionPoint.qml</file>
-        <file>OssiaReinitialize.qml</file>
-        <file>OssiaSlider.qml</file>
-        <file>OssiaSliders.qml</file>
-        <file>OssiaSpeed.qml</file>
-        <file>OssiaSpeeds.qml</file>
-        <file>OssiaSkeleton.qml</file>
-        <file>OssiaStop.qml</file>
-        <file>OssiaTimeline.qml</file>
-        <file>OssiaTrigger.qml</file>
-        <file>OssiaTriggers.qml</file>
-        <file>OssiaVolume.qml</file>
+        <file>ScoreControlSurface.qml</file>
+        <file>ScoreControlSurfaces.qml</file>
+        <file>ScorePlayGlob.qml</file>
+        <file>ScorePlayPause.qml</file>
+        <file>ScorePlayPauseStop.qml</file>
+        <file>ScorePlayPauseStop2.qml</file>
+        <file>ScorePosition.qml</file>
+        <file>ScorePositionPoint.qml</file>
+        <file>ScoreReinitialize.qml</file>
+        <file>ScoreSlider.qml</file>
+        <file>ScoreSliders.qml</file>
+        <file>ScoreSpeed.qml</file>
+        <file>ScoreSpeeds.qml</file>
+        <file>ScoreSkeleton.qml</file>
+        <file>ScoreStop.qml</file>
+        <file>ScoreTimeline.qml</file>
+        <file>ScoreTrigger.qml</file>
+        <file>ScoreTriggers.qml</file>
+        <file>ScoreVolume.qml</file>
         <file>TimeSet.qml</file>
         <file>main.cpp</file>
         <file>Icons/pause_off.svg</file>
@@ -32,8 +32,8 @@
         <file>Icons/reinitialize_on.svg</file>
         <file>Icons/stop_off.svg</file>
         <file>Icons/stop_on.svg</file>
-        <file>OssiaWebSocket.qml</file>
-        <file>OssiaTriggerModel.qml</file>
+        <file>ScoreWebSocket.qml</file>
+        <file>ScoreTriggerModel.qml</file>
         <file>Icons/connection.svg</file>
         <file>Icons/scenario_trigger.svg</file>
         <file>Icons/play_glob_hover.svg</file>
@@ -49,7 +49,19 @@
         <file>NumberBox.qml</file>
         <file>PanelBorder.qml</file>
         <file>SBPicker.qml</file>
-        <file>OssiaColorpicker.qml</file>
-        <file>OssiaColorPoint.qml</file>
+        <file>ScoreColorpicker.qml</file>
+        <file>ScoreColorPoint.qml</file>
+        <file>Icons/play_glob_off.png</file>
+        <file>Icons/pause_on.png</file>
+        <file>Icons/play_glob_hover.png</file>
+        <file>Icons/pause_hover.png</file>
+        <file>Icons/stop_on.png</file>
+        <file>Icons/stop_hover.png</file>
+        <file>Icons/reinitialize_on.png</file>
+        <file>Icons/reinitialize_hover.png</file>
+        <file>Icons/reinitialize_off.png</file>
+        <file>Icons/stop_off.png</file>
+        <file>Icons/connection.png</file>
+        <file>Icons/scenario_trigger.png</file>
     </qresource>
 </RCC>

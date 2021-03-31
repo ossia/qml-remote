@@ -9,5 +9,5 @@ Window {
     visible: true
     title: qsTr("Remote Control")
     color: "#202020"
-    OssiaSkeleton {}
+    ScoreSkeleton{}
 }

@@ -6,7 +6,7 @@ ColumnLayout{
     width: 300
     Repeater{
         model: ["ze 1", "te 2", "etnen 3"]
-        OssiaSlider{
+        ScoreSlider{
             id: slider
             controlName: modelData
             height: 20

@@ -40,7 +40,7 @@ Button {
         case '':
             /* Connection to the websocket
               * socket is the id of the Websocket
-              * instantiated in OssiaSkeleton
+              * instantiated in ScoreSkeleton
               */
             pauseButton.state = 'hoveredPlayOff';
             socket.active = !socket.active;

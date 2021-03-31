@@ -8,10 +8,10 @@ import QtQuick.Controls.Styles 1.4
 
 VisualItemModel {
     id: triggerModel
-    OssiaTrigger { sliderName: "event1" }
-    OssiaTrigger { sliderName: "sdfz" }
-    OssiaTrigger { sliderName: "qg" }
-    OssiaTrigger { sliderName: "qdgqg" }
-    OssiaTrigger { sliderName: "qgbqr"}
+    ScoreTrigger { sliderName: "event1" }
+    ScoreTrigger { sliderName: "sdfz" }
+    ScoreTrigger { sliderName: "qg" }
+    ScoreTrigger { sliderName: "qdgqg" }
+    ScoreTrigger { sliderName: "qgbqr"}
 
 }
