@@ -31,20 +31,20 @@ Button {
         sourceSize.width: 30
         sourceSize.height: 30
         clip: true
-        source: "Icons/reinitialize_off.svg"
+        source: "Icons/reinitialize_off.png"
         states: [
             State {
                 name: "reintializeOn"
                 PropertyChanges {
                     target: reinitializeButton
-                    source: "Icons/reinitialize_on.svg"
+                    source: "Icons/reinitialize_on.png"
                 }
             },
             State {
                 name: "hoveredReinitialize"
                 PropertyChanges {
                     target: reinitializeButton
-                    source: "Icons/reinitialize_hover.svg"
+                    source: "Icons/reinitialize_hover.png"
                 }
             }
         ]

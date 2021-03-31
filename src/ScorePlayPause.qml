@@ -61,7 +61,7 @@ Button {
         id: pauseButton
         sourceSize.width: 30
         sourceSize.height: 30
-        source: "Icons/connection.svg"
+        source: "Icons/connection.png"
         clip: true
 
         states: [
@@ -72,7 +72,7 @@ Button {
                 name: "playDisplayed"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/play_glob_off.svg"
+                    source: "Icons/play_glob_off.png"
                 }
             },
             State {
@@ -82,21 +82,21 @@ Button {
                 name: "pauseDisplayed"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/pause_on.svg"
+                    source: "Icons/pause_on.png"
                 }
             },
             State {
                 name: "hoveredPlayOff"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/play_glob_hover"
+                    source: "Icons/play_glob_hover.png"
                 }
             },
             State {
                 name: "hoveredPlayOn"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/pause_hover"
+                    source: "Icons/pause_hover.png"
                 }
             }
         ]

@@ -22,7 +22,7 @@ Button {
         Image{
             x: 5
             y: 5
-            source:"Icons/scenario_trigger.svg"
+            source:"Icons/scenario_trigger.png"
         }
     }
     onClicked: {
