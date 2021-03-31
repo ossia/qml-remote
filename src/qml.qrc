@@ -6,7 +6,6 @@
         <file>ScorePlayGlob.qml</file>
         <file>ScorePlayPause.qml</file>
         <file>ScorePlayPauseStop.qml</file>
-        <file>ScorePlayPauseStop2.qml</file>
         <file>ScorePosition.qml</file>
         <file>ScorePositionPoint.qml</file>
         <file>ScoreReinitialize.qml</file>
@@ -33,7 +32,6 @@
         <file>Icons/stop_off.svg</file>
         <file>Icons/stop_on.svg</file>
         <file>ScoreWebSocket.qml</file>
-        <file>ScoreTriggerModel.qml</file>
         <file>Icons/connection.svg</file>
         <file>Icons/scenario_trigger.svg</file>
         <file>Icons/play_glob_hover.svg</file>
