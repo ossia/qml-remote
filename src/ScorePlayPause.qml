@@ -20,6 +20,12 @@ Button {
         case 'hoveredPlayOff':
             pauseButton.state = 'playDisplayed';
             break;
+        case '':
+            pauseButton.state = 'hoveredConnection';
+            break;
+        case 'hoveredConnection':
+            pauseButton.state = '';
+            break;
         case 'playDisplayed':
             pauseButton.state = 'hoveredPlayOff';
             break;
@@ -37,7 +43,7 @@ Button {
     }
     onClicked: {
         switch (pauseButton.state) {
-        case '':
+        case 'hoveredConnection':
             /* Connection to the websocket
               * socket is the id of the Websocket
               * instantiated in ScoreSkeleton
@@ -73,6 +79,13 @@ Button {
                 PropertyChanges {
                     target: pauseButton
                     source: "Icons/play_glob_off.png"
+                }
+            },
+            State {
+                name: "hoveredConnection"
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/connection_hover.png"
                 }
             },
             State {

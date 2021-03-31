@@ -61,5 +61,7 @@
         <file>Icons/stop_off.png</file>
         <file>Icons/connection.png</file>
         <file>Icons/scenario_trigger.png</file>
+        <file>Icons/connection_hover.png</file>
+        <file>Icons/connection_hover.svg</file>
     </qresource>
 </RCC>
