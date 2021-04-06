@@ -29,6 +29,7 @@ Item {
                     scoreTimeline.intervalsMessageReceived(jsonObject);
                     scoreVolume.intervalsMessageReceived(jsonObject);
                     scoreSpeed.intervalsMessageReceived(jsonObject);
+                    scoreTimeSet.intervalsMessageReceived(jsonObject);
 
                 } else {
                     var typeOfMessage = jsonObject.Message;
@@ -112,6 +113,8 @@ Item {
         height: window.height / 5
         signal triggerMessageReceived(var n)
         signal intervalMessageReceived(var n)
+        signal intervalsMessageReceived(var n)
+
     }
     ScoreControlSurfaces {
         id: scoreControlSurface

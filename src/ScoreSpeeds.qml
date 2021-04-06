@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.1
 import QtQuick.Controls 2.2
+import QtQuick.Window 2.12
+
 
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
@@ -17,16 +19,9 @@ Rectangle {
         //width: speedList.width
         //height:speedList.height
         spacing: 10
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        //anchors.topMargin: parent.height/40
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.leftMargin: 5
-        anchors.topMargin: 5
-        anchors.bottomMargin: 5
-        orientation: ListView.Vertical
+        anchors.fill: parent
+        anchors.margins: 5
+        orientation: parent.Vertical
         clip: true
         snapMode: ListView.SnapToItem
 
@@ -40,9 +35,17 @@ Rectangle {
             anchors.right: parent.right
             anchors.rightMargin: 25
             anchors.left: parent.left
+            from: -120
+            value: speedValue
+            to: 600
             controlColor: "#62400a"
-            property var path : path;
-            value : value;
+            controlPath : path
+            onMoved: {
+                console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+                console.log('{ "Message": "IntervalSpeed", "Path":'.concat(speed.controlPath, ', "Speed": ',speed.value*6/720, '}'));
+                console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+                socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":'.concat(speed.controlPath, ', "Speed": ',speed.value*6/720, '}')))
+            }
         }
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
@@ -55,30 +58,23 @@ Rectangle {
             }
         }
     }
-    property int nb_interval : -1; // the first interval is the timeline's one, it will initialize the counter to 0
     //implementation de la fonction
     Connections {
         target: scoreTimeSet
-
         function onIntervalMessageReceived(m) {
             var messageObject = m.Message
             if(messageObject === "IntervalAdded"){
-                if (speedList.nb_interval === -1) {
-                    //scoreTimeline.totalTime = m.DefaultDuration;
-                    speedList.nb_interval = 0;
-                    /* I have to admit
-                          * Niveau encapsulation on est bof :shrug: */
-                } else {
-                    intervalsListModel.insert(speedList.nb_interval, {
-                                                  name:JSON.stringify(m.Name),path:JSON.stringify(m.Path),value:JSON.stringify(m.Speed)
-                                              });
-                    console.log(intervalsListModel[speedList.nb_interval]);
-                    speedList.nb_interval++;
-                }
+                console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+                console.log(JSON.stringify(m.Speed));
+                console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+                intervalsListModel.insert(0, {
+                                              name:JSON.stringify(m.Name),path:JSON.stringify(m.Path),speedValue:JSON.stringify(m.Speed)*720/6
+                                          });
+                console.log(intervalsListModel.get(0).value);
             }
             else if(messageObject === "IntervalRemoved"){
                 function find(cond) {
-                    for(var i = 0; i < speedList.nb_interval; ++i) if (cond(intervalsListModel.get(i))) return i;
+                    for(var i = 0; i < intervalsListModel.count; ++i) if (cond(intervalsListModel.get(i))) return i;
                     return null
                 }
                 var s = find(function (item) {
@@ -86,11 +82,31 @@ Rectangle {
                 }) //the index of m.Path in the listmodel
                 if(s !== null){
                     intervalsListModel.remove(s);
-                    speedList.nb_interval --;
                 }
                 // manque traitement a faire (passer la bonne vitesse de lecture .. )
             }
 
         }
+    }
+
+    Connections {
+        target: scoreTimeSet
+        function onIntervalsMessageReceived(m) {
+            var IntervalsObject = m.Intervals;
+            var count = 0;
+            while(IntervalsObject[count]){
+                for(var i = 0; i < intervalsListModel.count; ++i){
+                    if (intervalsListModel.get(i).path === JSON.stringify(IntervalsObject[count].Path)){ // The global path is the first one to be created by score
+                        intervalsListModel.set(i,{"speedValue": JSON.stringify(IntervalsObject[count].Speed)*720/6});
+                    }
+                }
+            count++
+            }
+        }
+    }
+
+    // Called by OssiaStop
+    function clearListModel() {
+        intervalsListModel.clear()
     }
 }
