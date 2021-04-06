@@ -64,13 +64,26 @@ Rectangle {
         function onIntervalMessageReceived(m) {
             var messageObject = m.Message
             if(messageObject === "IntervalAdded"){
-                console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
-                console.log(JSON.stringify(m.Speed));
-                console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
-                intervalsListModel.insert(0, {
-                                              name:JSON.stringify(m.Name),path:JSON.stringify(m.Path),speedValue:JSON.stringify(m.Speed)*720/6
-                                          });
-                console.log(intervalsListModel.get(0).value);
+                /* The timeline is a global interval
+                  * The name of the timeline changes everytime ossia is refreshed...
+                  * The only constant is that it contains "Untitled"
+                  * The timeline should not be added with the other speeds */
+                if (m.Name.includes("Untitled")) {
+                    ossiaTimeline.totalTime = m.DefaultDuration;
+                    /* I have to admit
+                      * Niveau encapsulation on est bof :shrug:
+                      */
+
+                } else {
+
+                    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+                    console.log(JSON.stringify(m.Speed));
+                    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+                    intervalsListModel.insert(0, {
+                                                  name:JSON.stringify(m.Name),path:JSON.stringify(m.Path),speedValue:JSON.stringify(m.Speed)*720/6
+                                              });
+                    console.log(intervalsListModel.get(0).value);
+                }
             }
             else if(messageObject === "IntervalRemoved"){
                 function find(cond) {
@@ -100,7 +113,7 @@ Rectangle {
                         intervalsListModel.set(i,{"speedValue": JSON.stringify(IntervalsObject[count].Speed)*720/6});
                     }
                 }
-            count++
+                count++
             }
         }
     }

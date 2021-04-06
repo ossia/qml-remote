@@ -10,21 +10,23 @@ ScoreSlider{
     from: -120
     value: 100
     to: 600
-    property var path: "5";
+    property var path;
     controlColor: "#62400a"
-    property double totalSpeed: globalSpeed.value*6/720; // The total speed goes from -120 to 600
 
     // Sends a message to Score to update its progress' timeline
     onMoved: {
         socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":'.concat(globalSpeed.path, ', "Speed": ',globalSpeed.value*6/720, '}')))
     }
 
-    //to have the path
     Connections {
-        target: scoreSpeed
+        target: ossiaSpeed
         function onIntervalMessageReceived(m) {
-            var IntervalsObject = m;
-            if (globalSpeed.path === "5"){ // The global path is the first one to be created by score
+            var IntervalsObject = m.Intervals;
+            console.log('speed changed on score');
+            console.log(m);
+            console.log('fin de message');
+            if (globalSpeed.path == null){ // The global path is the first one to be created by score
+                globalSpeed.value = JSON.stringify(m.Speed)*720/6;
                 globalSpeed.path = JSON.stringify(m.Path);
             }
 
