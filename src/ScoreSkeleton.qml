@@ -5,16 +5,19 @@ import QtWebSockets 1.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Styles 1.4
+import Qt.labs.settings 1.0
 
 Item {
     id: window
     anchors.fill: parent
-
+    Settings {
+        id:settings
+        property string  adresse_ip: "localhost"
+    }
     WebSocket {
         id: socket
-        url: "ws://localhost:10212"
+        url: "ws://" + settings.adresse_ip + ":10212"
         //url: "ws://192.168.60.25:10212"
-
         onTextMessageReceived: {
             try {
                 console.log("-----------------------------------------");
@@ -78,8 +81,16 @@ Item {
         }
         active: false
     }
+    ScoreAdresseIp{
+        id: adresseip
+        anchors.top: parent.top
+        anchors.left: parent.left
+        height: window / 10
+        signal playPauseStopMessageReceived(var n)
+    }
     ScorePlayPauseStop {
         id: scorePlayPauseStop
+        anchors.top:  adresseip.bottom
         anchors.left: parent.left
         height: window / 5
         signal playPauseStopMessageReceived(var n)
