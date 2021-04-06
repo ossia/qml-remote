@@ -10,7 +10,7 @@ ScoreSlider{
     from: -120
     value: 100
     to: 600
-    property var path;
+    property var path: "5";
     controlColor: "#62400a"
     property double totalSpeed: globalSpeed.value*6/720; // The total speed goes from -120 to 600
 
@@ -19,18 +19,32 @@ ScoreSlider{
         socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":'.concat(globalSpeed.path, ', "Speed": ',globalSpeed.value*6/720, '}')))
     }
 
+    //to have the path
     Connections {
         target: scoreSpeed
         function onIntervalMessageReceived(m) {
-            var IntervalsObject = m.Intervals;
-            console.log('speed changed on score');
-            console.log(m);
-            console.log('fin de message');
-            if (globalSpeed.path === null){ // The global path is the first one to be created by score
-                globalSpeed.value = JSON.stringify(m.Speed)*720/6;
+            var IntervalsObject = m;
+            if (globalSpeed.path === "5"){ // The global path is the first one to be created by score
+                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+                console.log(JSON.stringify(m.Path));
+                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
                 globalSpeed.path = JSON.stringify(m.Path);
             }
 
+        }
+    }
+
+    Connections {
+        target: scoreSpeed
+        function onIntervalsMessageReceived(m) {
+            var IntervalsObject = m.Intervals;
+            if (globalSpeed.path === JSON.stringify(IntervalsObject[0].Path)){ // The global path is the first one to be created by score
+                console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
+                console.log(JSON.stringify(IntervalsObject[0].Path));
+                console.log(globalSpeed.path);
+                console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
+                globalSpeed.value = JSON.stringify(IntervalsObject[0].Speed)*720/6;
+            }
         }
     }
 }

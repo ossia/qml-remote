@@ -13,6 +13,8 @@ Item {
     WebSocket {
         id: socket
         url: "ws://localhost:10212"
+        //url: "ws://192.168.60.25:10212"
+
         onTextMessageReceived: {
             try {
                 console.log("-----------------------------------------");
@@ -25,6 +27,9 @@ Item {
                     * of all the intervals inclunding itself
                     */
                     scoreTimeline.intervalsMessageReceived(jsonObject);
+                    scoreVolume.intervalsMessageReceived(jsonObject);
+                    scoreSpeed.intervalsMessageReceived(jsonObject);
+
                 } else {
                     var typeOfMessage = jsonObject.Message;
                     if (typeOfMessage === "TriggerRemoved"
@@ -36,8 +41,7 @@ Item {
                                || typeOfMessage === "IntervalAdded") {
                         scoreSpeed.intervalMessageReceived(jsonObject);
                         scoreTimeSet.intervalMessageReceived(jsonObject);
-
-
+                        scoreVolume.intervalMessageReceived(jsonObject);
                     } else if (typeOfMessage === "Play" || typeOfMessage === "Pause"
                                || typeOfMessage === "Restart") {
                         // (Play Pause Stop) are temporary. while waiting for the new version of score
@@ -84,6 +88,9 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
+        signal intervalMessageReceived(var n)
+        signal intervalsMessageReceived(var n)
+
     }
     ScoreSpeed {
         id: scoreSpeed
@@ -92,6 +99,7 @@ Item {
         anchors.topMargin: 5
         anchors.rightMargin: 5
         signal intervalMessageReceived(var n)
+        signal intervalsMessageReceived(var n)
     }
     TimeSet {
         id: scoreTimeSet
