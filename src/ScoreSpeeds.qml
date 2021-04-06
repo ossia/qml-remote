@@ -69,13 +69,12 @@ Rectangle {
                   * The only constant is that it contains "Untitled"
                   * The timeline should not be added with the other speeds */
                 if (m.Name.includes("Untitled")) {
-                    ossiaTimeline.totalTime = m.DefaultDuration;
+                    scoreTimeline.totalTime = m.DefaultDuration;
                     /* I have to admit
                       * Niveau encapsulation on est bof :shrug:
                       */
 
                 } else {
-
                     console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
                     console.log(JSON.stringify(m.Speed));
                     console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
