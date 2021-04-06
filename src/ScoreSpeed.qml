@@ -25,9 +25,6 @@ ScoreSlider{
         function onIntervalMessageReceived(m) {
             var IntervalsObject = m;
             if (globalSpeed.path === "5"){ // The global path is the first one to be created by score
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-                console.log(JSON.stringify(m.Path));
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
                 globalSpeed.path = JSON.stringify(m.Path);
             }
 
@@ -38,11 +35,7 @@ ScoreSlider{
         target: scoreSpeed
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals;
-            if (globalSpeed.path === JSON.stringify(IntervalsObject[0].Path)){ // The global path is the first one to be created by score
-                console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
-                console.log(JSON.stringify(IntervalsObject[0].Path));
-                console.log(globalSpeed.path);
-                console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
+            if (IntervalsObject[0] && globalSpeed.path === JSON.stringify(IntervalsObject[0].Path)){ // The global path is the first one to be created by score
                 globalSpeed.value = JSON.stringify(IntervalsObject[0].Speed)*720/6;
             }
         }

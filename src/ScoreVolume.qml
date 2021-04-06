@@ -40,7 +40,7 @@ ScoreSlider{
         target: scoreVolume
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals;
-            if (scoreGlobalVolume.path === JSON.stringify(IntervalsObject[0].Path)){ // The global path is the first one to be created by score
+            if (IntervalsObject[0] && scoreGlobalVolume.path === JSON.stringify(IntervalsObject[0].Path)){ // The global path is the first one to be created by score
                 console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
                 console.log(JSON.stringify(IntervalsObject[0].Path));
                 console.log(scoreGlobalVolume.path);
