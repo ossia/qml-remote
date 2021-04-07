@@ -30,5 +30,17 @@ Column{
                 reinitialize.clicked();
             }
         }
+        function onScorePlayPauseStopMessageReceived(n){
+            var messageObject = m.Message
+            switch (messageObject) {
+            case "IntervalPaused":
+                playPause.clicked();
+                break;
+            case "IntervalResumed":
+                playPause.clicked();
+                break;
+
+            }
+        }
     }
 }

@@ -3,6 +3,8 @@ import QtQuick.Controls 2.12
 import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 
+
+
 Button {
     hoverEnabled: true // Allows to specify a behavior when going over a button
     function stopClicked() {
@@ -14,6 +16,7 @@ Button {
     function isPaused() {
         return (pauseButton.state === 'hoveredPlayOff');
     }
+
 
     onHoveredChanged: {
         switch (pauseButton.state) {

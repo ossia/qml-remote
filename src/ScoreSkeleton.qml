@@ -57,7 +57,9 @@ Item {
                         scoreControlSurface.controlSurfaceMessageReceived(
                                     jsonObject);
 
-                    }
+                    } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResume"){
+                        playPauseStop.scorePlayPauseMessageReceived(jsonObject);
+                        }
 
                 }
                 //TODO: hundle volume and the main speed messages
