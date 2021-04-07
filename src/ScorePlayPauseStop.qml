@@ -28,10 +28,18 @@ Column{
             case "Restart":
                 //send signal to reinitialize Button
                 reinitialize.clicked();
+                break;
+            case "IntervalPaused":
+                playPause.clicked();
+                break;
+            case "IntervalResumed":
+                playPause.clicked();
+                break;
             }
         }
         function onScorePlayPauseStopMessageReceived(n){
             var messageObject = m.Message
+            console.log("ouiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
             switch (messageObject) {
             case "IntervalPaused":
                 playPause.clicked();
