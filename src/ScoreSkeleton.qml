@@ -57,9 +57,10 @@ Item {
                         scoreControlSurface.controlSurfaceMessageReceived(
                                     jsonObject);
 
-                    } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResume"){
-                        console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
-                        scorePlayPauseStop.scorePlayPauseMessageReceived(jsonObject);
+                    } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResumed"){
+                        //console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+                        scorePlayPauseStop.scorePlayPauseStopMessageReceived(jsonObject);
+                        //playPause.clicked();
                         }
 
                 }
@@ -96,8 +97,8 @@ Item {
         anchors.top:  adresseip.bottom
         anchors.left: parent.left
         height: window / 5
-        signal playPauseMessageReceived(var n)
-        signal scorePlayPauseMessageReceived(var n)
+        signal playPauseStopMessageReceived(var n)
+        signal scorePlayPauseStopMessageReceived(var n)
     }
     ScoreVolume {
         id: scoreVolume

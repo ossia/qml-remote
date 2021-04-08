@@ -16,50 +16,58 @@ Button {
     function isPaused() {
         return (pauseButton.state === 'hoveredPlayOff');
     }
-
-
-    onHoveredChanged: {
-        switch (pauseButton.state) {
-        case 'hoveredPlayOff':
-            pauseButton.state = 'playDisplayed';
-            break;
-        case '':
-            pauseButton.state = 'hoveredConnection';
-            break;
-        case 'hoveredConnection':
-            pauseButton.state = '';
-            break;
-        case 'playDisplayed':
-            pauseButton.state = 'hoveredPlayOff';
-            break;
-        case 'play_on':
-            pauseButton.state = 'hoveredPlayOn';
-            break;
-        case 'pauseDisplayed':
-            pauseButton.state = 'hoveredPlayOn';
-            break;
-        case 'hoveredPlayOn':
-            pauseButton.state = 'pauseDisplayed';
-            break;
-        default:
-        }
+    function playPressInScore() {
+        pauseButton.state ='pauseDisplayed'
     }
+    function pausePressInScore(){
+        pauseButton.state = 'playDisplayed'
+    }
+
+
+//    onHoveredChanged: {
+//        switch (pauseButton.state) {
+//        case 'hoveredPlayOff':
+//            pauseButton.state = 'playDisplayed';
+//            break;
+//        case '':
+//            pauseButton.state = 'hoveredConnection';
+//            break;
+//        case 'hoveredConnection':
+//            pauseButton.state = '';
+//            break;
+//        case 'playDisplayed':
+//            pauseButton.state = 'hoveredPlayOff';
+//            break;
+//        case 'play_on':
+//            pauseButton.state = 'hoveredPlayOn';
+//            break;
+//        case 'pauseDisplayed':
+//            pauseButton.state = 'hoveredPlayOn';
+//            break;
+//        case 'hoveredPlayOn':
+//            pauseButton.state = 'pauseDisplayed';
+//            break;
+//        default:
+//        }
+//    }
+
+
     onClicked: {
         switch (pauseButton.state) {
-        case 'hoveredConnection':
+        case '':
             /* Connection to the websocket
               * socket is the id of the Websocket
               * instantiated in ScoreSkeleton
               */
-            pauseButton.state = 'hoveredPlayOff';
+            pauseButton.state = 'playDisplayed';
             socket.active = !socket.active;
             break;
-        case 'hoveredPlayOff':
-            pauseButton.state = 'hoveredPlayOn';
+        case 'playDisplayed':
+            pauseButton.state = 'pauseDisplayed';
             socket.sendTextMessage('{ "Message": "Play" }');
             break;
-        case 'hoveredPlayOn':
-            pauseButton.state = 'hoveredPlayOff';
+        case 'pauseDisplayed':
+            pauseButton.state = 'playDisplayed';
             socket.sendTextMessage('{ "Message": "Pause" }');
             break;
         default:

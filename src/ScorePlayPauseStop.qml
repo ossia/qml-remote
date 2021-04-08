@@ -13,7 +13,8 @@ Column{
     //onplayPauseStopMessageReceived(var n){}
     Connections {
         target: scorePlayPauseStop
-        function onPlayPauseStopMessageReceived(n){
+        function onPlayPauseStopMessageReceived(m){
+            console.log("teeeeeeeeeeeest")
             var messageObject = m.Message
             switch (messageObject) {
             case "Start":
@@ -29,23 +30,25 @@ Column{
                 //send signal to reinitialize Button
                 reinitialize.clicked();
                 break;
-            case "IntervalPaused":
-                playPause.clicked();
-                break;
-            case "IntervalResumed":
-                playPause.clicked();
-                break;
+//            case "IntervalPaused":
+//                playPause.clicked();
+//                break;
+//            case "IntervalResumed":
+//                playPause.clicked();
+//                break;
             }
         }
-        function onScorePlayPauseStopMessageReceived(n){
+        function onScorePlayPauseStopMessageReceived(m){
             var messageObject = m.Message
-            console.log("ouiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
             switch (messageObject) {
             case "IntervalPaused":
-                playPause.clicked();
+                playPause.pausePressInScore();
+                console.log("pause Pressed")
                 break;
             case "IntervalResumed":
-                playPause.clicked();
+                console.log("play Pressed")
+                playPause.playPressInScore();
+
                 break;
 
             }

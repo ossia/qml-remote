@@ -5,14 +5,14 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
-    onHoveredChanged: {
-        if (stopButton.state === 'hoveredStop'
-                || stopButton.state === 'stopOn') {
-            stopButton.state = ''
-        } else {
-            stopButton.state = 'hoveredStop'
-        }
-    }
+//    onHoveredChanged: {
+//        if (stopButton.state === 'hoveredStop'
+//                || stopButton.state === 'stopOn') {
+//            stopButton.state = ''
+//        } else {
+//            stopButton.state = 'hoveredStop'
+//        }
+//    }
     onPressed: {
         stopButton.state = 'stopOn'
         if (playPause.isConnected()) {
@@ -23,7 +23,7 @@ Button {
         scoreControlSurface .clearListModel();
     }
 
-    onReleased: stopButton.state = 'hoveredStop'
+    onReleased: stopButton.state = ''
 
     contentItem: Image {
         id: stopButton
