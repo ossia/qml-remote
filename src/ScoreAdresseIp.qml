@@ -44,7 +44,7 @@ Button {
         id: pauseButton
         sourceSize.width: 35
         sourceSize.height: 35
-        source: "Icons/adresse_ip.svg"
+        source: "Icons/adresse_ip.png"
         clip: true
     }
     background: Rectangle {
