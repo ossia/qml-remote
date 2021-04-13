@@ -6,7 +6,7 @@ ScoreSlider{
     id: scoreGlobalVolume
     anchors.horizontalCenter: parent.horizontalCenter
     controlName: "Volume"
-    controlUnit: "dB"
+    controlUnit: "dB "
     height: 20; width: window.width/4
     controlColor: "#62400a"
     from: -40
