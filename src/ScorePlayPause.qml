@@ -79,7 +79,7 @@ Button {
                 name: "connectionOn"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/connection_hover.png"
+                    source: "Icons/connection_on.png"
                 }
             },
             State {

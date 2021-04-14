@@ -64,7 +64,7 @@ Button {
                 name: "ip_on"
                 PropertyChanges {
                     target: ipButton
-                    source: "Icons/adresse_ip_hover.png"
+                    source: "Icons/adresse_ip_on.png"
                     }
                 }
             ]

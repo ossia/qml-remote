@@ -42,7 +42,7 @@ Rectangle {
 
     RowLayout {
         id: picker
-        anchors.top: enablePaletteMode　? palette_switch.bottom : parent.top
+        anchors.top: enablePaletteMode　? palette_switch.bottom : parent.top;
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.rightMargin: colorHandleRadius
