@@ -24,37 +24,30 @@ Button {
     }
 
 
-//    onHoveredChanged: {
-//        switch (pauseButton.state) {
-//        case 'hoveredPlayOff':
-//            pauseButton.state = 'playDisplayed';
-//            break;
-//        case '':
-//            pauseButton.state = 'hoveredConnection';
-//            break;
-//        case 'hoveredConnection':
-//            pauseButton.state = '';
-//            break;
-//        case 'playDisplayed':
-//            pauseButton.state = 'hoveredPlayOff';
-//            break;
-//        case 'play_on':
-//            pauseButton.state = 'hoveredPlayOn';
-//            break;
-//        case 'pauseDisplayed':
-//            pauseButton.state = 'hoveredPlayOn';
-//            break;
-//        case 'hoveredPlayOn':
-//            pauseButton.state = 'pauseDisplayed';
-//            break;
-//        default:
-//        }
-//    }
+    onHoveredChanged: {
+        switch (pauseButton.state) {
+        case 'connectionOn':
+            pauseButton.state = ''
+            break;
+        case 'playPressed':
+            pauseButton.state = 'playDisplayed'
+            break;
+        }
+    }
 
+
+    onPressed: {
+        if (pauseButton.state === ''){
+            pauseButton.state = 'connectionOn'
+        }
+        if (pauseButton.state === 'playDisplayed'){
+            pauseButton.state = 'playPressed'
+        }
+    }
 
     onClicked: {
         switch (pauseButton.state) {
-        case '':
+        case 'connectionOn':
             /* Connection to the websocket
               * socket is the id of the Websocket
               * instantiated in ScoreSkeleton
@@ -62,7 +55,7 @@ Button {
             pauseButton.state = 'playDisplayed';
             socket.active = !socket.active;
             break;
-        case 'playDisplayed':
+        case 'playPressed':
             pauseButton.state = 'pauseDisplayed';
             socket.sendTextMessage('{ "Message": "Play" }');
             break;
@@ -83,6 +76,13 @@ Button {
 
         states: [
             State {
+                name: "connectionOn"
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/connection_hover.png"
+                }
+            },
+            State {
                 /* play symbol is displayed
                 * "paused" is the scenario's state.
                 */
@@ -90,6 +90,13 @@ Button {
                 PropertyChanges {
                     target: pauseButton
                     source: "Icons/play_glob_off.png"
+                }
+            },
+            State {
+                name: "playPressed"
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/play_glob_on.png"
                 }
             },
             State {

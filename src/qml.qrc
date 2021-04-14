@@ -68,5 +68,6 @@
         <file>Icons/adresse_ip.png</file>
         <file>Icons/adresse_ip_hover.png</file>
         <file>Icons/adresse_ip_hover.svg</file>
+        <file>Icons/play_glob_on.png</file>
     </qresource>
 </RCC>

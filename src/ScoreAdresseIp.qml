@@ -35,17 +35,39 @@ Button {
         }
     }
     hoverEnabled: true
-    onClicked: {
+    onPressed: {
+            ipButton.state = "ip_on"
+    }
+    onReleased: {
         console.log("avant cc = " + settings.cc)
        onClicked: ipDialog.open()
     }
 
+    onHoveredChanged: {
+        if (ipButton.state === 'ip_on'){
+            ipButton.state = ""
+        }
+
+    }
+
     contentItem: Image {
-        id: pauseButton
+        id: ipButton
         sourceSize.width: 35
         sourceSize.height: 35
         source: "Icons/adresse_ip.png"
         clip: true
+        states: [
+            State {
+                /* play symbol is displayed
+                * "paused" is the scenario's state.
+                */
+                name: "ip_on"
+                PropertyChanges {
+                    target: ipButton
+                    source: "Icons/adresse_ip_hover.png"
+                    }
+                }
+            ]
     }
     background: Rectangle {
         id: zone

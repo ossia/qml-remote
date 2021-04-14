@@ -5,14 +5,11 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
-//    onHoveredChanged: {
-//        if (stopButton.state === 'hoveredStop'
-//                || stopButton.state === 'stopOn') {
-//            stopButton.state = ''
-//        } else {
-//            stopButton.state = 'hoveredStop'
-//        }
-//    }
+    onHoveredChanged: {
+        if (stopButton.state === 'stopOn'){
+            stopButton.state = ''
+        }
+    }
     onPressed: {
         stopButton.state = 'stopOn'
         if (playPause.isConnected()) {

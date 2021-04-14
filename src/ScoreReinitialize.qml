@@ -5,14 +5,11 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
-//    onHoveredChanged: {
-//        if (reinitializeButton.state === 'hoveredReinitialize'
-//                || reinitializeButton.state === 'reintializeOn') {
-//            reinitializeButton.state = ''
-//        } else {
-//            reinitializeButton.state = 'hoveredReinitialize'
-//        }
-//    }
+    onHoveredChanged: {
+        if (reinitializeButton.state === 'reintializeOn'){
+            reinitializeButton.state = ''
+        }
+    }
 
     onPressed: {
         reinitializeButton.state = 'reintializeOn'
