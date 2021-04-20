@@ -19,6 +19,9 @@ ColumnLayout{
             id: sliderListModel
         }
         delegate: ScoreSlider{
+            property int idSlider
+            id: slider
+            idSlider: myId
             controlName: myName
             height: 20
             anchors.left: parent.left
@@ -27,6 +30,15 @@ ColumnLayout{
             from: myFrom
             value: myValue
             to: myTo
+            controlPath: path
+            onMoved: {
+                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                console.log('{ "Message": "ControlSurface","Path":'.concat(slider.controlPath,
+                                                                           ', "id":',slider.idSlider, ', "Value": {"Float":',slider.value, '}}'))
+                console.log("oooooooooooooooooooooooooooooooooo")
+                socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(slider.controlPath,
+                                        ', "id":',slider.myId, ', "Value": {"Float":',slider.value, '}}'))
+            }
         }
     }
     Connections{
@@ -40,7 +52,9 @@ ColumnLayout{
             }
             var a = find(function (item) { return item.id === JSON.stringify(s.id) }) //the index of m.Path in the listmodel
             if(a === null){
-                sliderListModel.insert(0,{ myName:JSON.stringify(s.Custom),
+                sliderListModel.insert(0,{ myName: JSON.stringify(s.Custom),
+                                           path: JSON.stringify(m.Path),
+                                           myId: JSON.stringify(m.id),
                                            myFrom: JSON.stringify(s.Domain.Float.Min),
                                            myValue: JSON.stringify(s.Value.Float),
                                            myTo: JSON.stringify(s.Domain.Float.Max)});
