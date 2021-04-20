@@ -32,9 +32,9 @@ Rectangle {
             id: speed
             controlName: name
             height: 20
-            anchors.right: parent.right
+            anchors.right: parent ? parent.right : undefined
             anchors.rightMargin: 25
-            anchors.left: parent.left
+            anchors.left: parent ? parent.left : undefined
             from: -120
             value: speedValue
             to: 600

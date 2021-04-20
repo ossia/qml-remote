@@ -54,7 +54,7 @@ Item {
                     } else if (typeOfMessage === "ControlSurfaceRemoved"
                                || typeOfMessage === "ControlSurfaceAdded") {
                         //handling the ControlSurface messages
-                        scoreControlSurface.controlSurfaceMessageReceived(
+                        scoreControlSurfaces.controlSurfacesMessageReceived(
                                     jsonObject);
 
                     } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResumed"){
@@ -133,7 +133,7 @@ Item {
 
     }
     ScoreControlSurfaces {
-        id: scoreControlSurface
+        id: scoreControlSurfaces
         anchors.top: scorePlayPauseStop.bottom
         anchors.bottom: scoreTimeline.top
         anchors.topMargin: 5
@@ -142,7 +142,7 @@ Item {
         height: parent.height
         //anchors.margins: 5
         //height: window.height / 1.5
-        signal controlSurfaceMessageReceived(var n)
+        signal controlSurfacesMessageReceived(var n)
     }
     ScoreTimeline {
         id: scoreTimeline

@@ -26,13 +26,28 @@ Rectangle{
             id: controlSurfacelist
         }
         delegate:
-            ScoreControlSurface{
-                controlSurfaceName: name
-        }
+            Item{
+                id: controlSurface
+                signal appendControls(var msg)
+                Loader {
+                   id: myControlSurface
+                   source: "ScoreControlSurface.qml"
+                   //controlSurfaceMessage: 10
+                   onLoaded: {
+                       controlSurface.appendControls(m)
+                   }
+                }
+                /*
+                Connections {
+                    target: myControlSurface.item
+                    onAppendControlSurface: console.log(msg)
+                }
+                */
+            }
     }
     Connections {
-        target: scoreControlSurface
-        function onControlSurfaceMessageReceived(m){
+        target: scoreControlSurfaces
+        function onControlSurfacesMessageReceived(m){
             var messageObject = m.Message
             function find(cond) {
                 for(var i = 0; i < controlSurfacelist.count; ++i) if (cond(controlSurfacelist.get(i))) return i;
@@ -41,7 +56,18 @@ Rectangle{
             var s = find(function (item) { return item.path === JSON.stringify(m.Path) }) //the index of m.Path in the listmodel
             if(messageObject === "ControlSurfaceAdded"){
                 if(s === null){
-                    controlSurfacelist.insert(0,{ name:JSON.stringify(m.Path), path:JSON.stringify(m.Path)});
+                    console.log("-------------------control surface added-------------------------")
+                    console.log(m)
+                    console.log("------------------------------------------------------------")
+                    controlSurfacelist.insert(0,{ "name":JSON.stringify(m.Name), "path":JSON.stringify(m.Path), m:m});
+                    //scoreControlSurface.controlMessageReceived(m.Controls);
+                    //controlSurfacelist.get(0).appendControls(m.Controls)
+                    console.log("gggggggggggggggggggggggggggggggg")
+                    console.log(controlSurfacelist.get(0).id)
+                    console.log("gggggggggggggggggggggggggggggggg")
+
+                    //ontrolSurfacelist.get(0).appendControls(m.Controls);
+
                 }
             }
             else if(messageObject === "ControlSurfaceRemoved"){
@@ -56,7 +82,7 @@ Rectangle{
         }
     }
 
-    // Called by ScoreStop
+    // Called by OssiaStop
     function clearListModel() {
         controlSurfacelist.clear()
     }

@@ -37,7 +37,6 @@ Rectangle{
             if(messageObject === "TriggerAdded"){
                 triggerslistModel.insert(0,{ name:JSON.stringify(m.Name),path:JSON.stringify(m.Path)});
                 //triggerslistModel.insert(0,{ name:JSON.stringify(m.Name),path:JSON.stringify(PathsObject[0].ObjectName)});
-
             }
             else if(messageObject === "TriggerRemoved"){
                 function find(cond) {

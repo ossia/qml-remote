@@ -5,28 +5,46 @@ import QtQml.Models 2.12
 
 ColumnLayout{
     spacing: 5
+    height: 200
     width: 300
-    Repeater{
-        id:triggerslist
+    ListView{
+        id:sliderList
         clip: true
+        spacing: 10
+        anchors.fill: parent
+        anchors.margins: 5
+        orientation: parent.Vertical
+        snapMode: ListView.SnapToItem
         model: ListModel {
-            id: slidersListModel
+            id: sliderListModel
         }
         delegate: ScoreSlider{
-            id: slider
+            controlName: myName
             height: 20
-            width: 300
+            anchors.left: parent.left
+            anchors.right: parent.right
             controlColor: "#f6a019"
+            from: myFrom
+            value: myValue
+            to: myTo
         }
     }
-    function appendSlider(s) {
-        function find(cond) {
-            for(var i = 0; i < slidersListModel.count; ++i) if (cond(slidersListModel.get(i))) return i;
-            return null
-        }
-        var a = find(function (item) { return item.id === JSON.stringify(m.id) }) //the index of m.Path in the listmodel
-        if(a === null){
-            slidersListModel.insert(0,{ id:JSON.stringify(m.id)});
+    Connections{
+        function onAppendSlider(s) {
+            console.log("uuuuuuuuuuuuuuuuuu")
+            console.log(JSON.stringify(s))
+            console.log("uuuuuuuuuuuuuuuuuu")
+            function find(cond) {
+                for(var i = 0; i < sliderListModel.count; ++i) if (cond(sliderListModel.get(i))) return i;
+                return null
+            }
+            var a = find(function (item) { return item.id === JSON.stringify(s.id) }) //the index of m.Path in the listmodel
+            if(a === null){
+                sliderListModel.insert(0,{ myName:JSON.stringify(s.Custom),
+                                           myFrom: JSON.stringify(s.Domain.Float.Min),
+                                           myValue: JSON.stringify(s.Value.Float),
+                                           myTo: JSON.stringify(s.Domain.Float.Max)});
+            }
         }
     }
 }

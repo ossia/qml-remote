@@ -24,4 +24,8 @@ Item{
         id:scoreSpeed
         anchors.right: parent.right
     }
+
+    function clearSpeedsListModel() {
+        scoreSpeed.clearSpeedsListModel()
+    }
 }
