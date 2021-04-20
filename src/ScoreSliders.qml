@@ -19,14 +19,13 @@ ColumnLayout{
             id: sliderListModel
         }
         delegate: ScoreSlider{
-            property int idSlider
             id: slider
-            idSlider: myId
             controlName: myName
             height: 20
             anchors.left: parent.left
             anchors.right: parent.right
             controlColor: "#f6a019"
+            controlId: myId
             from: myFrom
             value: myValue
             to: myTo
@@ -34,10 +33,10 @@ ColumnLayout{
             onMoved: {
                 console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
                 console.log('{ "Message": "ControlSurface","Path":'.concat(slider.controlPath,
-                                                                           ', "id":',slider.idSlider, ', "Value": {"Float":',slider.value, '}}'))
+                                                                           ', "id":',slider.controlId, ', "Value": {"Float":',slider.value, '}}'))
                 console.log("oooooooooooooooooooooooooooooooooo")
                 socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(slider.controlPath,
-                                        ', "id":',slider.myId, ', "Value": {"Float":',slider.value, '}}'))
+                                        ', "id":',slider.controlId, ', "Value": {"Float":',slider.value, '}}'))
             }
         }
     }
@@ -52,9 +51,9 @@ ColumnLayout{
             }
             var a = find(function (item) { return item.id === JSON.stringify(s.id) }) //the index of m.Path in the listmodel
             if(a === null){
-                sliderListModel.insert(0,{ myName: JSON.stringify(s.Custom),
-                                           path: JSON.stringify(m.Path),
-                                           myId: JSON.stringify(m.id),
+                sliderListModel.insert(sliderListModel.count,{ myName: JSON.stringify(s.Custom),
+                                           path: JSON.stringify(s.Path),
+                                           myId: JSON.stringify(s.id),
                                            myFrom: JSON.stringify(s.Domain.Float.Min),
                                            myValue: JSON.stringify(s.Value.Float),
                                            myTo: JSON.stringify(s.Domain.Float.Max)});
