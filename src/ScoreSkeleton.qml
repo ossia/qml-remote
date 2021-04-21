@@ -62,6 +62,9 @@ Item {
                         scorePlayPauseStop.scorePlayPauseStopMessageReceived(jsonObject);
                         //playPause.clicked();
                         }
+                    else{
+
+                    }
 
                 }
                 //TODO: hundle volume and the main speed messages

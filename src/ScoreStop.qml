@@ -17,7 +17,7 @@ Button {
         }
         socket.sendTextMessage('{ "Message": "Stop" }')
         scoreTimeline.stopTimeline();
-        scoreControlSurface .clearListModel();
+        scoreControlSurfaces.clearListModel();
     }
 
     onReleased: stopButton.state = ''

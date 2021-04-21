@@ -56,16 +56,9 @@ Rectangle{
             var s = find(function (item) { return item.path === JSON.stringify(m.Path) }) //the index of m.Path in the listmodel
             if(messageObject === "ControlSurfaceAdded"){
                 if(s === null){
-                    console.log("-------------------control surface added-------------------------")
-                    console.log(m)
-                    console.log("------------------------------------------------------------")
                     controlSurfacelist.insert(0,{ "name":JSON.stringify(m.Name), "path":JSON.stringify(m.Path), m:m});
                     //scoreControlSurface.controlMessageReceived(m.Controls);
                     //controlSurfacelist.get(0).appendControls(m.Controls)
-                    console.log("gggggggggggggggggggggggggggggggg")
-                    console.log(controlSurfacelist.get(0).id)
-                    console.log("gggggggggggggggggggggggggggggggg")
-
                     //ontrolSurfacelist.get(0).appendControls(m.Controls);
 
                 }

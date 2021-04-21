@@ -6,13 +6,14 @@ import QtQml.Models 2.12
 ColumnLayout{
     spacing: 5
     height: 200
-    width: 300
+    width: window.width/4
     ListView{
         id:sliderList
         clip: true
         spacing: 10
-        anchors.fill: parent
-        anchors.margins: 5
+        Layout.fillHeight: parent.height
+        Layout.fillWidth: parent.height
+        Layout.margins: 5
         orientation: parent.Vertical
         snapMode: ListView.SnapToItem
         model: ListModel {
@@ -31,10 +32,6 @@ ColumnLayout{
             to: myTo
             controlPath: path
             onMoved: {
-                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-                console.log('{ "Message": "ControlSurface","Path":'.concat(slider.controlPath,
-                                                                           ', "id":',slider.controlId, ', "Value": {"Float":',slider.value, '}}'))
-                console.log("oooooooooooooooooooooooooooooooooo")
                 socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(slider.controlPath,
                                         ', "id":',slider.controlId, ', "Value": {"Float":',slider.value, '}}'))
             }
@@ -42,9 +39,6 @@ ColumnLayout{
     }
     Connections{
         function onAppendSlider(s) {
-            console.log("uuuuuuuuuuuuuuuuuu")
-            console.log(JSON.stringify(s))
-            console.log("uuuuuuuuuuuuuuuuuu")
             function find(cond) {
                 for(var i = 0; i < sliderListModel.count; ++i) if (cond(sliderListModel.get(i))) return i;
                 return null

@@ -42,7 +42,6 @@ Column{
     Connections {
         target: controlSurface
         function onAppendControls(m){
-            console.log("uuuuuuuuuuuuuuuuuuu")
             controlSurfaceName.text = JSON.stringify(m.Name)
             var i = 0
             while(m.Controls[i]){
