@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           apt-get update -qq
-          DEBIAN_FRONTEND="noninteractive" apt-get install -qq --force-yes git build-essential qt5-default qtbase5-dev qtdeclarative5-dev libqt5websockets5-dev qtquickcontrols2-5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-extras qml-module-qt-websockets qml-module-qtqml-models2 qml-module-qt-labs-qmlmodels  qml-module-qt-labs-settings
+          DEBIAN_FRONTEND="noninteractive" apt-get install -qq --force-yes git build-essential qt5-default qtbase5-dev qtdeclarative5-dev libqt5websockets5-dev qtquickcontrols2-5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-extras qml-module-qt-websockets qml-module-qtqml-models2 qml-module-qt-labs-qmlmodels  qml-module-qt-labs-settings qml-module-qtquick-layouts
 
       - name: Build
         run: |
