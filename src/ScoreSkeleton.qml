@@ -20,9 +20,9 @@ Item {
         //url: "ws://192.168.60.25:10212"
         onTextMessageReceived: {
             try {
-                console.log("-----------------------------------------");
-                console.log(message);
-                console.log("-----------------------------------------");
+                //console.log("-----------------------------------------");
+                //console.log(message);
+                //console.log("-----------------------------------------");
 
                 var jsonObject = JSON.parse(message);
                 if (jsonObject.Intervals) {
@@ -79,9 +79,13 @@ Item {
                 break;
             case WebSocket.Open:
                 socket.sendTextMessage("Hello World");
+                adresseip.connected();
+                scorePlayPauseStop.connectedToScore();
                 break;
             case WebSocket.Closed:
                 console.log("The webSocket communication has been closed")
+                adresseip.disconnected();
+                scorePlayPauseStop.disconnectedFromScore();
                 break;
             default:
             }
@@ -92,7 +96,7 @@ Item {
         id: adresseip
         anchors.top: parent.top
         anchors.left: parent.left
-        height: window / 10
+        //height: window / 10
         signal playPauseStopMessageReceived(var n)
     }
     ScorePlayPauseStop {
@@ -102,6 +106,8 @@ Item {
         height: window / 5
         signal playPauseStopMessageReceived(var n)
         signal scorePlayPauseStopMessageReceived(var n)
+        signal connectedToScore()
+        signal disconnectedFromScore()
     }
     ScoreVolume {
         id: scoreVolume

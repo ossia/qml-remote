@@ -53,5 +53,12 @@ Column{
 
             }
         }
+        //Connect play Pause buttons with the socket instance
+        function onConnectedToScore(){
+            playPause.connectedToScore();
+        }
+        function onDisconnectedFromScore(){
+            playPause.disonnectedFromScore();
+        }
     }
 }

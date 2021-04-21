@@ -1,76 +1,134 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.3
-//import QtMultimedia 5.0
 import QtQuick.Controls.Material 2.3
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.15
 
-Button {
-    Dialog {
-        id: ipDialog
-        title: "Adresse IP:"
-        standardButtons: StandardButton.Ok | StandardButton.Cancel
-        Column {
-            anchors.fill: parent
-            Rectangle{
-                anchors.top : ipDialog.top
-                color: "#202020"
-                TextInput {
-                    id: ipInput
-                    text: settings.adresse_ip
+ColumnLayout{
+    Button {
+        id: ip_button
+        Dialog {
+            id: ipDialog
+            title: "Adresse IP:"
+            standardButtons: StandardButton.Ok | StandardButton.Cancel
+            Column {
+                anchors.fill: parent
+                Rectangle{
+                    anchors.top : ipDialog.top
+                    color: "#202020"
+                    TextInput {
+                        id: ipInput
+                        text: settings.adresse_ip
+                    }
+                }
+            }
+
+            onButtonClicked: {
+                console.log("HELLO")
+                if (clickedButton === StandardButton.Ok) {
+                    settings.adresse_ip = ipInput.text;
+                    console.log(" socket url " + socket.url)
+                    console.log("adresse ip = " + settings.adresse_ip)
+                } else {
+                    console.log("Rejected url = " + socket.url)
                 }
             }
         }
-
-        onButtonClicked: {
-            console.log("HELLO")
-            if (clickedButton === StandardButton.Ok) {
-                settings.adresse_ip = ipInput.text;
-               // settings.setValue("settings.adresse_ip",socket.adresse_IP)
-                console.log(" socket url " + socket.url)
-                console.log("adresse ip = " + settings.adresse_ip)
-            } else {
-                console.log("Rejected url = " + socket.url)
-            }
-        }
-    }
-    hoverEnabled: true
-    onPressed: {
+        hoverEnabled: true
+        onPressed: {
             ipButton.state = "ip_on"
-    }
-    onReleased: {
-        console.log("avant cc = " + settings.cc)
-       onClicked: ipDialog.open()
-    }
-
-    onHoveredChanged: {
-        if (ipButton.state === 'ip_on'){
-            ipButton.state = ""
+        }
+        onReleased: {
+            console.log("avant cc = " + settings.cc)
+            onClicked: ipDialog.open()
         }
 
-    }
+        onHoveredChanged: {
+            if (ipButton.state === 'ip_on'){
+                ipButton.state = ""
+            }
 
-    contentItem: Image {
-        id: ipButton
-        sourceSize.width: 35
-        sourceSize.height: 35
-        source: "Icons/adresse_ip.png"
-        clip: true
-        states: [
-            State {
-                /* play symbol is displayed
+        }
+
+        contentItem: Image {
+            id: ipButton
+            sourceSize.width: 35
+            sourceSize.height: 35
+            source: "Icons/adresse_ip.png"
+            clip: true
+            states: [
+                State {
+                    /* play symbol is displayed
                 * "paused" is the scenario's state.
                 */
-                name: "ip_on"
-                PropertyChanges {
-                    target: ipButton
-                    source: "Icons/adresse_ip_on.png"
+                    name: "ip_on"
+                    PropertyChanges {
+                        target: ipButton
+                        source: "Icons/adresse_ip_on.png"
                     }
                 }
             ]
+        }
+        background: Rectangle {
+            id: zone
+            color: "#202020"
+        }
     }
-    background: Rectangle {
-        id: zone
-        color: "#202020"
+
+    Button {
+        id: disconnectButton
+        Dialog {
+            id: disconnectDiag
+            title: "Disconnection"
+            standardButtons: StandardButton.Ok | StandardButton.Cancel
+            Text {
+                id: diagDisconnection
+                text: qsTr("Confirm disconnection")
+            }
+
+            onButtonClicked: {
+                if (clickedButton === StandardButton.Ok) {
+                    ip_button.visible = true;
+                    socket.active = false;
+                } else {
+
+                }
+            }
+        }
+
+        contentItem: Image {
+            id: disconnect_image
+            sourceSize.width: 35
+            sourceSize.height: 35
+            source: "Icons/disconnected.png"
+            clip: true
+            states: [
+                State {
+                    name: "disconnect"
+                    PropertyChanges {
+                        target: disconnect_image
+                        source: "Icons/disconnected.png"
+                    }
+                }
+            ]
+        }
+        background: Rectangle {
+            id: diagDisconnect
+            color: "#202020"
+        }
+        onClicked: {
+            onClicked: disconnectDiag.open()
+        }
+        hoverEnabled: true
+        visible: false
+    }
+    function connected(){
+        ip_button.visible = !ip_button.visible;
+        disconnectButton.visible = !disconnectButton.visible;
+    }
+    function disconnected(){
+        ip_button.visible = true;
+        disconnectButton.visible = false;
     }
 }

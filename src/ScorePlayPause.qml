@@ -29,6 +29,9 @@ Button {
         case 'connectionOn':
             pauseButton.state = ''
             break;
+        case 'connectionOff': ///////
+            pauseButton.state = ''
+            break;
         case 'playPressed':
             pauseButton.state = 'playDisplayed'
             break;
@@ -52,7 +55,7 @@ Button {
               * socket is the id of the Websocket
               * instantiated in ScoreSkeleton
               */
-            pauseButton.state = 'playDisplayed';
+            //pauseButton.state = 'playDisplayed';
             socket.active = !socket.active;
             break;
         case 'playPressed':
@@ -80,6 +83,13 @@ Button {
                 PropertyChanges {
                     target: pauseButton
                     source: "Icons/connection_on.png"
+                }
+            },
+            State {
+                name: "connectionOff"
+                PropertyChanges {
+                    target: pauseButton
+                    source: "Icons/connection.png"
                 }
             },
             State {
@@ -135,5 +145,11 @@ Button {
     background: Rectangle {
         id: zone
         color: "#202020"
+    }
+    function connectedToScore(){
+        pauseButton.state = 'playDisplayed';
+    }
+    function disonnectedFromScore(){
+        pauseButton.state = 'connectionOff';
     }
 }
