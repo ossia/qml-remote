@@ -57,17 +57,12 @@ Rectangle{
             if(messageObject === "ControlSurfaceAdded"){
                 if(s === null){
                     controlSurfacelist.insert(0,{ "name":JSON.stringify(m.Name), "path":JSON.stringify(m.Path), m:m});
-                    //scoreControlSurface.controlMessageReceived(m.Controls);
-                    //controlSurfacelist.get(0).appendControls(m.Controls)
-                    //ontrolSurfacelist.get(0).appendControls(m.Controls);
-
                 }
             }
             else if(messageObject === "ControlSurfaceRemoved"){
                 if(s !== null){
                     controlSurfacelist.remove(s)
                     //controlSurfacelist.clear()
-
                 }
                 //controlSurfacelist.setProperty(s, "name", "desactivated")
                 // manque traitement a faire (par exemple changer la couleur du background et le rendre immodifiable)
