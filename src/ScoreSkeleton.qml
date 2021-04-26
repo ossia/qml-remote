@@ -20,9 +20,9 @@ Item {
         //url: "ws://192.168.60.25:10212"
         onTextMessageReceived: {
             try {
-                //console.log("-----------------------------------------");
-                //console.log(message);
-                //console.log("-----------------------------------------");
+                console.log("-----------------------------------------");
+                console.log(message);
+                console.log("-----------------------------------------");
 
                 var jsonObject = JSON.parse(message);
                 if (jsonObject.Intervals) {

@@ -9,7 +9,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
 Rectangle {
-    id: speedList
+    id: scoreSpeeds
     width: parent.width / 4
     height: parent.height
     color: "#202020"
@@ -27,6 +27,7 @@ Rectangle {
 
         model: ListModel {
             id: intervalsListModel
+            property bool hasStarted: false
         }
         delegate: ScoreSlider {
             id: speed
@@ -65,8 +66,11 @@ Rectangle {
                   * The name of the timeline changes everytime ossia is refreshed...
                   * The only constant is that it contains "Untitled"
                   * The timeline should not be added with the other speeds */
-                if (m.Name.includes("Untitled")) {
+                if (!(intervalsListModel.hasStarted)) {
+                //if (m.Name.includes("Untitled")) {
+                    intervalsListModel.hasStarted = true;
                     scoreTimeline.totalTime = m.DefaultDuration;
+                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                     /* I have to admit
                       * Niveau encapsulation on est bof :shrug:
                       */
@@ -112,7 +116,8 @@ Rectangle {
     }
 
     // Called by OssiaStop
-    function clearListModel() {
-        intervalsListModel.clear()
+    function clearSpeedsListModel() {
+        intervalsListModel.clear();
+        intervalsListModel.hasStarted = false;
     }
 }

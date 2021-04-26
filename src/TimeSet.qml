@@ -21,11 +21,11 @@ Item{
 
     }
     ScoreSpeeds{
-        id:scoreSpeed
+        id:scoreSpeeds
         anchors.right: parent.right
     }
 
     function clearSpeedsListModel() {
-        scoreSpeed.clearSpeedsListModel()
+        scoreSpeeds.clearSpeedsListModel()
     }
 }

@@ -17,6 +17,7 @@ Button {
         }
         socket.sendTextMessage('{ "Message": "Stop" }')
         scoreTimeline.stopTimeline();
+        scoreTimeSet.clearSpeedsListModel();
         scoreControlSurfaces.clearListModel();
     }
 
