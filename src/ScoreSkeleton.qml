@@ -58,7 +58,6 @@ Item {
                                     jsonObject);
 
                     } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResumed"){
-                        //console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
                         scorePlayPauseStop.scorePlayPauseStopMessageReceived(jsonObject);
                         //playPause.clicked();
                         }
@@ -149,8 +148,6 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         height: parent.height
-        //anchors.margins: 5
-        //height: window.height / 1.5
         signal controlSurfacesMessageReceived(var n)
     }
     ScoreTimeline {

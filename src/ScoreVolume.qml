@@ -27,9 +27,6 @@ ScoreSlider{
         function onIntervalMessageReceived(m) {
             var IntervalsObject = m;
             if (scoreGlobalVolume.path === "5"){ // The global path is the first one to be created by score
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-                console.log(JSON.stringify(m.Path));
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
                 scoreGlobalVolume.path = JSON.stringify(m.Path);
             }
 
@@ -41,11 +38,6 @@ ScoreSlider{
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals;
             if (IntervalsObject[0] && scoreGlobalVolume.path === JSON.stringify(IntervalsObject[0].Path)){ // The global path is the first one to be created by score
-                console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
-                console.log(JSON.stringify(IntervalsObject[0].Path));
-                console.log(scoreGlobalVolume.path);
-                console.log(JSON.stringify(IntervalsObject[0].Gain))
-                console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
                 scoreGlobalVolume.value = 1 -  JSON.stringify(IntervalsObject[0].Gain);
             }
         }

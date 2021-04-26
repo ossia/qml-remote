@@ -14,7 +14,7 @@ ColumnLayout{
         Layout.fillHeight: parent.height
         Layout.fillWidth: parent.height
         Layout.margins: 5
-        orientation: parent.Vertical
+        //orientation: parent.Vertical
         snapMode: ListView.SnapToItem
         model: ListModel {
             id: sliderListModel

@@ -41,9 +41,6 @@ Rectangle {
             controlColor: "#62400a"
             controlPath : path
             onMoved: {
-                console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
-                console.log('{ "Message": "IntervalSpeed", "Path":'.concat(speed.controlPath, ', "Speed": ',speed.value*6/720, '}'));
-                console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
                 socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":'.concat(speed.controlPath, ', "Speed": ',speed.value*6/720, '}')))
             }
         }
@@ -75,9 +72,6 @@ Rectangle {
                       */
 
                 } else {
-                    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
-                    console.log(JSON.stringify(m.Speed));
-                    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
                     intervalsListModel.insert(0, {
                                                   name:JSON.stringify(m.Name),path:JSON.stringify(m.Path),speedValue:JSON.stringify(m.Speed)*720/6
                                               });
