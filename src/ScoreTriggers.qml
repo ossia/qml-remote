@@ -6,6 +6,7 @@ import QtQml.Models 2.12
 Rectangle{
     radius:9
     color: "#202020"
+    anchors.fill: parent
     ListView{
         id:triggerslist
         width: parent.width ;height:parent.height
