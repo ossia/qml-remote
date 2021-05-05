@@ -16,6 +16,8 @@ Column{
     ScoreSliders{
         id: scoreSliders
         signal appendSlider(var msg)
+        signal modifySlider(var msg)
+
     }
 
     // Add controls in th Control Surface
@@ -44,5 +46,12 @@ Column{
                 controlMessage = m.Controls[i]
             }
         }
+        function onModifyControl(m){
+            console.log("gggggggggggggggggggg")
+            if(m === "ControlSurfaceControl"){
+                scoreSliders.modifySlider(m)
+            }
+        }
+
     }
 }

@@ -26,24 +26,38 @@ Rectangle{
             id: controlSurfacelist
         }
         delegate:
-            Item{
+            Loader {
                 id: controlSurface
                 signal appendControls(var msg)
-                Loader {
-                   id: myControlSurface
-                   source: "ScoreControlSurface.qml"
-                   //controlSurfaceMessage: 10
-                   onLoaded: {
-                       controlSurface.appendControls(m)
-                   }
+                signal modifyControl(var msg)
+                source: "ScoreControlSurface.qml"
+                onProgressChanged: {
+                    console.log("ooooooooooooooooooooooo")
+                    if (myValue !== "efef"){
+                        console.log("kkkkkkkkkkkkkkkkkk")
+                        controlSurface.modifyControl(m)
+                    }
                 }
+                onLoaded: {
+                    //à finir
+                    console.log("rrrrrrrrrrrrrrrrrr")
+                    if(m.Message === "ControlSurfaceAdded"){
+                        console.log("iiiiiiiiiiiiiii")
+                        controlSurface.appendControls(m)
+                    }
+                    else if (myValue !== "efef"){
+                        controlSurface.modifyControl(m)
+                    }
+                }
+                property var myValue: "efef"
+            }
                 /*
                 Connections {
-                    target: myControlSurface.item
-                    onAppendControlSurface: console.log(msg)
+                    target: scoreControlSurfaces
+                    onTest: controlSurface.modifyControl(m)
                 }
                 */
-            }
+            //}
     }
     Connections {
         target: scoreControlSurfaces
@@ -64,6 +78,14 @@ Rectangle{
                     controlSurfacelist.remove(s)
                     //controlSurfacelist.clear()
                 }
+            }
+            else if(messageObject === "ControlSurfaceControl"){
+                if(s !== null){
+                    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeee")
+                    console.log(controlSurfacelist.get(s).myValue)
+                    controlSurfacelist.setProperty(s, "myValue", JSON.stringify(m.Value))
+                    console.log(controlSurfacelist.get(s).myValue)
+                }
                 //controlSurfacelist.setProperty(s, "name", "desactivated")
                 // manque traitement a faire (par exemple changer la couleur du background et le rendre immodifiable)
             }
@@ -75,3 +97,4 @@ Rectangle{
         controlSurfacelist.clear()
     }
 }
+
