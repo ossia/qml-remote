@@ -72,5 +72,7 @@
         <file>Icons/adresse_ip_on.png</file>
         <file>Icons/adresse_ip_on.svg</file>
         <file>Icons/disconnected.png</file>
+        <file>Icons/disconnected_on.svg</file>
+        <file>Icons/disconnected_on.png</file>
     </qresource>
 </RCC>

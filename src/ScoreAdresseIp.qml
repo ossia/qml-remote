@@ -110,6 +110,14 @@ ColumnLayout{
                         target: disconnect_image
                         source: "Icons/disconnected.png"
                     }
+                },
+                State {
+                    name: "disconnect_on"
+                    PropertyChanges {
+                        target: disconnect_image
+                        source: "Icons/disconnected_on.png"
+
+                    }
                 }
             ]
         }
@@ -117,8 +125,12 @@ ColumnLayout{
             id: diagDisconnect
             color: "#202020"
         }
-        onClicked: {
-            onClicked: disconnectDiag.open()
+        onPressed: {
+            disconnect_image.state = 'disconnect_on'
+        }
+
+        onReleased: {
+            disconnectDiag.open()
         }
         hoverEnabled: true
         visible: false
