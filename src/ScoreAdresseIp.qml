@@ -133,6 +133,11 @@ ColumnLayout{
             disconnectDiag.open()
         }
         hoverEnabled: true
+        onHoveredChanged: {
+            if (disconnect_image.state === 'disconnect_on'){
+                disconnect_image.state = 'disconnect'
+            }
+        }
         visible: false
     }
     function connected(){
