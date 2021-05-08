@@ -42,7 +42,7 @@ WebSocket {
                            || typeOfMessage === "ControlSurfaceAdded"
                            || typeOfMessage === "ControlSurfaceControl") {
                     //handling the ControlSurface messages
-                    scoreControlSurfaces.controlSurfacesMessageReceived(
+                    scoreControlSurfaceList.controlSurfacesMessageReceived(
                                 jsonObject);
 
                 } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResumed"){

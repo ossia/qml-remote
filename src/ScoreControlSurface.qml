@@ -1,74 +1,72 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 
-
-
-ColumnLayout{
-
+ColumnLayout {
     spacing: 5
     property string name: "ControlSurfaceName"
-    property string controlSurfaceMessage: "ControlSurfaceMessage"
 
-    Text{
+    // Control surface name
+    Text {
         id: controlSurfaceName
         text: name
         color: "white"
     }
 
-    Flow{
+    // List of controls
+    Row {
         spacing: 5
-        ScoreSliders{
+
+        // List of sliders
+        ScoreSliders {
             id: scoreSliders
             signal appendSlider(var msg)
             signal modifySlider(var msg)
         }
 
-
-        ScoreButtons{
+        // List of buttons
+        ScoreButtons {
             id: scoreButtons
             signal appendButton(var msg)
             signal modifyButton(var msg)
         }
     }
 
-
-
-    // Add controls in th Control Surface
+    // Receiving informations about controls in a control surface from score
     Connections {
         target: controlSurface
-        function onAppendControls(m){
+        // Adding controls in a control surface
+        function onAppendControls(m) {
             controlSurfaceName.text = JSON.stringify(m.Name)
             var i = 0
             var controlMessage = m.Controls[i]
-            while(controlMessage){
-                switch(controlMessage.uuid){
+            while (controlMessage) {
+                switch (controlMessage.uuid) {
                     // Float Slider
-                    case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
-                        scoreSliders.appendSlider(controlMessage)
-                        break
+                case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
+                    scoreSliders.appendSlider(controlMessage)
+                    break
                     // Log FLoat Slider
-                    case "5554eb67-bcc8-45ab-8ec2-37a3f191aa64":
-                        scoreSliders.appendSlider(controlMessage)
-                        break
+                case "5554eb67-bcc8-45ab-8ec2-37a3f191aa64":
+                    scoreSliders.appendSlider(controlMessage)
+                    break
                     // Int Slider
-                    case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
-                        scoreSliders.appendSlider(controlMessage)
-                        break
+                case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
+                    scoreSliders.appendSlider(controlMessage)
+                    break
                     // Button
-                    case "feb87e84-e0d2-428f-96ff-a123ac964f59":
-                        scoreButtons.appendButton(controlMessage)
-                        break
+                case "feb87e84-e0d2-428f-96ff-a123ac964f59":
+                    scoreButtons.appendButton(controlMessage)
+                    break
                 }
                 i++
                 controlMessage = m.Controls[i]
             }
         }
-        function onModifyControl(m){
-            console.log("gggggggggggggggggggg")
-            if(m === "ControlSurfaceControl"){
+        // Modifying controls in a control surface
+        function onModifyControl(m) {
+            if (m === "ControlSurfaceControl") {
                 scoreSliders.modifySlider(m)
             }
         }
-
     }
 }

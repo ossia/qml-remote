@@ -3,70 +3,73 @@ import QtQuick.Controls 2.12
 import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 
-
-
 Button {
     hoverEnabled: true // Allows to specify a behavior when going over a button
+    // Detecting when buttons are pressed whether in the interface or on score
     function stopClicked() {
-        pauseButton.state = 'playDisplayed';
+        pauseButton.state = 'playDisplayed'
     }
     function isConnected() {
-        return (pauseButton.state !== '');
+        return (pauseButton.state !== '')
     }
     function isPaused() {
-        return (pauseButton.state === 'hoveredPlayOff');
+        return (pauseButton.state === 'hoveredPlayOff')
     }
     function playPressInScore() {
-        pauseButton.state ='pauseDisplayed'
+        pauseButton.state = 'pauseDisplayed'
     }
-    function pausePressInScore(){
+    function pausePressInScore() {
         pauseButton.state = 'playDisplayed'
     }
 
-
+    // Allow to click on buttons and leave while pressing
     onHoveredChanged: {
         switch (pauseButton.state) {
         case 'connectionOn':
             pauseButton.state = ''
-            break;
-        case 'connectionOff': ///////
+            break
+        case 'connectionOff':
+            ///////
             pauseButton.state = ''
-            break;
+            break
         case 'playPressed':
             pauseButton.state = 'playDisplayed'
-            break;
+            break
         }
     }
 
-
+    // Change the button color when it is pressed
     onPressed: {
-        if (pauseButton.state === ''){
+        if (pauseButton.state === '') {
             pauseButton.state = 'connectionOn'
         }
-        if (pauseButton.state === 'playDisplayed'){
+        if (pauseButton.state === 'playDisplayed') {
             pauseButton.state = 'playPressed'
         }
     }
 
-    onClicked: {
+    // Specify the behavior of a button when it is clicked on
+    onReleased: {
         switch (pauseButton.state) {
         case 'connectionOn':
+
             /* Connection to the websocket
               * socket is the id of the Websocket
               * instantiated in ScoreSkeleton
               */
             //pauseButton.state = 'playDisplayed';
-            socket.active = !socket.active;
-            break;
+            socket.active = !socket.active
+            break
         case 'playPressed':
-            pauseButton.state = 'pauseDisplayed';
-            socket.sendTextMessage('{ "Message": "Play" }');
-            break;
+            pauseButton.state = 'pauseDisplayed'
+            socket.sendTextMessage('{ "Message": "Play" }')
+            break
         case 'pauseDisplayed':
-            pauseButton.state = 'playDisplayed';
-            socket.sendTextMessage('{ "Message": "Pause" }');
-            break;
+            pauseButton.state = 'playDisplayed'
+            socket.sendTextMessage('{ "Message": "Pause" }')
+            break
         default:
+
         }
     }
 
@@ -76,7 +79,6 @@ Button {
         sourceSize.height: 30
         source: "Icons/connection.png"
         clip: true
-
         states: [
             State {
                 name: "connectionOn"
@@ -93,6 +95,7 @@ Button {
                 }
             },
             State {
+
                 /* play symbol is displayed
                 * "paused" is the scenario's state.
                 */
@@ -117,6 +120,7 @@ Button {
                 }
             },
             State {
+
                 /* pause symbol is displayed
                 * "playing" is the scenario's state.
                 */
@@ -146,10 +150,10 @@ Button {
         id: zone
         color: "#202020"
     }
-    function connectedToScore(){
-        pauseButton.state = 'playDisplayed';
+    function connectedToScore() {
+        pauseButton.state = 'playDisplayed'
     }
-    function disonnectedFromScore(){
-        pauseButton.state = 'connectionOff';
+    function disonnectedFromScore() {
+        pauseButton.state = 'connectionOff'
     }
 }

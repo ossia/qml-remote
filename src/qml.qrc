@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ScoreControlSurface.qml</file>
-        <file>ScoreControlSurfaces.qml</file>
+        <file>ScoreControlSurfaceList.qml</file>
         <file>ScorePlayGlob.qml</file>
         <file>ScorePlayPause.qml</file>
         <file>ScorePlayPauseStop.qml</file>

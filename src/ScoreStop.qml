@@ -5,23 +5,25 @@ import QtQuick.Controls.Material 2.3
 
 Button {
     hoverEnabled: true
+    // Allow to click on buttons and leave while pressing
     onHoveredChanged: {
-        if (stopButton.state === 'stopOn'){
+        if (stopButton.state === 'stopOn') {
             stopButton.state = ''
         }
     }
+    // Change the button color when it is pressed
     onPressed: {
         stopButton.state = 'stopOn'
         if (playPause.isConnected()) {
             playPause.stopClicked()
         }
-        socket.sendTextMessage('{ "Message": "Stop" }')
-        scoreTimeline.stopTimeline();
-        scoreTimeSet.clearSpeedsListModel();
-        scoreControlSurfaces.clearListModel();
     }
-
-    onReleased: stopButton.state = ''
+    // Specify the behavior of a button when it is clicked on
+    onReleased: {
+        stopButton.state = ''
+        socket.sendTextMessage('{ "Message": "Stop" }')
+        scoreTimeline.stopTimeline()
+    }
 
     contentItem: Image {
         id: stopButton

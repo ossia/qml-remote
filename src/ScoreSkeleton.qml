@@ -17,12 +17,12 @@ Item {
     }
 
     // Creating the websocket
-    ScoreWebSocket{
+    ScoreWebSocket {
         id: socket
     }
 
     // Creating the IP adress button object
-    ScoreIpAdress{
+    ScoreIpAdress {
         id: ipAdress
         anchors.top: parent.top
         anchors.left: parent.left
@@ -37,9 +37,10 @@ Item {
         height: window / 5
         signal playPauseStopMessageReceived(var n)
         signal scorePlayPauseStopMessageReceived(var n)
-        signal connectedToScore()
-        signal disconnectedFromScore()
+        signal connectedToScore
+        signal disconnectedFromScore
     }
+
 
     /*
     // TODO : Creating the volume slider object
@@ -64,7 +65,7 @@ Item {
         signal intervalsMessageReceived(var n)
     }
 
-    // Creating the timeSet object : trigger buttons and intervals speed sliders
+    // Creating the timeSet object : trigger buttons and interval speed sliders
     TimeSet {
         id: scoreTimeSet
         anchors.top: scoreSpeed.bottom
@@ -80,8 +81,8 @@ Item {
     }
 
     // Creating the control surface list
-    ScoreControlSurfaces {
-        id: scoreControlSurfaces
+    ScoreControlSurfaceList {
+        id: scoreControlSurfaceList
         anchors.top: scorePlayPauseStop.bottom
         anchors.bottom: scoreTimeline.top
         anchors.topMargin: 5

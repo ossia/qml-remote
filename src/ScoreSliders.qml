@@ -3,23 +3,21 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
-ColumnLayout{
+ColumnLayout {
     spacing: 5
-    //height: 200
-    // width: window.width/4
-    Repeater{
-        id:sliderList
+
+    Repeater {
+        id: sliderList
         clip: true
-        //spacing: 10
         Layout.fillHeight: parent.height
         Layout.fillWidth: parent.height
         Layout.margins: 5
-        //orientation: parent.Vertical
-        //snapMode: ListView.SnapToItem
+
         model: ListModel {
             id: sliderListModel
         }
-        delegate: ScoreSlider{
+
+        delegate: ScoreSlider {
             id: slider
             controlName: myName
             height: 20
@@ -33,65 +31,84 @@ ColumnLayout{
             controlPath: path
             stepSize: myStepSize
             onMoved: {
-                socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(slider.controlPath,
-                                        ', "id":',slider.controlId, ', "Value": {"Float":',slider.value, '}}'))
+                socket.sendTextMessage(
+                            '{ "Message": "ControlSurface","Path":'.concat(
+                                slider.controlPath, ', "id":',
+                                slider.controlId, ', "Value": {"Float":',
+                                slider.value, '}}'))
             }
         }
     }
-    Connections{
+
+    // Receving informations about sliders in control surface from score
+    Connections {
+        // Adding a slider in the control surface
         function onAppendSlider(s) {
             function find(cond) {
-                for(var i = 0; i < sliderListModel.count; ++i) if (cond(sliderListModel.get(i))) return i;
+                for (var i = 0; i < sliderListModel.count; ++i)
+                    if (cond(sliderListModel.get(i)))
+                        return i
                 return null
             }
-            var a = find(function (item) { return item.id === JSON.stringify(s.id) }) //the index of m.Path in the listmodel
-            if(a === null){
+            var a = find(function (item) {
+                return item.id === JSON.stringify(s.id)
+            }) //the index of m.Path in the listmodel
+            if (a === null) {
                 var tmpFrom, tmpValue, tmpTo
                 var tmpStepSize
-                switch(s.uuid){
+                switch (s.uuid) {
                     // Float Slider
-                    case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
-                        tmpFrom = s.Domain.Float.Min
-                        tmpValue = s.Value.Float
-                        tmpTo = s.Domain.Float.Max
-                        tmpStepSize = 0.0
-                        break
+                case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
+                    tmpFrom = s.Domain.Float.Min
+                    tmpValue = s.Value.Float
+                    tmpTo = s.Domain.Float.Max
+                    tmpStepSize = 0.0
+                    break
                     // Int Slider
-                    case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
-                        tmpFrom = s.Domain.Int.Min
-                        tmpValue = s.Value.Int
-                        tmpTo = s.Domain.Int.Max
-                        tmpStepSize = 1
-                        break
+                case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
+                    tmpFrom = s.Domain.Int.Min
+                    tmpValue = s.Value.Int
+                    tmpTo = s.Domain.Int.Max
+                    tmpStepSize = 1
+                    break
                 }
-                sliderListModel.insert(sliderListModel.count,{ myName: JSON.stringify(s.Custom),
-                                            path: JSON.stringify(s.Path),
-                                            myId: JSON.stringify(s.id),
-                                            myFrom: JSON.stringify(tmpFrom),
-                                            myValue: JSON.stringify(tmpValue),
-                                            myTo: JSON.stringify(tmpTo),
-                                            myStepSize: tmpStepSize});
+                sliderListModel.insert(sliderListModel.count, {
+                                           "myName": JSON.stringify(s.Custom),
+                                           "path": JSON.stringify(s.Path),
+                                           "myId": JSON.stringify(s.id),
+                                           "myFrom": JSON.stringify(tmpFrom),
+                                           "myValue": JSON.stringify(tmpValue),
+                                           "myTo": JSON.stringify(tmpTo),
+                                           "myStepSize": tmpStepSize
+                                       })
             }
         }
-            function onModifySlider(s) {
-                function find(cond) {
-                    for(var i = 0; i < sliderListModel.count; ++i) if (cond(sliderListModel.get(i))) return i;
-                    return null
+        // Modifying a slider in the control surface
+        function onModifySlider(s) {
+            function find(cond) {
+                for (var i = 0; i < sliderListModel.count; ++i)
+                    if (cond(sliderListModel.get(i)))
+                        return i
+                return null
+            }
+            var a = find(function (item) {
+                return item.id === JSON.stringify(s.id)
+            }) //the index of m.Path in the listmodel
+            if (a !== null) {
+                var tmpValue
+                switch (s.uuid) {
+                    // Float Slider
+                case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
+                    tmpValue = s.Value.Float
+                    break
+                    // Int Slider
+                case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
+                    tmpValue = s.Value.Int
+                    break
                 }
-                var a = find(function (item) { return item.id === JSON.stringify(s.id) }) //the index of m.Path in the listmodel
-                if(a !== null){
-                    var tmpValue
-                    switch(s.uuid){
-                        // Float Slider
-                        case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
-                            tmpValue = s.Value.Float
-                            break
-                        // Int Slider
-                        case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
-                            tmpValue = s.Value.Int
-                            break
-                    }
-                sliderListModel.set(a, {myValue: JSON.stringify(tmpValue)});
+                sliderListModel.set(a, {
+                                        "myValue": JSON.stringify(tmpValue)
+                                    })
             }
         }
     }

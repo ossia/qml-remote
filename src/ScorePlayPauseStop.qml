@@ -4,51 +4,57 @@ import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.12
 
+Column {
+    ScorePlayPause {
+        id: playPause
+    }
 
-Column{
-    ScorePlayPause{id: playPause}
-    ScoreStop{id: stop}
-    ScoreReinitialize{id: reinitialize}
+    ScoreStop {
+        id: stop
+    }
+
+    ScoreReinitialize {
+        id: reinitialize
+    }
 
     Connections {
         target: scorePlayPauseStop
-        function onPlayPauseStopMessageReceived(m){
+        function onPlayPauseStopMessageReceived(m) {
             var messageObject = m.Message
             switch (messageObject) {
             case "Start":
                 //send signal to playPause Button
-                playPause.clicked();
-                break;
+                playPause.clicked()
+                break
             case "Stop":
                 //send signal to stop Button
-                stop.clicked();
-                scoreControlSurfaces.clearListModel();
-                break;
+                stop.clicked()
+                scoreControlSurfaceList.clearListModel()
+                break
             case "Restart":
                 //send signal to reinitialize Button
-                reinitialize.clicked();
-                break;
+                reinitialize.clicked()
+                break
             }
         }
-        function onScorePlayPauseStopMessageReceived(m){
+        function onScorePlayPauseStopMessageReceived(m) {
             var messageObject = m.Message
             switch (messageObject) {
             case "IntervalPaused":
-                playPause.pausePressInScore();
-                break;
+                playPause.pausePressInScore()
+                break
             case "IntervalResumed":
-                playPause.playPressInScore();
+                playPause.playPressInScore()
 
-                break;
-
+                break
             }
         }
         // Connect play Pause buttons with the socket instance
-        function onConnectedToScore(){
-            playPause.connectedToScore();
+        function onConnectedToScore() {
+            playPause.connectedToScore()
         }
-        function onDisconnectedFromScore(){
-            playPause.disonnectedFromScore();
+        function onDisconnectedFromScore() {
+            playPause.disonnectedFromScore()
         }
     }
 }
