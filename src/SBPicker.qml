@@ -20,6 +20,7 @@ Item {
             GradientStop { position: 1.0; color: root.hueColor }
         }
     }
+
     Rectangle {
         id: colorlessGradient
         x: r
@@ -31,6 +32,7 @@ Item {
             GradientStop { position: 0.0; color: "#00000000" }
         }
     }
+
     Item {
         id: pickerCursor
         Rectangle {
@@ -46,6 +48,7 @@ Item {
             }
         }
     }
+
     MouseArea {
         anchors.fill: colorlessGradient
         x: r

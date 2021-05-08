@@ -4,6 +4,7 @@ WebSocket {
     id: socket
     url: "ws://" + settings.ip_adress + ":10212"
 
+    // Handling message from score
     onTextMessageReceived: {
         try {
             /* Print messages send by score
@@ -11,70 +12,71 @@ WebSocket {
             console.log(message);
             console.log("-----------------------------------------");
             */
-            var jsonObject = JSON.parse(message);
+            var jsonObject = JSON.parse(message)
             if (jsonObject.Intervals) {
+
                 /* Supposing the timeline receives the progress
                 * of all the intervals inclunding itself
                 */
-                scoreTimeline.intervalsMessageReceived(jsonObject);
+                scoreTimeline.intervalsMessageReceived(jsonObject)
                 // scoreVolume.intervalsMessageReceived(jsonObject);
-                scoreSpeed.intervalsMessageReceived(jsonObject);
-                scoreTimeSet.intervalsMessageReceived(jsonObject);
-
+                scoreSpeed.intervalsMessageReceived(jsonObject)
+                scoreTimeSet.intervalsMessageReceived(jsonObject)
             } else {
-                var typeOfMessage = jsonObject.Message;
+                var typeOfMessage = jsonObject.Message
                 if (typeOfMessage === "TriggerRemoved"
                         || typeOfMessage === "TriggerAdded") {
-
-                    scoreTimeSet.triggerMessageReceived(jsonObject);
-
+                    // Handling messages about triggers
+                    scoreTimeSet.triggerMessageReceived(jsonObject)
                 } else if (typeOfMessage === "IntervalRemoved"
                            || typeOfMessage === "IntervalAdded") {
-                    scoreSpeed.intervalMessageReceived(jsonObject);
-                    scoreTimeSet.intervalMessageReceived(jsonObject);
-                    scoreVolume.intervalMessageReceived(jsonObject);
+                    // Handling messages about interval speeds
+                    scoreSpeed.intervalMessageReceived(jsonObject)
+                    scoreTimeSet.intervalMessageReceived(jsonObject)
+                    scoreVolume.intervalMessageReceived(jsonObject)
                 } else if (typeOfMessage === "Play" || typeOfMessage === "Pause"
                            || typeOfMessage === "Restart") {
-                    // (Play Pause Stop) are temporary. while waiting for the new version of score
-                    scorePlayPauseStop.playPauseStopMessageReceived(jsonObject);
-
+                    // Handling messages about play, pause and stop
+                    scorePlayPauseStop.playPauseStopMessageReceived(jsonObject)
                 } else if (typeOfMessage === "ControlSurfaceRemoved"
                            || typeOfMessage === "ControlSurfaceAdded"
                            || typeOfMessage === "ControlSurfaceControl") {
-                    //handling the ControlSurface messages
+                    // Handling  messages about control surfaces
                     scoreControlSurfaceList.controlSurfacesMessageReceived(
-                                jsonObject);
+                                jsonObject)
+                } else if (typeOfMessage === "IntervalPaused"
+                           || typeOfMessage === "IntervalResumed") {
+                    // Handling messages about play, pause and stop
+                    scorePlayPauseStop.scorePlayPauseStopMessageReceived(
+                                jsonObject)
+                } else {
 
-                } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResumed"){
-                    scorePlayPauseStop.scorePlayPauseStopMessageReceived(jsonObject);
-                    //playPause.clicked();
                 }
-                else{
-
-                }
-
             }
             // TODO: handle volume
         } catch (error) {
 
         }
     }
+
+    // Dealing with message from the remote control
     onStatusChanged: {
         switch (socket.status) {
         case WebSocket.Error:
-            console.log("Error: " + socket.errorString);
-            break;
+            console.log("Error: " + socket.errorString)
+            break
         case WebSocket.Open:
-            socket.sendTextMessage("Hello World");
-            ipAdress.connected();
-            scorePlayPauseStop.connectedToScore();
-            break;
+            socket.sendTextMessage("Hello World")
+            ipAdress.connected()
+            scorePlayPauseStop.connectedToScore()
+            break
         case WebSocket.Closed:
             console.log("The webSocket communication has been closed")
-            ipAdress.disconnected();
-            scorePlayPauseStop.disconnectedFromScore();
-            break;
+            ipAdress.disconnected()
+            scorePlayPauseStop.disconnectedFromScore()
+            break
         default:
+
         }
     }
     active: false

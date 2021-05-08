@@ -13,9 +13,11 @@ Column {
         id: stop
     }
 
+    /* Same behavior as ScoreStop
     ScoreReinitialize {
         id: reinitialize
     }
+    */
 
     Connections {
         target: scorePlayPauseStop
@@ -31,10 +33,12 @@ Column {
                 stop.clicked()
                 scoreControlSurfaceList.clearListModel()
                 break
+            /*
             case "Restart":
                 //send signal to reinitialize Button
                 reinitialize.clicked()
                 break
+            */
             }
         }
         function onScorePlayPauseStopMessageReceived(m) {
@@ -45,11 +49,10 @@ Column {
                 break
             case "IntervalResumed":
                 playPause.playPressInScore()
-
                 break
             }
         }
-        // Connect play Pause buttons with the socket instance
+        // Connect play/pause buttons with the socket instance
         function onConnectedToScore() {
             playPause.connectedToScore()
         }

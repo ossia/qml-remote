@@ -29,6 +29,15 @@ ColumnLayout {
             signal appendButton(var msg)
             signal modifyButton(var msg)
         }
+
+        /*
+        // List of colorpickers
+        ScoreColorPicker{
+            id: scoreColorPicker
+            signal appendColorPicker(var msg)
+            signal modifyColorPicker(var msg)
+        }
+        */
     }
 
     // Receiving informations about controls in a control surface from score
