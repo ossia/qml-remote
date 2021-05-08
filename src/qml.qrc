@@ -63,14 +63,14 @@
         <file>Icons/scenario_trigger.png</file>
         <file>Icons/connection_hover.png</file>
         <file>Icons/connection_hover.svg</file>
-        <file>Icons/adresse_ip.svg</file>
-        <file>ScoreAdresseIp.qml</file>
-        <file>Icons/adresse_ip.png</file>
+        <file>Icons/ip_adress.svg</file>
+        <file>ScoreIpAdress.qml</file>
+        <file>Icons/ip_adress.png</file>
         <file>Icons/play_glob_on.png</file>
         <file>Icons/connection_on.png</file>
         <file>Icons/connection_on.svg</file>
-        <file>Icons/adresse_ip_on.png</file>
-        <file>Icons/adresse_ip_on.svg</file>
+        <file>Icons/ip_adress_on.png</file>
+        <file>Icons/ip_adress_on.svg</file>
         <file>Icons/disconnected.png</file>
         <file>Icons/disconnected_on.svg</file>
         <file>Icons/disconnected_on.png</file>

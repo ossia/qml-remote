@@ -2,21 +2,22 @@ import QtWebSockets 1.0
 
 WebSocket {
     id: socket
-    url: "ws://" + settings.adresse_ip + ":10212"
-    //url: "ws://192.168.60.25:10212"
+    url: "ws://" + settings.ip_adress + ":10212"
+
     onTextMessageReceived: {
         try {
+            /* Print messages send by score
             console.log("-----------------------------------------");
             console.log(message);
             console.log("-----------------------------------------");
-
+            */
             var jsonObject = JSON.parse(message);
             if (jsonObject.Intervals) {
                 /* Supposing the timeline receives the progress
                 * of all the intervals inclunding itself
                 */
                 scoreTimeline.intervalsMessageReceived(jsonObject);
-                scoreVolume.intervalsMessageReceived(jsonObject);
+                // scoreVolume.intervalsMessageReceived(jsonObject);
                 scoreSpeed.intervalsMessageReceived(jsonObject);
                 scoreTimeSet.intervalsMessageReceived(jsonObject);
 
@@ -47,13 +48,13 @@ WebSocket {
                 } else if (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResumed"){
                     scorePlayPauseStop.scorePlayPauseStopMessageReceived(jsonObject);
                     //playPause.clicked();
-                    }
+                }
                 else{
 
                 }
 
             }
-            //TODO: hundle volume and the main speed messages
+            // TODO: handle volume
         } catch (error) {
 
         }
@@ -65,12 +66,12 @@ WebSocket {
             break;
         case WebSocket.Open:
             socket.sendTextMessage("Hello World");
-            adresseip.connected();
+            ipAdress.connected();
             scorePlayPauseStop.connectedToScore();
             break;
         case WebSocket.Closed:
             console.log("The webSocket communication has been closed")
-            adresseip.disconnected();
+            ipAdress.disconnected();
             scorePlayPauseStop.disconnectedFromScore();
             break;
         default:

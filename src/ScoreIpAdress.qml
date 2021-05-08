@@ -19,7 +19,7 @@ ColumnLayout{
                     color: "#202020"
                     TextInput {
                         id: ipInput
-                        text: settings.adresse_ip
+                        text: settings.ip_adress
                     }
                 }
             }
@@ -27,9 +27,9 @@ ColumnLayout{
             onButtonClicked: {
                 console.log("HELLO")
                 if (clickedButton === StandardButton.Ok) {
-                    settings.adresse_ip = ipInput.text;
+                    settings.ip_adress = ipInput.text;
                     console.log(" socket url " + socket.url)
-                    console.log("adresse ip = " + settings.adresse_ip)
+                    console.log("adresse ip = " + settings.ip_adress)
                 } else {
                     console.log("Rejected url = " + socket.url)
                 }
@@ -55,7 +55,7 @@ ColumnLayout{
             id: ipButton
             sourceSize.width: 35
             sourceSize.height: 35
-            source: "Icons/adresse_ip.png"
+            source: "Icons/ip_adress.png"
             clip: true
             states: [
                 State {
@@ -65,7 +65,7 @@ ColumnLayout{
                     name: "ip_on"
                     PropertyChanges {
                         target: ipButton
-                        source: "Icons/adresse_ip_on.png"
+                        source: "Icons/ip_adress_on.png"
                     }
                 }
             ]

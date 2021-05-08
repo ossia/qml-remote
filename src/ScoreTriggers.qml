@@ -10,18 +10,13 @@ Rectangle{
     ListView{
         id:triggerslist
         width: parent.width
-        height:parent.height
+        height: parent.height
         orientation: ListView.Horizontal
         clip: true
         spacing: 5
         snapMode: ListView.SnapToItem
         model:ListModel {
             id: triggerslistModel
-            /*
-            ListElement {
-                name: "Trigger133"
-                path: "Trigger133"
-            */
         }
         delegate: ScoreTrigger{
             scorePath:path

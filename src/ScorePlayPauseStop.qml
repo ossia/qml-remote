@@ -7,10 +7,9 @@ import QtQuick.Layouts 1.12
 
 Column{
     ScorePlayPause{id: playPause}
-    //ScorePlayGlob{id: playGlob}
     ScoreStop{id: stop}
     ScoreReinitialize{id: reinitialize}
-    //onplayPauseStopMessageReceived(var n){}
+
     Connections {
         target: scorePlayPauseStop
         function onPlayPauseStopMessageReceived(m){
@@ -29,12 +28,6 @@ Column{
                 //send signal to reinitialize Button
                 reinitialize.clicked();
                 break;
-//            case "IntervalPaused":
-//                playPause.clicked();
-//                break;
-//            case "IntervalResumed":
-//                playPause.clicked();
-//                break;
             }
         }
         function onScorePlayPauseStopMessageReceived(m){
@@ -42,17 +35,15 @@ Column{
             switch (messageObject) {
             case "IntervalPaused":
                 playPause.pausePressInScore();
-                console.log("pause Pressed")
                 break;
             case "IntervalResumed":
-                console.log("play Pressed")
                 playPause.playPressInScore();
 
                 break;
 
             }
         }
-        //Connect play Pause buttons with the socket instance
+        // Connect play Pause buttons with the socket instance
         function onConnectedToScore(){
             playPause.connectedToScore();
         }
