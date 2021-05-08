@@ -72,15 +72,10 @@
         <file>Icons/adresse_ip_on.png</file>
         <file>Icons/adresse_ip_on.svg</file>
         <file>Icons/disconnected.png</file>
-<<<<<<< Updated upstream
         <file>Icons/disconnected_on.svg</file>
         <file>Icons/disconnected_on.png</file>
-=======
         <file>ScoreButtons.qml</file>
         <file>Icons/disconnected.svg</file>
-        <file>Icons/disconnected_on.png</file>
-        <file>Icons/disconnected_on.svg</file>
         <file>ScoreButton.qml</file>
->>>>>>> Stashed changes
     </qresource>
 </RCC>
