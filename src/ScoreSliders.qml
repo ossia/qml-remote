@@ -5,17 +5,17 @@ import QtQml.Models 2.12
 
 ColumnLayout{
     spacing: 5
-    height: 75
-    width: window.width/4
-    ListView{
+    //height: 200
+    // width: window.width/4
+    Repeater{
         id:sliderList
         clip: true
-        spacing: 10
+        //spacing: 10
         Layout.fillHeight: parent.height
         Layout.fillWidth: parent.height
         Layout.margins: 5
         //orientation: parent.Vertical
-        snapMode: ListView.SnapToItem
+        //snapMode: ListView.SnapToItem
         model: ListModel {
             id: sliderListModel
         }

@@ -4,61 +4,56 @@ import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
 
-Rectangle{
+
+ListView{
     id: scoreControlSurfaces
-    radius:6
-    color: "#262626"
     //width: parent.width
-    //height: parent.height
-    ListView{
-        //width: parent.width
-        spacing: 5
-        anchors.left: parent.left
-        anchors.margins: 5
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        height: parent.height
-        orientation:ListView.Vertical
-        clip: true
-        snapMode: ListView.SnapToItem
-        model:ListModel {
-            id: controlSurfacelist
-        }
-        delegate:
-            Loader {
-                id: controlSurface
-                signal appendControls(var msg)
-                signal modifyControl(var msg)
-                source: "ScoreControlSurface.qml"
-                onProgressChanged: {
-                    console.log("ooooooooooooooooooooooo")
-                    if (myValue !== "efef"){
-                        console.log("kkkkkkkkkkkkkkkkkk")
-                        controlSurface.modifyControl(m)
-                    }
-                }
-                onLoaded: {
-                    //à finir
-                    console.log("rrrrrrrrrrrrrrrrrr")
-                    if(m.Message === "ControlSurfaceAdded"){
-                        console.log("iiiiiiiiiiiiiii")
-                        controlSurface.appendControls(m)
-                    }
-                    else if (myValue !== "efef"){
-                        controlSurface.modifyControl(m)
-                    }
-                }
-                property var myValue: "efef"
-            }
-                /*
-                Connections {
-                    target: scoreControlSurfaces
-                    onTest: controlSurface.modifyControl(m)
-                }
-                */
-            //}
+    spacing: 20
+    anchors.left: parent.left
+    anchors.margins: 5
+    anchors.right: parent.right
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    height: parent.height
+    orientation:ListView.Vertical
+    clip: true
+    snapMode: ListView.SnapToItem
+    model:ListModel {
+        id: controlSurfacelist
     }
+    delegate:
+        Loader {
+            id: controlSurface
+            signal appendControls(var msg)
+            signal modifyControl(var msg)
+            source: "ScoreControlSurface.qml"
+            onProgressChanged: {
+                console.log("ooooooooooooooooooooooo")
+                if (myValue !== "efef"){
+                    console.log("kkkkkkkkkkkkkkkkkk")
+                    controlSurface.modifyControl(m)
+                }
+            }
+            onLoaded: {
+                //à finir
+                console.log("rrrrrrrrrrrrrrrrrr")
+                if(m.Message === "ControlSurfaceAdded"){
+                    console.log("iiiiiiiiiiiiiii")
+                    controlSurface.appendControls(m)
+                }
+                else if (myValue !== "efef"){
+                    controlSurface.modifyControl(m)
+                }
+            }
+            property var myValue: "efef"
+        }
+            /*
+            Connections {
+                target: scoreControlSurfaces
+                onTest: controlSurface.modifyControl(m)
+            }
+            */
+        //}
     Connections {
         target: scoreControlSurfaces
         function onControlSurfacesMessageReceived(m){
@@ -97,4 +92,5 @@ Rectangle{
         controlSurfacelist.clear()
     }
 }
+
 

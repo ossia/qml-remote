@@ -14,7 +14,6 @@ Column{
     Connections {
         target: scorePlayPauseStop
         function onPlayPauseStopMessageReceived(m){
-            console.log("teeeeeeeeeeeest")
             var messageObject = m.Message
             switch (messageObject) {
             case "Start":

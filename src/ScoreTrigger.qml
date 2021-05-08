@@ -3,11 +3,11 @@ import QtQuick.Controls 2.12
 
 
 Button {
-    property string sliderName: "sliderName"
+    property string triggerName: "triggerName"
     property string scorePath: "vide"
-    //id: slider
+
     contentItem: Text {
-        text: sliderName
+        text: triggerName
         color: "#ffffff"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter

@@ -9,7 +9,8 @@ Rectangle{
     anchors.fill: parent
     ListView{
         id:triggerslist
-        width: parent.width ;height:parent.height
+        width: parent.width
+        height:parent.height
         orientation: ListView.Horizontal
         clip: true
         spacing: 5
@@ -22,10 +23,10 @@ Rectangle{
                 path: "Trigger133"
             */
         }
-        delegate:ScoreTrigger{
+        delegate: ScoreTrigger{
             scorePath:path
             height:triggerslist.height
-            sliderName: name
+            triggerName: name
         }
     }
 

@@ -1,24 +1,37 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Layouts 1.12
 
 
 
-Column{
+ColumnLayout{
+
     spacing: 5
     property string name: "ControlSurfaceName"
     property string controlSurfaceMessage: "ControlSurfaceMessage"
+
     Text{
         id: controlSurfaceName
         text: name
         color: "white"
     }
 
-    ScoreSliders{
-        id: scoreSliders
-        signal appendSlider(var msg)
-        signal modifySlider(var msg)
+    Flow{
+        spacing: 5
+        ScoreSliders{
+            id: scoreSliders
+            signal appendSlider(var msg)
+            signal modifySlider(var msg)
+        }
 
+
+        ScoreButtons{
+            id: scoreButtons
+            signal appendButton(var msg)
+            signal modifyButton(var msg)
+        }
     }
+
+
 
     // Add controls in th Control Surface
     Connections {
@@ -40,6 +53,10 @@ Column{
                     // Int Slider
                     case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
                         scoreSliders.appendSlider(controlMessage)
+                        break
+                    // Button
+                    case "feb87e84-e0d2-428f-96ff-a123ac964f59":
+                        scoreButtons.appendButton(controlMessage)
                         break
                 }
                 i++
