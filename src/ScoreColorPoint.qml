@@ -1,12 +1,10 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-
-
 Rectangle {
     property string _colorPointName: "ColorPointName"
     id: colorButton
-    width: colorBackground.width/45
+    width: colorBackground.width / 45
     height: colorButton.width
     color: "#a7dd0d"
     border.width: 2
@@ -26,41 +24,45 @@ Rectangle {
         height: 15
         anchors.top: colorName.bottom
         anchors.left: colorName.left
-        Checkerboard { cellSide: 5 }
+        Checkerboard {
+            cellSide: 5
+        }
         Rectangle {
             id: colorValue
-            width: parent.width; height: 15
-            border.width: 1; border.color: "black"
+            width: parent.width
+            height: 15
+            border.width: 1
+            border.color: "black"
             color: colorButton.displayedColor
         }
     }
 
-    MouseArea{
+    MouseArea {
         id: colorMouseAreaButton
         anchors.fill: parent
-        onClicked:  colorButton.state = 'off'
+        onClicked: colorButton.state = 'off'
     }
 
     states: [
         State {
             name: "off"
             PropertyChanges {
-                target: colorValue;
+                target: colorValue
                 color: colorValue.color
             }
             PropertyChanges {
-                target: colorButton;
+                target: colorButton
                 color: "#363636"
             }
-            PropertyChanges{
-                target: colorMouseAreaButton;
+            PropertyChanges {
+                target: colorMouseAreaButton
                 onClicked: colorButton.state = "on"
             }
         },
         State {
             name: "on"
             PropertyChanges {
-                target: colorValue;
+                target: colorValue
                 color: displayedColor
             }
         }

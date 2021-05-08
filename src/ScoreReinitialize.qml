@@ -6,14 +6,14 @@ import QtQuick.Controls.Material 2.3
 Button {
     hoverEnabled: true
     onHoveredChanged: {
-        if (reinitializeButton.state === 'reintializeOn'){
+        if (reinitializeButton.state === 'reintializeOn') {
             reinitializeButton.state = ''
         }
     }
 
     onPressed: {
         reinitializeButton.state = 'reintializeOn'
-        if (playPause.isConnected()){
+        if (playPause.isConnected()) {
             playPause.stopClicked()
         }
         socket.sendTextMessage('{ "Message": "Stop" }')

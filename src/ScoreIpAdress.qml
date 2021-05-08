@@ -5,7 +5,7 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
 
-ColumnLayout{
+ColumnLayout {
     Button {
         id: ip_button
         Dialog {
@@ -14,8 +14,8 @@ ColumnLayout{
             standardButtons: StandardButton.Ok | StandardButton.Cancel
             Column {
                 anchors.fill: parent
-                Rectangle{
-                    anchors.top : ipDialog.top
+                Rectangle {
+                    anchors.top: ipDialog.top
                     color: "#202020"
                     TextInput {
                         id: ipInput
@@ -27,7 +27,7 @@ ColumnLayout{
             onButtonClicked: {
                 console.log("HELLO")
                 if (clickedButton === StandardButton.Ok) {
-                    settings.ip_adress = ipInput.text;
+                    settings.ip_adress = ipInput.text
                     console.log(" socket url " + socket.url)
                     console.log("adresse ip = " + settings.ip_adress)
                 } else {
@@ -45,10 +45,9 @@ ColumnLayout{
         }
 
         onHoveredChanged: {
-            if (ipButton.state === 'ip_on'){
+            if (ipButton.state === 'ip_on') {
                 ipButton.state = ""
             }
-
         }
 
         contentItem: Image {
@@ -59,6 +58,7 @@ ColumnLayout{
             clip: true
             states: [
                 State {
+
                     /* play symbol is displayed
                 * "paused" is the scenario's state.
                 */
@@ -89,8 +89,8 @@ ColumnLayout{
 
             onButtonClicked: {
                 if (clickedButton === StandardButton.Ok) {
-                    ip_button.visible = true;
-                    socket.active = false;
+                    ip_button.visible = true
+                    socket.active = false
                 } else {
 
                 }
@@ -116,7 +116,6 @@ ColumnLayout{
                     PropertyChanges {
                         target: disconnect_image
                         source: "Icons/disconnected_on.png"
-
                     }
                 }
             ]
@@ -134,18 +133,18 @@ ColumnLayout{
         }
         hoverEnabled: true
         onHoveredChanged: {
-            if (disconnect_image.state === 'disconnect_on'){
+            if (disconnect_image.state === 'disconnect_on') {
                 disconnect_image.state = 'disconnect'
             }
         }
         visible: false
     }
-    function connected(){
-        ip_button.visible = !ip_button.visible;
-        disconnectButton.visible = !disconnectButton.visible;
+    function connected() {
+        ip_button.visible = !ip_button.visible
+        disconnectButton.visible = !disconnectButton.visible
     }
-    function disconnected(){
-        ip_button.visible = true;
-        disconnectButton.visible = false;
+    function disconnected() {
+        ip_button.visible = true
+        disconnectButton.visible = false
     }
 }

@@ -7,6 +7,7 @@ WebSocket {
     // Handling message from score
     onTextMessageReceived: {
         try {
+
             /* Print messages send by score
             console.log("-----------------------------------------");
             console.log(message);
@@ -14,6 +15,7 @@ WebSocket {
             */
             var jsonObject = JSON.parse(message)
             if (jsonObject.Intervals) {
+
 
                 /* Supposing the timeline receives the progress
                 * of all the intervals inclunding itself

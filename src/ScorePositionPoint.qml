@@ -1,12 +1,10 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-
-
 Rectangle {
     property string _positionPointName: "PositionPointName"
     id: positionButton
-    width: background.width/30
+    width: background.width / 30
     height: positionButton.width
     color: "#a7dd0d"
     border.width: 2
@@ -24,37 +22,39 @@ Rectangle {
         id: positionValue
         anchors.top: positionName.bottom
         anchors.left: positionName.left
-        text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)
+        text: "x,y:" + vertical.x.toFixed(0) + "," + horizontal.y.toFixed(0)
         color: "#a7dd0d"
     }
 
-    MouseArea{
+    MouseArea {
         id: positionMouseAreaButton
         anchors.fill: parent
-        onClicked:  positionButton.state = 'off'
+        onClicked: positionButton.state = 'off'
     }
 
     states: [
         State {
             name: "off"
             PropertyChanges {
-                target: positionValue;
+                target: positionValue
                 text: positionValue.text
             }
             PropertyChanges {
-                target: positionButton;
+                target: positionButton
                 color: "#363636"
             }
-            PropertyChanges{
-                target: positionMouseAreaButton;
+            PropertyChanges {
+                target: positionMouseAreaButton
                 onClicked: positionButton.state = 'on'
             }
         },
         State {
             name: "on"
             PropertyChanges {
-                target: positionValue;
-                text: "x,y:"+vertical.x.toFixed(0)+","+horizontal.y.toFixed(0)}
+                target: positionValue
+                text: "x,y:" + vertical.x.toFixed(
+                          0) + "," + horizontal.y.toFixed(0)
+            }
         }
     ]
 }

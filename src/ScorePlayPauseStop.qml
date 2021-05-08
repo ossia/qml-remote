@@ -13,12 +13,12 @@ Column {
         id: stop
     }
 
+
     /* Same behavior as ScoreStop
     ScoreReinitialize {
         id: reinitialize
     }
     */
-
     Connections {
         target: scorePlayPauseStop
         function onPlayPauseStopMessageReceived(m) {
@@ -33,7 +33,8 @@ Column {
                 stop.clicked()
                 scoreControlSurfaceList.clearListModel()
                 break
-            /*
+
+                /*
             case "Restart":
                 //send signal to reinitialize Button
                 reinitialize.clicked()

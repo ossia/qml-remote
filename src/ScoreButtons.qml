@@ -43,7 +43,7 @@ RowLayout {
             }) //the index of m.Path in the listmodel
             if (a === null) {
                 buttonlistModel.insert(buttonlistModel.count, {
-                                           "name": JSON.stringify(s.Custom),
+                                           "name": s.Custom,
                                            "path": JSON.stringify(s.Path),
                                            "id": JSON.stringify(s.id)
                                        })

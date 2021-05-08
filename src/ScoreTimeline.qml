@@ -2,7 +2,6 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
 
-
 Slider {
     property int totalTime: 10 * 60 * 1000 // By default, the total duration is set to 10 min
     id: time
@@ -12,7 +11,9 @@ Slider {
 
     // Sends a message to Score to update its progress' timeline
     onMoved: {
-        socket.sendTextMessage(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
+        socket.sendTextMessage(
+                    ('{ "Message": "Transport", "Milliseconds":').concat(
+                        time.value * time.totalTime, '}'))
         // console.log(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
     }
 
@@ -20,31 +21,29 @@ Slider {
     Connections {
         target: scoreTimeline
         function onIntervalsMessageReceived(m) {
-            var IntervalsObject = m.Intervals;
+            var IntervalsObject = m.Intervals
             if (IntervalsObject[0]) {
                 // The timeline is positioned first in the JSON file
-                time.value = JSON.stringify(IntervalsObject[0].Progress);
+                time.value = JSON.stringify(IntervalsObject[0].Progress)
             }
         }
     }
 
     // Called by ScoreStop
     function stopTimeline() {
-        time.value = 0;
+        time.value = 0
     }
 
     // Convert milliseconds to a hh:mm:ss.zz format
     function msToTime(duration, currentDate) {
-        var milliseconds = parseInt((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+        var milliseconds = parseInt(
+                    (duration % 1000) / 100), seconds = Math.floor((duration / 1000) % 60), minutes = Math.floor((duration / (1000 * 60)) % 60), hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
 
-        hours = (hours < 10) ? "0" + hours : hours;
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
+        hours = (hours < 10) ? "0" + hours : hours
+        minutes = (minutes < 10) ? "0" + minutes : minutes
+        seconds = (seconds < 10) ? "0" + seconds : seconds
 
-        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+        return hours + ":" + minutes + ":" + seconds + "." + milliseconds
     }
 
     Text {
@@ -75,5 +74,4 @@ Slider {
             color: "#62400a"
         }
     }
-
 }

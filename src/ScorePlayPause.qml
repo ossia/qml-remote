@@ -53,6 +53,7 @@ Button {
         switch (pauseButton.state) {
         case 'connectionOn':
 
+
             /* Connection to the websocket
               * socket is the id of the Websocket
               * instantiated in ScoreSkeleton
@@ -96,6 +97,7 @@ Button {
             },
             State {
 
+
                 /* play symbol is displayed
                 * "paused" is the scenario's state.
                 */
@@ -120,6 +122,7 @@ Button {
                 }
             },
             State {
+
 
                 /* pause symbol is displayed
                 * "playing" is the scenario's state.

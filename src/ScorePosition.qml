@@ -1,4 +1,3 @@
-
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
@@ -12,7 +11,7 @@ Rectangle {
     Rectangle {
         id: zone
         anchors.left: parent.left
-        width: 65*background.width/100
+        width: 65 * background.width / 100
         anchors.bottom: parent.bottom
         anchors.top: parent.top
         anchors.margins: 5
@@ -25,16 +24,19 @@ Rectangle {
             spacing: 20
             Repeater {
                 model: ["position1", "ps", "position2"]
-                ScorePositionPoint{_positionPointName: modelData}
+                ScorePositionPoint {
+                    _positionPointName: modelData
+                }
             }
         }
-        MouseArea{
+        MouseArea {
             anchors.fill: parent
             drag.target: this
             Rectangle {
                 id: vertical
                 anchors.top: parent.top
-                x: Math.min(Math.max(parent.mouseX - width/2., 0), parent.width - width)
+                x: Math.min(Math.max(parent.mouseX - width / 2., 0),
+                            parent.width - width)
                 //x: parent.mouseX - width/2.
                 width: 5
                 height: parent.height
@@ -43,7 +45,8 @@ Rectangle {
             Rectangle {
                 id: horizontal
                 anchors.left: parent.left
-                y: Math.min(Math.max(parent.mouseY - height/2., 0), parent.height  - height)
+                y: Math.min(Math.max(parent.mouseY - height / 2., 0),
+                            parent.height - height)
                 //y: parent.mouseY - height/2.
                 width: parent.width
                 height: 5

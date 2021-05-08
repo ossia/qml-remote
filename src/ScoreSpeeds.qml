@@ -1,10 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.1
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.12
-
-
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
@@ -14,10 +11,9 @@ Rectangle {
     height: parent.height
     color: "#202020"
     anchors.right: parent.right
+
     ListView {
         id: lView
-        //width: speedList.width
-        //height:speedList.height
         spacing: 10
         anchors.fill: parent
         anchors.margins: 5
@@ -29,6 +25,7 @@ Rectangle {
             id: intervalsListModel
             property bool hasStarted: false
         }
+
         delegate: ScoreSlider {
             id: speed
             controlName: name
@@ -40,9 +37,12 @@ Rectangle {
             value: speedValue
             to: 600
             controlColor: "#62400a"
-            controlPath : path
+            controlPath: path
             onMoved: {
-                socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":'.concat(speed.controlPath, ', "Speed": ',speed.value*6/720, '}')))
+                socket.sendTextMessage(
+                            ('{ "Message": "IntervalSpeed", "Path":'.concat(
+                                 speed.controlPath, ', "Speed": ',
+                                 speed.value * 6 / 720, '}')))
             }
         }
         ScrollBar.vertical: ScrollBar {
@@ -56,68 +56,69 @@ Rectangle {
             }
         }
     }
-    //implementation de la fonction
+
+    // Receiving and handling messages about intervals
     Connections {
         target: scoreTimeSet
         function onIntervalMessageReceived(m) {
             var messageObject = m.Message
-            if(messageObject === "IntervalAdded"){
+            if (messageObject === "IntervalAdded") {
+                // Adding an interval speed
+
                 /* The timeline is a global interval
                   * The name of the timeline changes everytime ossia is refreshed...
                   * The only constant is that it contains "Untitled"
                   * The timeline should not be added with the other speeds */
                 if (!(intervalsListModel.hasStarted)) {
-                //if (m.Name.includes("Untitled")) {
-                    intervalsListModel.hasStarted = true;
-                    scoreTimeline.totalTime = m.DefaultDuration;
-                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                    /* I have to admit
-                      * Niveau encapsulation on est bof :shrug:
-                      */
-
+                    intervalsListModel.hasStarted = true
                 } else {
                     intervalsListModel.insert(0, {
-                                                  name:JSON.stringify(m.Name),path:JSON.stringify(m.Path),speedValue:JSON.stringify(m.Speed)*720/6
-                                              });
-                    console.log(intervalsListModel.get(0).value);
+                                                  "name": m.Name,
+                                                  "path": JSON.stringify(
+                                                              m.Path),
+                                                  "speedValue": JSON.stringify(
+                                                                    m.Speed) * 720 / 6
+                                              })
+                    console.log(intervalsListModel.get(0).value)
                 }
-            }
-            else if(messageObject === "IntervalRemoved"){
+            } else if (messageObject === "IntervalRemoved") {
+                // Removing an interval speed
                 function find(cond) {
-                    for(var i = 0; i < intervalsListModel.count; ++i) if (cond(intervalsListModel.get(i))) return i;
+                    for (var i = 0; i < intervalsListModel.count; ++i)
+                        if (cond(intervalsListModel.get(i)))
+                            return i
                     return null
                 }
                 var s = find(function (item) {
                     return item.path === JSON.stringify(m.Path)
                 }) //the index of m.Path in the listmodel
-                if(s !== null){
-                    intervalsListModel.remove(s);
+                if (s !== null) {
+                    intervalsListModel.remove(s)
                 }
-                // manque traitement a faire (passer la bonne vitesse de lecture .. )
             }
-
         }
     }
 
     Connections {
         target: scoreTimeSet
+        // Modifying an interval speed
         function onIntervalsMessageReceived(m) {
-            var IntervalsObject = m.Intervals;
-            var count = 0;
-            while(IntervalsObject[count]){
-                for(var i = 0; i < intervalsListModel.count; ++i){
-                    if (intervalsListModel.get(i).path === JSON.stringify(IntervalsObject[count].Path)){ // The global path is the first one to be created by score
-                        intervalsListModel.set(i,{"speedValue": JSON.stringify(IntervalsObject[count].Speed)*720/6});
+            var IntervalsObject = m.Intervals
+            var count = 0
+            while (IntervalsObject[count]) {
+                for (var i = 0; i < intervalsListModel.count; ++i) {
+                    if (intervalsListModel.get(i).path === JSON.stringify(
+                                IntervalsObject[count].Path)) {
+                        // The global path is the first one to be created by score
+                        intervalsListModel.set(i, {
+                                                   "speedValue": JSON.stringify(
+                                                                     IntervalsObject[count].Speed)
+                                                                 * 720 / 6
+                                               })
                     }
                 }
                 count++
             }
         }
-    }
-
-    // Called by OssiaStop
-    function clearSpeedsListModel() {
-        intervalsListModel.clear();
-        intervalsListModel.hasStarted = false;
     }
 }

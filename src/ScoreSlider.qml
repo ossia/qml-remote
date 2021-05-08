@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 
-
 Slider {
     property string controlName: "ControlName"
     property string controlPath: "ControlPath"
@@ -25,12 +24,9 @@ Slider {
         verticalAlignment: Text.AlignVCenter
     }
 
-
-
     handle: Rectangle {} // No handle
 
     background: Rectangle {
-
         implicitWidth: 300
         implicitHeight: 20
         width: control.width

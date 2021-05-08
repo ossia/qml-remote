@@ -30,6 +30,7 @@ ColumnLayout {
             signal modifyButton(var msg)
         }
 
+
         /*
         // List of colorpickers
         ScoreColorPicker{

@@ -27,7 +27,7 @@ ListView {
             controlSurface.appendControls(m)
         }
     }
-    // Receiving informations about Control Surfaces from score
+    // Receiving and handling messages about Control Surfaces from score
     Connections {
         target: scoreControlSurfaceList
         function onControlSurfacesMessageReceived(m) {
@@ -59,6 +59,7 @@ ListView {
                     controlSurfacelist.remove(s)
                 }
             }
+
 
             /* Modifying a control in a control surface
             else if(messageObject === "ControlSurfaceControl"){
