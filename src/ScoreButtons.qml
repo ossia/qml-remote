@@ -42,7 +42,6 @@ RowLayout {
             if (a === null) {
                 buttonlistModel.insert(buttonlistModel.count, {
                                            "name": s.Custom,
-                                           "path": JSON.stringify(s.Path),
                                            "id": JSON.stringify(s.id)
                                        })
                 console.log(JSON.stringify(s.id))

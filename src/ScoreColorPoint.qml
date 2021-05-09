@@ -5,20 +5,22 @@ Rectangle {
     property string colorPointName: "ColorPointName"
     property string colorPointPath: "path"
     property string colorPointId: "Id"
+    property string colorPointColor: "Color"
+    property string colorPointOpacity: "Opacity"
     id: colorButton
-    width: colorBackground.width / 45
+    width: colorBackground.width / 20
     height: colorButton.width
     color: "#a7dd0d"
-    border.width: 2
+    border.width: 5
     border.color: "#a7dd0d"
     property color displayedColor: "#FFFFFFFF"
 
-    /*Text {
+    Text {
         id: colorName
         anchors.left: colorButton.right
         anchors.leftMargin: 5
         anchors.horizontalCenter: colorButton.horizontalCenter
-        text: _colorPointName
+        text: colorPointName
         color: "#a7dd0d"
     }
     PanelBorder {
@@ -68,5 +70,5 @@ Rectangle {
                 color: displayedColor
             }
         }
-    ]*/
+    ]
 }

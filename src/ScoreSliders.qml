@@ -74,7 +74,6 @@ ColumnLayout {
                 }
                 sliderListModel.insert(sliderListModel.count, {
                                            "myName": s.Custom,
-                                           "path": JSON.stringify(s.Path),
                                            "myId": JSON.stringify(s.id),
                                            "myFrom": JSON.stringify(tmpFrom),
                                            "myValue": JSON.stringify(tmpValue),

@@ -85,7 +85,8 @@ Rectangle {
                 }
             } else if (messageObject === "IntervalRemoved") {
                 // Removing an interval speed
-                if (JSON.stringify(m.Path) === intervalsListModel.globalSpeedPath) {
+                if (JSON.stringify(
+                            m.Path) === intervalsListModel.globalSpeedPath) {
                     intervalsListModel.hasStarted = false
                 } else {
                     function find(cond) {
