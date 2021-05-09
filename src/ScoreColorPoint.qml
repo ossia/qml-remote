@@ -3,6 +3,8 @@ import QtQuick.Controls 2.12
 
 Rectangle {
     property string _colorPointName: "ColorPointName"
+    property string colorPointPath: "path"
+    property string colorPointId: "Id"
     id: colorButton
     width: colorBackground.width / 45
     height: colorButton.width
@@ -11,7 +13,7 @@ Rectangle {
     border.color: "#a7dd0d"
     property color displayedColor: "#FFFFFFFF"
 
-    Text {
+    /*Text {
         id: colorName
         anchors.left: colorButton.right
         anchors.leftMargin: 5
@@ -66,5 +68,5 @@ Rectangle {
                 color: displayedColor
             }
         }
-    ]
+    ]*/
 }

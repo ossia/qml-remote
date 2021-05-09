@@ -13,7 +13,7 @@ ColumnLayout {
     }
 
     // List of controls
-    Row {
+    Flow {
         spacing: 5
 
         // List of sliders
@@ -30,15 +30,16 @@ ColumnLayout {
             signal modifyButton(var msg)
         }
 
-
-        /*
         // List of colorpickers
-        ScoreColorPicker{
-            id: scoreColorPicker
-            signal appendColorPicker(var msg)
-            signal modifyColorPicker(var msg)
+        ScoreColorpicker{
+            id: scoreColorpicker
+            signal appendColorpicker(var msg)
+            signal modifyColorpicker(var msg)
         }
-        */
+
+
+
+
     }
 
     // Receiving informations about controls in a control surface from score
@@ -66,6 +67,9 @@ ColumnLayout {
                     // Button
                 case "feb87e84-e0d2-428f-96ff-a123ac964f59":
                     scoreButtons.appendButton(controlMessage)
+                    break
+                case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
+                    scoreColorpicker.appendColorpicker(controlMessage)
                     break
                 }
                 i++
