@@ -22,7 +22,8 @@ Rectangle {
         // Create a list of sliders for the intervals' speeds
         model: ListModel {
             id: intervalsListModel
-            property bool hasStarted: false // Initialized on false in order to know if the first (and main) interval has been added or not
+            // Initialized on false in order to know if the first (and main) interval has been added or not
+            property bool hasStarted: false
             property var globalSpeedPath: "null"
         }
         // Create a slider for each interval in the list

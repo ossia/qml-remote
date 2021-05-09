@@ -33,6 +33,7 @@ ColumnLayout {
 
         // List of colorpickers
         ScoreColorpicker {
+            visible: false
             id: scoreColorpicker
             signal appendColorpicker(var msg)
             signal modifyColorpicker(var msg)
@@ -67,6 +68,7 @@ ColumnLayout {
                     break
                 case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
                     // Colorpicker
+                    scoreColorpicker.visible = true
                     scoreColorpicker.appendColorpicker(controlMessage)
                     break
                 }
