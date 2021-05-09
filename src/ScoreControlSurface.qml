@@ -14,6 +14,7 @@ ColumnLayout {
 
     // List of controls
     Flow {
+        width: window.width
         spacing: 5
 
         // List of sliders
@@ -36,10 +37,6 @@ ColumnLayout {
             signal appendColorpicker(var msg)
             signal modifyColorpicker(var msg)
         }
-
-
-
-
     }
 
     // Receiving informations about controls in a control surface from score
@@ -70,6 +67,8 @@ ColumnLayout {
                     break
                 case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
                     scoreColorpicker.appendColorpicker(controlMessage)
+                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
+
                     break
                 }
                 i++

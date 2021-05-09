@@ -6,8 +6,6 @@ import QtQml.Models 2.12
 
 RowLayout {
     spacing: 5
-    //height: 75
-    //width: window.width / 4
 
     Repeater {
         id: buttonList

@@ -24,6 +24,7 @@ Rectangle {
         model: ListModel {
             id: intervalsListModel
             property bool hasStarted: false
+            property var globalSpeedPath: "null"
         }
 
         delegate: ScoreSlider {
@@ -65,12 +66,14 @@ Rectangle {
             if (messageObject === "IntervalAdded") {
                 // Adding an interval speed
 
+
                 /* The timeline is a global interval
                   * The name of the timeline changes everytime ossia is refreshed...
                   * The only constant is that it contains "Untitled"
                   * The timeline should not be added with the other speeds */
                 if (!(intervalsListModel.hasStarted)) {
                     intervalsListModel.hasStarted = true
+                    intervalsListModel.globalSpeedPath = JSON.stringify(m.Path)
                 } else {
                     intervalsListModel.insert(0, {
                                                   "name": m.Name,
@@ -79,21 +82,24 @@ Rectangle {
                                                   "speedValue": JSON.stringify(
                                                                     m.Speed) * 720 / 6
                                               })
-                    console.log(intervalsListModel.get(0).value)
                 }
             } else if (messageObject === "IntervalRemoved") {
                 // Removing an interval speed
-                function find(cond) {
-                    for (var i = 0; i < intervalsListModel.count; ++i)
-                        if (cond(intervalsListModel.get(i)))
-                            return i
-                    return null
-                }
-                var s = find(function (item) {
-                    return item.path === JSON.stringify(m.Path)
-                }) //the index of m.Path in the listmodel
-                if (s !== null) {
-                    intervalsListModel.remove(s)
+                if (JSON.stringify(m.Path) === intervalsListModel.globalSpeedPath) {
+                    intervalsListModel.hasStarted = false
+                } else {
+                    function find(cond) {
+                        for (var i = 0; i < intervalsListModel.count; ++i)
+                            if (cond(intervalsListModel.get(i)))
+                                return i
+                        return null
+                    }
+                    var s = find(function (item) {
+                        return item.path === JSON.stringify(m.Path)
+                    }) //the index of m.Path in the listmodel
+                    if (s !== null) {
+                        intervalsListModel.remove(s)
+                    }
                 }
             }
         }

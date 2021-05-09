@@ -30,7 +30,7 @@ Rectangle {
             }
 
             delegate : ScoreColorPoint {
-                _colorPointName: myName
+                colorPointName: myName
                 colorPointPath: myPath
                 colorPointId: myId
                 displayedColor: colorpicker.colorValue

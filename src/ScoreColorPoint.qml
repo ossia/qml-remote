@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
-    property string _colorPointName: "ColorPointName"
+    property string colorPointName: "ColorPointName"
     property string colorPointPath: "path"
     property string colorPointId: "Id"
     id: colorButton
