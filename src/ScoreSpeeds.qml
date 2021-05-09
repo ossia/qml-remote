@@ -11,7 +11,6 @@ Rectangle {
     height: parent.height
     color: "#202020"
     anchors.right: parent.right
-
     ListView {
         id: lView
         spacing: 10
@@ -20,13 +19,13 @@ Rectangle {
         orientation: parent.Vertical
         clip: true
         snapMode: ListView.SnapToItem
-
+        // Create a list of sliders for the intervals' speeds
         model: ListModel {
             id: intervalsListModel
-            property bool hasStarted: false
+            property bool hasStarted: false // Initialized on false in order to know if the first (and main) interval has been added or not
             property var globalSpeedPath: "null"
         }
-
+        // Create a slider for each interval in the list
         delegate: ScoreSlider {
             id: speed
             controlName: name
@@ -39,6 +38,7 @@ Rectangle {
             to: 600
             controlColor: "#62400a"
             controlPath: path
+            // Managing the speeds from the app
             onMoved: {
                 socket.sendTextMessage(
                             ('{ "Message": "IntervalSpeed", "Path":'.concat(
@@ -69,7 +69,7 @@ Rectangle {
 
                 /* The timeline is a global interval
                   * The name of the timeline changes everytime ossia is refreshed...
-                  * The only constant is that it contains "Untitled"
+                  * The only constant is that it is the first interval added
                   * The timeline should not be added with the other speeds */
                 if (!(intervalsListModel.hasStarted)) {
                     intervalsListModel.hasStarted = true
