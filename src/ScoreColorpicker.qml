@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQml.Models 2.12
+import QtQml 2.15
 
 Rectangle {
     property string _positionPointName: "ColorName"
@@ -37,17 +38,23 @@ Rectangle {
                 colorPointColor: myColor
                 colorPointOpacity: myOpacity
                 displayedColor: colorpicker.colorValue
+
+                function hexToRGB(hex) {
+
+                    return "[" + hex.r + ", " + hex.g + ", " + hex.b + ", " + hex.a + "]";
+                }
+
                 onDisplayedColorChanged: {
                     // le pb est de convertir un "#ffffffff" en [r,g, b, o] et inversement
+
+                    if (colorPoint.state === "on" || colorPoint.state === "") {
+
                     socket.sendTextMessage(
                                 '{ "Message": "ControlSurface","Path":'.concat(
                                     colorPoint.colorPointPath, ', "id":',
-                                    colorPoint.colorPointId, ', "Value": {"Vect4f":',
-                                    colorPoint.displayedColor, '}}'))
-                    console.log('{ "Message": "ControlSurface","Path":'.concat(
-                                    colorPoint.colorPointPath, ', "id":',
-                                    colorPoint.colorPointId, ', "Value": {"Vect4f":',
-                                    colorPoint.displayedColor.rgb(), '}}'))
+                                    colorPoint.colorPointId, ', "Value": {"Vec4f":',
+                                    hexToRGB(colorPoint.displayedColor), '}}'))
+                    }
                 }
             }
         }
@@ -67,13 +74,35 @@ Rectangle {
                 return item.id === JSON.stringify(s.id)
             }) //the index of m.Path in the listmodel
             if (a === null) {
-                console.log(JSON.stringify(s))
+                var red = s.Value.Vec4f[0]
+                var green = s.Value.Vec4f[1]
+                var blue = s.Value.Vec4f[2]
+                var alpha = s.Value.Vec4f[3]
+                var newColor = Qt.rgba(red, green, blue, alpha)
                 colorPointListModel.insert(colorPointListModel.count, {
                                                "myName": s.Custom,
                                                "myId": JSON.stringify(s.id),
-                                               "myColor": JSON.stringify(s.Value.Vec4f),
+                                               "myColor": colorpicker._fullColorString(newColor, alpha),
                                                "myOpacity":  JSON.stringify(s.Value.Vec4f)
                                            })
+            }
+        }
+
+        // Modifying a colorpicker in the control surface
+        function onModifyColorpicker(s) {
+            function find(cond) {
+                for (var i = 0; i < colorPointListModel.count; ++i)
+                    if (cond(colorPointListModel.get(i)))
+                        return i
+                return null
+            }
+            var a = find(function (item) {
+                return item.id === JSON.stringify(s.id)
+            }) //the index of m.Path in the listmodel
+            if (a !== null) {
+                colorPointListModel.set(a, {
+                                        "myValue": JSON.stringify(tmpValue)
+                                    })
             }
         }
     }

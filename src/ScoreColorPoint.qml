@@ -13,7 +13,7 @@ Rectangle {
     color: "#a7dd0d"
     border.width: 5
     border.color: "#a7dd0d"
-    property color displayedColor: "#FFFFFFFF"
+    property color displayedColor: "#a7dd0dFF"
 
     Text {
         id: colorName
@@ -44,10 +44,11 @@ Rectangle {
     MouseArea {
         id: colorMouseAreaButton
         anchors.fill: parent
-        onClicked: colorButton.state = 'off'
+        onClicked: colorButton.state = "off"
     }
 
     states: [
+
         State {
             name: "off"
             PropertyChanges {
