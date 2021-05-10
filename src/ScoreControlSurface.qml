@@ -6,6 +6,8 @@ ColumnLayout {
     property string name: "ControlSurfaceName"
     property alias sliders: scoreSliders
 
+    property var sliderControl: width
+
     // Control surface name
     Text {
         id: controlSurfaceName
@@ -56,6 +58,13 @@ ColumnLayout {
         target: controlSurface
         // Adding controls in a control surface
         function onAppendControls(m) {
+
+            PropertyChanges {
+                target: parent
+
+
+            }
+
             controlSurfaceName.text = JSON.stringify(m.Name)
             var i = 0
             var controlMessage = m.Controls[i]

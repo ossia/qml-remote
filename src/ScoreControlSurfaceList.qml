@@ -55,7 +55,8 @@ ListView {
                                                               m.Name),
                                                   "path": JSON.stringify(
                                                               m.Path),
-                                                  "m": m
+                                                  "m": m,
+                                                  sliders: ""
                                               })
                 }
             } // Removing a control surface
@@ -75,7 +76,7 @@ ListView {
                     console.log("1111111111111111111111")
                     // Première technique
 
-                    console.log(JSON.stringify(controlSurfacelist.get(s).sliders.width))
+                    console.log(JSON.stringify(controlSurfacelist.get(s)))
 
                     // Deuxième Technique
                     /*
