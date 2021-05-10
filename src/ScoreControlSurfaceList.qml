@@ -46,8 +46,7 @@ ListView {
             if (messageObject === "ControlSurfaceAdded") {
                 if (s === null) {
                     controlSurfacelist.insert(0, {
-                                                  "name": JSON.stringify(
-                                                              m.Name),
+                                                  "name": m.Name,
                                                   "path": JSON.stringify(
                                                               m.Path),
                                                   "m": m

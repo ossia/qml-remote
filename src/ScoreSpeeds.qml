@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.1
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.12
 import QtQuick.Controls.Styles 1.4
@@ -26,7 +27,6 @@ Rectangle {
             property bool hasStarted: false
             property var globalSpeedPath: "null"
         }
-        // Create a slider for each interval in the list
         delegate: ScoreSlider {
             id: speed
             controlName: name
@@ -58,7 +58,6 @@ Rectangle {
             }
         }
     }
-
     // Receiving and handling messages about intervals
     Connections {
         target: scoreTimeSet
@@ -67,27 +66,28 @@ Rectangle {
             if (messageObject === "IntervalAdded") {
                 // Adding an interval speed
 
-
                 /* The timeline is a global interval
                   * The name of the timeline changes everytime ossia is refreshed...
-                  * The only constant is that it is the first interval added
+                  * The only constant is that it contains "Untitled"
                   * The timeline should not be added with the other speeds */
                 if (!(intervalsListModel.hasStarted)) {
                     intervalsListModel.hasStarted = true
                     intervalsListModel.globalSpeedPath = JSON.stringify(m.Path)
+                    scoreTimeline.totalTime = m.DefaultDuration
                 } else {
                     intervalsListModel.insert(0, {
-                                                  "name": m.Name,
+                                                  "name": JSON.stringify(
+                                                              m.Name),
                                                   "path": JSON.stringify(
                                                               m.Path),
                                                   "speedValue": JSON.stringify(
                                                                     m.Speed) * 720 / 6
                                               })
+                    console.log(intervalsListModel.get(0).value)
                 }
             } else if (messageObject === "IntervalRemoved") {
                 // Removing an interval speed
-                if (JSON.stringify(
-                            m.Path) === intervalsListModel.globalSpeedPath) {
+                if (JSON.stringify(m.Path) === intervalsListModel.globalSpeedPath) {
                     intervalsListModel.hasStarted = false
                 } else {
                     function find(cond) {
@@ -102,6 +102,7 @@ Rectangle {
                     if (s !== null) {
                         intervalsListModel.remove(s)
                     }
+                    // manque traitement a faire (passer la bonne vitesse de lecture .. )
                 }
             }
         }
@@ -128,5 +129,11 @@ Rectangle {
                 count++
             }
         }
+    }
+
+    // Called by OssiaStop
+    function clearSpeedsListModel() {
+        intervalsListModel.clear()
+        intervalsListModel.hasStarted = false
     }
 }
