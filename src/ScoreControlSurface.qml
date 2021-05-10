@@ -4,9 +4,9 @@ import QtQuick.Layouts 1.12
 ColumnLayout {
     spacing: 5
     property string name: "ControlSurfaceName"
-    property alias sliders: scoreSliders
+    //property alias sliders: scoreSliders
 
-    property var sliderControl: width
+    //property var sliderControl: width
 
     // Control surface name
     Text {
@@ -23,7 +23,7 @@ ColumnLayout {
         // List of sliders
         ScoreSliders {
             id: scoreSliders
-            width: 5
+            //width: 5
             signal appendSlider(var msg)
             signal modifySlider(var msg)
         }
@@ -58,12 +58,6 @@ ColumnLayout {
         target: controlSurface
         // Adding controls in a control surface
         function onAppendControls(m) {
-
-            PropertyChanges {
-                target: parent
-
-
-            }
 
             controlSurfaceName.text = JSON.stringify(m.Name)
             var i = 0

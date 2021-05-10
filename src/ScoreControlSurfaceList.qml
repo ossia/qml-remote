@@ -55,8 +55,8 @@ ListView {
                                                               m.Name),
                                                   "path": JSON.stringify(
                                                               m.Path),
-                                                  "m": m,
-                                                  sliders: ""
+                                                  "m": m
+                                                  //, sliders: ""
                                               })
                 }
             } // Removing a control surface
