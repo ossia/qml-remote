@@ -78,7 +78,10 @@ ListView {
 
                     /*
                     console.log(JSON.stringify(controlSurfacelist.get(s)))
-                    controlSurfacelist.get(s) // HELP : on ne sait pas comment accéder au scoreSliders dans controlSurfacelist.get(s)
+
+                    // HELP : on ne sait pas comment accéder au scoreSliders dans controlSurfacelist.get(s)
+
+                    controlSurfacelist.get(s)
 */
                     // Deuxième Technique
 
@@ -89,7 +92,10 @@ ListView {
                         if(controlSurfacelist.get(s).m.Controls[i].id === m.Control){
                             console.log(JSON.stringify(m.Value.Float))
                             console.log(JSON.stringify(newSurfaceControl.m.Controls[i].Value.Float))
-                            newSurfaceControl.m.Controls[i].Value.Float = m.Value.Float  // HELP : l'affectation ne fonctionne pas
+
+                            // HELP : l'affectation ne fonctionne pas
+
+                            newSurfaceControl.m.Controls[i].Value.Float = m.Value.Float
                             console.log(JSON.stringify(newSurfaceControl.m.Controls[i].Value.Float))
                         }
                     }
