@@ -72,21 +72,28 @@ ListView {
                 if(s !== null){
                     //controlSurfacelist.setProperty(s, "myValue", JSON.stringify(m.Value))
                     console.log("SurfaceControl")
-                    console.log(JSON.stringify(controlSurfacelist.get(s))) // continuer la dessus
-                    console.log("1111111111111111111111")
-                    // Première technique
-
                     console.log(JSON.stringify(controlSurfacelist.get(s)))
 
+                    // Première technique
+
+                    /*
+                    console.log(JSON.stringify(controlSurfacelist.get(s)))
+                    controlSurfacelist.get(s) // HELP : on ne sait pas comment accéder au scoreSliders dans controlSurfacelist.get(s)
+*/
                     // Deuxième Technique
+
                     /*
                     var newSurfaceControl = controlSurfacelist.get(s)
                     for (var i = 0; i < controlSurfacelist.count; ++i){
                         console.log(JSON.stringify(newSurfaceControl.m.Controls[i]))
                         if(controlSurfacelist.get(s).m.Controls[i].id === m.Control){
-                            newSurfaceControl.m.Controls[i].Value.Float = m.Value.Float
+                            console.log(JSON.stringify(m.Value.Float))
+                            console.log(JSON.stringify(newSurfaceControl.m.Controls[i].Value.Float))
+                            newSurfaceControl.m.Controls[i].Value.Float = m.Value.Float  // HELP : l'affectation ne fonctionne pas
+                            console.log(JSON.stringify(newSurfaceControl.m.Controls[i].Value.Float))
                         }
                     }
+
                     console.log("newSurfaceControl")
                     console.log(JSON.stringify(newSurfaceControl))
                     controlSurfacelist.set(s, newSurfaceControl)
