@@ -26,6 +26,11 @@ ListView {
         onLoaded: {
             controlSurface.appendControls(m)
         }
+        /*
+        onActiveChanged: {
+            controlSurface.modifyControl("le bon controle")
+        }
+        */
     }
     // Receiving and handling messages about Control Surfaces from score
     Connections {
@@ -61,12 +66,32 @@ ListView {
             }
 
 
-            /* Modifying a control in a control surface
+            /* Modifying a control in a control surface            */
             else if(messageObject === "ControlSurfaceControl"){
                 if(s !== null){
-                    controlSurfacelist.setProperty(s, "myValue", JSON.stringify(m.Value))
+                    //controlSurfacelist.setProperty(s, "myValue", JSON.stringify(m.Value))
+                    console.log("SurfaceControl")
+                    console.log(JSON.stringify(controlSurfacelist.get(s))) // continuer la dessus
+                    console.log("1111111111111111111111")
+                    // Première technique
+
+                    console.log(JSON.stringify(controlSurfacelist.get(s).sliders.width))
+
+                    // Deuxième Technique
+                    /*
+                    var newSurfaceControl = controlSurfacelist.get(s)
+                    for (var i = 0; i < controlSurfacelist.count; ++i){
+                        console.log(JSON.stringify(newSurfaceControl.m.Controls[i]))
+                        if(controlSurfacelist.get(s).m.Controls[i].id === m.Control){
+                            newSurfaceControl.m.Controls[i].Value.Float = m.Value.Float
+                        }
+                    }
+                    console.log("newSurfaceControl")
+                    console.log(JSON.stringify(newSurfaceControl))
+                    controlSurfacelist.set(s, newSurfaceControl)
+                    */
                 }
-            */
+            }
         }
     }
 }

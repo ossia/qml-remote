@@ -6,6 +6,8 @@ import QtQml.Models 2.12
 ColumnLayout {
     spacing: 5
 
+    property alias model: sliderListModel
+
     Repeater {
         id: sliderList
         clip: true
@@ -30,6 +32,7 @@ ColumnLayout {
             to: myTo
             controlPath: path
             stepSize: myStepSize
+            controlInd: myInd
             onMoved: {
                 socket.sendTextMessage(
                             '{ "Message": "ControlSurface","Path":'.concat(
@@ -43,7 +46,7 @@ ColumnLayout {
     // Receving informations about sliders in control surface from score
     Connections {
         // Adding a slider in the control surface
-        function onAppendSlider(s) {
+        function onAppendSlider(s, ind) {
             function find(cond) {
                 for (var i = 0; i < sliderListModel.count; ++i)
                     if (cond(sliderListModel.get(i)))
@@ -78,12 +81,14 @@ ColumnLayout {
                                            "myFrom": JSON.stringify(tmpFrom),
                                            "myValue": JSON.stringify(tmpValue),
                                            "myTo": JSON.stringify(tmpTo),
-                                           "myStepSize": tmpStepSize
+                                           "myStepSize": tmpStepSize,
+                                           "myInd": ind
                                        })
             }
         }
         // Modifying a slider in the control surface
         function onModifySlider(s) {
+            /*
             function find(cond) {
                 for (var i = 0; i < sliderListModel.count; ++i)
                     if (cond(sliderListModel.get(i)))
@@ -108,6 +113,15 @@ ColumnLayout {
                 sliderListModel.set(a, {
                                         "myValue": JSON.stringify(tmpValue)
                                     })
+            }
+            */
+            console.log("333333333333333333333")
+            for (var i = 0; i < sliderListModel.count; ++i){
+                if(sliderListModel.get(i).controlInd === m.ObjectId){
+                    sliderListModel.set(i, {
+                                            "myValue": JSON.stringify(tmpValue)
+                                        })
+                }
             }
         }
     }

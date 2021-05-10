@@ -7,6 +7,7 @@ Slider {
     property string controlId: "ControlId"
     property string controlUnit: ""
     property string controlColor: "#e0b01e"
+    property int controlInd: 0
     id: control
     //value: 0.5
     Text {
