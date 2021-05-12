@@ -53,12 +53,12 @@ ColumnLayout {
         }*/
     }
 
+
     // Receiving informations about controls in a control surface from score
     Connections {
         target: controlSurface
         // Adding controls in a control surface
-        function onAppendControls(m) {
-
+        onAppendControls: {
             controlSurfaceName.text = JSON.stringify(m.Name)
             var i = 0
             var controlMessage = m.Controls[i]
@@ -96,8 +96,8 @@ ColumnLayout {
             }
         }
         // Modifying controls in a control surface
-        function onModifyControl(m) {
-            if (m === "ControlSurfaceControl") {
+        onModifyControl: {
+            if (m.Message === "ControlSurfaceControl") {
                 console.log("22222222222222222222222222")
                 scoreSliders.modifySlider(m)
             }
