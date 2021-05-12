@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 
 ColumnLayout {
     spacing: 5
-    property string name: "ControlSurfaceName"
+    property string name
     //property alias sliders: scoreSliders
 
     //property var sliderControl: width
@@ -59,7 +59,7 @@ ColumnLayout {
         target: controlSurface
         // Adding controls in a control surface
         onAppendControls: {
-            controlSurfaceName.text = JSON.stringify(m.Name)
+            controlSurfaceName.text = m.Name
             var i = 0
             var controlMessage = m.Controls[i]
             while (controlMessage) {
@@ -85,11 +85,13 @@ ColumnLayout {
                     scoreColorpicker.visible = true
                     scoreColorpicker.appendColorpicker(controlMessage)
                     break
+                    /*
                 case "8093743c-584f-4bb9-97d4-6c7602f87116":
                     // Position
                     scorePosition.visible = true
                     scorePosition.appendPosition(controlMessage)
                     break
+                    */
                 }
                 i++
                 controlMessage = m.Controls[i]
@@ -98,8 +100,6 @@ ColumnLayout {
         // Modifying controls in a control surface
         onModifyControl: {
             if (m.Message === "ControlSurfaceControl") {
-                console.log("22222222222222222222222222")
-                console.log(JSON.stringify(m))
                 scoreSliders.modifySlider(m)
                 scoreColorpicker.modifyColorpicker(m)
             }

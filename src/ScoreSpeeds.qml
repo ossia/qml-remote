@@ -65,6 +65,7 @@ Rectangle {
             if (messageObject === "IntervalAdded") {
                 // Adding an interval speed
 
+
                 /* The timeline is a global interval
                   * The name of the timeline changes everytime ossia is refreshed...
                   * The only constant is that it contains "Untitled"
@@ -75,8 +76,7 @@ Rectangle {
                     scoreTimeline.totalTime = m.DefaultDuration
                 } else {
                     intervalsListModel.insert(0, {
-                                                  "name": JSON.stringify(
-                                                              m.Name),
+                                                  "name": m.Name,
                                                   "path": JSON.stringify(
                                                               m.Path),
                                                   "speedValue": JSON.stringify(
@@ -86,7 +86,8 @@ Rectangle {
                 }
             } else if (messageObject === "IntervalRemoved") {
                 // Removing an interval speed
-                if (JSON.stringify(m.Path) === intervalsListModel.globalSpeedPath) {
+                if (JSON.stringify(
+                            m.Path) === intervalsListModel.globalSpeedPath) {
                     intervalsListModel.hasStarted = false
                 } else {
                     function find(cond) {

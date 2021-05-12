@@ -35,12 +35,6 @@ ListView {
             onLoaded: {
                 controlSurface.appendControls(m)
             }
-
-            /*
-            onActiveChanged: {
-                controlSurface.modifyControl("le bon controle")
-            }
-            */
         }
     }
 
@@ -81,8 +75,6 @@ ListView {
             else if(messageObject === "ControlSurfaceControl"){
                 if(s !== null){
                     let controlSurface = controlSurfacelist.get(parseInt(s));
-                    console.log("111111111111111111")
-                    console.log(JSON.stringify(m))
                     controlSurface.modifyControl(m);
                 }
             }
