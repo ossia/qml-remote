@@ -4,7 +4,8 @@ import QtQuick.Controls 2.12
 Slider {
     property string controlName: "ControlName"
     property string controlPath: "ControlPath"
-    property string controlId: "ControlId"
+    property int controlId
+    property string controlUuid
     property string controlUnit: ""
     property string controlColor: "#e0b01e"
     property int controlInd: 0

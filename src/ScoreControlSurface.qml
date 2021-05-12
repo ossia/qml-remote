@@ -99,6 +99,7 @@ ColumnLayout {
         onModifyControl: {
             if (m.Message === "ControlSurfaceControl") {
                 console.log("22222222222222222222222222")
+                console.log(JSON.stringify(m))
                 scoreSliders.modifySlider(m)
             }
         }
