@@ -8,12 +8,22 @@ ColumnLayout {
 
     //property var sliderControl: width
 
+
+    Rectangle{
+        width: window.width
+        height: 5
+        color: "#303030"
+    }
+
+
     // Control surface name
     Text {
         id: controlSurfaceName
         text: name
         color: "white"
     }
+
+
 
     // List of controls
     Flow {
@@ -51,6 +61,7 @@ ColumnLayout {
             signal appendPosition(var msg)
             signal modifyPosition(var msg)
         }*/
+
     }
 
 
