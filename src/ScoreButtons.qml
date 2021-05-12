@@ -48,7 +48,6 @@ RowLayout {
             }
         }
         // Modifying a slider in the control surface
-        function onModifyButton(s) {
-        }
+        function onModifyButton(s) {}
     }
 }

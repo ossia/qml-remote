@@ -58,11 +58,11 @@ ListView {
                 if (s === null) {
                     let newSurfaceModel = controlSurfaceDataModel.createObject(
                             controlSurfacelist, {
-                                name: m.Name,
-                                path: JSON.stringify(m.Path),
-                                m: m
-                            });
-                    controlSurfacelist.insert(0, newSurfaceModel);
+                                "name": m.Name,
+                                "path": JSON.stringify(m.Path),
+                                "m": m
+                            })
+                    controlSurfacelist.insert(0, newSurfaceModel)
                 }
             } // Removing a control surface
             else if (messageObject === "ControlSurfaceRemoved") {
@@ -70,12 +70,11 @@ ListView {
                     controlSurfacelist.remove(s)
                 }
             }
-
             /* Modifying a control in a control surface            */
-            else if(messageObject === "ControlSurfaceControl"){
-                if(s !== null){
-                    let controlSurface = controlSurfacelist.get(parseInt(s));
-                    controlSurface.modifyControl(m);
+            else if (messageObject === "ControlSurfaceControl") {
+                if (s !== null) {
+                    let controlSurface = controlSurfacelist.get(parseInt(s))
+                    controlSurface.modifyControl(m)
                 }
             }
         }

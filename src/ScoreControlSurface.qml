@@ -4,17 +4,15 @@ import QtQuick.Layouts 1.12
 ColumnLayout {
     spacing: 5
     property string name
+
     //property alias sliders: scoreSliders
 
     //property var sliderControl: width
-
-
-    Rectangle{
+    Rectangle {
         width: window.width
         height: 5
         color: "#303030"
     }
-
 
     // Control surface name
     Text {
@@ -22,8 +20,6 @@ ColumnLayout {
         text: name
         color: "white"
     }
-
-
 
     // List of controls
     Flow {
@@ -53,6 +49,7 @@ ColumnLayout {
             signal modifyColorpicker(var msg)
         }
 
+
         /*
         // List of positions
         ScorePosition {
@@ -61,9 +58,7 @@ ColumnLayout {
             signal appendPosition(var msg)
             signal modifyPosition(var msg)
         }*/
-
     }
-
 
     // Receiving informations about controls in a control surface from score
     Connections {
@@ -96,6 +91,7 @@ ColumnLayout {
                     scoreColorpicker.visible = true
                     scoreColorpicker.appendColorpicker(controlMessage)
                     break
+
                     /*
                 case "8093743c-584f-4bb9-97d4-6c7602f87116":
                     // Position

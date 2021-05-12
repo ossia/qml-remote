@@ -8,12 +8,12 @@ WebSocket {
     onTextMessageReceived: {
         try {
 
+
             /* Print messages send by score
             console.log("-----------------------------------------");
             console.log(message);
             console.log("-----------------------------------------");
             */
-
             var jsonObject = JSON.parse(message)
             if (jsonObject.Intervals) {
 
