@@ -4,9 +4,10 @@ import QtQuick.Controls 2.12
 Rectangle {
     property string colorPointName: "ColorPointName"
     property string colorPointPath: "path"
-    property string colorPointId: "Id"
+    property int colorPointId
     property string colorPointColor: "Color"
     property string colorPointOpacity: "Opacity"
+    property string colorPointUuid
     id: colorButton
     width: colorBackground.width / 20
     height: colorButton.width

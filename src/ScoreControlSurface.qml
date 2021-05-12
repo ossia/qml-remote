@@ -101,6 +101,7 @@ ColumnLayout {
                 console.log("22222222222222222222222222")
                 console.log(JSON.stringify(m))
                 scoreSliders.modifySlider(m)
+                scoreColorpicker.modifyColorpicker(m)
             }
         }
     }

@@ -90,39 +90,9 @@ ColumnLayout {
         }
         // Modifying a slider in the control surface
         function onModifySlider(s) {
-            /*
-            function find(cond) {
-                for (var i = 0; i < sliderListModel.count; ++i)
-                    if (cond(sliderListModel.get(i)))
-                        return i
-                return null
-            }
-            var a = find(function (item) {
-                return item.id === JSON.stringify(s.id)
-            }) //the index of m.Path in the listmodel
-            if (a !== null) {
-                var tmpValue
-                switch (s.uuid) {
-                    // Float Slider
-                case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
-                    tmpValue = s.Value.Float
-                    break
-                    // Int Slider
-                case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
-                    tmpValue = s.Value.Int
-                    break
-                }
-                sliderListModel.set(a, {
-                                        "myValue": JSON.stringify(tmpValue)
-                                    })
-            }
-            */
             console.log("333333333333333333333333")
-            for (var i = 0; i < sliderListModel.count; ++i){
-                if(sliderListModel.get(i).myId === s.Control){
-                    console.log(JSON.stringify(sliderListModel.get(i)))
-                    console.log(JSON.stringify(s))
-                    console.log(JSON.stringify(sliderListModel.get(i).MyUuid))
+            for (var i = 0; i < sliderListModel.count; ++i) {
+                if (sliderListModel.get(i).myId === s.Control) {
                     var tmpValue
                     switch (sliderListModel.get(i).myUuid) {
                         // Float Slider
@@ -133,6 +103,8 @@ ColumnLayout {
                     case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
                         tmpValue = s.Value.Int
                         break
+                    default:
+                        return
                     }
                     sliderListModel.set(i, {
                                             "myValue": tmpValue
