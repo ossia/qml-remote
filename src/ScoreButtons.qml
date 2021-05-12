@@ -42,27 +42,13 @@ RowLayout {
             if (a === null) {
                 buttonlistModel.insert(buttonlistModel.count, {
                                            "name": s.Custom,
-                                           "id": JSON.stringify(s.id)
+                                           "id": s.id
                                        })
                 console.log(JSON.stringify(s.id))
             }
         }
         // Modifying a slider in the control surface
         function onModifyButton(s) {
-            function find(cond) {
-                for (var i = 0; i < buttonlistModel.count; ++i)
-                    if (cond(buttonlistModel.get(i)))
-                        return i
-                return null
-            }
-            var a = find(function (item) {
-                return item.id === JSON.stringify(s.id)
-            }) //the index of m.Path in the listmodel
-            if (a !== null) {
-                buttonlistModel.set(a, {
-                                        "myValue": JSON.stringify(tmpValue)
-                                    })
-            }
         }
     }
 }

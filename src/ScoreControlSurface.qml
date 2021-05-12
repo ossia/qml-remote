@@ -87,7 +87,7 @@ ColumnLayout {
                     // Int Slider
                     scoreSliders.appendSlider(controlMessage, i)
                     break
-                case "feb87e84-e0d2-428f-96ff-a123ac964f59":
+                case "7cd210d3-ebd1-4f71-9de6-cccfb639cbc3":
                     // Button
                     scoreButtons.appendButton(controlMessage)
                     break
@@ -113,6 +113,7 @@ ColumnLayout {
             if (m.Message === "ControlSurfaceControl") {
                 scoreSliders.modifySlider(m)
                 scoreColorpicker.modifyColorpicker(m)
+                scoreButtons.modifyButton(m)
             }
         }
     }
