@@ -15,18 +15,35 @@ ListView {
     orientation: ListView.Vertical
     clip: true
     snapMode: ListView.SnapToItem
-    model: ListModel {
+
+    // ObjectModel's "model" data is the actual item that is going to be displayed
+    model: ObjectModel {
         id: controlSurfacelist
     }
-    delegate: Loader {
-        id: controlSurface
-        signal appendControls(var msg)
-        signal modifyControl(var msg)
-        source: "ScoreControlSurface.qml"
-        onLoaded: {
-            controlSurface.appendControls(m)
+
+    // The Component will serve as a factory to create the individual ControlSurface visual items & data model
+    Component {
+        id: controlSurfaceDataModel
+        Loader {
+            id: controlSurface
+            property string name
+            property var path
+            property var m
+            signal appendControls(var m)
+            signal modifyControl(var m)
+            source: "ScoreControlSurface.qml"
+            onLoaded: {
+                controlSurface.appendControls(m)
+            }
+
+            /*
+            onActiveChanged: {
+                controlSurface.modifyControl("le bon controle")
+            }
+            */
         }
     }
+
     // Receiving and handling messages about Control Surfaces from score
     Connections {
         target: scoreControlSurfaceList
@@ -45,12 +62,13 @@ ListView {
             // Adding a control surface
             if (messageObject === "ControlSurfaceAdded") {
                 if (s === null) {
-                    controlSurfacelist.insert(0, {
-                                                  "name": m.Name,
-                                                  "path": JSON.stringify(
-                                                              m.Path),
-                                                  "m": m
-                                              })
+                    let newSurfaceModel = controlSurfaceDataModel.createObject(
+                            controlSurfacelist, {
+                                name: m.Name,
+                                path: JSON.stringify(m.Path),
+                                m: m
+                            });
+                    controlSurfacelist.insert(0, newSurfaceModel);
                 }
             } // Removing a control surface
             else if (messageObject === "ControlSurfaceRemoved") {
@@ -59,13 +77,15 @@ ListView {
                 }
             }
 
-
-            /* Modifying a control in a control surface
+            /* Modifying a control in a control surface            */
             else if(messageObject === "ControlSurfaceControl"){
                 if(s !== null){
-                    controlSurfacelist.setProperty(s, "myValue", JSON.stringify(m.Value))
+                    let controlSurface = controlSurfacelist.get(parseInt(s));
+                    console.log("111111111111111111")
+                    console.log(JSON.stringify(m))
+                    controlSurface.modifyControl(m);
                 }
-            */
+            }
         }
     }
 }

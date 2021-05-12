@@ -6,6 +6,8 @@ import QtQml.Models 2.12
 ColumnLayout {
     spacing: 5
 
+    property alias model: sliderListModel
+
     Repeater {
         id: sliderList
         clip: true
@@ -30,6 +32,8 @@ ColumnLayout {
             to: myTo
             controlPath: path
             stepSize: myStepSize
+            controlInd: myInd
+            controlUuid: myUuid
             onMoved: {
                 socket.sendTextMessage(
                             '{ "Message": "ControlSurface","Path":'.concat(
@@ -43,7 +47,7 @@ ColumnLayout {
     // Receving informations about sliders in control surface from score
     Connections {
         // Adding a slider in the control surface
-        function onAppendSlider(s) {
+        function onAppendSlider(s, ind) {
             function find(cond) {
                 for (var i = 0; i < sliderListModel.count; ++i)
                     if (cond(sliderListModel.get(i)))
@@ -74,16 +78,19 @@ ColumnLayout {
                 }
                 sliderListModel.insert(sliderListModel.count, {
                                            "myName": s.Custom,
-                                           "myId": JSON.stringify(s.id),
+                                           "myId": s.id,
                                            "myFrom": JSON.stringify(tmpFrom),
-                                           "myValue": JSON.stringify(tmpValue),
+                                           "myValue": tmpValue,
                                            "myTo": JSON.stringify(tmpTo),
-                                           "myStepSize": tmpStepSize
+                                           "myStepSize": tmpStepSize,
+                                           "myInd": ind,
+                                           "myUuid": s.uuid
                                        })
             }
         }
         // Modifying a slider in the control surface
         function onModifySlider(s) {
+            /*
             function find(cond) {
                 for (var i = 0; i < sliderListModel.count; ++i)
                     if (cond(sliderListModel.get(i)))
@@ -108,6 +115,29 @@ ColumnLayout {
                 sliderListModel.set(a, {
                                         "myValue": JSON.stringify(tmpValue)
                                     })
+            }
+            */
+            console.log("333333333333333333333333")
+            for (var i = 0; i < sliderListModel.count; ++i){
+                if(sliderListModel.get(i).myId === s.Control){
+                    console.log(JSON.stringify(sliderListModel.get(i)))
+                    console.log(JSON.stringify(s))
+                    console.log(JSON.stringify(sliderListModel.get(i).MyUuid))
+                    var tmpValue
+                    switch (sliderListModel.get(i).myUuid) {
+                        // Float Slider
+                    case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
+                        tmpValue = s.Value.Float
+                        break
+                        // Int Slider
+                    case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
+                        tmpValue = s.Value.Int
+                        break
+                    }
+                    sliderListModel.set(i, {
+                                            "myValue": tmpValue
+                                        })
+                }
             }
         }
     }

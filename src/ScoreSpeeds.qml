@@ -17,7 +17,6 @@ Rectangle {
         spacing: 10
         anchors.fill: parent
         anchors.margins: 5
-        orientation: parent.Vertical
         clip: true
         snapMode: ListView.SnapToItem
         // Create a list of sliders for the intervals' speeds
