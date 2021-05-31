@@ -4,7 +4,7 @@ import QtQuick 2.11
 Item {
     property int cursorHeight: 7
     property real value: (1 - pickerCursor.y / height)
-    //width: 15; height: 300
+
     Item {
         id: pickerCursor
         width: parent.width
