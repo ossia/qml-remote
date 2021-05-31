@@ -3,7 +3,6 @@ import QtQuick 2.11
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.4
 
-//import "content"
 Rectangle {
     id: colorPicker
     property color colorValue: paletteMode ? _rgb(paletts.paletts_color,
