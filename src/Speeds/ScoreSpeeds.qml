@@ -6,6 +6,8 @@ import QtQuick.Window 2.12
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
+import "../Slider"
+
 Rectangle {
     id: scoreSpeeds
     width: parent.width / 4

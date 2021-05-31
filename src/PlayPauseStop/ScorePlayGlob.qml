@@ -66,55 +66,55 @@ Button {
         sourceSize.width: 30
         sourceSize.height: 30
         clip: true
-        source: "Icons/play_glob_off.svg"
+        source: "../Icons/play_glob_off.svg"
         states: [
             State {
                 name: "holdClickPause"
                 PropertyChanges {
                     target: playGlobButton
-                    source: "Icons/play_glob_on.svg"
+                    source: "../Icons/play_glob_on.svg"
                 }
             },
             State {
                 name: "hoveredPlayGlob"
                 PropertyChanges {
                     target: playGlobButton
-                    source: "Icons/play_glob_hover.svg"
+                    source: "../Icons/play_glob_hover.svg"
                 }
             },
             State {
                 name: "pausedPlayGlob"
                 PropertyChanges {
                     target: playGlobButton
-                    source: "Icons/pause_disabled.svg"
+                    source: "../Icons/pause_disabled.svg"
                 }
             },
             State {
                 name: 'pausedHover'
                 PropertyChanges {
                     target: playGlobButton
-                    source: "Icons/pause_hover.svg"
+                    source: "../Icons/pause_hover.svg"
                 }
             },
             State {
                 name: 'pausedOn'
                 PropertyChanges {
                     target: playGlobButton
-                    source: "Icons/pause_on.svg"
+                    source: "../Icons/pause_on.svg"
                 }
             },
             State {
                 name: 'pausedOff'
                 PropertyChanges {
                     target: playGlobButton
-                    source: "Icons/pause_off.svg"
+                    source: "../Icons/pause_off.svg"
                 }
             },
             State {
                 name: 'disabledPlayGlob'
                 PropertyChanges {
                     target: playGlobButton
-                    source: "Icons/play_glob_disabled.svg"
+                    source: "../Icons/play_glob_disabled.svg"
                 }
             }
         ]

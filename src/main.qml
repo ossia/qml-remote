@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+import "Skeleton"
 
 // Creation of the main window of the application
 Window {
@@ -10,5 +11,5 @@ Window {
     title: qsTr("Remote Control")
     color: "#202020"
     // Creation of the application's skeleton
-    ScoreSkeleton {}
+    ScoreSkeleton{}
 }

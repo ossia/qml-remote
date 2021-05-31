@@ -1,6 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 
+import "../Colorpicker"
+import "../Slider"
+import "../Button"
+
+
 ColumnLayout {
     spacing: 5
     property string name

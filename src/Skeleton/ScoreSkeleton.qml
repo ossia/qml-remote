@@ -6,6 +6,15 @@ import QtQuick.Controls 2.12
 import QtQuick.Controls.Styles 1.4
 import Qt.labs.settings 1.0
 
+import "../WebSocket"
+import "../IpAdress"
+import "../PlayPauseStop"
+import "../Speed"
+import "../TimeSet"
+import "../ControlSurface"
+import "../Timeline"
+
+
 Item {
     id: window
     anchors.fill: parent

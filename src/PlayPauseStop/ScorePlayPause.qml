@@ -78,21 +78,21 @@ Button {
         id: pauseButton
         sourceSize.width: 30
         sourceSize.height: 30
-        source: "Icons/connection.png"
+        source: "../Icons/connection.png"
         clip: true
         states: [
             State {
                 name: "connectionOn"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/connection_on.png"
+                    source: "../Icons/connection_on.png"
                 }
             },
             State {
                 name: "connectionOff"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/connection.png"
+                    source: "../Icons/connection.png"
                 }
             },
             State {
@@ -104,21 +104,21 @@ Button {
                 name: "playDisplayed"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/play_glob_off.png"
+                    source: "../Icons/play_glob_off.png"
                 }
             },
             State {
                 name: "playPressed"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/play_glob_on.png"
+                    source: "../Icons/play_glob_on.png"
                 }
             },
             State {
                 name: "hoveredConnection"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/connection_hover.png"
+                    source: "../Icons/connection_hover.png"
                 }
             },
             State {
@@ -130,21 +130,21 @@ Button {
                 name: "pauseDisplayed"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/pause_on.png"
+                    source: "../Icons/pause_on.png"
                 }
             },
             State {
                 name: "hoveredPlayOff"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/play_glob_hover.png"
+                    source: "../Icons/play_glob_hover.png"
                 }
             },
             State {
                 name: "hoveredPlayOn"
                 PropertyChanges {
                     target: pauseButton
-                    source: "Icons/pause_hover.png"
+                    source: "../Icons/pause_hover.png"
                 }
             }
         ]

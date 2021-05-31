@@ -90,7 +90,6 @@ ColumnLayout {
         }
         // Modifying a slider in the control surface
         function onModifySlider(s) {
-            console.log("333333333333333333333333")
             for (var i = 0; i < sliderListModel.count; ++i) {
                 if (sliderListModel.get(i).myId === s.Control) {
                     var tmpValue

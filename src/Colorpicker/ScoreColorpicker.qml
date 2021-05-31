@@ -96,14 +96,11 @@ Rectangle {
 
         // Modifying a colorpicker in the control surface
         function onModifyColorpicker(s) {
-            console.log("3333333333333333333")
             for (var i = 0; i < colorPointListModel.count; ++i) {
-                console.log(JSON.stringify(colorPointListModel.get(i)))
-                console.log(JSON.stringify(s))
                 if (colorPointListModel.get(i).myId === s.Control) {
                     switch (colorPointListModel.get(i).myUuid) {
-                        // Float Colorpicker
                     case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
+                        // Float Colorpicker
                         var red = s.Value.Vec4f[0]
                         var green = s.Value.Vec4f[1]
                         var blue = s.Value.Vec4f[2]

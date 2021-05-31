@@ -54,7 +54,7 @@ ColumnLayout {
             id: ipButton
             sourceSize.width: 35
             sourceSize.height: 35
-            source: "Icons/ip_adress.png"
+            source: "../Icons/ip_adress.png"
             clip: true
             states: [
                 State {
@@ -65,7 +65,7 @@ ColumnLayout {
                     name: "ip_on"
                     PropertyChanges {
                         target: ipButton
-                        source: "Icons/ip_adress_on.png"
+                        source: "../Icons/ip_adress_on.png"
                     }
                 }
             ]
@@ -101,21 +101,21 @@ ColumnLayout {
             id: disconnect_image
             sourceSize.width: 35
             sourceSize.height: 35
-            source: "Icons/disconnected.png"
+            source: "../Icons/disconnected.png"
             clip: true
             states: [
                 State {
                     name: "disconnect"
                     PropertyChanges {
                         target: disconnect_image
-                        source: "Icons/disconnected.png"
+                        source: "../Icons/disconnected.png"
                     }
                 },
                 State {
                     name: "disconnect_on"
                     PropertyChanges {
                         target: disconnect_image
-                        source: "Icons/disconnected_on.png"
+                        source: "../Icons/disconnected_on.png"
                     }
                 }
             ]

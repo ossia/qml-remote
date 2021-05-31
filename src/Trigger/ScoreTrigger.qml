@@ -25,7 +25,7 @@ Button {
             y: 5
             width: 20
             height: 20
-            source: "Icons/scenario_trigger.png"
+            source: "../Icons/scenario_trigger.png"
         }
     }
 

@@ -1,26 +1,24 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>ScoreControlSurface.qml</file>
-        <file>ScoreControlSurfaceList.qml</file>
-        <file>ScorePlayGlob.qml</file>
-        <file>ScorePlayPause.qml</file>
-        <file>ScorePlayPauseStop.qml</file>
-        <file>ScorePosition.qml</file>
-        <file>ScorePositionPoint.qml</file>
-        <file>ScoreReinitialize.qml</file>
-        <file>ScoreSlider.qml</file>
-        <file>ScoreSliders.qml</file>
-        <file>ScoreSpeed.qml</file>
-        <file>ScoreSpeeds.qml</file>
-        <file>ScoreSkeleton.qml</file>
-        <file>ScoreStop.qml</file>
-        <file>ScoreTimeline.qml</file>
-        <file>ScoreTrigger.qml</file>
-        <file>ScoreTriggers.qml</file>
-        <file>ScoreVolume.qml</file>
-        <file>TimeSet.qml</file>
-        <file>main.cpp</file>
+        <file>ControlSurface/ScoreControlSurface.qml</file>
+        <file>ControlSurface/ScoreControlSurfaceList.qml</file>
+        <file>PlayPauseStop/ScorePlayGlob.qml</file>
+        <file>PlayPauseStop/ScorePlayPause.qml</file>
+        <file>PlayPauseStop/ScorePlayPauseStop.qml</file>
+        <file>Position/ScorePosition.qml</file>
+        <file>Position/ScorePositionPoint.qml</file>
+        <file>PlayPauseStop/ScoreReinitialize.qml</file>
+        <file>Slider/ScoreSlider.qml</file>
+        <file>Slider/ScoreSliders.qml</file>
+        <file>Speed/ScoreSpeed.qml</file>
+        <file>Speeds/ScoreSpeeds.qml</file>
+        <file>Skeleton/ScoreSkeleton.qml</file>
+        <file>PlayPauseStop/ScoreStop.qml</file>
+        <file>Timeline/ScoreTimeline.qml</file>
+        <file>Trigger/ScoreTrigger.qml</file>
+        <file>Trigger/ScoreTriggers.qml</file>
+        <file>Volume/ScoreVolume.qml</file>
+        <file>TimeSet/TimeSet.qml</file>
         <file>Icons/pause_off.svg</file>
         <file>Icons/pause_on.svg</file>
         <file>Icons/play_glob_off.svg</file>
@@ -31,7 +29,7 @@
         <file>Icons/reinitialize_on.svg</file>
         <file>Icons/stop_off.svg</file>
         <file>Icons/stop_on.svg</file>
-        <file>ScoreWebSocket.qml</file>
+        <file>WebSocket/ScoreWebSocket.qml</file>
         <file>Icons/connection.svg</file>
         <file>Icons/scenario_trigger.svg</file>
         <file>Icons/play_glob_hover.svg</file>
@@ -41,14 +39,14 @@
         <file>Icons/pause_disabled.svg</file>
         <file>Icons/pause_hover.svg</file>
         <file>Icons/play_glob_disabled.svg</file>
-        <file>Checkerboard.qml</file>
-        <file>ColorSlider.qml</file>
-        <file>Colorpicker.qml</file>
-        <file>NumberBox.qml</file>
-        <file>PanelBorder.qml</file>
-        <file>SBPicker.qml</file>
-        <file>ScoreColorpicker.qml</file>
-        <file>ScoreColorPoint.qml</file>
+        <file>Colorpicker/Checkerboard.qml</file>
+        <file>Colorpicker/ColorSlider.qml</file>
+        <file>Colorpicker/Colorpicker.qml</file>
+        <file>Colorpicker/NumberBox.qml</file>
+        <file>Colorpicker/PanelBorder.qml</file>
+        <file>Colorpicker/SBPicker.qml</file>
+        <file>Colorpicker/ScoreColorpicker.qml</file>
+        <file>Colorpicker/ScoreColorPoint.qml</file>
         <file>Icons/play_glob_off.png</file>
         <file>Icons/pause_on.png</file>
         <file>Icons/play_glob_hover.png</file>
@@ -64,7 +62,7 @@
         <file>Icons/connection_hover.png</file>
         <file>Icons/connection_hover.svg</file>
         <file>Icons/ip_adress.svg</file>
-        <file>ScoreIpAdress.qml</file>
+        <file>IpAdress/ScoreIpAdress.qml</file>
         <file>Icons/ip_adress.png</file>
         <file>Icons/play_glob_on.png</file>
         <file>Icons/connection_on.png</file>
@@ -74,8 +72,10 @@
         <file>Icons/disconnected.png</file>
         <file>Icons/disconnected_on.svg</file>
         <file>Icons/disconnected_on.png</file>
-        <file>ScoreButtons.qml</file>
+        <file>Button/ScoreButtons.qml</file>
         <file>Icons/disconnected.svg</file>
-        <file>ScoreButton.qml</file>
+        <file>Button/ScoreButton.qml</file>
+        <file>main.cpp</file>
+        <file>main.qml</file>
     </qresource>
 </RCC>
