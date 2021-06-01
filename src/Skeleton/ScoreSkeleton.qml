@@ -34,7 +34,8 @@ Item {
         id: scoreButtons
         anchors.top: parent.top
         anchors.left: parent.left
-        width: parent.width / 15
+        width: ( 0.3 * parent.width + 0.7 * parent.height ) / 10
+
         //height: parent.height /5
 
         // Creating the IP adress button object

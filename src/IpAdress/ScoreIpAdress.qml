@@ -5,9 +5,14 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
 
-ColumnLayout {
+Column {
+    width: parent.width
+
     Button {
         id: ip_button
+        width: parent.width
+        height: parent.width
+
         Dialog {
             id: ipDialog
             title: "Adresse IP:"
@@ -52,8 +57,8 @@ ColumnLayout {
 
         contentItem: Image {
             id: ipButton
-            sourceSize.width: window.width / 20
-            sourceSize.height: window.width / 20
+            sourceSize.width: parent.width
+            sourceSize.height: parent.width
             source: "../Icons/ip_adress.png"
             clip: true
             states: [
@@ -78,6 +83,9 @@ ColumnLayout {
 
     Button {
         id: disconnectButton
+        width: parent.width
+        height: parent.width
+
         Dialog {
             id: disconnectDiag
             title: "Disconnection"
@@ -99,8 +107,8 @@ ColumnLayout {
 
         contentItem: Image {
             id: disconnect_image
-            sourceSize.width: window.width / 20
-            sourceSize.height: window.width / 20
+            sourceSize.width: parent.width
+            sourceSize.height: parent.width
             source: "../Icons/disconnected.png"
             clip: true
             states: [

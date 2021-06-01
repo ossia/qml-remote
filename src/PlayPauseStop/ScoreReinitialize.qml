@@ -4,7 +4,10 @@ import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 
 Button {
+    width: parent.width
+    height: parent.width
     hoverEnabled: true
+
     onHoveredChanged: {
         if (reinitializeButton.state === 'reintializeOn') {
             reinitializeButton.state = ''
@@ -25,8 +28,8 @@ Button {
     }
     contentItem: Image {
         id: reinitializeButton
-        sourceSize.width: window.width / 20
-        sourceSize.height: window.width / 20
+        sourceSize.width: parent.width
+        sourceSize.height: parent.width
         clip: true
         source: "../Icons/reinitialize_off.png"
         states: [

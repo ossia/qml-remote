@@ -4,6 +4,9 @@ import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 
 Button {
+    width: parent.width
+    height: parent.width
+
     hoverEnabled: true // Allows to specify a behavior when going over a button
     // Detecting when buttons are pressed whether in the interface or on score
     function stopClicked() {
@@ -76,8 +79,9 @@ Button {
 
     contentItem: Image {
         id: pauseButton
-        sourceSize.width: window.width / 20
-        sourceSize.height: window.width / 20
+        sourceSize.width: parent.width
+        sourceSize.height: parent.width
+
         source: "../Icons/connection.png"
         clip: true
         states: [

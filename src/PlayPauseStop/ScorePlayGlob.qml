@@ -4,6 +4,9 @@ import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 
 Button {
+    width: parent.width
+    height: parent.width
+
     function playClicked() {
         if (playGlobButton.state === '' || !playPause.isPaused())
             playGlobButton.state = 'pausedPlayGlob'
@@ -63,8 +66,8 @@ Button {
     }
     contentItem: Image {
         id: playGlobButton
-        sourceSize.width: window.width / 20
-        sourceSize.height: window.width / 20
+        sourceSize.width: parent.width
+        sourceSize.height: parent.width
         clip: true
         source: "../Icons/play_glob_off.svg"
         states: [
