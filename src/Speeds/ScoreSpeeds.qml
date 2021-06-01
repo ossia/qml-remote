@@ -31,7 +31,8 @@ Rectangle {
         delegate: ScoreSlider {
             id: speed
             controlName: name
-            height: window.height / 25
+            height: 5 + window.height / 25
+            width: window.width / 3
             anchors.right: parent ? parent.right : undefined
             anchors.left: parent ? parent.left : undefined
             anchors.rightMargin: 25

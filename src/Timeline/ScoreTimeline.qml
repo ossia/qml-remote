@@ -62,10 +62,8 @@ Slider {
     handle: Rectangle {} // No handle
 
     background: Rectangle {
-        implicitWidth: 300
-        implicitHeight: 20
-        width: time.width
-        height: time.height
+        implicitWidth: parent.width
+        implicitHeight: parent.height
         color: "#161514"
         border.width: 1
         border.color: "#62400a"
