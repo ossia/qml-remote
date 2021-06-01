@@ -24,6 +24,46 @@ ColumnLayout {
         color: "white"
     }
 
+    // List of controls
+    Flow {
+        width: window.width
+        spacing: 5
+
+        // List of sliders
+        ScoreSliders {
+            id: scoreSliders
+            //width: 5
+            signal appendSlider(var msg)
+            signal modifySlider(var msg)
+        }
+
+        /*
+        // List of buttons
+        ScoreButtons {
+            id: scoreButtons
+            signal appendButton(var msg)
+            signal modifyButton(var msg)
+        }
+        */
+
+        // List of colorpickers
+        ScoreColorpicker {
+            visible: false
+            id: scoreColorpicker
+            signal appendColorpicker(var msg)
+            signal modifyColorpicker(var msg)
+        }
+
+
+        /*
+        // List of positions
+        ScorePosition {
+            visible: false
+            id: scorePosition
+            signal appendPosition(var msg)
+            signal modifyPosition(var msg)
+        }*/
+    }
 
     // Receiving informations about controls in a control surface from score
     Connections {
