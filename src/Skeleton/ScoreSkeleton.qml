@@ -34,7 +34,7 @@ Item {
         id: scoreButtons
         anchors.top: parent.top
         anchors.left: parent.left
-        width: ( 0.3 * parent.width + 0.7 * parent.height ) / 10
+        width: ( 0.3 * parent.width + 0.7 * parent.height ) / 11
 
         //height: parent.height /5
 
