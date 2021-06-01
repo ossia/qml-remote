@@ -4,7 +4,10 @@ import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 
 Button {
+    width: parent.width
+    height: parent.width
     hoverEnabled: true
+
     // Allow to click on buttons and leave while pressing
     onHoveredChanged: {
         if (stopButton.state === 'stopOn') {
@@ -27,8 +30,8 @@ Button {
 
     contentItem: Image {
         id: stopButton
-        sourceSize.width: window.width / 20
-        sourceSize.height: window.width / 20
+        sourceSize.width: parent.width
+        sourceSize.height: parent.width
         clip: true
         source: "../Icons/stop_off.png"
         states: [
