@@ -61,7 +61,7 @@ Rectangle {
     }
     // Receiving and handling messages about intervals
     Connections {
-        target: scoreTimeSet
+        target: scoreSpeeds
         function onIntervalMessageReceived(m) {
             var messageObject = m.Message
             if (messageObject === "IntervalAdded") {
@@ -110,7 +110,7 @@ Rectangle {
     }
 
     Connections {
-        target: scoreTimeSet
+        target: scoreSpeeds
         // Modifying an interval speed
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals

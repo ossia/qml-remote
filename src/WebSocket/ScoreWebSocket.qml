@@ -24,18 +24,18 @@ WebSocket {
                 scoreTimeline.intervalsMessageReceived(jsonObject)
                 // scoreVolume.intervalsMessageReceived(jsonObject);
                 scoreSpeed.intervalsMessageReceived(jsonObject)
-                scoreTimeSet.intervalsMessageReceived(jsonObject)
+                scoreSpeeds.intervalsMessageReceived(jsonObject)
             } else {
                 var typeOfMessage = jsonObject.Message
                 if (typeOfMessage === "TriggerRemoved"
                         || typeOfMessage === "TriggerAdded") {
                     // Handling messages about triggers
-                    scoreTimeSet.triggerMessageReceived(jsonObject)
+                    scoreTriggers.triggerMessageReceived(jsonObject)
                 } else if (typeOfMessage === "IntervalRemoved"
                            || typeOfMessage === "IntervalAdded") {
                     // Handling messages about interval speeds
                     scoreSpeed.intervalMessageReceived(jsonObject)
-                    scoreTimeSet.intervalMessageReceived(jsonObject)
+                    scoreSpeeds.intervalMessageReceived(jsonObject)
                     scoreVolume.intervalMessageReceived(jsonObject)
                 } else if (typeOfMessage === "Play" || typeOfMessage === "Pause"
                            || typeOfMessage === "Restart") {
