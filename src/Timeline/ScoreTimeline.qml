@@ -7,7 +7,7 @@ Slider {
     id: time
     value: 0
     implicitWidth: window.width
-    implicitHeight: 20
+    implicitHeight: 5 + window.height / 25
 
     // Sends a message to Score to update its progress' timeline
     onMoved: {
@@ -53,8 +53,10 @@ Slider {
         color: "#f0f0f0"
         font.bold: true
         width: time.width
+        anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.pointSize: parent.height === 0 ? 1 : parent.height / 2.5
     }
 
     handle: Rectangle {} // No handle
