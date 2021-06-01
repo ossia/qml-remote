@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 
 Slider {
+    implicitWidth: 300
+    implicitHeight: 20
     property string controlName: "ControlName"
     property string controlPath: "ControlPath"
     property int controlId
@@ -9,29 +11,30 @@ Slider {
     property string controlUnit: ""
     property string controlColor: "#e0b01e"
     id: control
-    //value: 0.5
+
     Text {
         text: ' ' + controlName + ':'
         color: "#ffedb6"
         font.bold: true
-        width: control.width
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        font.pointSize: parent.height === 0 ? 1 : parent.height / 2.5
     }
+
     Text {
         text: control.value.toFixed(3) + ' ' + controlUnit
         color: "#ffedb6"
+        anchors.right: parent.right
         font.bold: true
-        width: control.width
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
+        font.pointSize: parent.height === 0 ? 1 : parent.height / 2.5
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     handle: Rectangle {} // No handle
 
     background: Rectangle {
-        implicitWidth: 300
-        implicitHeight: 20
-        //width: control.width
-        //height: control.height
+        implicitWidth: parent.width
+        implicitHeight: parent.height
         color: "#363636"
         border.width: 1
         border.color: controlColor
