@@ -9,8 +9,10 @@ Button {
     contentItem: Text {
         text: triggerName
         color: "#ffffff"
+        anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.pointSize: parent.height === 0 ? 1 : parent.height / 15
         elide: Text.ElideRight
     }
 
@@ -23,8 +25,8 @@ Button {
         Image {
             x: 5
             y: 5
-            width: 20
-            height: 20
+            width: (parent.height + parent.width) / 10
+            height: (parent.height + parent.width) / 10
             source: "../Icons/scenario_trigger.png"
         }
     }
