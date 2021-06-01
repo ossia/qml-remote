@@ -74,7 +74,7 @@ Item {
     // Creating the trigger list
     ScoreTriggers {
         id: scoreTriggers
-        anchors.margins: 5
+        anchors.margins: 10
         anchors.left: scoreButtons.right
         anchors.top: parent.top
         anchors.right: scoreSpeed.left
@@ -86,6 +86,7 @@ Item {
 
     ScoreSpeeds {
         id: scoreSpeeds
+        anchors.topMargin: 10
         anchors.right: parent.right
         anchors.bottom: scoreButtons.bottom
         anchors.top: scoreSpeed.bottom
@@ -98,8 +99,8 @@ Item {
         id: scoreSpeed
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 5
-        anchors.rightMargin: 5
+        anchors.topMargin: 10
+        anchors.rightMargin: 10
         signal intervalMessageReceived(var n)
         signal intervalsMessageReceived(var n)
     }
