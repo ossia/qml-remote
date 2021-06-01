@@ -18,7 +18,6 @@
         <file>Trigger/ScoreTrigger.qml</file>
         <file>Trigger/ScoreTriggers.qml</file>
         <file>Volume/ScoreVolume.qml</file>
-        <file>TimeSet/TimeSet.qml</file>
         <file>Icons/pause_off.svg</file>
         <file>Icons/pause_on.svg</file>
         <file>Icons/play_glob_off.svg</file>

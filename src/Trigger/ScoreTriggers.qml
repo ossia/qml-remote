@@ -6,7 +6,6 @@ import QtQml.Models 2.12
 Rectangle {
     radius: 9
     color: "#202020"
-    anchors.fill: parent
 
     ListView {
         id: triggerslist
@@ -29,7 +28,7 @@ Rectangle {
 
     // Receiving informations about trigger from score
     Connections {
-        target: scoreTimeSet
+        target: scoreTriggers
         function onTriggerMessageReceived(m) {
             var messageObject = m.Message
             // Adding a trigger

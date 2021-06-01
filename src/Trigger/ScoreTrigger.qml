@@ -12,7 +12,7 @@ Button {
         anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.pointSize: parent.height === 0 ? 1 : parent.height / 15
+        font.pointSize: parent.height === 0 ? 1 : parent.height / 18
         elide: Text.ElideRight
     }
 

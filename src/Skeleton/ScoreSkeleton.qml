@@ -10,10 +10,10 @@ import "../WebSocket"
 import "../IpAdress"
 import "../PlayPauseStop"
 import "../Speed"
-import "../TimeSet"
 import "../ControlSurface"
 import "../Timeline"
-
+import "../Trigger"
+import "../Speeds"
 
 Item {
     id: window
@@ -59,7 +59,6 @@ Item {
         }
     }
 
-
     /*
     // TODO : Creating the volume slider object
     ScoreVolume {
@@ -72,6 +71,28 @@ Item {
 
     }*/
 
+    // Creating the trigger list
+    ScoreTriggers {
+        id: scoreTriggers
+        anchors.margins: 5
+        anchors.left: scoreButtons.right
+        anchors.top: parent.top
+        anchors.right: scoreSpeed.left
+        anchors.bottom: scoreButtons.bottom
+        //anchors.right: scoreSpeeds.left
+        //anchors.rightMargin: 5
+        signal triggerMessageReceived(var n)
+    }
+
+    ScoreSpeeds {
+        id: scoreSpeeds
+        anchors.right: parent.right
+        anchors.bottom: scoreButtons.bottom
+        anchors.top: scoreSpeed.bottom
+        signal intervalMessageReceived(var n)
+        signal intervalsMessageReceived(var n)
+    }
+
     // Creating the speed slider object
     ScoreSpeed {
         id: scoreSpeed
@@ -79,21 +100,6 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 5
         anchors.rightMargin: 5
-        signal intervalMessageReceived(var n)
-        signal intervalsMessageReceived(var n)
-    }
-
-    // Creating the timeSet object : trigger buttons and interval speed sliders
-    TimeSet {
-        id: scoreTimeSet
-        anchors.top: scoreSpeed.bottom
-        anchors.topMargin: 5
-        anchors.left: scoreButtons.right
-        anchors.right: window.right
-        anchors.bottom: scoreButtons.bottom
-        width: parent.width
-        height: window.height / 5
-        signal triggerMessageReceived(var n)
         signal intervalMessageReceived(var n)
         signal intervalsMessageReceived(var n)
     }
