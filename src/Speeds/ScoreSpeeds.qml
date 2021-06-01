@@ -18,7 +18,7 @@ Rectangle {
         id: lView
         spacing: 10
         anchors.fill: parent
-        anchors.margins: 5
+        //anchors.margins: 5
         clip: true
         snapMode: ListView.SnapToItem
         // Create a list of sliders for the intervals' speeds
