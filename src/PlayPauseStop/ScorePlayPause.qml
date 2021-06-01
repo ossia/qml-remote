@@ -76,8 +76,8 @@ Button {
 
     contentItem: Image {
         id: pauseButton
-        sourceSize.width: 30
-        sourceSize.height: 30
+        sourceSize.width: window.width / 20
+        sourceSize.height: window.width / 20
         source: "../Icons/connection.png"
         clip: true
         states: [

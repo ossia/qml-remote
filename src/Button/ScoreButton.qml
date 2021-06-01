@@ -29,7 +29,6 @@ Button {
 
     onPressed: {
         background.color = "#101010"
-
         /*
         console.log('{ "Message": "ControlSurface","Path":'.concat(
                         button.buttonPath, ', "id":', button.buttonId,

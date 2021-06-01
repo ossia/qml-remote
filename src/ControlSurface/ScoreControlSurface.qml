@@ -111,6 +111,7 @@ ColumnLayout {
         }
         // Modifying controls in a control surface
         function onModifyControl(m) {
+
             if (m.Message === "ControlSurfaceControl") {
                 scoreSliders.modifySlider(m)
                 scoreColorpicker.modifyColorpicker(m)
