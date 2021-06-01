@@ -106,9 +106,6 @@ Rectangle {
                         var blue = s.Value.Vec4f[2]
                         var alpha = s.Value.Vec4f[3]
                         var newColor = Qt.rgba(red, green, blue, alpha)
-                        console.log(JSON.stringify(colorpicker._fullColorString(
-                                                       newColor, alpha)))
-
                         break
                     default:
                         return

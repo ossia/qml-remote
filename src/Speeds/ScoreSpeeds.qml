@@ -10,7 +10,7 @@ import "../Slider"
 
 Rectangle {
     id: scoreSpeeds
-    width: parent.width / 4
+    width: parent.width / 3
     height: parent.height
     color: "#202020"
     anchors.right: parent.right
@@ -26,15 +26,15 @@ Rectangle {
             id: intervalsListModel
             // Initialized on false in order to know if the first (and main) interval has been added or not
             property bool hasStarted: false
-            property var globalSpeedPath: "null"
+            property string globalSpeedPath: "null"
         }
         delegate: ScoreSlider {
             id: speed
             controlName: name
-            height: 20
+            height: window.width / 40
             anchors.right: parent ? parent.right : undefined
-            anchors.rightMargin: 25
             anchors.left: parent ? parent.left : undefined
+            anchors.rightMargin: 25
             from: -120
             value: speedValue
             to: 600
@@ -84,7 +84,6 @@ Rectangle {
                                                   "speedValue": JSON.stringify(
                                                                     m.Speed) * 720 / 6
                                               })
-                    console.log(intervalsListModel.get(0).value)
                 }
             } else if (messageObject === "IntervalRemoved") {
                 // Removing an interval speed

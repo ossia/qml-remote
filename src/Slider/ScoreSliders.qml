@@ -23,8 +23,7 @@ ColumnLayout {
             id: slider
             controlName: myName
             height: 20
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.alignment: Qt.AlignLeft | Qt.AlignRight
             controlColor: "#f6a019"
             controlId: myId
             from: myFrom
@@ -32,7 +31,6 @@ ColumnLayout {
             to: myTo
             controlPath: path
             stepSize: myStepSize
-            controlInd: myInd
             controlUuid: myUuid
             onMoved: {
                 socket.sendTextMessage(
@@ -83,7 +81,6 @@ ColumnLayout {
                                            "myValue": tmpValue,
                                            "myTo": JSON.stringify(tmpTo),
                                            "myStepSize": tmpStepSize,
-                                           "myInd": ind,
                                            "myUuid": s.uuid
                                        })
             }
