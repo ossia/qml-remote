@@ -25,13 +25,13 @@ ColumnLayout {
             }
 
             onButtonClicked: {
-                //console.log("HELLO")
+                console.log("HELLO")
                 if (clickedButton === StandardButton.Ok) {
                     settings.ip_adress = ipInput.text
-                    //console.log(" socket url " + socket.url)
-                    //console.log("adresse ip = " + settings.ip_adress)
+                    console.log(" socket url " + socket.url)
+                    console.log("adresse ip = " + settings.ip_adress)
                 } else {
-                    //console.log("Rejected url = " + socket.url)
+                    console.log("Rejected url = " + socket.url)
                 }
             }
         }
@@ -52,8 +52,8 @@ ColumnLayout {
 
         contentItem: Image {
             id: ipButton
-            sourceSize.width: 35
-            sourceSize.height: 35
+            sourceSize.width: window.width / 20
+            sourceSize.height: window.width / 20
             source: "../Icons/ip_adress.png"
             clip: true
             states: [
@@ -99,8 +99,8 @@ ColumnLayout {
 
         contentItem: Image {
             id: disconnect_image
-            sourceSize.width: 35
-            sourceSize.height: 35
+            sourceSize.width: window.width / 20
+            sourceSize.height: window.width / 20
             source: "../Icons/disconnected.png"
             clip: true
             states: [

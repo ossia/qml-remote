@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.12
 
 Column {
+    id: playPauseStop
     ScorePlayPause {
         id: playPause
     }

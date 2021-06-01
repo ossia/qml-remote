@@ -30,24 +30,32 @@ Item {
         id: socket
     }
 
-    // Creating the IP adress button object
-    ScoreIpAdress {
-        id: ipAdress
+    Column{
+        id: scoreButtons
         anchors.top: parent.top
         anchors.left: parent.left
-        signal playPauseStopMessageReceived(var n)
-    }
+        width: parent.width / 15
+        //height: parent.height /5
 
-    // Creating play, pause and stop button objects
-    ScorePlayPauseStop {
-        id: scorePlayPauseStop
-        anchors.top: ipAdress.bottom
-        anchors.left: parent.left
-        height: window / 5
-        signal playPauseStopMessageReceived(var n)
-        signal scorePlayPauseStopMessageReceived(var n)
-        signal connectedToScore
-        signal disconnectedFromScore
+        // Creating the IP adress button object
+        ScoreIpAdress {
+            id: ipAdress
+            anchors.left: parent.left
+            anchors.right: parent.right
+            signal playPauseStopMessageReceived(var n)
+        }
+
+        // Creating play, pause and stop button objects
+        ScorePlayPauseStop {
+            id: scorePlayPauseStop
+            anchors.left: parent.left
+            anchors.right: parent.right
+            //height: window / 5
+            signal playPauseStopMessageReceived(var n)
+            signal scorePlayPauseStopMessageReceived(var n)
+            signal connectedToScore
+            signal disconnectedFromScore
+        }
     }
 
 
@@ -79,9 +87,9 @@ Item {
         id: scoreTimeSet
         anchors.top: scoreSpeed.bottom
         anchors.topMargin: 5
-        anchors.left: scorePlayPauseStop.right
+        anchors.left: scoreButtons.right
         anchors.right: window.right
-        anchors.bottom: scorePlayPauseStop.bottom
+        anchors.bottom: scoreButtons.bottom
         width: parent.width
         height: window.height / 5
         signal triggerMessageReceived(var n)
@@ -92,7 +100,7 @@ Item {
     // Creating the control surface list
     ScoreControlSurfaceList {
         id: scoreControlSurfaceList
-        anchors.top: scorePlayPauseStop.bottom
+        anchors.top: scoreButtons.bottom
         anchors.bottom: scoreTimeline.top
         anchors.topMargin: 5
         anchors.left: parent.left
