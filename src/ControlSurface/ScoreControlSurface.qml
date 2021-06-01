@@ -10,8 +10,6 @@ ColumnLayout {
     spacing: 5
     property string name
 
-    //property alias sliders: scoreSliders
-
     //property var sliderControl: width
     Rectangle {
         width: window.width
@@ -26,50 +24,12 @@ ColumnLayout {
         color: "white"
     }
 
-    // List of controls
-    Flow {
-        width: window.width
-        spacing: 5
-
-        // List of sliders
-        ScoreSliders {
-            id: scoreSliders
-            //width: 5
-            signal appendSlider(var msg)
-            signal modifySlider(var msg)
-        }
-
-        // List of buttons
-        ScoreButtons {
-            id: scoreButtons
-            signal appendButton(var msg)
-            signal modifyButton(var msg)
-        }
-
-        // List of colorpickers
-        ScoreColorpicker {
-            visible: false
-            id: scoreColorpicker
-            signal appendColorpicker(var msg)
-            signal modifyColorpicker(var msg)
-        }
-
-
-        /*
-        // List of positions
-        ScorePosition {
-            visible: false
-            id: scorePosition
-            signal appendPosition(var msg)
-            signal modifyPosition(var msg)
-        }*/
-    }
 
     // Receiving informations about controls in a control surface from score
     Connections {
         target: controlSurface
         // Adding controls in a control surface
-        onAppendControls: {
+        function onAppendControls(m) {
             controlSurfaceName.text = m.Name
             var i = 0
             var controlMessage = m.Controls[i]
@@ -110,11 +70,11 @@ ColumnLayout {
             }
         }
         // Modifying controls in a control surface
-        onModifyControl: {
+        function onModifyControl(m) {
             if (m.Message === "ControlSurfaceControl") {
                 scoreSliders.modifySlider(m)
                 scoreColorpicker.modifyColorpicker(m)
-                scoreButtons.modifyButton(m)
+                //scoreButtons.modifyButton(m)
             }
         }
     }

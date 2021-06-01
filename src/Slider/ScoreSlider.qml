@@ -8,7 +8,6 @@ Slider {
     property string controlUuid
     property string controlUnit: ""
     property string controlColor: "#e0b01e"
-    property int controlInd: 0
     id: control
     //value: 0.5
     Text {
@@ -31,14 +30,13 @@ Slider {
     background: Rectangle {
         implicitWidth: 300
         implicitHeight: 20
-        width: control.width
-        height: control.height
+        //width: control.width
+        //height: control.height
         color: "#363636"
         border.width: 1
         border.color: controlColor
 
         Rectangle {
-
             width: control.visualPosition * parent.width - y
             height: parent.height
             color: controlColor

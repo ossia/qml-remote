@@ -25,13 +25,13 @@ ColumnLayout {
             }
 
             onButtonClicked: {
-                console.log("HELLO")
+                //console.log("HELLO")
                 if (clickedButton === StandardButton.Ok) {
                     settings.ip_adress = ipInput.text
-                    console.log(" socket url " + socket.url)
-                    console.log("adresse ip = " + settings.ip_adress)
+                    //console.log(" socket url " + socket.url)
+                    //console.log("adresse ip = " + settings.ip_adress)
                 } else {
-                    console.log("Rejected url = " + socket.url)
+                    //console.log("Rejected url = " + socket.url)
                 }
             }
         }

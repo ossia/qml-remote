@@ -44,7 +44,6 @@ RowLayout {
                                            "name": s.Custom,
                                            "id": s.id
                                        })
-                console.log(JSON.stringify(s.id))
             }
         }
         // Modifying a slider in the control surface
