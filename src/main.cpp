@@ -3,14 +3,13 @@
 
 int main(int argc, char *argv[])
 {
-    qputenv("QT_SCALE_FACTOR", "1");
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
     QGuiApplication app(argc, argv);
 
-    app.setOrganizationName("ossia score");
+    app.setOrganizationName("ossia.io");
     app.setOrganizationDomain("Remote Control");
 
     QQmlApplicationEngine engine;
