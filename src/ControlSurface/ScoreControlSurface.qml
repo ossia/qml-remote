@@ -26,6 +26,7 @@ Column {
 
     // List of controls
     Flow {
+        id: controlList
         //Layout.alignment: parent.fillHeight | parent.fillWidth
         width: window.width
         spacing: 5

@@ -9,7 +9,7 @@ ScoreSlider {
     property var path
     controlName: "Speed"
     height: 5 + window.height / 25
-    width: window.width / 3
+    width: window.width / 2
     from: -120
     value: 100
     to: 600
