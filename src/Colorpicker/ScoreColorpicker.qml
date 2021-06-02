@@ -5,58 +5,71 @@ import QtQml 2.15
 Rectangle {
     property string _positionPointName: "ColorName"
     id: colorBackground
-    width: 550
-    height: 150
-
+    width: (window.width <= 500 ? window.width : (window.width >= 1500 ? 600 : window.width / 2))
+    height: colorBackground.width / 2
     color: "#363636"
 
     // Instantiate color picker window
     Colorpicker {
         id: colorpicker
-        width: 70 * colorBackground.width / 100
-        height: 98 * colorBackground.height / 100
+        //anchors.margins: 5
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: ( 2 / 3 ) * colorBackground.width
     }
 
     // Create the column of color picker
     Column {
         anchors.left: colorpicker.right
+        anchors.right: colorBackground.right
         anchors.leftMargin: 5
-        anchors.top: colorpicker.top
-        anchors.topMargin: 5
-        spacing: 20
+        anchors.top: colorBackground.top
+        anchors.topMargin: 10
+        spacing: 5
+        width: ( 1 / 3 ) * colorBackground.width
+
         Repeater {
+            width: parent.width
             id: colorPointList
             model: ListModel {
                 id: colorPointListModel
             }
 
-            delegate: ScoreColorPoint {
-                id: colorPoint
-                colorPointName: myName
-                colorPointPath: path // path de la control surface et pas du color picker
-                colorPointId: myId
-                colorPointColor: myColor
-                colorPointOpacity: myOpacity
-                displayedColor: colorpicker.colorValue
-                colorPointUuid: myUuid
+            delegate: Item {
+                id: background
+                width: parent.width
+                height: parent.width / 5
 
-                function hexToRGB(hex) {
+                ScoreColorPoint {
+                    id: colorPoint
+                    width: parent.width / 5
+                    colorPointName: myName
+                    colorPointPath: path // path de la control surface et pas du color picker
+                    colorPointId: myId
+                    colorPointColor: myColor
+                    colorPointOpacity: myOpacity
+                    displayedColor: colorpicker.colorValue
+                    colorPointUuid: myUuid
 
-                    return "[" + hex.r + ", " + hex.g + ", " + hex.b + ", " + hex.a + "]"
-                }
+                    function hexToRGB(hex) {
 
-                onDisplayedColorChanged: {
+                        return "[" + hex.r + ", " + hex.g + ", " + hex.b + ", " + hex.a + "]"
+                    }
 
-                    // le pb est de convertir un "#ffffffff" en [r,g, b, o] et inversement
-                    if (colorPoint.state === "on" || colorPoint.state === "") {
+                    onDisplayedColorChanged: {
 
-                        socket.sendTextMessage(
-                                    '{ "Message": "ControlSurface","Path":'.concat(
-                                        colorPoint.colorPointPath, ', "id":',
-                                        colorPoint.colorPointId,
-                                        ', "Value": {"Vec4f":',
-                                        hexToRGB(colorPoint.displayedColor),
-                                        '}}'))
+                        // le pb est de convertir un "#ffffffff" en [r,g, b, o] et inversement
+                        if (colorPoint.state === "on" || colorPoint.state === "") {
+
+                            socket.sendTextMessage(
+                                        '{ "Message": "ControlSurface","Path":'.concat(
+                                            colorPoint.colorPointPath, ', "id":',
+                                            colorPoint.colorPointId,
+                                            ', "Value": {"Vec4f":',
+                                            hexToRGB(colorPoint.displayedColor),
+                                            '}}'))
+                        }
                     }
                 }
             }

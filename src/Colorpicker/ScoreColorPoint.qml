@@ -9,7 +9,6 @@ Rectangle {
     property string colorPointOpacity: "Opacity"
     property string colorPointUuid
     id: colorButton
-    width: colorBackground.width / 20
     height: colorButton.width
     color: "#a7dd0d"
     border.width: 5
@@ -22,20 +21,19 @@ Rectangle {
         anchors.leftMargin: 5
         anchors.horizontalCenter: colorButton.horizontalCenter
         text: colorPointName
+        font.pointSize: background.height * ( 9 / 40)
         color: "#a7dd0d"
     }
     PanelBorder {
-        width: 100
-        height: 15
+        width: background.width * ( 2 / 3)
+        height: parent.width / 2
         anchors.top: colorName.bottom
         anchors.left: colorName.left
-        Checkerboard {
-            cellSide: 5
-        }
+
         Rectangle {
             id: colorValue
             width: parent.width
-            height: 15
+            height: parent.height
             border.width: 1
             border.color: "black"
             color: colorButton.displayedColor
