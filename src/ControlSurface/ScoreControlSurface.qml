@@ -6,11 +6,10 @@ import "../Slider"
 import "../Button"
 
 
-ColumnLayout {
+Column {
     spacing: 5
     property string name
 
-    //property var sliderControl: width
     Rectangle {
         width: window.width
         height: 5
@@ -27,6 +26,7 @@ ColumnLayout {
 
     // List of controls
     Flow {
+        //Layout.alignment: parent.fillHeight | parent.fillWidth
         width: window.width
         spacing: 5
 

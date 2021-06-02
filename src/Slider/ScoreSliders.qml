@@ -4,16 +4,16 @@ import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
 ColumnLayout {
-    spacing: 5
-
+    id: sliderColumn
     property alias model: sliderListModel
+    implicitWidth: window.width / 3
+    spacing: 5
 
     Repeater {
         id: sliderList
         clip: true
         Layout.fillHeight: parent.height
         Layout.fillWidth: parent.height
-        Layout.margins: 5
 
         model: ListModel {
             id: sliderListModel
@@ -22,8 +22,8 @@ ColumnLayout {
         delegate: ScoreSlider {
             id: slider
             controlName: myName
-            height: 20
-            Layout.alignment: Qt.AlignLeft | Qt.AlignRight
+            implicitHeight: 5 + window.height / 25
+            width: window.width / 3
             controlColor: "#f6a019"
             controlId: myId
             from: myFrom
