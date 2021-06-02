@@ -22,6 +22,7 @@ ColumnLayout {
         id: controlSurfaceName
         text: name
         color: "white"
+        font.pointSize: parent.height === 0 ? font.default : (0.55 * window.width + 0.45 * window.height) / 75
     }
 
     // List of controls
