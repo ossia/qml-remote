@@ -33,7 +33,6 @@ ColumnLayout {
         // List of sliders
         ScoreSliders {
             id: scoreSliders
-            //width: 5
             signal appendSlider(var msg)
             signal modifySlider(var msg)
         }
