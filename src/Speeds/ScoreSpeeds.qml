@@ -10,17 +10,15 @@ import "../Slider"
 
 Rectangle {
     id: scoreSpeeds
-    width: parent.width / 3
-    height: parent.height
     color: "#202020"
-    anchors.right: parent.right
+
     ListView {
         id: lView
         spacing: 10
         anchors.fill: parent
-        //anchors.margins: 5
         clip: true
         snapMode: ListView.SnapToItem
+
         // Create a list of sliders for the intervals' speeds
         model: ListModel {
             id: intervalsListModel
@@ -28,14 +26,14 @@ Rectangle {
             property bool hasStarted: false
             property string globalSpeedPath: "null"
         }
+
         delegate: ScoreSlider {
             id: speed
             controlName: name
             height: 5 + window.height / 25
-            width: window.width / 3
-            anchors.right: parent ? parent.right : undefined
-            anchors.left: parent ? parent.left : undefined
-            anchors.rightMargin: 25
+            width: window.width / 3 - scoreSpeeds.width / 15 - 10
+            //anchors.right: scrollBar.left
+            anchors.rightMargin: 10
             from: -120
             value: speedValue
             to: 600
@@ -49,14 +47,20 @@ Rectangle {
                                  speed.value * 6 / 720, '}')))
             }
         }
+
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
-            width: 20
+            active: true
+            width: parent.width / 15
             anchors.right: parent.right
-            policy: ScrollBar.AlwaysOn
+            policy: ScrollBar.AsNeeded
+            snapMode: ScrollBar.SnapAlways
+
             contentItem: Rectangle {
+                id: contentItem
                 radius: width / 2
-                color: "#303030"
+                visible: scrollBar.size >= 1 ? false : true
+                color: scrollBar.pressed ? "#f6a019" : "#303030"
             }
         }
     }

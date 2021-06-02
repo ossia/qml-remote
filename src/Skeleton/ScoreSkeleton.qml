@@ -87,9 +87,11 @@ Item {
     ScoreSpeeds {
         id: scoreSpeeds
         anchors.topMargin: 10
+        anchors.rightMargin: 10
         anchors.right: parent.right
         anchors.bottom: scoreButtons.bottom
         anchors.top: scoreSpeed.bottom
+        anchors.left: scoreSpeed.left
         signal intervalMessageReceived(var n)
         signal intervalsMessageReceived(var n)
     }
