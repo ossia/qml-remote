@@ -30,13 +30,9 @@ Column {
             }
 
             onButtonClicked: {
-                console.log("HELLO")
                 if (clickedButton === StandardButton.Ok) {
                     settings.ip_adress = ipInput.text
-                    console.log(" socket url " + socket.url)
-                    console.log("adresse ip = " + settings.ip_adress)
                 } else {
-                    console.log("Rejected url = " + socket.url)
                 }
             }
         }
@@ -45,7 +41,6 @@ Column {
             ipButton.state = "ip_on"
         }
         onReleased: {
-            console.log("avant cc = " + settings.cc)
             onClicked: ipDialog.open()
         }
 
