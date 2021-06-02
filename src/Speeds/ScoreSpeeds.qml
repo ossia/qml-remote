@@ -31,7 +31,7 @@ Rectangle {
             id: speed
             controlName: name
             height: 5 + window.height / 25
-            width: window.width / 3 - scoreSpeeds.width / 15 - 10
+            width: window.width / 2 - scoreSpeeds.width / 15 - 10
             //anchors.right: scrollBar.left
             anchors.rightMargin: 10
             from: -120

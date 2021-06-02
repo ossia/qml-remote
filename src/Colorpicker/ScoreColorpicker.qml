@@ -5,7 +5,7 @@ import QtQml 2.15
 Rectangle {
     property string _positionPointName: "ColorName"
     id: colorBackground
-    width: (window.width <= 500 ? window.width : (window.width >= 1500 ? 600 : window.width / 2))
+    width: (window.width <= 500 ? (window.width - 10) : (window.width >= 1500 ? 600 : window.width / 2))
     height: colorBackground.width / 2
     color: "#363636"
 
