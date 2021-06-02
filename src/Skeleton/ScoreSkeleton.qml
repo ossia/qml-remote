@@ -30,11 +30,12 @@ Item {
         id: socket
     }
 
+    // Creating the button list : Ip, (dis)connection, play, pause, stop
     Column{
         id: scoreButtons
         anchors.top: parent.top
         anchors.left: parent.left
-        width: ( 0.3 * parent.width + 0.7 * parent.height ) / 11
+        width: 20 + ( ( 0.3 * parent.width + 0.7 * parent.height ) / 20 )
 
         //height: parent.height /5
 
