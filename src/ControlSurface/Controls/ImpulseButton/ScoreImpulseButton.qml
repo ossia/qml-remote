@@ -3,13 +3,17 @@ import QtQuick.Controls 2.15
 
 Button {
     id: button
-    property string buttonName: "buttonName"
-    property string buttonPath: "buttonPath"
-    property int buttonId
-    property string buttonUuid
+
+    property string controlCustom
+    property string controlDomain
+    property string controlValueType
+    property string controlValueData
+    property int controlId
+    property string controlUuid
+    property string controlSurfacePath
 
     contentItem: Text {
-        text: buttonName
+        text: controlCustom
         color: "#ffffff"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -29,14 +33,9 @@ Button {
 
     onPressed: {
         background.color = "#101010"
-        /*
-        console.log('{ "Message": "ControlSurface","Path":'.concat(
-                        button.buttonPath, ', "id":', button.buttonId,
-                        ', "Value": {"Impulse":null}}'))
-                        */
         socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(
-                                   button.buttonPath, ', "id":',
-                                   button.buttonId,
+                                   button.controlSurfacePath, ', "id":',
+                                   button.controlId,
                                    ', "Value": {"Impulse":null}}'))
     }
 
