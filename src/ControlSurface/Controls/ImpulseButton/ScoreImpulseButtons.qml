@@ -20,9 +20,9 @@ RowLayout {
 
         delegate: ScoreImpulseButton {
             id: button
-            buttonPath: path
-            buttonName: name
-            buttonId: id
+            controlCustom: _custom
+            controlId: _id
+            controlSurfacePath: path
         }
     }
 
@@ -41,8 +41,8 @@ RowLayout {
             }) //the index of m.Path in the listmodel
             if (a === null) {
                 buttonlistModel.insert(buttonlistModel.count, {
-                                           "name": s.Custom,
-                                           "id": s.id
+                                           "_custom": s.Custom,
+                                           "_id": s.id
                                        })
             }
         }
