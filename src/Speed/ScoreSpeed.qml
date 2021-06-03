@@ -2,9 +2,9 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
 
-import "../Slider"
+import "../ObjectSkeletons"
 
-ScoreSlider {
+ScoreSliderSkeleton {
     id: globalSpeed
     property var path
     controlName: "Speed"
