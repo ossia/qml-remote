@@ -78,5 +78,7 @@
         <file>ControlSurface/Controls/Colorpicker/SBPicker.qml</file>
         <file>ControlSurface/Controls/Colorpicker/ScoreColorpicker.qml</file>
         <file>ControlSurface/Controls/Colorpicker/ScoreColorPoint.qml</file>
+        <file>ControlSurface/Controls/ImpulseButton/ScoreImpulseButton.qml</file>
+        <file>ControlSurface/Controls/ImpulseButton/ScoreImpulseButtons.qml</file>
     </qresource>
 </RCC>
