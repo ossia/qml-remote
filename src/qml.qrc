@@ -8,8 +8,8 @@
         <file>Position/ScorePosition.qml</file>
         <file>Position/ScorePositionPoint.qml</file>
         <file>PlayPauseStop/ScoreReinitialize.qml</file>
-        <file>Slider/ScoreSlider.qml</file>
-        <file>Slider/ScoreSliders.qml</file>
+        <file>ControlSurface/Controls/Slider/ScoreSlider.qml</file>
+        <file>ControlSurface/Controls/Slider/ScoreSliders.qml</file>
         <file>Speed/ScoreSpeed.qml</file>
         <file>Speeds/ScoreSpeeds.qml</file>
         <file>Skeleton/ScoreSkeleton.qml</file>
@@ -76,7 +76,7 @@
         <file>Button/ScoreButton.qml</file>
         <file>main.cpp</file>
         <file>main.qml</file>
-        <file>Control/Control.qml</file>
+        <file>ControlSurface/Controls/Control.qml</file>
         <file>ObjectSkeletons/ScoreSliderSkeleton.qml</file>
     </qresource>
 </RCC>
