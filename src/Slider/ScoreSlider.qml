@@ -2,18 +2,22 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 
 Slider {
+    id: slider
     implicitWidth: 300
     implicitHeight: 20
-    property string controlName: "ControlName"
-    property string controlPath: "ControlPath"
+
+    property string controlCustom
+    property string controlDomain
+    property string controlValueType
+    property string controlValueData
     property int controlId
     property string controlUuid
-    property string controlUnit: ""
-    property string controlColor: "#e0b01e"
-    id: control
+    property string controlSurfacePath
+
+    property color controlColor: "#e0b01e"
 
     Text {
-        text: ' ' + controlName + ':'
+        text: ' ' + controlCustom + ':'
         color: "#ffedb6"
         font.bold: true
         anchors.left: parent.left
@@ -22,7 +26,7 @@ Slider {
     }
 
     Text {
-        text: control.value.toFixed(3) + ' ' + controlUnit
+        text: slider.value.toFixed(3)
         color: "#ffedb6"
         anchors.right: parent.right
         font.bold: true
@@ -40,7 +44,7 @@ Slider {
         border.color: controlColor
 
         Rectangle {
-            width: control.visualPosition * parent.width - y
+            width: slider.visualPosition * parent.width - y
             height: parent.height
             color: controlColor
         }
