@@ -26,7 +26,7 @@ Slider {
     }
 
     Text {
-        text: slider.value.toFixed(3)
+        text: slider.value.toFixed(3) + " "
         color: "#ffedb6"
         anchors.right: parent.right
         font.bold: true
