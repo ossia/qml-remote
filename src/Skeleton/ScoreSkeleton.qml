@@ -37,8 +37,6 @@ Item {
         anchors.left: parent.left
         width: 20 + ( ( 0.3 * parent.width + 0.7 * parent.height ) / 20 )
 
-        //height: parent.height /5
-
         // Creating the IP adress button object
         ScoreIpAdress {
             id: ipAdress
