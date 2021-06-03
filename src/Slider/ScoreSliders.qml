@@ -3,11 +3,14 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
+import "../Control"
+
 ColumnLayout {
     id: sliderColumn
-    property alias model: sliderListModel
-    implicitWidth: (window.width <= 500 ? (window.width - 10) : (window.width >= 1200 ? 400 : window.width / 3))
+    implicitWidth: (window.width <= 500 ? (window.width - 10) : (window.width
+                                                                 >= 1200 ? 400 : window.width / 3))
     spacing: 5
+    property alias model: sliderListModel
 
     Repeater {
         id: sliderList
@@ -21,22 +24,28 @@ ColumnLayout {
 
         delegate: ScoreSlider {
             id: slider
-            controlName: myName
             implicitHeight: 5 + window.height / 25
             implicitWidth: (window.width <= 500 ? (window.width - 10) : (window.width >= 1200 ? 400 : window.width / 3))
-            width: (window.width <= 500 ? (window.width - 10) : (window.width >= 1200 ? 400 : window.width / 3))
+            width: (window.width <= 500 ? (window.width - 10) : (window.width
+                                                                 >= 1200 ? 400 : window.width / 3))
+
+            // Control values
+            controlCustom: _custom
+            controlId: _id
+            controlUuid: _uuid
+            controlSurfacePath: path
             controlColor: "#f6a019"
-            controlId: myId
-            from: myFrom
-            value: myValue
-            to: myTo
-            controlPath: path
-            stepSize: myStepSize
-            controlUuid: myUuid
+
+            // Specific variables to the sliders
+            from: _from
+            value: _value
+            to: _to
+            stepSize: _stepSize
+
             onMoved: {
                 socket.sendTextMessage(
                             '{ "Message": "ControlSurface","Path":'.concat(
-                                slider.controlPath, ', "id":',
+                                slider.controlSurfacePath, ', "id":',
                                 slider.controlId, ', "Value": {"Float":',
                                 slider.value, '}}'))
             }
@@ -60,15 +69,15 @@ ColumnLayout {
                 var tmpFrom, tmpValue, tmpTo
                 var tmpStepSize
                 switch (s.uuid) {
-                    // Float Slider
                 case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
+                    // Float Slider
                     tmpFrom = s.Domain.Float.Min
                     tmpValue = s.Value.Float
                     tmpTo = s.Domain.Float.Max
                     tmpStepSize = 0.0
                     break
-                    // Int Slider
                 case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
+                    // Int Slider
                     tmpFrom = s.Domain.Int.Min
                     tmpValue = s.Value.Int
                     tmpTo = s.Domain.Int.Max
@@ -76,22 +85,22 @@ ColumnLayout {
                     break
                 }
                 sliderListModel.insert(sliderListModel.count, {
-                                           "myName": s.Custom,
-                                           "myId": s.id,
-                                           "myFrom": JSON.stringify(tmpFrom),
-                                           "myValue": tmpValue,
-                                           "myTo": JSON.stringify(tmpTo),
-                                           "myStepSize": tmpStepSize,
-                                           "myUuid": s.uuid
+                                           "_custom": s.Custom,
+                                           "_id": s.id,
+                                           "_from": tmpFrom,
+                                           "_value": tmpValue,
+                                           "_to": tmpTo,
+                                           "_stepSize": tmpStepSize,
+                                           "_uuid": s.uuid
                                        })
             }
         }
         // Modifying a slider in the control surface
         function onModifySlider(s) {
             for (var i = 0; i < sliderListModel.count; ++i) {
-                if (sliderListModel.get(i).myId === s.Control) {
+                if (sliderListModel.get(i)._id === s.Control) {
                     var tmpValue
-                    switch (sliderListModel.get(i).myUuid) {
+                    switch (sliderListModel.get(i)._uuid) {
                         // Float Slider
                     case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
                         tmpValue = s.Value.Float
@@ -104,7 +113,7 @@ ColumnLayout {
                         return
                     }
                     sliderListModel.set(i, {
-                                            "myValue": tmpValue
+                                            "_value": tmpValue
                                         })
                 }
             }
