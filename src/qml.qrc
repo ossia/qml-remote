@@ -38,14 +38,6 @@
         <file>Icons/pause_disabled.svg</file>
         <file>Icons/pause_hover.svg</file>
         <file>Icons/play_glob_disabled.svg</file>
-        <file>Colorpicker/Checkerboard.qml</file>
-        <file>Colorpicker/ColorSlider.qml</file>
-        <file>Colorpicker/Colorpicker.qml</file>
-        <file>Colorpicker/NumberBox.qml</file>
-        <file>Colorpicker/PanelBorder.qml</file>
-        <file>Colorpicker/SBPicker.qml</file>
-        <file>Colorpicker/ScoreColorpicker.qml</file>
-        <file>Colorpicker/ScoreColorPoint.qml</file>
         <file>Icons/play_glob_off.png</file>
         <file>Icons/pause_on.png</file>
         <file>Icons/play_glob_hover.png</file>
@@ -78,5 +70,13 @@
         <file>main.qml</file>
         <file>ControlSurface/Controls/Control.qml</file>
         <file>ObjectSkeletons/ScoreSliderSkeleton.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/Checkerboard.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/Colorpicker.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/ColorSlider.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/NumberBox.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/PanelBorder.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/SBPicker.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/ScoreColorpicker.qml</file>
+        <file>ControlSurface/Controls/Colorpicker/ScoreColorPoint.qml</file>
     </qresource>
 </RCC>
