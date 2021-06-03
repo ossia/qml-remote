@@ -63,9 +63,9 @@
         <file>Icons/disconnected.png</file>
         <file>Icons/disconnected_on.svg</file>
         <file>Icons/disconnected_on.png</file>
-        <file>Button/ScoreButtons.qml</file>
+        <file>ControlSurface/Controls/Button/ScoreButtons.qml</file>
         <file>Icons/disconnected.svg</file>
-        <file>Button/ScoreButton.qml</file>
+        <file>ControlSurface/Controls/Button/ScoreButton.qml</file>
         <file>main.cpp</file>
         <file>main.qml</file>
         <file>ControlSurface/Controls/Control.qml</file>
