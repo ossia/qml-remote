@@ -6,7 +6,8 @@ import QtQuick.Window 2.12
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
-import "../Slider"
+
+import "../ObjectSkeletons"
 
 Rectangle {
     id: scoreSpeeds
@@ -27,7 +28,7 @@ Rectangle {
             property string globalSpeedPath: "null"
         }
 
-        delegate: ScoreSlider {
+        delegate: ScoreSliderSkeleton {
             id: speed
             controlName: name
             height: 5 + window.height / 25

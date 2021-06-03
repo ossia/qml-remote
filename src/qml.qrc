@@ -77,5 +77,6 @@
         <file>main.cpp</file>
         <file>main.qml</file>
         <file>Control/Control.qml</file>
+        <file>ObjectSkeletons/ScoreSliderSkeleton.qml</file>
     </qresource>
 </RCC>
