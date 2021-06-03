@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
-import "../Control"
+// import "../Control"
 
 ColumnLayout {
     id: sliderColumn
