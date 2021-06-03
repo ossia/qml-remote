@@ -5,6 +5,8 @@ import "Controls/Colorpicker"
 import "Controls/Slider"
 import "Controls/Button"
 import "Controls/Position"
+import "Controls/ImpulseButton"
+
 
 Column {
     spacing: 5
@@ -36,6 +38,13 @@ Column {
             id: scoreSliders
             signal appendSlider(var msg)
             signal modifySlider(var msg)
+        }
+
+        // List of Impulse buttons
+        ScoreImpulseButtons {
+            id: scoreButtons
+            signal appendButton(var msg)
+            signal modifyButton(var msg)
         }
 
         /*
