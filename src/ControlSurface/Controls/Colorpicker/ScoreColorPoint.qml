@@ -2,17 +2,21 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
-    property string colorPointName: "ColorPointName"
-    property string colorPointPath: "path"
-    property int colorPointId
-    property string colorPointColor: "Color"
-    property string colorPointOpacity: "Opacity"
-    property string colorPointUuid
     id: colorButton
     height: colorButton.width
     color: "#a7dd0d"
     border.width: 5
     border.color: "#a7dd0d"
+
+    property string controlCustom
+    property string controlDomain
+    property string controlValueType
+    property string controlValueData
+    property int controlId
+    property string controlUuid
+    property string controlSurfacePath
+
+    property color controlColor
     property color displayedColor: "#a7dd0dFF"
 
     Text {
@@ -20,7 +24,7 @@ Rectangle {
         anchors.left: colorButton.right
         anchors.leftMargin: 5
         anchors.horizontalCenter: colorButton.horizontalCenter
-        text: colorPointName
+        text: controlCustom
         font.pointSize: background.height * ( 9 / 40)
         color: "#a7dd0d"
     }
