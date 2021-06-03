@@ -76,5 +76,6 @@
         <file>Button/ScoreButton.qml</file>
         <file>main.cpp</file>
         <file>main.qml</file>
+        <file>Control/Control.qml</file>
     </qresource>
 </RCC>
