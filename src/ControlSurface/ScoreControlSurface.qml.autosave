@@ -6,8 +6,6 @@ import "Controls/Slider"
 import "Controls/Button"
 import "Controls/Position"
 
-
-
 Column {
     spacing: 5
     property string name

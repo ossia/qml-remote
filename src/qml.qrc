@@ -5,8 +5,8 @@
         <file>PlayPauseStop/ScorePlayGlob.qml</file>
         <file>PlayPauseStop/ScorePlayPause.qml</file>
         <file>PlayPauseStop/ScorePlayPauseStop.qml</file>
-        <file>Position/ScorePosition.qml</file>
-        <file>Position/ScorePositionPoint.qml</file>
+        <file>ControlSurface/Controls/Position/ScorePosition.qml</file>
+        <file>ControlSurface/Controls/Position/ScorePositionPoint.qml</file>
         <file>PlayPauseStop/ScoreReinitialize.qml</file>
         <file>ControlSurface/Controls/Slider/ScoreSlider.qml</file>
         <file>ControlSurface/Controls/Slider/ScoreSliders.qml</file>
