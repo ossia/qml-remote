@@ -24,7 +24,7 @@ ColumnLayout {
             controlName: myName
             implicitHeight: 5 + window.height / 25
             implicitWidth: (window.width <= 500 ? (window.width - 10) : (window.width >= 1200 ? 400 : window.width / 3))
-            width: (window.width <= 500 ? (window.width - 10) : (window.width >= 1500 ? 400 : window.width / 3))
+            width: (window.width <= 500 ? (window.width - 10) : (window.width >= 1200 ? 400 : window.width / 3))
             controlColor: "#f6a019"
             controlId: myId
             from: myFrom
