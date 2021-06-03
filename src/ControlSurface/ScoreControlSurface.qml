@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 
 import "Controls/Colorpicker"
 import "Controls/Slider"
-import "../Button"
+import "Controls/Button"
 
 
 Column {
