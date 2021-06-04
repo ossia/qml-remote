@@ -30,12 +30,7 @@ Button {
     }
 
     onIsPressedChanged: {
-        //this.pressed()
-        if(isPressed == true){
-            console.log("222222222222")
-            background.color = "#101010"
-            //background.color = "#303030"
-        }
+        // Todo : change the color when the button is pressed in score
     }
 
     onHoveredChanged: {

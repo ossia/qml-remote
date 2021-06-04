@@ -53,15 +53,11 @@ RowLayout {
         }
         // Modifying an impulse button in the control surface
         function onModifyImpulseButton(s) {
-            console.log("55555555555")
             for (var i = 0; i < impulseButtonlistModel.count; ++i) {
                 if (impulseButtonlistModel.get(i)._id === s.Control) {
-                    console.log("4444444444444")
-                    console.log(impulseButtonlistModel.get(i)._uuid)
                     switch (impulseButtonlistModel.get(i)._uuid) {
                     case "7cd210d3-ebd1-4f71-9de6-cccfb639cbc3":
                         // Impulse Button
-                        console.log("3333333333333")
                         impulseButtonlistModel.set(i, {
                                                        "_isPressed": true
                                                    })
