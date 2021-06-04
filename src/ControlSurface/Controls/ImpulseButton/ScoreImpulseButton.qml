@@ -25,27 +25,6 @@ Button {
         elide: Text.ElideRight
     }
 
-
-    /*
-    indicator: Rectangle {
-             implicitWidth: 26
-             implicitHeight: 26
-             x: button.leftPadding
-             y: parent.height / 2 - height / 2
-             radius: 13
-             border.color: button.down ? "#17a81a" : "#21be2b"
-
-             Rectangle {
-                 width: 14
-                 height: 14
-                 x: 6
-                 y: 6
-                 radius: 7
-                 color: button.down ? "#17a81a" : "#21be2b"
-                 visible: button.checked
-             }
-         }
-    */
     indicator: Rectangle {
         implicitWidth: parent.width - 10
         implicitHeight: parent.height - 10
