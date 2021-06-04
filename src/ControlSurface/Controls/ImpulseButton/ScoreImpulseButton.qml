@@ -24,7 +24,9 @@ Button {
         font.pointSize: parent.height === 0 ? 1 : parent.height / 12
         elide: Text.ElideRight
     }
-/*
+
+
+    /*
     indicator: Rectangle {
              implicitWidth: 26
              implicitHeight: 26
@@ -44,8 +46,6 @@ Button {
              }
          }
     */
-
-
     indicator: Rectangle {
         implicitWidth: parent.width - 10
         implicitHeight: parent.height - 10
@@ -65,6 +65,7 @@ Button {
     }
 
     onIsPressedChanged: {
+
         // Todo : change the color when the button is pressed in score
     }
 
