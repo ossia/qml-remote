@@ -23,13 +23,14 @@ Button {
     }
 
     background: Rectangle {
-        implicitWidth: window.width / 10
-        implicitHeight: window.width / 10
+        implicitWidth: (window.width <= 500 ? 100 : (window.width >= 1200 ? 150 : 100 + ((window.width + window.height) / 100)))
+        implicitHeight: this.implicitWidth
         color: "#303030"
-        radius: 10
+        radius: 25
     }
 
     onIsPressedChanged: {
+
         // Todo : change the color when the button is pressed in score
     }
 

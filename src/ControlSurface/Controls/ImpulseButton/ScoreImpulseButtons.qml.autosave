@@ -7,6 +7,7 @@ import QtQml.Models 2.12
 Flow {
     spacing: 5
     width: window.width - 10
+    
     Repeater {
         id: impulseButtonList
         clip: true
