@@ -8,31 +8,34 @@ RowLayout {
     spacing: 5
 
     Repeater {
-        id: buttonList
+        id: impulseButtonList
         clip: true
         Layout.fillHeight: parent.height
         Layout.fillWidth: parent.height
         Layout.margins: 5
 
         model: ListModel {
-            id: buttonlistModel
+            id: impulseButtonlistModel
         }
 
         delegate: ScoreImpulseButton {
             id: button
             controlCustom: _custom
             controlId: _id
+            controlUuid: _uuid
             controlSurfacePath: path
+
+            isPressed: _isPressed
         }
     }
 
-    // Receving informations about buttons in control surface from score
+    // Receving informations about impulse buttons in control surface from score
     Connections {
-        // Adding a button in the control surface
-        function onAppendButton(s) {
+        // Adding an impluse button in the control surface
+        function onAppendImpulseButton(s) {
             function find(cond) {
-                for (var i = 0; i < buttonlistModel.count; ++i)
-                    if (cond(buttonlistModel.get(i)))
+                for (var i = 0; i < impulseButtonlistModel.count; ++i)
+                    if (cond(impulseButtonlistModel.get(i)))
                         return i
                 return null
             }
@@ -40,13 +43,34 @@ RowLayout {
                 return item.id === JSON.stringify(s.id)
             }) //the index of m.Path in the listmodel
             if (a === null) {
-                buttonlistModel.insert(buttonlistModel.count, {
-                                           "_custom": s.Custom,
-                                           "_id": s.id
-                                       })
+                impulseButtonlistModel.insert(impulseButtonlistModel.count, {
+                                                  "_custom": s.Custom,
+                                                  "_id": s.id,
+                                                  "_isPressed": false,
+                                                  "_uuid": s.uuid
+                                              })
             }
         }
-        // Modifying a slider in the control surface
-        function onModifyButton(s) {}
+        // Modifying an impulse button in the control surface
+        function onModifyImpulseButton(s) {
+            console.log("55555555555")
+            for (var i = 0; i < impulseButtonlistModel.count; ++i) {
+                if (impulseButtonlistModel.get(i)._id === s.Control) {
+                    console.log("4444444444444")
+                    console.log(impulseButtonlistModel.get(i)._uuid)
+                    switch (impulseButtonlistModel.get(i)._uuid) {
+                    case "7cd210d3-ebd1-4f71-9de6-cccfb639cbc3":
+                        // Impulse Button
+                        console.log("3333333333333")
+                        impulseButtonlistModel.set(i, {
+                                                       "_isPressed": true
+                                                   })
+                        break
+                    default:
+                        return
+                    }
+                }
+            }
+        }
     }
 }

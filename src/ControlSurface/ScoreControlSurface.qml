@@ -42,9 +42,9 @@ Column {
 
         // List of Impulse buttons
         ScoreImpulseButtons {
-            id: scoreButtons
-            signal appendButton(var msg)
-            signal modifyButton(var msg)
+            id: scoreImpulseButtons
+            signal appendImpulseButton(var msg)
+            signal modifyImpulseButton(var msg)
         }
 
         /*
@@ -98,8 +98,8 @@ Column {
                     scoreSliders.appendSlider(controlMessage, i)
                     break
                 case "7cd210d3-ebd1-4f71-9de6-cccfb639cbc3":
-                    // Button
-                    scoreButtons.appendButton(controlMessage)
+                    // Impulse Button
+                    scoreImpulseButtons.appendImpulseButton(controlMessage)
                     break
                 case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
                     // Colorpicker
@@ -125,6 +125,7 @@ Column {
             if (m.Message === "ControlSurfaceControl") {
                 scoreSliders.modifySlider(m)
                 scoreColorpicker.modifyColorpicker(m)
+                scoreImpulseButtons.modifyImpulseButton(m)
                 //scoreButtons.modifyButton(m)
             }
         }
