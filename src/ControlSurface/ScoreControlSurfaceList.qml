@@ -58,9 +58,9 @@ ListView {
                 if (s === null) {
                     let newSurfaceModel = controlSurfaceDataModel.createObject(
                             controlSurfacelist, {
-                                "name": m.Name,
-                                "path": JSON.stringify(m.Path),
-                                "m": m
+                                name: m.Name,
+                                path: JSON.stringify(m.Path),
+                                m: m
                             })
                     controlSurfacelist.insert(0, newSurfaceModel)
                 }

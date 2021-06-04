@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Button {
@@ -11,6 +11,8 @@ Button {
     property int controlId
     property string controlUuid
     property string controlSurfacePath
+
+    property bool isPressed: false
 
     contentItem: Text {
         text: controlCustom
@@ -25,6 +27,15 @@ Button {
         implicitHeight: window.width / 10
         color: "#303030"
         radius: 10
+    }
+
+    onIsPressedChanged: {
+        //this.pressed()
+        if(isPressed == true){
+            console.log("222222222222")
+            background.color = "#101010"
+            //background.color = "#303030"
+        }
     }
 
     onHoveredChanged: {
