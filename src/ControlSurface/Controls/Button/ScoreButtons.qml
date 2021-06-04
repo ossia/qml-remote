@@ -4,8 +4,9 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.15
 import QtQml.Models 2.12
 
-RowLayout {
+Flow {
     spacing: 5
+    width: window.width - 10
 
     Repeater {
         id: buttonList
@@ -15,24 +16,27 @@ RowLayout {
         Layout.margins: 5
 
         model: ListModel {
-            id: buttonlistModel
+            id: buttonListModel
         }
 
         delegate: ScoreButton {
             id: button
-            buttonPath: path
-            buttonName: name
-            buttonId: id
+            controlCustom: _custom
+            controlId: _id
+            controlUuid: _uuid
+            controlSurfacePath: path
+
+            isPressed: _isPressed
         }
     }
 
-    // Receving informations about buttons in control surface from score
+    // Receving informations about impulse buttons in control surface from score
     Connections {
-        // Adding a button in the control surface
+        // Adding an impluse button in the control surface
         function onAppendButton(s) {
             function find(cond) {
-                for (var i = 0; i < buttonlistModel.count; ++i)
-                    if (cond(buttonlistModel.get(i)))
+                for (var i = 0; i < buttonListModel.count; ++i)
+                    if (cond(buttonListModel.get(i)))
                         return i
                 return null
             }
@@ -40,13 +44,31 @@ RowLayout {
                 return item.id === JSON.stringify(s.id)
             }) //the index of m.Path in the listmodel
             if (a === null) {
-                buttonlistModel.insert(buttonlistModel.count, {
-                                           "name": s.Custom,
-                                           "id": s.id
-                                       })
+                buttonListModel.insert(buttonListModel.count, {
+                                                  "_custom": s.Custom,
+                                                  "_id": s.id,
+                                                  "_isPressed": false,
+                                                  "_uuid": s.uuid
+                                              })
             }
         }
-        // Modifying a slider in the control surface
-        function onModifyButton(s) {}
+        // Modifying an impulse button in the control surface
+        function onModifyButton(s) {
+            for (var i = 0; i < buttonListModel.count; ++i) {
+                if (buttonListModel.get(i)._id === s.Control) {
+                    switch (buttonListModel.get(i)._uuid) {
+                    case "fb27e4cb-ea7f-41e2-ad92-2354498c1b6b":
+                        // Button
+                        buttonListModel.set(i, {
+                                                       "_isPressed": true
+                                                   })
+                        break
+                    default:
+                        return
+                    }
+                }
+            }
+        }
     }
 }
+
