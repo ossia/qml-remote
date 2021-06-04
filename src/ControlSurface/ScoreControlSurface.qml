@@ -48,15 +48,12 @@ Column {
             signal modifyImpulseButton(var msg)
         }
 
-
-        /*
         // List of buttons
         ScoreButtons {
             id: scoreButtons
             signal appendButton(var msg)
             signal modifyButton(var msg)
         }
-        */
 
         // List of colorpickers
         ScoreColorpicker {
@@ -101,8 +98,13 @@ Column {
                 case Uuid.impulseButtonUUID:
                     // Impulse Button
                     scoreImpulseButtons.appendImpulseButton(controlMessage)
-
                     break
+
+                case "fb27e4cb-ea7f-41e2-ad92-2354498c1b6b":
+                    // Button
+                    scoreButtons.appendButton(controlMessage)
+                    break
+
                 case Uuid.colorPickerUUID:
                     // Colorpicker
                     scoreColorpicker.visible = true
@@ -113,6 +115,10 @@ Column {
                     // Position
                     scorePosition.visible = true
                     scorePosition.appendPosition(controlMessage)
+                    break
+
+                default:
+                    console.log(JSON.stringify(controlMessage.uuid))
                     break
                 }
                 i++
@@ -126,7 +132,7 @@ Column {
                 scoreSliders.modifySlider(m)
                 scoreColorpicker.modifyColorpicker(m)
                 scoreImpulseButtons.modifyImpulseButton(m)
-                //scoreButtons.modifyButton(m)
+                scoreButtons.modifyButton(m)
             }
         }
     }
