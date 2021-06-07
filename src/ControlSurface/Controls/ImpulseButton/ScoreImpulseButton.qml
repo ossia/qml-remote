@@ -57,7 +57,7 @@ Button {
         socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(
                                    button.controlSurfacePath, ', "id":',
                                    button.controlId,
-                                   ', "Value": {"Impulse":null}}'))
+                                   ', "Value": {"Impulse":1}}'))
     }
 
     onReleased: {

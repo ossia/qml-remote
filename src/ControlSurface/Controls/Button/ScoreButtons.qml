@@ -27,6 +27,7 @@ Flow {
             controlSurfacePath: path
 
             isPressed: _isPressed
+            pressedFromScore: _pressedFromScore
         }
     }
 
@@ -45,11 +46,12 @@ Flow {
             }) //the index of m.Path in the listmodel
             if (a === null) {
                 buttonListModel.insert(buttonListModel.count, {
-                                                  "_custom": s.Custom,
-                                                  "_id": s.id,
-                                                  "_isPressed": false,
-                                                  "_uuid": s.uuid
-                                              })
+                                           "_custom": s.Custom,
+                                           "_id": s.id,
+                                           "_isPressed": s.Value.Bool,
+                                           "_pressedFromScore": s.Value.Bool,
+                                           "_uuid": s.uuid
+                                       })
             }
         }
         // Modifying an impulse button in the control surface
@@ -60,8 +62,8 @@ Flow {
                     case "fb27e4cb-ea7f-41e2-ad92-2354498c1b6b":
                         // Button
                         buttonListModel.set(i, {
-                                                       "_isPressed": true
-                                                   })
+                                                "_pressedFromScore": s.Value.Bool
+                                            })
                         break
                     default:
                         return
@@ -71,4 +73,3 @@ Flow {
         }
     }
 }
-
