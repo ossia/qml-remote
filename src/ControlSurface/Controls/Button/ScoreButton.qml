@@ -14,7 +14,10 @@ Button {
     property string controlUuid
     property string controlSurfacePath
 
-    property bool isPressed: false
+    property bool isPressed
+    property bool firstPressedFromScore: true
+    property bool pressedFromScore
+    property bool pressedFromRemote: false
 
     contentItem: Text {
         text: controlCustom
@@ -29,8 +32,7 @@ Button {
         implicitWidth: parent.width - 10
         implicitHeight: parent.height - 10
         anchors.centerIn: parent
-        radius: 25
-        color: button.down ? "#f6a019" : "#303030"
+        color: button.isPressed ? "#f6a019" : "#303030"
         border.width: 5
         border.color: "#303030"
     }
@@ -38,30 +40,57 @@ Button {
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: "#303030"
-        radius: 25
-        border.color: "#303030"
+        color: "#f6a019"
     }
 
-    onIsPressedChanged: {
+    onPressedFromScoreChanged: {
 
-        // Todo : change the color when the button is pressed in score
+        // Almost works
+
+        /*
+        if (pressedFromRemote) {
+            console.log("PressedFromRemote")
+            pressedFromRemote = false
+            return
+        }
+        console.log("onPressedFromScoreChanged")
+        if(firstPressedFromScore){
+            console.log("FirstPressedFromScore")
+            if(!isPressed){
+                //isPressed = true
+            }
+            indicator.color = isPressed ? "#f6a019" : "#303030"
+            firstPressedFromScore = false
+            return
+        }
+        console.log(indicator.color)
+        console.log(isPressed)
+        indicator.color = isPressed ? "#303030" : "#f6a019"
+        console.log(indicator.color)
+        console.log("PressedFromScore")
+        if(isPressed){
+            isPressed = false
+        } else {
+            isPressed = true
+        }
+        */
     }
 
-    onHoveredChanged: {
-        background.color = "#303030"
-    }
-
-    onPressed: {
-        background.color = "#f6a019"
-        socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(
-                                   button.controlSurfacePath, ', "id":',
-                                   button.controlId,
-                                   ', "Value": {"Impulse":null}}'))
-    }
-
-    onReleased: {
-        background.color = "#303030"
+    onClicked: {
+        pressedFromRemote = true
+        indicator.color = isPressed ? "#303030" : "#f6a019"
+        if (isPressed) {
+            isPressed = false
+            socket.sendTextMessage(
+                        '{ "Message": "ControlSurface","Path":'.concat(
+                            button.controlSurfacePath, ', "id":',
+                            button.controlId, ', "Value":{"Bool":false}}'))
+        } else {
+            isPressed = true
+            socket.sendTextMessage(
+                        '{ "Message": "ControlSurface","Path":'.concat(
+                            button.controlSurfacePath, ', "id":',
+                            button.controlId, ', "Value":{"Bool":true}}'))
+        }
     }
 }
-
