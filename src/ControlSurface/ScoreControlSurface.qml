@@ -7,7 +7,6 @@ import "Controls/Button"
 import "Controls/Position"
 import "Controls/ImpulseButton"
 
-
 Column {
     spacing: 5
     property string name
@@ -53,6 +52,7 @@ Column {
             signal appendButton(var msg)
             signal modifyButton(var msg)
         }
+        */
 
         // List of colorpickers
         ScoreColorpicker {
