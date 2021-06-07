@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.15
 import QtQml.Models 2.12
+import "../../../Utility/utility.js" as Utility
 
 Flow {
     spacing: 5
@@ -34,15 +35,10 @@ Flow {
     Connections {
         // Adding an impluse button in the control surface
         function onAppendImpulseButton(s) {
-            function find(cond) {
-                for (var i = 0; i < impulseButtonlistModel.count; ++i)
-                    if (cond(impulseButtonlistModel.get(i)))
-                        return i
-                return null
-            }
-            var a = find(function (item) {
+            //the index of m.Path in the listmodel
+            var a = Utility.find(impulseButtonList.model, function (item) {
                 return item.id === JSON.stringify(s.id)
-            }) //the index of m.Path in the listmodel
+            })
             if (a === null) {
                 impulseButtonlistModel.insert(impulseButtonlistModel.count, {
                                                   "_custom": s.Custom,

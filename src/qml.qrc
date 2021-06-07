@@ -80,5 +80,6 @@
         <file>ControlSurface/Controls/Colorpicker/ScoreColorPoint.qml</file>
         <file>ControlSurface/Controls/ImpulseButton/ScoreImpulseButton.qml</file>
         <file>ControlSurface/Controls/ImpulseButton/ScoreImpulseButtons.qml</file>
+        <file>Utility/utility.js</file>
     </qresource>
 </RCC>
