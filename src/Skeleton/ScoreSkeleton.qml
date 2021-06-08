@@ -22,7 +22,7 @@ Item {
     // A field to save the IP adress
     Settings {
         id: settings
-        property string ip_adress: "localhost"
+        property string ip_adress: "127.0.0.1"
     }
 
     // Creating the websocket
