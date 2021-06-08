@@ -6,7 +6,6 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
 
 Column {
-    width: parent.width
 
     Button {
         id: ip_button
@@ -15,19 +14,48 @@ Column {
 
         Dialog {
             id: ipDialog
-            title: "Adresse IP:"
-            standardButtons: StandardButton.Ok | StandardButton.Cancel
-            Column {
+            title: "Connection"
+            standardButtons:  StandardButton.Cancel | StandardButton.Ok
+
+            Row {
                 anchors.fill: parent
-                Rectangle {
-                    anchors.top: ipDialog.top
-                    color: "#202020"
-                    TextInput {
-                        id: ipInput
-                        text: settings.ip_adress
-                    }
+                Text{
+                  text: "Ip adress: "
+                }
+
+                TextField {
+                    id: ipInput
+                    text: settings.ip_adress
                 }
             }
+            /*
+            contentItem: Rectangle{
+                anchors.fill: parent
+                color: "green"
+                }
+
+               contentItem:
+                    Rectangle{
+                        anchors.top: ipDialog.top
+                        //anchors.fill: parent
+                        color: "red"
+                        Row{
+                            anchors.fill: parent
+                            Text{
+                              text: "Ip adress: "
+                            }
+
+                            TextField {
+                                id: ipInput
+                                text: settings.ip_adress
+                            }
+                        }
+                    //}
+
+                //}
+            //}
+*/
+
 
             onButtonClicked: {
                 if (clickedButton === StandardButton.Ok) {
