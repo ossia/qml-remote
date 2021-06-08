@@ -90,7 +90,7 @@ Column {
                     break
                 case "7cd210d3-ebd1-4f71-9de6-cccfb639cbc3":
                     // Button
-                    scoreButtons.appendButton(controlMessage)
+                    //scoreButtons.appendButton(controlMessage)
                     break
                 case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
                     // Colorpicker
