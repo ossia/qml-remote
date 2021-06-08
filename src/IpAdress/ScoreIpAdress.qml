@@ -15,23 +15,79 @@ Column {
         Dialog {
             id: ipDialog
             title: "Connection"
-            standardButtons: StandardButton.Cancel | StandardButton.Ok
+            width: 300
+            height: 100
 
-            Row {
+            contentItem: Rectangle {
                 anchors.fill: parent
-                spacing: 10
-                Text {
-                    text: "Ip adress"
-                    anchors.verticalCenter: parent.verticalCenter
-                }
+                color: "#303030"
 
-                TextField {
-                    id: ipInput
-                    text: settings.ip_adress
-                    anchors.verticalCenter: parent.verticalCenter
+                Rectangle {
+                    id: connectionWindow
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    color: "#303030"
+
+                    Rectangle {
+                        width: parent.width
+                        height: 50
+                        anchors.top: parent.top
+                        color: "#303030"
+
+                        Text {
+                            id: ipText
+                            text: "Ip adress"
+                            color: "white"
+                            anchors.left: parent.left
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        TextField {
+                            id: ipInput
+                            text: settings.ip_adress
+                            anchors.left: ipText.right
+                            anchors.leftMargin: 10
+                            width: parent.width <= 160 ? 65 : 100
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: "white"
+
+                            background: Rectangle {
+                                anchors.fill: parent
+                                color: "#202020"
+                                border.color: "#62400a"
+                            }
+                        }
+                    }
+
+                    Button {
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        width: 75
+                        height: 30
+
+                        contentItem: Text {
+                            color: "white"
+                            text: qsTr("OK")
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        onReleased: {
+                            settings.ip_adress = ipInput.text
+                            ipDialog.close()
+                        }
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: "#202020"
+                            border.color: "#505050"
+                        }
+                    }
                 }
             }
 
+
+            /*
             onButtonClicked: {
                 if (clickedButton === StandardButton.Ok) {
                     settings.ip_adress = ipInput.text
@@ -39,6 +95,7 @@ Column {
 
                 }
             }
+            */
         }
         hoverEnabled: true
         onPressed: {
