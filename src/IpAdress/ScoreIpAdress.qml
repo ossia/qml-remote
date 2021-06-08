@@ -15,12 +15,12 @@ Column {
         Dialog {
             id: ipDialog
             title: "Connection"
-            standardButtons:  StandardButton.Cancel | StandardButton.Ok
+            standardButtons: StandardButton.Cancel | StandardButton.Ok
 
             Row {
                 anchors.fill: parent
-                Text{
-                  text: "Ip adress: "
+                Text {
+                    text: "Ip adress: "
                 }
 
                 TextField {
@@ -28,39 +28,12 @@ Column {
                     text: settings.ip_adress
                 }
             }
-            /*
-            contentItem: Rectangle{
-                anchors.fill: parent
-                color: "green"
-                }
-
-               contentItem:
-                    Rectangle{
-                        anchors.top: ipDialog.top
-                        //anchors.fill: parent
-                        color: "red"
-                        Row{
-                            anchors.fill: parent
-                            Text{
-                              text: "Ip adress: "
-                            }
-
-                            TextField {
-                                id: ipInput
-                                text: settings.ip_adress
-                            }
-                        }
-                    //}
-
-                //}
-            //}
-*/
-
 
             onButtonClicked: {
                 if (clickedButton === StandardButton.Ok) {
                     settings.ip_adress = ipInput.text
                 } else {
+
                 }
             }
         }
@@ -86,6 +59,7 @@ Column {
             clip: true
             states: [
                 State {
+
 
                     /* play symbol is displayed
                 * "paused" is the scenario's state.
