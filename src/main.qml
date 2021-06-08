@@ -11,5 +11,5 @@ Window {
     title: qsTr("Remote Control")
     color: "#202020"
     // Creation of the application's skeleton
-    ScoreSkeleton{}
+    ScoreSkeleton {}
 }

@@ -9,6 +9,8 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    qmlRegisterSingletonType(QUrl("qrc:///Utility/Uuid.qml"), "Variable.Global", 1, 0, "Uuid");
+
     app.setOrganizationName("ossia.io");
     app.setOrganizationDomain("Remote Control");
 

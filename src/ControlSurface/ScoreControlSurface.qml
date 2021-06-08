@@ -7,6 +7,7 @@ import "Controls/Button"
 import "Controls/Position"
 import "Controls/ImpulseButton"
 
+import Variable.Global 1.0
 
 Column {
     spacing: 5
@@ -23,13 +24,13 @@ Column {
         id: controlSurfaceName
         text: name
         color: "white"
-        font.pointSize: parent.height === 0 ? font.default : (0.55 * window.width + 0.45 * window.height) / 75
+        font.pointSize: parent.height === 0 ? font.default : (0.55 * window.width + 0.45
+                                                              * window.height) / 75
     }
 
     // List of controls
     Flow {
         id: controlList
-        //Layout.alignment: parent.fillHeight | parent.fillWidth
         width: window.width
         spacing: 5
 
@@ -46,6 +47,7 @@ Column {
             signal appendImpulseButton(var msg)
             signal modifyImpulseButton(var msg)
         }
+
 
         /*
         // List of buttons
@@ -85,30 +87,31 @@ Column {
             var controlMessage = m.Controls[i]
             while (controlMessage) {
                 switch (controlMessage.uuid) {
-                case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
+                case Uuid.floatSliderUUID:
                     // Float Slider
                     scoreSliders.appendSlider(controlMessage, i)
                     break
-                case "5554eb67-bcc8-45ab-8ec2-37a3f191aa64":
-                    // Log FLoat Slider
+                case Uuid.logFloatSliderUUID:
+                    // Log Float Slider
                     scoreSliders.appendSlider(controlMessage, i)
                     break
-                case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
+                case Uuid.intSliderUUID:
                     // Int Slider
                     scoreSliders.appendSlider(controlMessage, i)
                     break
-                case "7cd210d3-ebd1-4f71-9de6-cccfb639cbc3":
+                case Uuid.impulseButtonUUID:
                     // Impulse Button
                     scoreImpulseButtons.appendImpulseButton(controlMessage)
                     break
-                case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
+                case Uuid.colorPickerUUID:
                     // Colorpicker
                     scoreColorpicker.visible = true
                     scoreColorpicker.appendColorpicker(controlMessage)
                     break
 
+
                     /*
-                case "8093743c-584f-4bb9-97d4-6c7602f87116":
+                case Uuid.positionUUID:
                     // Position
                     scorePosition.visible = true
                     scorePosition.appendPosition(controlMessage)

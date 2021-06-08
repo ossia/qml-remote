@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQml.Models 2.12
 import QtQml 2.15
 
+import Variable.Global 1.0
+
 Rectangle {
     id: colorBackground
     width: (window.width <= 500 ? (window.width - 10) : (window.width
@@ -107,7 +109,7 @@ Rectangle {
             for (var i = 0; i < colorPointListModel.count; ++i) {
                 if (colorPointListModel.get(i)._id === s.Control) {
                     switch (colorPointListModel.get(i)._uuid) {
-                    case "8f38638e-9f9f-48b0-ae36-1cba86ef5703":
+                    case Uuid.colorPickerUUID:
                         // Float Colorpicker
                         var red = s.Value.Vec4f[0]
                         var green = s.Value.Vec4f[1]

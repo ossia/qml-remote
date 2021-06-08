@@ -3,7 +3,9 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.15
 import QtQml.Models 2.12
+
 import "../../../Utility/utility.js" as Utility
+import Variable.Global 1.0
 
 Flow {
     spacing: 5
@@ -53,7 +55,7 @@ Flow {
             for (var i = 0; i < impulseButtonlistModel.count; ++i) {
                 if (impulseButtonlistModel.get(i)._id === s.Control) {
                     switch (impulseButtonlistModel.get(i)._uuid) {
-                    case "7cd210d3-ebd1-4f71-9de6-cccfb639cbc3":
+                    case Uuid.impulsButtoUUID:
                         // Impulse Button
                         impulseButtonlistModel.set(i, {
                                                        "_isPressed": true

@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
-// import "../Control"
+import Variable.Global 1.0
 
 ColumnLayout {
     id: sliderColumn
@@ -69,14 +69,14 @@ ColumnLayout {
                 var tmpFrom, tmpValue, tmpTo
                 var tmpStepSize
                 switch (s.uuid) {
-                case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
+                case Uuid.floatSliderUUID:
                     // Float Slider
                     tmpFrom = s.Domain.Float.Min
                     tmpValue = s.Value.Float
                     tmpTo = s.Domain.Float.Max
                     tmpStepSize = 0.0
                     break
-                case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
+                case Uuid.intSliderUUID:
                     // Int Slider
                     tmpFrom = s.Domain.Int.Min
                     tmpValue = s.Value.Int
@@ -101,12 +101,12 @@ ColumnLayout {
                 if (sliderListModel.get(i)._id === s.Control) {
                     var tmpValue
                     switch (sliderListModel.get(i)._uuid) {
+                    case Uuid.floatSliderUUID:
                         // Float Slider
-                    case "af2b4fc3-aecb-4c15-a5aa-1c573a239925":
                         tmpValue = s.Value.Float
                         break
+                    case Uuid.intSliderUUID:
                         // Int Slider
-                    case "348b80a4-45dc-4f70-8f5f-6546c85089a2":
                         tmpValue = s.Value.Int
                         break
                     default:
