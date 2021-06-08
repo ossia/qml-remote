@@ -102,6 +102,9 @@ Column {
                     // Impulse Button
                     scoreImpulseButtons.appendImpulseButton(controlMessage)
 
+                case Uuid.buttonUUID:
+                    // Button
+                    //scoreButtons.appendButton(controlMessage)
                     break
                 case Uuid.colorPickerUUID:
                     // Colorpicker
