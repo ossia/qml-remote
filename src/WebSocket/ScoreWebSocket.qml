@@ -66,7 +66,6 @@ WebSocket {
     onStatusChanged: {
         switch (socket.status) {
         case WebSocket.Error:
-            console.log("Error: " + socket.errorString)
             break
         case WebSocket.Open:
             socket.sendTextMessage("Hello World")
@@ -74,7 +73,6 @@ WebSocket {
             scorePlayPauseStop.connectedToScore()
             break
         case WebSocket.Closed:
-            console.log("The webSocket communication has been closed")
             ipAdress.disconnected()
             scorePlayPauseStop.disconnectedFromScore()
             break
