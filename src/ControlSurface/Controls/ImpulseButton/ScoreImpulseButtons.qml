@@ -4,7 +4,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.15
 import QtQml.Models 2.12
 
-import "../../../Utility/utility.js" as Utility
+import "qrc:/Utility/utility.js" as Utility
 import Variable.Global 1.0
 
 Flow {

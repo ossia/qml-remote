@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
 
-import "../ObjectSkeletons"
+import "qrc:/ObjectSkeletons"
 
 ScoreSliderSkeleton {
     id: globalSpeed

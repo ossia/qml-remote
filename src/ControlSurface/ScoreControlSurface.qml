@@ -1,11 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 
-import "Controls/Colorpicker"
-import "Controls/Slider"
-import "Controls/Button"
-import "Controls/Position"
-import "Controls/ImpulseButton"
+import "qrc:/ControlSurface/Controls/Colorpicker"
+import "qrc:/ControlSurface/Controls/Slider"
+import "qrc:/ControlSurface/Controls/Button"
+import "qrc:/ControlSurface/Controls/Position"
+import "qrc:/ControlSurface/Controls/ImpulseButton"
 
 import Variable.Global 1.0
 

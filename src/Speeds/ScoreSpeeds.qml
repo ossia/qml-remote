@@ -7,7 +7,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
 
-import "../ObjectSkeletons"
+import "qrc:/ObjectSkeletons"
 
 Rectangle {
     id: scoreSpeeds

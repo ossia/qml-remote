@@ -6,14 +6,14 @@ import QtQuick.Controls 2.12
 import QtQuick.Controls.Styles 1.4
 import Qt.labs.settings 1.0
 
-import "../WebSocket"
-import "../IpAdress"
-import "../PlayPauseStop"
-import "../Speed"
-import "../ControlSurface"
-import "../Timeline"
-import "../Trigger"
-import "../Speeds"
+import "qrc:/WebSocket"
+import "qrc:/IpAdress"
+import "qrc:/PlayPauseStop"
+import "qrc:/Speed"
+import "qrc:/ControlSurface"
+import "qrc:/Timeline"
+import "qrc:/Trigger"
+import "qrc:/Speeds"
 
 Item {
     id: window

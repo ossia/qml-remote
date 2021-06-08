@@ -1,7 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 
-ScoreSlider {
+import "qrc:/ObjectSkeletons"
+
+ScoreSliderSkeleton {
     id: scoreGlobalVolume
     anchors.horizontalCenter: parent.horizontalCenter
     controlName: "Volume"
