@@ -19,13 +19,16 @@ Column {
 
             Row {
                 anchors.fill: parent
+                spacing: 10
                 Text {
-                    text: "Ip adress: "
+                    text: "Ip adress"
+                    anchors.verticalCenter: parent.verticalCenter
                 }
 
                 TextField {
                     id: ipInput
                     text: settings.ip_adress
+                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
 
