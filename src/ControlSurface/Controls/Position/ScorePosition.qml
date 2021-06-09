@@ -3,11 +3,8 @@ import QtQuick.Controls 2.12
 
 Rectangle {
     id: positionBackground
-    width: (window.width <= 500
-            ? (window.width - 10)
-            : (window.width >= 1200
-               ? 600
-               : window.width / 2))
+    width: (window.width <= 500 ? (window.width - 10) : (window.width
+                                                         >= 1200 ? 600 : window.width / 2))
 
     height: positionBackground.width / 2
     color: "#363636"
@@ -75,24 +72,33 @@ Rectangle {
                     controlUuid: _uuid
                     controlSurfacePath: path
 
-                    controlX: _controlX
-                    controlY: _controlY
                     controlDomain: _controlDomain
 
-                    /*
                     onControlXChanged: {
                         if (positionPoint.state === "on"
                                 || positionPoint.state === "") {
                             socket.sendTextMessage(
                                         '{ "Message": "ControlSurface","Path":'.concat(
                                             positionPoint.controlSurfacePath,
-                                            ', "id":', colorPoint.controlId,
-                                            ', "Value": {"Vec4f":', hexToRGB(
-                                                positionPoint.displayedColor),
-                                            '}}'))
+                                            ', "id":', positionPoint.controlId,
+                                            ', "Value": {"Vec2f":[',
+                                            positionPoint.controlX, ',',
+                                            positionPoint.controlY, ']}}'))
                         }
                     }
-                    */
+
+                    onControlYChanged: {
+                        if (positionPoint.state === "on"
+                                || positionPoint.state === "") {
+                            socket.sendTextMessage(
+                                        '{ "Message": "ControlSurface","Path":'.concat(
+                                            positionPoint.controlSurfacePath,
+                                            ', "id":', positionPoint.controlId,
+                                            ', "Value": {"Vec2f":[',
+                                            positionPoint.controlX, ',',
+                                            positionPoint.controlY, ']}}'))
+                        }
+                    }
                 }
             }
         }
@@ -129,6 +135,7 @@ Rectangle {
                                          })
             }
         }
+
 
         /*
         // Modifying a colorpicker in the control surface
