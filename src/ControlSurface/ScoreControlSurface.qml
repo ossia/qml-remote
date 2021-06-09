@@ -66,15 +66,13 @@ Column {
             signal modifyColorpicker(var msg)
         }
 
-
-        /*
         // List of positions
         ScorePosition {
             visible: false
             id: scorePosition
             signal appendPosition(var msg)
             signal modifyPosition(var msg)
-        }*/
+        }
     }
 
     // Receiving informations about controls in a control surface from score
@@ -111,14 +109,11 @@ Column {
                     scoreColorpicker.appendColorpicker(controlMessage)
                     break
 
-
-                    /*
                 case Uuid.positionUUID:
                     // Position
                     scorePosition.visible = true
                     scorePosition.appendPosition(controlMessage)
                     break
-                    */
                 }
                 i++
                 controlMessage = m.Controls[i]
