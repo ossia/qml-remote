@@ -64,8 +64,9 @@ Column {
                     // OK button
                     Button {
                         id: okButton
-                        anchors.right: parent.right
+                        anchors.right: cancelButton.left
                         anchors.bottom: parent.bottom
+                        anchors.rightMargin: 10
                         width: 75
                         height: 30
 
@@ -129,6 +130,80 @@ Column {
                                 }
                                 PropertyChanges {
                                     target: okButtonText
+                                    opacity: 0.5
+                                }
+                            }
+                        ]
+                    }
+
+                    // Cancel button
+                    Button {
+                        id: cancelButton
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        width: 75
+                        height: 30
+
+                        contentItem: Text {
+                            id: cancelButtonText
+                            color: "white"
+                            text: qsTr("Cancel")
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        onPressed: {
+                            switch (cancelButton.state) {
+                            case "hoveredCANCEL":
+                                cancelButton.state = "pressedCANCEL"
+                                break
+                            }
+                        }
+
+                        onReleased: {
+                            ipInput.text = settings.ip_adress
+                            ipDialog.close()
+                        }
+
+                        onHoveredChanged: {
+                            switch (cancelButton.state) {
+                            case "":
+                                cancelButton.state = "hoveredCANCEL"
+                                break
+                            case "hoveredCANCEL":
+                                cancelButton.state = ""
+                                break
+                            case "pressedCANCEL":
+                                cancelButton.state = ""
+                                break
+                            }
+                        }
+
+                        background: Rectangle {
+                            id: cancelButtonBackground
+                            anchors.fill: parent
+                            color: "#202020"
+                            border.color: "#505050"
+                            border.width: 0.5
+                        }
+
+                        states: [
+                            State {
+                                name: "hoveredCANCEL"
+                                PropertyChanges {
+                                    target: cancelButtonBackground
+                                    border.color: "#62400a"
+                                }
+                            },
+                            State {
+                                name: "pressedCANCEL"
+                                PropertyChanges {
+                                    target: cancelButtonBackground
+                                    border.color: "#e0b01e"
+                                    color: "#62400a"
+                                }
+                                PropertyChanges {
+                                    target: cancelButtonText
                                     opacity: 0.5
                                 }
                             }
