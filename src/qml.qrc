@@ -82,5 +82,6 @@
         <file>ControlSurface/Controls/ImpulseButton/ScoreImpulseButtons.qml</file>
         <file>Utility/utility.js</file>
         <file>Utility/Uuid.qml</file>
+        <file>IpAdress/ScoreConnection.qml</file>
     </qresource>
 </RCC>
