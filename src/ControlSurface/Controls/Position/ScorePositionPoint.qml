@@ -25,7 +25,7 @@ Rectangle {
         anchors.left: positionButton.right
         anchors.leftMargin: 5
         anchors.horizontalCenter: positionButton.horizontalCenter
-        text: _positionPointName
+        text: controlCustom
         color: "#a7dd0d"
     }
 
@@ -33,7 +33,9 @@ Rectangle {
         id: positionValue
         anchors.top: positionName.bottom
         anchors.left: positionName.left
-        text: "x,y:" + vertical.x.toFixed(0) + "," + horizontal.y.toFixed(0)
+        text: "x,y:" + (vertical.x * (controlDomain / position.height)).toFixed(
+                  2) + "," + (horizontal.y * (controlDomain / position.height)).toFixed(
+                  2)
         color: "#a7dd0d"
     }
 
@@ -63,8 +65,9 @@ Rectangle {
             name: "on"
             PropertyChanges {
                 target: positionValue
-                text: "x,y:" + vertical.x.toFixed(
-                          0) + "," + horizontal.y.toFixed(0)
+                text: "x,y:" + (vertical.x * (controlDomain / position.height)).toFixed(
+                          2) + "," + (horizontal.y * (controlDomain / position.height)).toFixed(
+                          2)
             }
         }
     ]
