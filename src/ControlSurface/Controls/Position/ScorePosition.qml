@@ -14,26 +14,14 @@ Rectangle {
     color: "#363636"
 
     Rectangle {
-        id: zone
+        id: position
         anchors.left: parent.left
-        width: 65 * background.width / 100
+        width: position.height
         anchors.bottom: parent.bottom
         anchors.top: parent.top
         anchors.margins: 5
         color: "black"
 
-        Column {
-            anchors.left: zone.right
-            anchors.leftMargin: 5
-            anchors.top: zone.top
-            spacing: 20
-            Repeater {
-                model: ["position1", "ps", "position2"]
-                ScorePositionPoint {
-                    _positionPointName: modelData
-                }
-            }
-        }
         MouseArea {
             anchors.fill: parent
             drag.target: this
@@ -56,6 +44,51 @@ Rectangle {
                 width: parent.width
                 height: 5
                 color: "white"
+            }
+        }
+    }
+
+    // Create the column of position
+    Column {
+        anchors.left: position.right
+        anchors.leftMargin: 5
+        anchors.top: zone.top
+        spacing: 20
+
+        Repeater {
+            width: parent.width
+            id: colorPointList
+            model: ListModel {
+                id: colorPointListModel
+            }
+
+            delegate: Item {
+                width: parent.width
+                height: parent.width / 5
+
+                ScorePositionPoint {
+                    id: positionPoint
+                    width: parent.width / 5
+                    controlCustom: _custom
+                    controlId: _id
+                    controlUuid: _uuid
+                    controlSurfacePath: path
+
+                    /*
+                    onControlXChanged: {
+                        if (positionPoint.state === "on"
+                                || positionPoint.state === "") {
+                            socket.sendTextMessage(
+                                        '{ "Message": "ControlSurface","Path":'.concat(
+                                            colorPoint.controlSurfacePath,
+                                            ', "id":', colorPoint.controlId,
+                                            ', "Value": {"Vec4f":', hexToRGB(
+                                                colorPoint.displayedColor),
+                                            '}}'))
+                        }
+                    }
+                    */
+                }
             }
         }
     }

@@ -2,13 +2,23 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
-    property string _positionPointName: "PositionPointName"
     id: positionButton
     width: background.width / 30
     height: positionButton.width
     color: "#a7dd0d"
-    border.width: 2
+    border.width: 5
     border.color: "#a7dd0d"
+
+    property string controlCustom
+    property string controlDomain
+    property string controlValueType
+    property string controlValueData
+    property int controlId
+    property string controlUuid
+    property string controlSurfacePath
+
+    property int controlX
+    property int controlY
 
     Text {
         id: positionName
@@ -18,6 +28,7 @@ Rectangle {
         text: _positionPointName
         color: "#a7dd0d"
     }
+
     Text {
         id: positionValue
         anchors.top: positionName.bottom
