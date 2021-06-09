@@ -4,10 +4,15 @@ import QtQuick.Controls 2.12
 Rectangle {
     property string _positionPointName: "PositionName"
     id: background
-    width: 300
-    height: 150
+    width: (window.width <= 500
+            ? (window.width - 10)
+            : (window.width >= 1200
+               ? 600
+               : window.width / 2))
 
+    height: background.width / 2
     color: "#363636"
+
     Rectangle {
         id: zone
         anchors.left: parent.left
