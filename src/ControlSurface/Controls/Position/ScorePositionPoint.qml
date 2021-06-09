@@ -16,9 +16,9 @@ Rectangle {
     property string controlUuid
     property string controlSurfacePath
 
-    property int controlX
-    property int controlY
-    property int controlDomain
+    property real controlX: vertical.x * (controlDomain / position.height)
+    property real controlY: horizontal.y * (controlDomain / position.height)
+    property real controlDomain
 
     Text {
         id: positionName
@@ -32,11 +32,10 @@ Rectangle {
     Text {
         id: positionValue
         anchors.top: positionName.bottom
-        anchors.left: positionName.left
-        text: "x,y:" + (vertical.x * (controlDomain / position.height)).toFixed(
-                  2) + "," + (horizontal.y * (controlDomain / position.height)).toFixed(
-                  2)
         color: "#a7dd0d"
+        anchors.left: positionName.left
+        text: "x,y:" + positionButton.controlX.toFixed(
+                  2) + "," + positionButton.controlY.toFixed(2)
     }
 
     MouseArea {
@@ -49,8 +48,9 @@ Rectangle {
         State {
             name: "off"
             PropertyChanges {
-                target: positionValue
-                text: positionValue.text
+                target: positionButton
+                controlX: controlX
+                controlY: controlY
             }
             PropertyChanges {
                 target: positionButton
@@ -64,10 +64,9 @@ Rectangle {
         State {
             name: "on"
             PropertyChanges {
-                target: positionValue
-                text: "x,y:" + (vertical.x * (controlDomain / position.height)).toFixed(
-                          2) + "," + (horizontal.y * (controlDomain / position.height)).toFixed(
-                          2)
+                target: positionButton
+                controlX: vertical.x * (controlDomain / position.height)
+                controlY: horizontal.y * (controlDomain / position.height)
             }
         }
     ]
