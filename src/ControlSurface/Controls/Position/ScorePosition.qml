@@ -52,15 +52,16 @@ Rectangle {
         anchors.top: positionBackground.top
         anchors.topMargin: 10
         spacing: 5
+        width: (1 / 3) * colorBackground.width
 
         Repeater {
             width: parent.width
-            id: colorPointList
             model: ListModel {
                 id: positionListModel
             }
 
             delegate: Item {
+                id: background
                 width: parent.width
                 height: parent.width / 5
 

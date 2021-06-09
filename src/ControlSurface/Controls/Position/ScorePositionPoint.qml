@@ -3,7 +3,6 @@ import QtQuick.Controls 2.12
 
 Rectangle {
     id: positionButton
-    width: background.width / 30
     height: positionButton.width
     color: "#a7dd0d"
     border.width: 5
@@ -26,6 +25,7 @@ Rectangle {
         anchors.leftMargin: 5
         anchors.horizontalCenter: positionButton.horizontalCenter
         text: controlCustom
+        font.pointSize: background.height * ( 9 / 40)
         color: "#a7dd0d"
     }
 
@@ -36,6 +36,7 @@ Rectangle {
         anchors.left: positionName.left
         text: "x,y:" + positionButton.controlX.toFixed(
                   2) + "," + positionButton.controlY.toFixed(2)
+        font.pointSize: background.height * ( 9 / 40)
     }
 
     MouseArea {
