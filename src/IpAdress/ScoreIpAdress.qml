@@ -12,6 +12,7 @@ Column {
         width: parent.width
         height: parent.width
 
+        // Connection window
         Dialog {
             id: ipDialog
             title: "Connection"
@@ -42,6 +43,7 @@ Column {
                             anchors.verticalCenter: parent.verticalCenter
                         }
 
+                        // TextField to enter the IP adress
                         TextField {
                             id: ipInput
                             text: settings.ip_adress
@@ -59,17 +61,28 @@ Column {
                         }
                     }
 
+                    // OK button
                     Button {
+                        id: okButton
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
                         width: 75
                         height: 30
 
                         contentItem: Text {
+                            id: okButtonText
                             color: "white"
                             text: qsTr("OK")
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
+                        }
+
+                        onPressed: {
+                            switch (okButton.state) {
+                            case "hoveredOK":
+                                okButton.state = "pressedOK"
+                                break
+                            }
                         }
 
                         onReleased: {
@@ -77,30 +90,59 @@ Column {
                             ipDialog.close()
                         }
 
+                        onHoveredChanged: {
+                            switch (okButton.state) {
+                            case "":
+                                okButton.state = "hoveredOK"
+                                break
+                            case "hoveredOK":
+                                okButton.state = ""
+                                break
+                            case "pressedOK":
+                                okButton.state = ""
+                                break
+                            }
+                        }
+
                         background: Rectangle {
+                            id: okButtonBackground
                             anchors.fill: parent
                             color: "#202020"
                             border.color: "#505050"
+                            border.width: 0.5
                         }
+
+                        states: [
+                            State {
+                                name: "hoveredOK"
+                                PropertyChanges {
+                                    target: okButtonBackground
+                                    border.color: "#62400a"
+                                }
+                            },
+                            State {
+                                name: "pressedOK"
+                                PropertyChanges {
+                                    target: okButtonBackground
+                                    border.color: "#e0b01e"
+                                    color: "#62400a"
+                                }
+                                PropertyChanges {
+                                    target: okButtonText
+                                    opacity: 0.5
+                                }
+                            }
+                        ]
                     }
                 }
             }
-
-
-            /*
-            onButtonClicked: {
-                if (clickedButton === StandardButton.Ok) {
-                    settings.ip_adress = ipInput.text
-                } else {
-
-                }
-            }
-            */
         }
+
         hoverEnabled: true
         onPressed: {
             ipButton.state = "ip_on"
         }
+
         onReleased: {
             onClicked: ipDialog.open()
         }
