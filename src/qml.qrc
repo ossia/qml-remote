@@ -83,5 +83,6 @@
         <file>Utility/utility.js</file>
         <file>Utility/Uuid.qml</file>
         <file>IpAdress/ScoreConnection.qml</file>
+        <file>IpAdress/ScoreDisconnection.qml</file>
     </qresource>
 </RCC>
