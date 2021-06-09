@@ -2,28 +2,42 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
-    property string _positionPointName: "PositionPointName"
     id: positionButton
-    width: background.width / 30
     height: positionButton.width
     color: "#a7dd0d"
-    border.width: 2
+    border.width: 5
     border.color: "#a7dd0d"
+
+    property string controlCustom
+    property string controlValueType
+    property string controlValueData
+    property int controlId
+    property string controlUuid
+    property string controlSurfacePath
+
+    property real controlX: controlMin + vertical.x * (controlDomain / position.height)
+    property real controlY: controlMin + horizontal.y * (controlDomain / position.height)
+    property real controlDomain
+    property real controlMin
 
     Text {
         id: positionName
         anchors.left: positionButton.right
         anchors.leftMargin: 5
         anchors.horizontalCenter: positionButton.horizontalCenter
-        text: _positionPointName
+        text: controlCustom
+        font.pointSize: background.height * (9 / 40)
         color: "#a7dd0d"
     }
+
     Text {
         id: positionValue
         anchors.top: positionName.bottom
-        anchors.left: positionName.left
-        text: "x,y:" + vertical.x.toFixed(0) + "," + horizontal.y.toFixed(0)
         color: "#a7dd0d"
+        anchors.left: positionName.left
+        text: "x,y:" + positionButton.controlX.toFixed(
+                  2) + "," + positionButton.controlY.toFixed(2)
+        font.pointSize: background.height * (9 / 40)
     }
 
     MouseArea {
@@ -36,8 +50,9 @@ Rectangle {
         State {
             name: "off"
             PropertyChanges {
-                target: positionValue
-                text: positionValue.text
+                target: positionButton
+                controlX: controlX
+                controlY: controlY
             }
             PropertyChanges {
                 target: positionButton
@@ -51,9 +66,9 @@ Rectangle {
         State {
             name: "on"
             PropertyChanges {
-                target: positionValue
-                text: "x,y:" + vertical.x.toFixed(
-                          0) + "," + horizontal.y.toFixed(0)
+                target: positionButton
+                controlX: controlMin + vertical.x * (controlDomain / position.height)
+                controlY: controlMin + horizontal.y * (controlDomain / position.height)
             }
         }
     ]
