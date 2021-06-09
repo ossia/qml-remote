@@ -2,7 +2,6 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
-    property string _positionPointName: "PositionName"
     id: positionBackground
     width: (window.width <= 500
             ? (window.width - 10)
@@ -118,7 +117,8 @@ Rectangle {
                 var tmpMin = s.Domain.Float.Min
                 var tmpMax = s.Domain.Float.Max
                 var tmpDomain = Math.abs(tmpMax - tmpMin)
-
+                // vertical.x = tmpX * ( positionBackground / tmpDomain )
+                // horizontal.y = tmpY * ( positionBackground / tmpDomain )
                 positionListModel.insert(positionListModel.count, {
                                              "_custom": s.Custom,
                                              "_id": s.id,
