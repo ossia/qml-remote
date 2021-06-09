@@ -99,9 +99,11 @@ Column {
                     // Int Slider
                     scoreSliders.appendSlider(controlMessage, i)
                     break
+
                 case Uuid.impulseButtonUUID:
                     // Impulse Button
                     scoreImpulseButtons.appendImpulseButton(controlMessage)
+
                     break
                 case Uuid.colorPickerUUID:
                     // Colorpicker
