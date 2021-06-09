@@ -10,7 +10,6 @@ Rectangle {
     border.color: "#a7dd0d"
 
     property string controlCustom
-    property string controlDomain
     property string controlValueType
     property string controlValueData
     property int controlId
@@ -19,6 +18,7 @@ Rectangle {
 
     property int controlX
     property int controlY
+    property int controlDomain
 
     Text {
         id: positionName
