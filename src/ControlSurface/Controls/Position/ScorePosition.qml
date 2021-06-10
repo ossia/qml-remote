@@ -136,32 +136,5 @@ Rectangle {
                                          })
             }
         }
-
-
-        /*
-        // Modifying a colorpicker in the control surface
-        function onModifyPosition(s) {
-            for (var i = 0; i < positionListModel.count; ++i) {
-                if (positionListModel.get(i)._id === s.Control) {
-                    switch (positionListModel.get(i)._uuid) {
-                    case Uuid.positionUUID:
-                        // Float Colorpicker
-                        var red = s.Value.Vec4f[0]
-                        var green = s.Value.Vec4f[1]
-                        var blue = s.Value.Vec4f[2]
-                        var alpha = s.Value.Vec4f[3]
-                        var newColor = Qt.rgba(red, green, blue, alpha)
-                        break
-                    default:
-                        return
-                    }
-                    positionListModel.set(i, {
-                                                "_color": colorpicker._fullColorString(
-                                                              newColor, alpha)
-                                            })
-                }
-            }
-        }
-        */
     }
 }
