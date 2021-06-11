@@ -1,6 +1,8 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import "qrc:/Utility/utility.js" as Utility
+
 Rectangle {
     id: positionBackground
     width: (window.width <= 500
@@ -58,6 +60,7 @@ Rectangle {
         width: (1 / 3) * positionBackground.width
 
         Repeater {
+            id: positionList
             width: parent.width
             model: ListModel {
                 id: positionListModel
@@ -113,14 +116,8 @@ Rectangle {
     Connections {
         // Adding a colorpicker in the control surface
         function onAppendPosition(s) {
-            function find(cond) {
-                for (var i = 0; i < positionListModel.count; ++i)
-                    if (cond(positionListModel.get(i)))
-                        return i
-                return null
-            }
             //the index of m.Path in the listmodel
-            var a = find(function (item) {
+            var a = Utility.find(positionList.model, function (item) {
                 return item.id === JSON.stringify(s.id)
             })
             if (a === null) {
