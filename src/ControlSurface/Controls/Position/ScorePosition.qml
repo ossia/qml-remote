@@ -1,10 +1,15 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import "qrc:/Utility/utility.js" as Utility
+
 Rectangle {
     id: positionBackground
-    width: (window.width <= 500 ? (window.width - 10) : (window.width
-                                                         >= 1200 ? 600 : window.width / 2))
+    width: (window.width <= 500
+            ? (window.width - 10)
+            : (window.width >= 1200
+               ? 600
+               : window.width / 2))
 
     height: positionBackground.width / 2
     color: "#363636"
@@ -52,9 +57,10 @@ Rectangle {
         anchors.top: positionBackground.top
         anchors.topMargin: 10
         spacing: 5
-        width: (1 / 3) * colorBackground.width
+        width: (1 / 3) * positionBackground.width
 
         Repeater {
+            id: positionList
             width: parent.width
             model: ListModel {
                 id: positionListModel
@@ -73,6 +79,7 @@ Rectangle {
                     controlUuid: _uuid
                     controlSurfacePath: path
 
+                    controlMin: _controlMin
                     controlDomain: _controlDomain
 
                     onControlXChanged: {
@@ -109,30 +116,24 @@ Rectangle {
     Connections {
         // Adding a colorpicker in the control surface
         function onAppendPosition(s) {
-            function find(cond) {
-                for (var i = 0; i < positionListModel.count; ++i)
-                    if (cond(positionListModel.get(i)))
-                        return i
-                return null
-            }
-            var a = find(function (item) {
+            //the index of m.Path in the listmodel
+            var a = Utility.find(positionList.model, function (item) {
                 return item.id === JSON.stringify(s.id)
-            }) //the index of m.Path in the listmodel
+            })
             if (a === null) {
                 var tmpX = s.Value.Vec2f[0]
                 var tmpY = s.Value.Vec2f[1]
                 var tmpMin = s.Domain.Float.Min
                 var tmpMax = s.Domain.Float.Max
                 var tmpDomain = Math.abs(tmpMax - tmpMin)
-                // vertical.x = tmpX * ( positionBackground / tmpDomain )
-                // horizontal.y = tmpY * ( positionBackground / tmpDomain )
                 positionListModel.insert(positionListModel.count, {
                                              "_custom": s.Custom,
                                              "_id": s.id,
                                              "_uuid": s.uuid,
                                              "_controlX": tmpX,
                                              "_controlY": tmpY,
-                                             "_controlDomain": tmpDomain
+                                             "_controlDomain": tmpDomain,
+                                             "_controlMin": tmpMin
                                          })
             }
         }

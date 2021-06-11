@@ -15,9 +15,10 @@ Rectangle {
     property string controlUuid
     property string controlSurfacePath
 
-    property real controlX: vertical.x * (controlDomain / position.height)
-    property real controlY: horizontal.y * (controlDomain / position.height)
+    property real controlX: controlMin + vertical.x * (controlDomain / position.height)
+    property real controlY: controlMin + horizontal.y * (controlDomain / position.height)
     property real controlDomain
+    property real controlMin
 
     Text {
         id: positionName
@@ -25,7 +26,7 @@ Rectangle {
         anchors.leftMargin: 5
         anchors.horizontalCenter: positionButton.horizontalCenter
         text: controlCustom
-        font.pointSize: background.height * ( 9 / 40)
+        font.pointSize: background.height * (9 / 40)
         color: "#a7dd0d"
     }
 
@@ -36,7 +37,7 @@ Rectangle {
         anchors.left: positionName.left
         text: "x,y:" + positionButton.controlX.toFixed(
                   2) + "," + positionButton.controlY.toFixed(2)
-        font.pointSize: background.height * ( 9 / 40)
+        font.pointSize: background.height * (9 / 40)
     }
 
     MouseArea {
@@ -66,8 +67,8 @@ Rectangle {
             name: "on"
             PropertyChanges {
                 target: positionButton
-                controlX: vertical.x * (controlDomain / position.height)
-                controlY: horizontal.y * (controlDomain / position.height)
+                controlX: controlMin + vertical.x * (controlDomain / position.height)
+                controlY: controlMin + horizontal.y * (controlDomain / position.height)
             }
         }
     ]
