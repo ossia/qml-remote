@@ -6,6 +6,8 @@ import "qrc:/ControlSurface/Controls/Slider"
 import "qrc:/ControlSurface/Controls/Button"
 import "qrc:/ControlSurface/Controls/Position"
 import "qrc:/ControlSurface/Controls/ImpulseButton"
+import "qrc:/ControlSurface/Controls/ComboBox"
+
 
 import Variable.Global 1.0
 
@@ -70,6 +72,13 @@ Column {
             signal appendPosition(var msg)
             signal modifyPosition(var msg)
         }
+
+
+        // List of comboBoxes
+        ScoreComboBox {
+            id: scoreComboBox
+            signal appendComboBox(var msg)
+        }
     }
 
     // Receiving informations about controls in a control surface from score
@@ -116,8 +125,15 @@ Column {
                     scorePosition.visible = true
                     scorePosition.appendPosition(controlMessage)
                     break
-                default:
+
+                case Uuid.comboBoxUUID:
+                    // ComboBox
+                    console.log("333333333333333333")
+                    scoreComboBox.appendComboBox(controlMessage)
                     break
+
+                default:
+                    break;
                 }
                 i++
                 controlMessage = m.Controls[i]

@@ -9,4 +9,5 @@ QtObject  {
     property string buttonUUID: "fb27e4cb-ea7f-41e2-ad92-2354498c1b6b"
     property string colorPickerUUID: "8f38638e-9f9f-48b0-ae36-1cba86ef5703"
     property string positionUUID: "8093743c-584f-4bb9-97d4-6c7602f87116"
+    property string comboBoxUUID: "485680cc-b8b9-4a01-acc7-3e8334bdc016"
 }
