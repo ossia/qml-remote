@@ -84,5 +84,7 @@
         <file>Utility/Uuid.qml</file>
         <file>IpAdress/ScoreConnection.qml</file>
         <file>IpAdress/ScoreDisconnection.qml</file>
+        <file>ControlSurface/Controls/ComboBox/ScoreComboBox.qml</file>
+        <file>ControlSurface/Controls/ComboBox/ScoreComboBoxes.qml</file>
     </qresource>
 </RCC>
