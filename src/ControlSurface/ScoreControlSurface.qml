@@ -73,9 +73,8 @@ Column {
             signal modifyPosition(var msg)
         }
 
-
         // List of comboBoxes
-        ScoreComboBox {
+        ScoreComboBoxes {
             id: scoreComboBox
             signal appendComboBox(var msg)
         }
@@ -128,7 +127,6 @@ Column {
 
                 case Uuid.comboBoxUUID:
                     // ComboBox
-                    console.log("333333333333333333")
                     scoreComboBox.appendComboBox(controlMessage)
                     break
 
