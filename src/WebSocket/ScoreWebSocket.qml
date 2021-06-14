@@ -68,7 +68,6 @@ WebSocket {
         case WebSocket.Error:
             break
         case WebSocket.Open:
-            socket.sendTextMessage("Hello World")
             ipAdress.connected()
             scorePlayPauseStop.connectedToScore()
             break
