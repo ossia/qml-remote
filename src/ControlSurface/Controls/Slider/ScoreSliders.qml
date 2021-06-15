@@ -3,12 +3,15 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
+import "qrc:/Utility/utility.js" as Utility
 import Variable.Global 1.0
 
 ColumnLayout {
     id: sliderColumn
-    implicitWidth: (window.width <= 500 ? (window.width - 10) : (window.width
-                                                                 >= 1200 ? 400 : window.width / 3))
+    implicitWidth: (window.width <= 500 ? (window.width - 10)
+                                        : (window.width >= 1200
+                                           ? 400
+                                           : window.width / 3))
     spacing: 5
     property alias model: sliderListModel
 
@@ -25,9 +28,14 @@ ColumnLayout {
         delegate: ScoreSlider {
             id: slider
             implicitHeight: 5 + window.height / 25
-            implicitWidth: (window.width <= 500 ? (window.width - 10) : (window.width >= 1200 ? 400 : window.width / 3))
-            width: (window.width <= 500 ? (window.width - 10) : (window.width
-                                                                 >= 1200 ? 400 : window.width / 3))
+            implicitWidth: (window.width <= 500 ? (window.width - 10)
+                                                : (window.width >= 1200
+                                                   ? 400
+                                                   : window.width / 3))
+            width: (window.width <= 500 ? (window.width - 10)
+                                                : (window.width >= 1200
+                                                   ? 400
+                                                   : window.width / 3))
 
             // Control values
             controlCustom: _custom
@@ -44,10 +52,12 @@ ColumnLayout {
 
             onMoved: {
                 socket.sendTextMessage(
-                            '{ "Message": "ControlSurface","Path":'.concat(
-                                slider.controlSurfacePath, ', "id":',
-                                slider.controlId, ', "Value": {"Float":',
-                                slider.value, '}}'))
+                            '{ "Message": "ControlSurface",
+                                          "Path":'.concat(slider.controlSurfacePath, ', "id":',
+                                                          slider.controlId, ', "Value": {"Float":',
+                                                          (slider.controlUuid === Uuid.logFloatSliderUUID
+                                                           ? Utility.logSlider(slider.value, slider.from, slider.to).toFixed(3) + " "
+                                                           : slider.value.toFixed(3)) + " ", '}}'))
             }
         }
     }
@@ -83,7 +93,15 @@ ColumnLayout {
                     tmpTo = s.Domain.Int.Max
                     tmpStepSize = 1
                     break
+                case Uuid.logFloatSliderUUID:
+                    // LogFloat Slider
+                    tmpFrom = s.Domain.Float.Min
+                    tmpValue = s.Value.Float
+                    tmpTo = s.Domain.Float.Max
+                    tmpStepSize = 0.0
+                    break
                 }
+
                 sliderListModel.insert(sliderListModel.count, {
                                            "_custom": s.Custom,
                                            "_id": s.id,
@@ -109,12 +127,20 @@ ColumnLayout {
                         // Int Slider
                         tmpValue = s.Value.Int
                         break
+                    case Uuid.logFloatSliderUUID:
+                        // LogFloat Slider
+                        tmpValue = s.Value.Float
+                        break
                     default:
                         return
                     }
+
+
+                    /*
                     sliderListModel.set(i, {
                                             "_value": tmpValue
-                                        })
+                                        }
+                    */
                 }
             }
         }
