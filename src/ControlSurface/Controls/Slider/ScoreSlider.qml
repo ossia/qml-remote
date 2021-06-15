@@ -1,6 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 
+import "qrc:/Utility/utility.js" as Utility
+import Variable.Global 1.0
+
 Slider {
     id: slider
     implicitWidth: 300
@@ -22,15 +25,24 @@ Slider {
         font.bold: true
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2 ? parent.height / 2 : (parent.height + parent.width) / 30.0
+        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
+                        ? parent.height / 2
+                        : (parent.height + parent.width) / 30.0
     }
 
     Text {
-        text: slider.value.toFixed(3) + " "
+        text: slider.controlUuid
+              === Uuid.logFloatSliderUUID
+              ? Utility.logSlider(slider.value,
+                                  slider.from,
+                                  slider.to).toFixed(3) + " "
+              : slider.value.toFixed(3) + " "
         color: "#ffedb6"
         anchors.right: parent.right
         font.bold: true
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2 ? parent.height / 2 : (parent.height + parent.width) / 30.0
+        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
+                        ? parent.height / 2
+                        : (parent.height + parent.width) / 30.0
         anchors.verticalCenter: parent.verticalCenter
     }
 
