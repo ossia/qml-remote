@@ -6,8 +6,11 @@ function find(listModel, cond) {
 }
 
 function logSlider(x, min, max) {
-    var minv = Math.log(min)
-    var maxv = Math.log(max)
-    var scale = (maxv - minv) / (max - min)
+    const minv = Math.log(min)
+    const maxv = Math.log(max)
+    const range = max - min === 0
+                ? 1
+                : max - min
+    const scale = (maxv - minv) / (max - min)
     return Math.exp(minv + scale * (x - min))
 }
