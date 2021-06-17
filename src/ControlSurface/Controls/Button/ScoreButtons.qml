@@ -31,9 +31,9 @@ Flow {
         }
     }
 
-    // Receving informations about impulse buttons in control surface from score
+    // Receving informations about buttons in control surface from score
     Connections {
-        // Adding an impluse button in the control surface
+        // Adding a button in the control surface
         function onAppendButton(s) {
             function find(cond) {
                 for (var i = 0; i < buttonListModel.count; ++i)
@@ -54,7 +54,7 @@ Flow {
                                        })
             }
         }
-        // Modifying an impulse button in the control surface
+        // Modifying a button in the control surface
         function onModifyButton(s) {
             for (var i = 0; i < buttonListModel.count; ++i) {
                 if (buttonListModel.get(i)._id === s.Control) {
