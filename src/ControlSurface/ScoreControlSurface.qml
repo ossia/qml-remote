@@ -98,10 +98,11 @@ Column {
                 case Uuid.impulseButtonUUID:
                     // Impulse Button
                     scoreImpulseButtons.appendImpulseButton(controlMessage)
+                    break
 
                 case Uuid.buttonUUID:
                     // Button
-                    //scoreButtons.appendButton(controlMessage)
+                    scoreButtons.appendButton(controlMessage)
                     break
 
                 case Uuid.colorPickerUUID:
@@ -116,7 +117,6 @@ Column {
                     scorePosition.appendPosition(controlMessage)
                     break
                 default:
-                    console.log(JSON.stringify(controlMessage.uuid))
                     break
                 }
                 i++
