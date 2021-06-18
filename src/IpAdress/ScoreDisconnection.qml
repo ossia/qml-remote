@@ -31,7 +31,7 @@ Button {
 
                     Text {
                         id: ipText
-                        text: "Do you want to save your changes?"
+                        text: "Do you really want to disconnect?"
                         color: "white"
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
