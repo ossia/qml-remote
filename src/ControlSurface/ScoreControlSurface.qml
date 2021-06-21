@@ -14,7 +14,7 @@ Column {
     property string name
 
     Rectangle {
-        width: window.width
+        width: parent.width
         height: 5
         color: "#303030"
     }
@@ -24,14 +24,15 @@ Column {
         id: controlSurfaceName
         text: name
         color: "white"
-        font.pointSize: parent.height === 0 ? font.default : (0.55 * window.width + 0.45
-                                                              * window.height) / 75
+        font.pointSize: parent.height === 0
+                        ? font.default
+                        : (0.55 * window.width + 0.45 * window.height) / 75
     }
 
     // List of controls
     Flow {
         id: controlList
-        width: window.width
+        width: parent.width
         spacing: 5
 
         // List of sliders
