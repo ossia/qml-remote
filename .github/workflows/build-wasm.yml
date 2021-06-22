@@ -1,0 +1,38 @@
+name: Build wasm app
+
+on: push
+
+jobs:
+  buster:
+    name: wasm build
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker
+        run: |
+          clone https://github.com/guerinoni/qt-wasm.git
+          cd qt-wasm
+          docker build -t qtwa .
+
+      - name: Create Container
+        run: |
+          docker run -it -v /home/user/qml-remote:/remote --name webassembly qtwa
+
+
+      - name: Build 
+        run: |
+          cd /home/user/qml-remote
+          mkdir /build
+          cd /build
+          qmake ..
+          make
+
+      - name: Zip
+        shell: bash
+        run: |
+          tar -czvf /home/user/qml-remote/build.tar.gz /home/user/qml-remote/build
