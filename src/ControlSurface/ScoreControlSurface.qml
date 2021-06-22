@@ -27,9 +27,11 @@ Column {
         id: controlSurfaceName
         text: name
         color: "white"
-        font.pointSize: parent.height === 0
-                        ? font.default
-                        : (0.55 * window.width + 0.45 * window.height) / 75
+        font.pointSize: (parent.width <= 500
+                         ? 10
+                         : (parent.width >= 1200
+                            ? 20
+                            : 15))
     }
 
     // List of controls
