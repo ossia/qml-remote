@@ -18,7 +18,9 @@ jobs:
           git clone https://github.com/guerinoni/qt-wasm.git
           ls .
           cd qt-wasm
-          ls /__w/_temp/
+          ls -la /__w/_temp/
+          chmod +r /__w/_temp/48307b3f-0065-4e15-8dfb-118fe3e7821f.sh
+          ls -la /__w/_temp/
           docker build -t qtwa .
 
       - name: Create Container
