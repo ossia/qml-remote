@@ -12,6 +12,7 @@ import "qrc:/ControlSurface/Controls/ComboBox"
 import Variable.Global 1.0
 
 Column {
+    id: controlSurfaceListColumn
     spacing: 5
     property string name
 

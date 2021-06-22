@@ -34,6 +34,7 @@ Item  {
             id: controlSurfaceDataModel
             Loader {
                 id: controlSurface
+                width: scoreControlSurfaceListView.width
                 property string name
                 property var path
                 property var m
@@ -54,6 +55,7 @@ Item  {
             active: true
             width: 30
             height: parent.height
+
             anchors.right: parent.right
             policy: ScrollBar.AsNeeded
             snapMode: ScrollBar.SnapAlways
