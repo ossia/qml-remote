@@ -19,7 +19,7 @@ jobs:
           ls .
           cd qt-wasm
           ls -la /__w/_temp/
-          chmod -R 744 /__w/_temp/
+          chmod -R 777 /__w/_temp/
           ls -la /__w/_temp/
           docker build -t qtwa .
 
