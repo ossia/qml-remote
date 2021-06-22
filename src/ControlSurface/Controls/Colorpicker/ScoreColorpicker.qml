@@ -9,7 +9,7 @@ Rectangle {
     width: (parent.width <= 500 ? (parent.width)
                                 : (parent.width >= 1200
                                    ? 600
-                                   : window.width / 2))
+                                   : parent.width / 2))
     height: colorBackground.width / 2
     color: "#363636"
 
