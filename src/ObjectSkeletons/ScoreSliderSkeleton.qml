@@ -18,7 +18,9 @@ Slider {
         font.bold: true
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2 ? parent.height / 2 : (parent.height + parent.width) / 30.0
+        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
+                        ? parent.height / 2
+                        : (parent.height + parent.width) / 30.0
     }
 
     Text {
@@ -26,7 +28,9 @@ Slider {
         color: "#ffedb6"
         anchors.right: parent.right
         font.bold: true
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2 ? parent.height / 2 : (parent.height + parent.width) / 30.0
+        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
+                        ? parent.height / 2
+                        : (parent.height + parent.width) / 30.0
         anchors.verticalCenter: parent.verticalCenter
     }
 

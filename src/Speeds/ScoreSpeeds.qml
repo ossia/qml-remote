@@ -16,9 +16,12 @@ Rectangle {
     ListView {
         id: lView
         spacing: 10
-        anchors.fill: parent
         clip: true
         snapMode: ListView.SnapToItem
+        height: parent.height
+        anchors.right: scrollBar.left
+        anchors.left: parent.left
+        anchors.rightMargin: 5
 
         // Create a list of sliders for the intervals' speeds
         model: ListModel {
@@ -32,9 +35,8 @@ Rectangle {
             id: speed
             controlName: name
             height: 5 + window.height / 25
-            width: window.width / 2 - scoreSpeeds.width / 15 - 10
-            //anchors.right: scrollBar.left
-            anchors.rightMargin: 10
+            anchors.left: parent.left
+            anchors.right: parent.right
             from: -120
             value: speedValue
             to: 600
@@ -49,22 +51,34 @@ Rectangle {
             }
         }
 
-        ScrollBar.vertical: ScrollBar {
+        ScrollBar.vertical: scrollBar
+    }
+
+    ScrollBar {
             id: scrollBar
             active: true
-            width: parent.width / 15
+            width: 30
+            height: parent.height
+
             anchors.right: parent.right
             policy: ScrollBar.AsNeeded
             snapMode: ScrollBar.SnapAlways
-
             contentItem: Rectangle {
-                id: contentItem
-                radius: width / 2
+                id: scrollBarContentItem
                 visible: scrollBar.size >= 1 ? false : true
-                color: scrollBar.pressed ? "#f6a019" : "#303030"
+                color: scrollBar.pressed ? "#f6a019" : "#808080"
             }
-        }
+
+            background: Rectangle {
+                id: scrollBarBackground
+                width: scrollBarContentItem.width
+                anchors.fill: parent
+                color: "#202020"
+                border.color: "#101010"
+                border.width: 2
+            }
     }
+
     // Receiving and handling messages about intervals
     Connections {
         target: scoreSpeeds
