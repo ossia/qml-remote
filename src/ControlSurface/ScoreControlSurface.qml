@@ -10,6 +10,7 @@ import "qrc:/ControlSurface/Controls/ImpulseButton"
 import Variable.Global 1.0
 
 Column {
+    id: controlSurfaceListColumn
     spacing: 5
     property string name
 
