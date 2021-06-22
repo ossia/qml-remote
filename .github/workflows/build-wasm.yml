@@ -19,6 +19,7 @@ jobs:
           ls .
           cd qt-wasm
           ls .
+          chmod 755 /__w/_temp/10fe837c-dc7d-4033-ac0d-75d7eaef99c0.sh
           docker build -t qtwa .
 
       - name: Create Container
