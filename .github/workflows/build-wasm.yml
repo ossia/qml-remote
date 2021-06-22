@@ -20,8 +20,8 @@ jobs:
           cd qt-wasm
           ls -la /__w/_temp/
           chmod -R 777 /__w/_temp/
-          ls -la /__w/_temp/
-          sudo docker build -t qtwa .
+          ls -la /__w/_temp/*
+          docker build -t qtwa .
 
       - name: Create Container
         run: |
