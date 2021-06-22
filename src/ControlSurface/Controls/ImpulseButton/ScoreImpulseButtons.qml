@@ -9,7 +9,7 @@ import Variable.Global 1.0
 
 Flow {
     spacing: 5
-    width: window.width - 10
+    width: parent.width
 
     Repeater {
         id: impulseButtonList
