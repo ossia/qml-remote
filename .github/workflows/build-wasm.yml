@@ -7,7 +7,7 @@ jobs:
     name: wasm build
     runs-on: ubuntu-latest
     container:
-      image: archlinux:latest
+      image: qt-wasm:latest
 
     steps:
       - name: Checkout code
@@ -15,7 +15,7 @@ jobs:
 
       - name: Build Docker
         run: |
-          clone https://github.com/guerinoni/qt-wasm.git
+          git clone https://github.com/guerinoni/qt-wasm.git
           cd qt-wasm
           docker build -t qtwa .
 
