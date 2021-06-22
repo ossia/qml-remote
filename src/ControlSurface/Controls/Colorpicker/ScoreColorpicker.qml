@@ -6,8 +6,10 @@ import Variable.Global 1.0
 
 Rectangle {
     id: colorBackground
-    width: (window.width <= 500 ? (window.width - 10) : (window.width
-                                                         >= 1200 ? 600 : window.width / 2))
+    width: (parent.width <= 500 ? (parent.width)
+                                : (parent.width >= 1200
+                                   ? 600
+                                   : window.width / 2))
     height: colorBackground.width / 2
     color: "#363636"
 

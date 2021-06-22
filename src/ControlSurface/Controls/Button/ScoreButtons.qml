@@ -6,7 +6,7 @@ import QtQml.Models 2.12
 
 Flow {
     spacing: 5
-    width: window.width - 10
+    width: parent.width
 
     Repeater {
         id: buttonList

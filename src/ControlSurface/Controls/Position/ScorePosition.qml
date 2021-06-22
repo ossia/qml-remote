@@ -5,11 +5,11 @@ import "qrc:/Utility/utility.js" as Utility
 
 Rectangle {
     id: positionBackground
-    width: (window.width <= 500
-            ? (window.width - 10)
-            : (window.width >= 1200
+    width: (parent.width <= 500
+            ? (parent.width)
+            : (parent.width >= 1200
                ? 600
-               : window.width / 2))
+               : parent.width / 2))
 
     height: positionBackground.width / 2
     color: "#363636"
