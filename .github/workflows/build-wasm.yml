@@ -7,7 +7,7 @@ jobs:
     name: wasm build
     runs-on: ubuntu-latest
     container:
-      image: qt-wasm:latest
+      image: guerra1994/qt-wasm:latest
 
     steps:
       - name: Checkout code
@@ -23,7 +23,6 @@ jobs:
         run: |
           docker run -it -v /home/user/qml-remote:/remote --name webassembly qtwa
 
-
       - name: Build 
         run: |
           cd /home/user/qml-remote
@@ -36,4 +35,3 @@ jobs:
         shell: bash
         run: |
           tar -czvf /home/user/qml-remote/build.tar.gz /home/user/qml-remote/build
-          
