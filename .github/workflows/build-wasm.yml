@@ -36,3 +36,4 @@ jobs:
         shell: bash
         run: |
           tar -czvf /home/user/qml-remote/build.tar.gz /home/user/qml-remote/build
+          
