@@ -35,8 +35,7 @@ Rectangle {
             id: speed
             controlName: name
             height: 5 + window.height / 25
-            anchors.left: parent.left
-            anchors.right: parent.right
+            width: lView.width
             from: -120
             value: speedValue
             to: 600
@@ -57,6 +56,7 @@ Rectangle {
     ScrollBar {
             id: scrollBar
             active: true
+            visible: lView.count > 0
             width: window.width <= 500 ? 20 : 30
             height: parent.height
 
