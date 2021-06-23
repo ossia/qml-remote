@@ -62,7 +62,7 @@ Item  {
             snapMode: ScrollBar.SnapAlways
             contentItem: Rectangle {
                 id: scrollBarContentItem
-                visible: scrollBar.size >= 1 ? false : true
+                visible: scrollBar.size < 1
                 color: scrollBar.pressed ? "#f6a019" : "#808080"
             }
 
