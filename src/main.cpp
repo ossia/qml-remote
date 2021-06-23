@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
 
     app.setOrganizationName("ossia.io");
     app.setOrganizationDomain("Remote Control");
+    app.setWindowIcon(QPixmap("Icons/score_logo.png"));
 
     QQmlApplicationEngine engine;
     const bool debugEnabled = qEnvironmentVariableIntValue("SCORE_QML_REMOTE_DEBUG") > 0;

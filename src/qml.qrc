@@ -86,5 +86,7 @@
         <file>IpAdress/ScoreDisconnection.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBox.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBoxes.qml</file>
+        <file>Icons/ossia_score.ico</file>
+        <file>Icons/ossia_score.png</file>
     </qresource>
 </RCC>
