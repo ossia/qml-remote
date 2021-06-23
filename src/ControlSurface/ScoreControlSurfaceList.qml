@@ -53,6 +53,7 @@ Item  {
     ScrollBar {
             id: scrollBar
             active: true
+            visible: scoreControlSurfaceListView.count > 0
             width: window.width <= 500 ? 20 : 30
             height: parent.height
 
