@@ -53,7 +53,7 @@ Item  {
     ScrollBar {
             id: scrollBar
             active: true
-            width: parent.width <= 500 ? 20 : 30
+            width: window.width <= 500 ? 20 : 30
             height: parent.height
 
             anchors.right: parent.right
