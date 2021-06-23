@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
@@ -9,11 +10,13 @@ Rectangle {
 
     ListView {
         id: triggerslist
-        width: parent.width
+        anchors.left: parent.left
+        anchors.right: scrollBar.left
+        anchors.rightMargin: 5
         height: parent.height
-        orientation: ListView.Horizontal
+        orientation: ListView.Vertical
         clip: true
-        spacing: 5
+        spacing: 10
         snapMode: ListView.SnapToItem
         model: ListModel {
             id: triggerslistModel
@@ -21,9 +24,38 @@ Rectangle {
 
         delegate: ScoreTrigger {
             scorePath: path
-            height: triggerslist.height
+            width: parent.width
+            height: 5 + window.height / 25
             triggerName: name
         }
+
+        ScrollBar.vertical: scrollBar
+    }
+
+    ScrollBar {
+            id: scrollBar
+            active: triggerslist.count > 0
+            visible: triggerslist.count > 0
+            width: window.width <= 500 ? 20 : 30
+            height: parent.height
+
+            anchors.right: parent.right
+            policy: ScrollBar.AsNeeded
+            snapMode: ScrollBar.SnapAlways
+            contentItem: Rectangle {
+                id: scrollBarContentItem
+                visible: scrollBar.size >= 1 ? false : true
+                color: scrollBar.pressed ? "#f6a019" : "#808080"
+            }
+
+            background: Rectangle {
+                id: scrollBarBackground
+                width: scrollBarContentItem.width
+                anchors.fill: parent
+                color: "#202020"
+                border.color: "#101010"
+                border.width: 2
+            }
     }
 
     // Receiving informations about trigger from score
