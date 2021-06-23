@@ -24,7 +24,7 @@ Rectangle {
 
         delegate: ScoreTrigger {
             scorePath: path
-            width: parent.width
+            width: scoreTriggers.width
             height: 5 + window.height / 25
             triggerName: name
         }
