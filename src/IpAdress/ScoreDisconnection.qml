@@ -1,3 +1,9 @@
+/* Disconnection Button :
+ * at the top left of the interface with others buttons
+ * when the button is pressed: a window appears asking for confirmation
+ * of the disconnection
+ */
+
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.3

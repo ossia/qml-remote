@@ -72,6 +72,7 @@ WebSocket {
             scorePlayPauseStop.connectedToScore()
             break
         case WebSocket.Closed:
+            window.state = ""
             ipAdress.disconnected()
             scorePlayPauseStop.disconnectedFromScore()
             break
