@@ -1,12 +1,15 @@
+/*
+  * Define a colorpoint
+  * Is located in a colorpicker in a Control Surface
+  * All colorpickers of a same control surface in score share a common colorpanel
+  */
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
     id: colorButton
-    height: colorButton.width
-    color: "#a7dd0d"
-    border.width: 5
-    border.color: "#a7dd0d"
+    color: "#62400a"
 
     property string controlCustom
     property string controlDomain
@@ -21,18 +24,20 @@ Rectangle {
 
     Text {
         id: colorName
-        anchors.left: colorButton.right
+        anchors.left: colorButton.left
         anchors.leftMargin: 5
         anchors.horizontalCenter: colorButton.horizontalCenter
         text: controlCustom
-        font.pointSize: background.height * ( 9 / 40)
-        color: "#a7dd0d"
+        font.pointSize: parent.width <= 200 ? 8 : 10
+        color: "white"
     }
+
     PanelBorder {
-        width: background.width * ( 2 / 3)
-        height: parent.width / 2
-        anchors.top: colorName.bottom
+        anchors.right: parent.right
         anchors.left: colorName.left
+        anchors.top: colorName.bottom
+        anchors.bottom: parent.bottom
+        anchors.margins: 5
 
         Rectangle {
             id: colorValue
@@ -60,18 +65,11 @@ Rectangle {
             }
             PropertyChanges {
                 target: colorButton
-                color: "#363636"
+                color: "#303030"
             }
             PropertyChanges {
                 target: colorMouseAreaButton
-                onClicked: colorButton.state = "on"
-            }
-        },
-        State {
-            name: "on"
-            PropertyChanges {
-                target: colorValue
-                color: displayedColor
+                onClicked: colorButton.state = ""
             }
         }
     ]
