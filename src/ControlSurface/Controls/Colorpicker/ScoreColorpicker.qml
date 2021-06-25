@@ -6,6 +6,7 @@
 
 import QtQuick 2.0
 import QtQml.Models 2.12
+ import QtQuick.Controls 2.15
 import QtQml 2.15
 
 import Variable.Global 1.0
@@ -29,59 +30,89 @@ Rectangle {
     }
 
     // Create the column of color picker
-    Column {
+    ListView {
+        id: colorPointList
         anchors.left: colorpicker.right
-        anchors.right: colorBackground.right
-        anchors.leftMargin: 5
-        anchors.top: colorBackground.top
-        anchors.topMargin: 10
-        anchors.rightMargin: 5
+        anchors.right: scrollBar.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.margins: 5
         spacing: 5
-        width: (1 / 3) * colorBackground.width
+        orientation: ListView.Vertical
+        clip: true
+        snapMode: ListView.SnapToItem
+        interactive: scrollBar.size < 1
 
-        Repeater {
+        model: ListModel {
+            id: colorPointListModel
+        }
+
+        delegate: Item {
+            id: background
             width: parent.width
-            id: colorPointList
-            model: ListModel {
-                id: colorPointListModel
-            }
+            height: 5 + window.height / 20
 
-            delegate: Item {
-                id: background
+            ScoreColorPoint {
+                id: colorPoint
                 width: parent.width
                 height: 5 + window.height / 20
+                controlCustom: _custom
+                controlId: _id
+                controlUuid: _uuid
+                controlSurfacePath: path
+                controlColor: _color
+                displayedColor: colorpicker.colorValue
+                state: _state
 
-                ScoreColorPoint {
-                    id: colorPoint
-                    width: parent.width
-                    height: 5 + window.height / 20
-                    controlCustom: _custom
-                    controlId: _id
-                    controlUuid: _uuid
-                    controlSurfacePath: path
-                    controlColor: _color
-                    displayedColor: colorpicker.colorValue
-                    state: _state
+                function hexToRGB(hex) {
+                    return "[" + hex.r + ", " + hex.g + ", " + hex.b + ", " + hex.a + "]"
+                }
 
-                    function hexToRGB(hex) {
-                        return "[" + hex.r + ", " + hex.g + ", " + hex.b + ", " + hex.a + "]"
-                    }
-
-                    onDisplayedColorChanged: {
-                        if (colorPoint.state === "on"
-                                || colorPoint.state === "") {
-                            socket.sendTextMessage(
-                                        '{ "Message": "ControlSurface","Path":'.concat(
-                                            colorPoint.controlSurfacePath,
-                                            ', "id":', colorPoint.controlId,
-                                            ', "Value": {"Vec4f":', hexToRGB(
-                                                colorPoint.displayedColor),
-                                            '}}'))
-                        }
+                onDisplayedColorChanged: {
+                    if (colorPoint.state === "on"
+                            || colorPoint.state === "") {
+                        socket.sendTextMessage(
+                                    '{ "Message": "ControlSurface","Path":'.concat(
+                                        colorPoint.controlSurfacePath,
+                                        ', "id":', colorPoint.controlId,
+                                        ', "Value": {"Vec4f":', hexToRGB(
+                                            colorPoint.displayedColor),
+                                        '}}'))
                     }
                 }
             }
         }
+
+        ScrollBar.vertical: scrollBar
+    }
+
+    ScrollBar {
+            id: scrollBar
+            active: scrollBar.size < 1
+            visible: scrollBar.size < 1
+            width: window.width <= 500 ? 20 : 30
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
+
+            anchors.right: parent.right
+            interactive: scrollBar.size < 1
+            policy: ScrollBar.AsNeeded
+            snapMode: ScrollBar.NoSnap
+            contentItem: Rectangle {
+                id: scrollBarContentItem
+                visible: scrollBar.size < 1
+                color: scrollBar.pressed ? "#f6a019" : "#808080"
+            }
+
+            background: Rectangle {
+                id: scrollBarBackground
+                width: scrollBarContentItem.width
+                anchors.fill: parent
+                color: "#202020"
+                border.color: "#101010"
+                border.width: 2
+            }
     }
 
     // Receving informations about colorpickers in control surface from score
