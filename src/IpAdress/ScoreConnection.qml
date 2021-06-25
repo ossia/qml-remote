@@ -81,6 +81,7 @@ Button {
                     }
 
                     onReleased: {
+                        window.state = "connected"
                         settings.ip_adress = ipInput.text
                         ipDialog.close()
                     }
