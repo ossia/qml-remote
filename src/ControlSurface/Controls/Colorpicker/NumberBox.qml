@@ -11,7 +11,6 @@ Row {
     width: 80
     height: 15
     spacing: 4
-    //anchors.margins: 2
     Text {
         id: captionBox
         width: 18
