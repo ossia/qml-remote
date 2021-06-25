@@ -1,12 +1,15 @@
+/*
+  * Define a colorpoint
+  * Is located in a position in a Control Surface
+  * All position of a same control surface in score share a common position display
+  */
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
     id: positionButton
-    height: positionButton.width
-    color: "#a7dd0d"
-    border.width: 5
-    border.color: "#a7dd0d"
+    color: "#62400a"
 
     property string controlCustom
     property string controlValueType
@@ -22,22 +25,22 @@ Rectangle {
 
     Text {
         id: positionName
-        anchors.left: positionButton.right
+        anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.horizontalCenter: positionButton.horizontalCenter
         text: controlCustom
-        font.pointSize: background.height * (9 / 40)
-        color: "#a7dd0d"
+        font.pointSize: parent.height * (9 / 40)
+        color: "white"
     }
 
     Text {
         id: positionValue
         anchors.top: positionName.bottom
-        color: "#a7dd0d"
+        color: "white"
         anchors.left: positionName.left
         text: "x,y:" + positionButton.controlX.toFixed(
                   2) + "," + positionButton.controlY.toFixed(2)
-        font.pointSize: background.height * (9 / 40)
+        font.pointSize: parent.height * (9 / 40)
     }
 
     MouseArea {
@@ -56,7 +59,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: positionButton
-                color: "#363636"
+                color: "#303030"
             }
             PropertyChanges {
                 target: positionMouseAreaButton

@@ -1,3 +1,9 @@
+/*
+  * Define the position control
+  * Is located in a Control Surface
+  * All position of a same control surface in score share a common position display
+  */
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
@@ -50,66 +56,94 @@ Rectangle {
     }
 
     // Create the column of position
-    Column {
+    ListView {
+        id: positionList
         anchors.left: position.right
-        anchors.right: positionBackground.right
-        anchors.leftMargin: 5
-        anchors.top: positionBackground.top
-        anchors.topMargin: 10
+        anchors.right: scrollBar.left
+        anchors.margins: 5
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         spacing: 5
-        width: (1 / 3) * positionBackground.width
+        orientation: ListView.Vertical
+        clip: true
+        snapMode: ListView.SnapToItem
+        interactive: scrollBar.size < 1
 
-        Repeater {
-            id: positionList
+        model: ListModel {
+            id: positionListModel
+        }
+
+        delegate: ScorePositionPoint {
+            id: positionPoint
             width: parent.width
-            model: ListModel {
-                id: positionListModel
+            height: 5 + window.height / 20
+            controlCustom: _custom
+            controlId: _id
+            controlUuid: _uuid
+            controlSurfacePath: path
+
+            controlMin: _controlMin
+            controlDomain: _controlDomain
+
+            state: _state
+
+            onControlXChanged: {
+                if (positionPoint.state === "on"
+                        || positionPoint.state === "") {
+                    socket.sendTextMessage(
+                                '{ "Message": "ControlSurface","Path":'.concat(
+                                    positionPoint.controlSurfacePath,
+                                    ', "id":', positionPoint.controlId,
+                                    ', "Value": {"Vec2f":[',
+                                    positionPoint.controlX, ',',
+                                    positionPoint.controlY, ']}}'))
+                }
             }
 
-            delegate: Item {
-                id: background
-                width: parent.width
-                height: parent.width / 5
-
-                ScorePositionPoint {
-                    id: positionPoint
-                    width: parent.width / 5
-                    controlCustom: _custom
-                    controlId: _id
-                    controlUuid: _uuid
-                    controlSurfacePath: path
-
-                    controlMin: _controlMin
-                    controlDomain: _controlDomain
-
-                    onControlXChanged: {
-                        if (positionPoint.state === "on"
-                                || positionPoint.state === "") {
-                            socket.sendTextMessage(
-                                        '{ "Message": "ControlSurface","Path":'.concat(
-                                            positionPoint.controlSurfacePath,
-                                            ', "id":', positionPoint.controlId,
-                                            ', "Value": {"Vec2f":[',
-                                            positionPoint.controlX, ',',
-                                            positionPoint.controlY, ']}}'))
-                        }
-                    }
-
-                    onControlYChanged: {
-                        if (positionPoint.state === "on"
-                                || positionPoint.state === "") {
-                            socket.sendTextMessage(
-                                        '{ "Message": "ControlSurface","Path":'.concat(
-                                            positionPoint.controlSurfacePath,
-                                            ', "id":', positionPoint.controlId,
-                                            ', "Value": {"Vec2f":[',
-                                            positionPoint.controlX, ',',
-                                            positionPoint.controlY, ']}}'))
-                        }
-                    }
+            onControlYChanged: {
+                if (positionPoint.state === "on"
+                        || positionPoint.state === "") {
+                    socket.sendTextMessage(
+                                '{ "Message": "ControlSurface","Path":'.concat(
+                                    positionPoint.controlSurfacePath,
+                                    ', "id":', positionPoint.controlId,
+                                    ', "Value": {"Vec2f":[',
+                                    positionPoint.controlX, ',',
+                                    positionPoint.controlY, ']}}'))
                 }
             }
         }
+
+        ScrollBar.vertical: scrollBar
+    }
+
+    ScrollBar {
+            id: scrollBar
+            active: scrollBar.size < 1
+            visible: scrollBar.size < 1
+            width: window.width <= 500 ? 20 : 30
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
+
+            anchors.right: parent.right
+            interactive: scrollBar.size < 1
+            policy: ScrollBar.AsNeeded
+            snapMode: ScrollBar.NoSnap
+            contentItem: Rectangle {
+                id: scrollBarContentItem
+                visible: scrollBar.size < 1
+                color: scrollBar.pressed ? "#f6a019" : "#808080"
+            }
+
+            background: Rectangle {
+                id: scrollBarBackground
+                width: scrollBarContentItem.width
+                anchors.fill: parent
+                color: "#202020"
+                border.color: "#101010"
+                border.width: 2
+            }
     }
 
     // Receving informations about colorpickers in control surface from score
@@ -133,7 +167,8 @@ Rectangle {
                                              "_controlX": tmpX,
                                              "_controlY": tmpY,
                                              "_controlDomain": tmpDomain,
-                                             "_controlMin": tmpMin
+                                             "_controlMin": tmpMin,
+                                             "_state": positionListModel.count <= 0 ? "" : "off"
                                          })
             }
         }
