@@ -1,3 +1,9 @@
+/*
+  * Define the colorpicker control
+  * Is located in a Control Surface
+  * All colorpickers of a same control surface in score share a common colorpanel
+  */
+
 import QtQuick 2.0
 import QtQml.Models 2.12
 import QtQml 2.15
@@ -29,6 +35,7 @@ Rectangle {
         anchors.leftMargin: 5
         anchors.top: colorBackground.top
         anchors.topMargin: 10
+        anchors.rightMargin: 5
         spacing: 5
         width: (1 / 3) * colorBackground.width
 
@@ -42,25 +49,25 @@ Rectangle {
             delegate: Item {
                 id: background
                 width: parent.width
-                height: parent.width / 5
+                height: 5 + window.height / 20
 
                 ScoreColorPoint {
                     id: colorPoint
-                    width: parent.width / 5
+                    width: parent.width
+                    height: 5 + window.height / 20
                     controlCustom: _custom
                     controlId: _id
                     controlUuid: _uuid
                     controlSurfacePath: path
                     controlColor: _color
                     displayedColor: colorpicker.colorValue
+                    state: _state
 
                     function hexToRGB(hex) {
                         return "[" + hex.r + ", " + hex.g + ", " + hex.b + ", " + hex.a + "]"
                     }
 
                     onDisplayedColorChanged: {
-
-                        // le pb est de convertir un "#ffffffff" en [r,g, b, o] et inversement
                         if (colorPoint.state === "on"
                                 || colorPoint.state === "") {
                             socket.sendTextMessage(
@@ -87,9 +94,10 @@ Rectangle {
                         return i
                 return null
             }
+            //the index of m.Path in the listmodel
             var a = find(function (item) {
                 return item.id === JSON.stringify(s.id)
-            }) //the index of m.Path in the listmodel
+            })
             if (a === null) {
                 var red = s.Value.Vec4f[0]
                 var green = s.Value.Vec4f[1]
@@ -101,7 +109,8 @@ Rectangle {
                                                "_id": s.id,
                                                "_uuid": s.uuid,
                                                "_color": colorpicker._fullColorString(
-                                                             newColor, alpha)
+                                                             newColor, alpha),
+                                               "_state": colorPointListModel.count <= 0 ? "" : "off"
                                            })
             }
         }
