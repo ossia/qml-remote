@@ -1,3 +1,10 @@
+/*
+  * List of buttons  :
+  * - in a control surface
+  * - modify button value in the remote modify
+  * the value of this button in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
