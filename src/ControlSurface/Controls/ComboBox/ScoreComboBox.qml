@@ -1,9 +1,18 @@
+/*
+  * Combobox control :
+  * - in a list of comboboxes in a control surface
+  * - modify combobox value in the remote modify
+  * the value of this combobox in score
+  */
+
 import QtQuick 2.15
 import QtQuick.Controls 2.12
 
 ComboBox {
     id: comboBox
-    implicitHeight: 5 + window.height / 25
+    implicitHeight: window.height<= 500
+                    ? 30
+                    : 5 + window.height / 25
     implicitWidth: (window.width <= 500
                     ? (window.width - 10)
                     : (window.width >= 1200 ? 400 : window.width / 3))
@@ -29,19 +38,19 @@ ComboBox {
         height: 40
         contentItem: Text {
             text: name
-            color: "#ffedb6"
-            font.pointSize: ((comboBox.contentItem.height + comboBox.contentItem.width)
-                             / 30) >= comboBox.contentItem.height / 2
-                            ? comboBox.contentItem.height / 2
-                            : (comboBox.contentItem.height
-                               + comboBox.contentItem.width) / 30.0
+            color: "white"
+            font.pointSize: parent.width <= 200
+                            ? 10
+                            : parent.width >= 500
+                              ? parent.height / 2
+                              : 15
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
         }
 
         background: Rectangle {
             opacity: delegateItem.highlighted ? 1 : 0.3
-            color: delegateItem.highlighted ? "#f6a019" : "#303030"
+            color: delegateItem.highlighted ? "#62400a" : "#303030"
             //height: parent.height
         }
 
@@ -72,7 +81,7 @@ ComboBox {
             context.lineTo(width, 0)
             context.lineTo(width / 2, height)
             context.closePath()
-            context.fillStyle = comboBox.pressed ? "#ffedb6" : "#ffedb6"
+            context.fillStyle = "white"
             context.fill()
         }
     }
@@ -80,22 +89,23 @@ ComboBox {
     contentItem: Text {
         leftPadding: 5
         rightPadding: comboBox.indicator.width + comboBox.spacing
-        text: " " + "<b>" + qsTr(controlCustom)
-              + ": " + "</b>" + comboBox.displayText
-        color: comboBox.pressed ? "#ffedb6" : "#ffedb6"
+        text: qsTr(controlCustom)
+              + ": " + comboBox.displayText
+        color: "white"
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
-        font.pointSize: ((parent.height + parent.width) / 30)
-                        >= parent.height / 2
-                        ? parent.height / 2
-                        : (parent.height + parent.width) / 30.0
+        font.pointSize: parent.width <= 200
+                        ? 10
+                        : parent.width >= 500
+                          ? parent.height / 2
+                          : 15
     }
 
     background: Rectangle {
         implicitWidth: 120
         implicitHeight: 40
         color: "#303030"
-        border.color: comboBox.pressed ? "#f6a019" : "#f6a019"
+        border.color: comboBox.pressed ? "#62400a" : "#62400a"
     }
 
     popup: Popup {
@@ -113,7 +123,7 @@ ComboBox {
             ScrollBar.vertical: ScrollBar {
                 id: scrollBar
                 active: true
-                width: 30 // parent.width / 15
+                width: 30
                 anchors.right: parent.right
 
                 policy: ScrollBar.AsNeeded
@@ -134,7 +144,7 @@ ComboBox {
 
         background: Rectangle {
             color: "#303030"
-            border.color: "#f6a019"
+            border.color: "#62400a"
         }
     }
 

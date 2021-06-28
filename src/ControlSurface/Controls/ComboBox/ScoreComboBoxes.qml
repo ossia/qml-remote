@@ -1,3 +1,10 @@
+/*
+  * List of comboboxes  :
+  * - in a control surface
+  * - modify combobox value in the remote modify
+  * the value of this combobox in score
+  */
+
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
