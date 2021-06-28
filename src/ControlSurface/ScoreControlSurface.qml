@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.15
 
 import "qrc:/ControlSurface/Controls/Colorpicker"
 import "qrc:/ControlSurface/Controls/Slider"
@@ -12,9 +13,10 @@ import "qrc:/ControlSurface/Controls/ComboBox"
 import Variable.Global 1.0
 
 Column {
-    id: controlSurfaceListColumn
+    id: column
     spacing: 5
     property string name
+    property int size: controlList.height
 
     Rectangle {
         width: parent.width
@@ -23,15 +25,27 @@ Column {
     }
 
     // Control surface name
-    Text {
-        id: controlSurfaceName
-        text: name
-        color: "white"
-        font.pointSize: (parent.width <= 500
-                         ? 10
-                         : (parent.width >= 1200
-                            ? 20
-                            : 15))
+    Button {
+        id: controlSurfaceNameButton
+        background: Rectangle {
+            color: "#363636"
+        }
+
+        contentItem: Text {
+            id: controlSurfaceName
+            text: name
+            color: controlSurfaceNameButton.pressed ? "#f6a019" : "white"
+            font.pointSize:  window.width <= 500
+                             ? 10
+                             : window.width <= 1200
+                               ? 12
+                               : 15
+        }
+
+        onReleased: {
+            controlList.visible = ! controlList.visible
+        }
+
     }
 
     // List of controls

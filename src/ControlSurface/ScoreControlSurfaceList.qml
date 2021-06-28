@@ -6,6 +6,7 @@ import QtQml.Models 2.12
 
 Item  {
     id: scoreControlSurfaceList
+    spacing: 5
     anchors.left: parent.left
     anchors.margins: 5
     anchors.right: parent.right
