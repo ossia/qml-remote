@@ -1,3 +1,10 @@
+/*
+  * List of impulse buttons  :
+  * - in a control surface
+  * - modify impulse button value in the remote modify
+  * the value of this impulse button in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
