@@ -1,3 +1,10 @@
+/*
+  * Connection Button :
+  * - at the top left of the interface with others buttons
+  * - visible when the remote is disconnected form score
+  * - when the button is pressed: a window appears asking for IP adress
+  */
+
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.3

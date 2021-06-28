@@ -1,3 +1,10 @@
+/*
+  * WebSocket object :
+  * - call some remote functions according to the socket state
+  * - handle messages from score and call fonctions of the
+  * correspondings objects
+  */
+
 import QtWebSockets 1.0
 
 WebSocket {
@@ -62,7 +69,7 @@ WebSocket {
         }
     }
 
-    // Dealing with message from the remote control
+    // Calling remote functions according to the socket state
     onStatusChanged: {
         switch (socket.status) {
         case WebSocket.Error:

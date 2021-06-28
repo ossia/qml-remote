@@ -1,3 +1,9 @@
+/*
+  * List of control surfaces :
+  * - it is the element that takes up the most space on the screen
+  * - it locates in the middle below the buttons and the lists of trigger and speed and above the time line
+  */
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.2
@@ -115,6 +121,11 @@ Item  {
                     controlSurface.modifyControl(m)
                 }
             }
+        }
+
+        // Clear the control surface list when the remote is disconnected from score
+        function onClearControlSurfaceList() {
+            controlSurfacelist.clear()
         }
     }
 }

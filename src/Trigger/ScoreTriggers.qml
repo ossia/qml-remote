@@ -1,3 +1,9 @@
+/*
+  * List of triggers  :
+  * - at the top left of the interface
+  * - pressed the trigger button in the remote trigger the event in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.2
@@ -85,6 +91,11 @@ Rectangle {
                     triggerslistModel.remove(s)
                 }
             }
+        }
+
+        // Clear the trigger list when the remote is disconnected from score
+        function onClearTriggerList() {
+            triggerslistModel.clear()
         }
     }
 }
