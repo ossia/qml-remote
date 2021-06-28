@@ -1,10 +1,25 @@
+/*
+  * Button control  :
+  * - in a list of buttons in a control surface
+  * - modify button value in the remote modify
+  * the value of this button in score
+  */
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Button {
     id: button
-    implicitWidth: (window.width <= 500 ? 100 : (window.width >= 1200 ? 150 : 100 + ((window.width + window.height) / 100)))
-    implicitHeight: (window.width <= 500 ? 100 : (window.width >= 1200 ? 150 : 100 + ((window.width + window.height) / 100)))
+    implicitWidth: (window.width <= 500
+                    ? 75
+                    : (window.width <= 1200
+                       ? 100
+                       : 100 + ((window.width + window.height) / 100)))
+    implicitHeight: (window.width <= 500
+                     ? 75
+                     : (window.width <= 1200
+                        ? 100
+                        : 100 + ((window.width + window.height) / 100)))
 
     property string controlCustom
     property string controlDomain
@@ -24,7 +39,7 @@ Button {
         color: "#ffffff"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.pointSize: parent.height === 0 ? 1 : parent.height / 12
+        font.pointSize: parent.height === 0 ? 1 : parent.height / 9
         elide: Text.ElideRight
     }
 
@@ -32,7 +47,7 @@ Button {
         implicitWidth: parent.width - 10
         implicitHeight: parent.height - 10
         anchors.centerIn: parent
-        color: button.isPressed ? "#f6a019" : "#303030"
+        color: button.isPressed ? "#62400a" : "#303030"
         border.width: 5
         border.color: "#303030"
     }
@@ -40,7 +55,7 @@ Button {
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: "#f6a019"
+        color: "#62400a"
     }
 
     onPressedFromScoreChanged: {
@@ -78,7 +93,7 @@ Button {
 
     onClicked: {
         pressedFromRemote = true
-        indicator.color = isPressed ? "#303030" : "#f6a019"
+        indicator.color = isPressed ? "#303030" : "#62400a"
         if (isPressed) {
             isPressed = false
             socket.sendTextMessage(
