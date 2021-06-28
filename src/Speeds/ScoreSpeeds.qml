@@ -1,3 +1,10 @@
+/*
+  * List of interval speeds  :
+  * - at the top right of the interface
+  * - modify a interval speed value in the remote modify
+  * the value of this interval speed in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.1
@@ -150,11 +157,11 @@ Rectangle {
                 count++
             }
         }
-    }
 
-    // Called by OssiaStop
-    function clearSpeedsListModel() {
-        intervalsListModel.clear()
-        intervalsListModel.hasStarted = false
+        // Clear the speed list when the remote is disconnected from score
+        function onClearSpeedList() {
+            intervalsListModel.clear()
+            intervalsListModel.hasStarted = false
+        }
     }
 }

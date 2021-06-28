@@ -1,3 +1,15 @@
+/*
+  * Skeleton of the app all objects which are displayed
+  * - Buttons (top left) :
+  *     - Play, Pause, stop
+  *     - IP, connection, disconnection
+  * - list of triggers (top left)
+  * - main speed (top right)
+  * - list of speeds (top right)
+  * - list of control surface (in the middle)
+  * - time line (bottom)
+  */
+
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtWebSockets 1.0
@@ -73,6 +85,7 @@ Item {
         anchors.right: scoreSpeed.left
         anchors.bottom: scorePlayPauseStop.bottom
         signal triggerMessageReceived(var n)
+        signal clearTriggerList()
     }
 
     // Creating the button to hide the top panel (triggers, speeds)
@@ -125,6 +138,7 @@ Item {
         anchors.left: scoreSpeed.left
         signal intervalMessageReceived(var n)
         signal intervalsMessageReceived(var n)
+        signal clearSpeedList()
     }
 
     // Creating the main scenario speed slider object
@@ -147,6 +161,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         signal controlSurfacesMessageReceived(var n)
+        signal clearControlSurfaceList()
     }
 
     // Creating the timeline slider object
@@ -157,7 +172,6 @@ Item {
     }
 
     states: [
-
         // State in which the top panel (triggers, speeds) is hidden
         State {
             name: "hidden"
@@ -190,4 +204,14 @@ Item {
             }
         }
     ]
+
+    // Called when the remote is disconnected from score
+    function disconnect() {
+        // Clear trigger, speed, control surface... lists
+        scoreTriggers.clearTriggerList()
+        scoreSpeeds.clearSpeedList()
+        scoreControlSurfaceList.clearControlSurfaceList()
+        // Reset timeline
+        scoreTimeline.stopTimeline()
+    }
 }

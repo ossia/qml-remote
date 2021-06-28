@@ -1,8 +1,10 @@
-/* Disconnection Button :
- * at the top left of the interface with others buttons
- * when the button is pressed: a window appears asking for confirmation
- * of the disconnection
- */
+/*
+  * Disconnection Button :
+  * - at the top left of the interface with others buttons
+  * - visible when the remote is connected to score
+  * - when the button is pressed: a window appears asking for confirmation
+  * of the disconnection
+  */
 
 import QtQuick 2.0
 import QtQuick.Controls 2.12
@@ -71,6 +73,7 @@ Button {
 
                     onReleased: {
                         ip_button.visible = true
+                        window.disconnect()
                         socket.active = false
                         disconnectDiag.close()
                     }

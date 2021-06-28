@@ -1,3 +1,11 @@
+/*
+  * At the top left of the interface with others buttons
+  * Contain ScoreConnection and ScoreDisconnection :
+  * - ScoreConnection : a window which is asking for ip adress
+  * - ScoreConnection : a window for disconnection
+  *
+  */
+
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.3
