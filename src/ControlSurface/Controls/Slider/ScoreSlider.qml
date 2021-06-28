@@ -1,3 +1,10 @@
+/*
+  * Slider control  :
+  * - in a list of sliders in a control surface
+  * - modify slider value in the remote modify
+  * the value of this slider in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 
@@ -21,13 +28,14 @@ Slider {
 
     Text {
         text: ' ' + controlCustom + ':'
-        color: "#ffedb6"
-        font.bold: true
+        color: "white"
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
-                        ? parent.height / 2
-                        : (parent.height + parent.width) / 30.0
+        font.pointSize: parent.width <= 200
+                        ? 10
+                        : parent.width >= 500
+                          ? parent.height / 2
+                          : 15
     }
 
     Text {
@@ -37,12 +45,13 @@ Slider {
                                   slider.from,
                                   slider.to).toFixed(3) + " "
               : slider.value.toFixed(3) + " "
-        color: "#ffedb6"
+        color: "white"
         anchors.right: parent.right
-        font.bold: true
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
-                        ? parent.height / 2
-                        : (parent.height + parent.width) / 30.0
+        font.pointSize: parent.width <= 200
+                        ? 10
+                        : parent.width >= 500
+                          ? parent.height / 2
+                          : 15
         anchors.verticalCenter: parent.verticalCenter
     }
 
