@@ -34,9 +34,11 @@ ColumnLayout {
 
         delegate: ScoreSlider {
             id: slider
-            implicitHeight: 5 + window.height / 25
-            implicitWidth: (controlSurfaceListColumn.width <= 500 ? (controlSurfaceListColumn.width)
-                                                : (controlSurfaceListColumn.width >= 1200
+            implicitHeight: window.height<= 500
+                            ? 30
+                            : 5 + window.height / 25
+            implicitWidth: (window.width <= 500 ? (window.width - 10)
+                                                : (window.width >= 1200
                                                    ? 400
                                                    : controlSurfaceListColumn.width / 3))
             width: (controlSurfaceListColumn.width <= 500 ? (controlSurfaceListColumn.width)
