@@ -1,3 +1,10 @@
+/*
+  * List of sliders  :
+  * - in a control surface
+  * - modify slider value in the remote modify
+  * the value of this slider in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
@@ -42,7 +49,7 @@ ColumnLayout {
             controlId: _id
             controlUuid: _uuid
             controlSurfacePath: path
-            controlColor: "#f6a019"
+            controlColor: "#62400a"
 
             // Specific variables to the sliders
             from: _from
