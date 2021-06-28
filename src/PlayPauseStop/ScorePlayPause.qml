@@ -1,3 +1,16 @@
+/*
+  * Play and Pause buttons :
+  * - at the top left of the interface with others buttons
+  * - visibles when the remote is connected to score
+  * - synchornise with score
+  * - play button pressed :
+  *     - play in score
+  *     - pause button displayed
+  * - pause button pressed :
+  *     - pause in score
+  *     - play button displayed
+  */
+
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.3
@@ -161,6 +174,6 @@ Button {
         pauseButton.state = 'playDisplayed'
     }
     function disonnectedFromScore() {
-        pauseButton.state = 'connectionOff'
+        pauseButton.state = ''
     }
 }

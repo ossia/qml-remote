@@ -67,7 +67,7 @@ Item {
     /*
     // TODO : Creating the volume slider object
     ScoreVolume {
-        id: scoreVolume
+        id: scoreVolumeS
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
@@ -213,5 +213,6 @@ Item {
         scoreControlSurfaceList.clearControlSurfaceList()
         // Reset timeline
         scoreTimeline.stopTimeline()
+
     }
 }
