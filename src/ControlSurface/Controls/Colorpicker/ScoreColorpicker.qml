@@ -17,6 +17,7 @@ Rectangle {
                                 : (parent.width >= 1200
                                    ? 600
                                    : parent.width / 2))
+
     height: colorBackground.width / 2
     color: "#363636"
 
@@ -36,7 +37,7 @@ Rectangle {
         anchors.right: scrollBar.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.margins: 5
+        anchors.margins: 5        
         spacing: 5
         orientation: ListView.Vertical
         clip: true
