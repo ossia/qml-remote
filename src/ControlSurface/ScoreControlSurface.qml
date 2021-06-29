@@ -33,7 +33,6 @@ Column {
     id: column
     spacing: 5
     property string name
-    property int size: controlList.height
 
     Rectangle {
         width: parent.width
