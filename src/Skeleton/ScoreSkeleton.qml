@@ -31,7 +31,7 @@ Item {
     }
 
     // Creating the button list : Ip, (dis)connection, play, pause, stop
-    Column{
+    Column {
         id: scoreButtons
         anchors.top: parent.top
         anchors.left: parent.left
@@ -83,6 +83,43 @@ Item {
         signal triggerMessageReceived(var n)
     }
 
+    Button {
+        id: scoreTopPanel
+        anchors.top: parent.top
+        anchors.bottom: scoreSpeed.bottom
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.topMargin: 5
+        width: window.width <= 500 ? 20 : 30
+
+        background: Rectangle {
+            color: "#363636"
+            width: parent.width
+            height: parent.height
+        }
+
+        contentItem: Image {
+            id: indicator
+            anchors.verticalCenter: parent.verticalCenter
+            width: parent.height
+            height: parent.height
+            source: !scoreTriggers.visible
+                    ? scoreTopPanel.pressed
+                      ? "../Icons/indicator_on.svg"
+                      : "../Icons/indicator.svg"
+                    : scoreTopPanel.pressed
+                      ? "../Icons/indicator_hidden_on.svg"
+                      : "../Icons/indicator_hidden.svg"
+        }
+
+        onReleased: {
+            scoreButtons.visible = ! scoreButtons.visible
+            scoreTriggers.visible = ! scoreTriggers.visible
+            scoreSpeeds.visible = ! scoreSpeeds.visible
+            scoreSpeed.visible = ! scoreSpeed.visible
+        }
+    }
+
     ScoreSpeeds {
         id: scoreSpeeds
         anchors.topMargin: 5
@@ -98,7 +135,7 @@ Item {
     // Creating the speed slider object
     ScoreSpeed {
         id: scoreSpeed
-        anchors.right: parent.right
+        anchors.right: scoreTopPanel.left
         anchors.top: parent.top
         anchors.topMargin: 5
         anchors.rightMargin: 5
@@ -109,7 +146,7 @@ Item {
     // Creating the control surface list
     ScoreControlSurfaceList {
         id: scoreControlSurfaceList
-        anchors.top: scoreButtons.bottom
+        anchors.top: scoreButtons.visible ? scoreButtons.bottom : scoreTopPanel.bottom
         anchors.bottom: scoreTimeline.top
         anchors.topMargin: 5
         anchors.left: parent.left
