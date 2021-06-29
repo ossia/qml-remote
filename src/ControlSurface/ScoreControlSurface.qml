@@ -1,3 +1,20 @@
+/*
+  * Control Surface :
+  * - main object of the remote
+  * - a control located in a control surface in score
+  * can be modified in the application
+  * - a control surface contains :
+  *     - a name
+  *     - several control lists :
+  *         - slider (int, float, log)
+  *         - impulse button
+  *         - button
+  *         - colorpicker
+  *         - position
+  *         - combobox
+  * - handle message from score relayed by ScoreSkeleton.qml
+  */
+
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.15
@@ -31,21 +48,37 @@ Column {
             color: "#363636"
         }
 
-        contentItem: Text {
-            id: controlSurfaceName
-            text: name
-            color: controlSurfaceNameButton.pressed ? "#f6a019" : "white"
-            font.pointSize:  window.width <= 500
-                             ? 10
-                             : window.width <= 1200
-                               ? 12
-                               : 15
+        contentItem: Row {
+            spacing: 5
+            Text {
+                id: controlSurfaceName
+                text: name
+                color: controlSurfaceNameButton.pressed ? "#f6a019" : "white"
+                font.pointSize:  window.width <= 500
+                                 ? 10
+                                 : window.width <= 1200
+                                   ? 12
+                                   : 15
+            }
+
+            Image {
+                id: indicator
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.height
+                height: parent.height
+                source: !controlList.visible
+                        ? controlSurfaceNameButton.pressed
+                          ? "../Icons/indicator_on.svg"
+                          : "../Icons/indicator.svg"
+                        : controlSurfaceNameButton.pressed
+                          ? "../Icons/indicator_hidden_on.svg"
+                          : "../Icons/indicator_hidden.svg"
+            }
         }
 
         onReleased: {
             controlList.visible = ! controlList.visible
         }
-
     }
 
     // List of controls

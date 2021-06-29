@@ -86,5 +86,9 @@
         <file>IpAdress/ScoreDisconnection.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBox.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBoxes.qml</file>
+        <file>Icons/indicator.svg</file>
+        <file>Icons/indicator_hidden.svg</file>
+        <file>Icons/indicator_hidden_on.svg</file>
+        <file>Icons/indicator_on.svg</file>
     </qresource>
 </RCC>
