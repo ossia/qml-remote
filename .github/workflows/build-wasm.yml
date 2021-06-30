@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install sudo package
-        run: apt update && apt install sudo
+        run: |
+          apt update && apt install sudo
+          sudo groupadd docker
 
       - name: Build Docker
         run: |
