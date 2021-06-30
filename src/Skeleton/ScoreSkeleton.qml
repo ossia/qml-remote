@@ -75,6 +75,7 @@ Item {
         signal triggerMessageReceived(var n)
     }
 
+    // Creating the button to hide the top panel (triggers, speeds)
     Button {
         id: scoreTopPanel
         anchors.top: parent.top
@@ -112,6 +113,7 @@ Item {
         }
     }
 
+    // Creating the speed list
     ScoreSpeeds {
         id: scoreSpeeds
         anchors.topMargin: 5
@@ -124,7 +126,7 @@ Item {
         signal intervalsMessageReceived(var n)
     }
 
-    // Creating the speed slider object
+    // Creating the main scenario speed slider object
     ScoreSpeed {
         id: scoreSpeed
         anchors.right: scoreTopPanel.left
@@ -154,6 +156,8 @@ Item {
     }
 
     states: [
+
+        // State in which the top panel (triggers, speeds) is hidden
         State {
             name: "hidden"
 
