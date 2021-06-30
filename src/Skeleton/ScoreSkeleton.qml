@@ -108,6 +108,7 @@ Item {
         onReleased: {
             scoreTriggers.visible = ! scoreTriggers.visible
             scoreSpeeds.visible = ! scoreSpeeds.visible
+            ipAdress.visible = ! ipAdress.visible
             window.state = scoreSpeeds.visible ? "" : "hidden"
             scorePlayPauseStop.state = scoreSpeeds.visible ? "" : "hidden"
         }
@@ -169,7 +170,7 @@ Item {
             PropertyChanges {
                 target: scorePlayPauseStop
                 anchors.top: window.top
-                anchors.left: ipAdress.right
+                anchors.left: window.left
                 width: 2 * ipAdress.width
                 height: ipAdress.width
             }
