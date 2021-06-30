@@ -1,3 +1,9 @@
+/*
+  * Speed of the main scenario :
+  * - at the top right of the interface
+  * - modify its value in the remote modify the value in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
@@ -8,7 +14,7 @@ ScoreSliderSkeleton {
     id: globalSpeed
     property var path
     controlName: "Speed"
-    height: 5 + window.height / 25
+    height: window.height <= 500 ? 25 : 5 + window.height / 25
     width: window.width / 2
     from: -120
     value: 100
@@ -17,13 +23,14 @@ ScoreSliderSkeleton {
 
     // Send a message to Score to update its progress' timeline
     onMoved: {
-        socket.sendTextMessage(('{ "Message": "IntervalSpeed",
-"Path":'.concat(globalSpeed.path, ', "Speed": ',
-                globalSpeed.value * 6 / 720, '}')))
+        socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":'.concat(
+                                    globalSpeed.path, ', "Speed": ',
+                                    globalSpeed.value * 6 / 720, '}')))
     }
 
     Connections {
         target: scoreSpeed
+
         // Managing the first speed message sent by score
         function onIntervalMessageReceived(m) {
             var IntervalsObject = m.Intervals
@@ -33,6 +40,7 @@ ScoreSliderSkeleton {
                 globalSpeed.path = JSON.stringify(m.Path)
             }
         }
+
         // Updating when speed is changed on score
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals
