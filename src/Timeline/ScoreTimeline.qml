@@ -1,3 +1,9 @@
+/*
+  * Timeline :
+  * - Additional functionality compared to score
+  * - modify its value in the remote modify the value in score
+  */
+
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
@@ -7,7 +13,7 @@ Slider {
     id: time
     value: 0
     implicitWidth: window.width
-    implicitHeight: 5 + window.height / 25
+    implicitHeight: window.height <= 600 ? 25 : 5 + window.height / 25
 
     // Sends a message to Score to update its progress' timeline
     onMoved: {
