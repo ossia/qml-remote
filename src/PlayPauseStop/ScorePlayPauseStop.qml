@@ -84,6 +84,7 @@ Item {
     states: [
 
         // State in which the top panel (triggers, speeds) is hidden
+        // and the button list is vertical
         State {
             name: "hidden"
 

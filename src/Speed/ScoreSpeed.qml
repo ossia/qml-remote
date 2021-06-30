@@ -14,7 +14,7 @@ ScoreSliderSkeleton {
     id: globalSpeed
     property var path
     controlName: "Speed"
-    height: window.height <= 500 ? 25 : 5 + window.height / 25
+    height: window.height <= 600 ? 30 : 5 + window.height / 25
     width: window.width / 2
     from: -120
     value: 100
