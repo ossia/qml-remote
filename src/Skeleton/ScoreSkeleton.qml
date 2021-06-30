@@ -30,32 +30,26 @@ Item {
         id: socket
     }
 
-    // Creating the button list : Ip, (dis)connection, play, pause, stop
-    Column {
-        id: scoreButtons
+    // Creating the IP adress button object
+    ScoreIpAdress {
+        id: ipAdress
         anchors.top: parent.top
         anchors.left: parent.left
-        width: 20 + ( ( 0.3 * parent.width + 0.7 * parent.height ) / 20 )
+        width: 20 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
+        signal playPauseStopMessageReceived(var n)
+    }
 
-        // Creating the IP adress button object
-        ScoreIpAdress {
-            id: ipAdress
-            anchors.left: parent.left
-            anchors.right: parent.right
-            signal playPauseStopMessageReceived(var n)
-        }
-
-        // Creating play, pause and stop button objects
-        ScorePlayPauseStop {
-            id: scorePlayPauseStop
-            anchors.left: parent.left
-            anchors.right: parent.right
-            //height: window / 5
-            signal playPauseStopMessageReceived(var n)
-            signal scorePlayPauseStopMessageReceived(var n)
-            signal connectedToScore
-            signal disconnectedFromScore
-        }
+    // Creating play, pause and stop button objects
+    ScorePlayPauseStop {
+        id: scorePlayPauseStop
+        anchors.left: ipAdress.left
+        anchors.top: ipAdress.bottom
+        height: 2 * this.width
+        width: ipAdress.width
+        signal playPauseStopMessageReceived(var n)
+        signal scorePlayPauseStopMessageReceived(var n)
+        signal connectedToScore()
+        signal disconnectedFromScore()
     }
 
     /*
@@ -74,12 +68,10 @@ Item {
     ScoreTriggers {
         id: scoreTriggers
         anchors.margins: 5
-        anchors.left: scoreButtons.right
+        anchors.left: ipAdress.right
         anchors.top: parent.top
         anchors.right: scoreSpeed.left
-        anchors.bottom: scoreButtons.bottom
-        //anchors.right: scoreSpeeds.left
-        //anchors.rightMargin: 5
+        anchors.bottom: scorePlayPauseStop.bottom
         signal triggerMessageReceived(var n)
     }
 
@@ -113,10 +105,10 @@ Item {
         }
 
         onReleased: {
-            scoreButtons.visible = ! scoreButtons.visible
             scoreTriggers.visible = ! scoreTriggers.visible
             scoreSpeeds.visible = ! scoreSpeeds.visible
-            scoreSpeed.visible = ! scoreSpeed.visible
+            window.state = scoreSpeeds.visible ? "" : "hidden"
+            scorePlayPauseStop.state = scoreSpeeds.visible ? "" : "hidden"
         }
     }
 
@@ -125,7 +117,7 @@ Item {
         anchors.topMargin: 5
         anchors.rightMargin: 5
         anchors.right: parent.right
-        anchors.bottom: scoreButtons.bottom
+        anchors.bottom: scorePlayPauseStop.bottom
         anchors.top: scoreSpeed.bottom
         anchors.left: scoreSpeed.left
         signal intervalMessageReceived(var n)
@@ -146,12 +138,11 @@ Item {
     // Creating the control surface list
     ScoreControlSurfaceList {
         id: scoreControlSurfaceList
-        anchors.top: scoreButtons.visible ? scoreButtons.bottom : scoreTopPanel.bottom
+        anchors.top: scorePlayPauseStop.bottom
         anchors.bottom: scoreTimeline.top
         anchors.topMargin: 5
         anchors.left: parent.left
         anchors.right: parent.right
-        height: parent.height
         signal controlSurfacesMessageReceived(var n)
     }
 
@@ -161,4 +152,37 @@ Item {
         anchors.bottom: parent.bottom
         signal intervalsMessageReceived(var n)
     }
+
+    states: [
+        State {
+            name: "hidden"
+
+            PropertyChanges {
+                target: ipAdress
+                width: 1.4 * scoreTopPanel.height
+            }
+
+            PropertyChanges {
+                target: scorePlayPauseStop
+                anchors.top: window.top
+                anchors.left: ipAdress.right
+                width: 2 * ipAdress.width
+                height: ipAdress.width
+            }
+
+            PropertyChanges {
+                target: scoreTriggers
+                anchors.margins: 5
+                anchors.left: scorePlayPauseStop.right
+                anchors.top: parent.top
+                anchors.right: scoreSpeed.left
+                anchors.bottom: scorePlayPauseStop.bottom
+            }
+
+            PropertyChanges {
+                target: scoreControlSurfaceList
+                anchors.top: scoreTopPanel.bottom
+            }
+        }
+    ]
 }
