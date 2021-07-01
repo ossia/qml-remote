@@ -34,7 +34,7 @@ ColumnLayout {
 
         delegate: ScoreSlider {
             id: slider
-            implicitHeight: window.height<= 500
+            implicitHeight: window.height <= 500
                             ? 30
                             : 5 + window.height / 25
             implicitWidth: (window.width <= 500 ? (window.width - 10)
