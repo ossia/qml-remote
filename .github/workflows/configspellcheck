@@ -1,0 +1,6 @@
+spellchecker: hunspell
+
+matrix:
+- name: Qml Source
+  sources:
+  - src/**/*.qml
