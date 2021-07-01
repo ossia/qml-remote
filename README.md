@@ -8,16 +8,15 @@ The project aims to deport the use of this software on a mobile connected device
 
 All files are located in the `src/` directory, which itself is divided into several subdirectories :
 
-- **ControlSurface :** Constains the list of control surfaces and all different type of controls (sliders, buttons, comboboxes...)
+- **ControlSurface :** Contains the list of control surfaces and all different type of controls (sliders, buttons, comboboxes...)
 - **Icons :** Contains all icons used in the app (button icons...)
-- **ObjectSkeletons :** 
-- **PlayPauseStop :**
-- **Skeleton :**
-- **Speed :**
-- **Speeds :**
-- **Timeline :**
-- **Triggers :**
-- **Utility :**
-- **Volume :**
-- **WebSocket :**
-
+- **ObjectSkeletons :** Contains a skeleton slider used in the speed sliders (Speed and Speeds directories)
+- **PlayPauseStop :** Contains buttons that allow you to interract with time (play, pause and stop buttons)
+- **Skeleton :** Contains the skeleton file of the app. This file instanciate all of the obects displayed on the srceen.
+- **Speed :** Contains the speed slider of the main scenario
+- **Speeds :** Contains the list of speed sliders of the sub-scenarios
+- **Timeline :** Contains the timeline of the main scenario. It is an additional feature compared to ossia score
+- **Triggers :** Contains the list of triggers
+- **Utility :** Contains some global functions and variables
+- **Volume :** Contains the volume of the main scenario. Does not work at the momenbt
+- **WebSocket :** Contains the file which etablishes the websocket connection
