@@ -13,22 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install sudo package
-        run: apt update && apt install sudo
-
-      - name: Add docker
-        run: sudo groupadd docker
-
       - name: Build Docker
         run: |
           git clone https://github.com/guerinoni/qt-wasm.git
           cd qt-wasm
           chmod -R 777 /__w/_temp/
-          sudo docker build -t qtwa .
-
-      - name: Create Container
-        run: |
-          docker run -it -v /home/user/qml-remote:/remote --name webassembly qtwa
+          docker build -t qtwa .
 
       - name: Build 
         run: |
