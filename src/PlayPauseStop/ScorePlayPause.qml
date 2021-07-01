@@ -1,8 +1,8 @@
 /*
   * Play and Pause buttons :
   * - at the top left of the interface with others buttons
-  * - visibles when the remote is connected to score
-  * - synchornise with score
+  * - visible when the remote is connected to score
+  * - synchronise with score
   * - play button pressed :
   *     - play in score
   *     - pause button displayed

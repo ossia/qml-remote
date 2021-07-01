@@ -67,7 +67,7 @@ Item {
     /*
     // TODO : Creating the volume slider object
     ScoreVolume {
-        id: scoreVolumeS
+        id: scoreVolume
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
