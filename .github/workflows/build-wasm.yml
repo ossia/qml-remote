@@ -15,6 +15,7 @@ jobs:
 
       - name: Build 
         run: |
+          ls -la
           cd /home/user/qml-remote
           mkdir /build
           cd /build
