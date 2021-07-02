@@ -90,5 +90,6 @@
         <file>Icons/indicator_hidden.svg</file>
         <file>Icons/indicator_hidden_on.svg</file>
         <file>Icons/indicator_on.svg</file>
+        <file>Utility/Color.qml</file>
     </qresource>
 </RCC>

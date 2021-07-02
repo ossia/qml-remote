@@ -7,9 +7,11 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import Variable.Global 1.0
+
 Rectangle {
     id: colorButton
-    color: "#62400a"
+    color: Color.brown
 
     property string controlCustom
     property string controlDomain
@@ -29,7 +31,7 @@ Rectangle {
         anchors.horizontalCenter: colorButton.horizontalCenter
         text: controlCustom
         font.pointSize: parent.width <= 200 ? 8 : 10
-        color: "white"
+        color: Color.white
     }
 
     PanelBorder {
@@ -44,7 +46,7 @@ Rectangle {
             width: parent.width
             height: parent.height
             border.width: 1
-            border.color: "black"
+            border.color: Color.black
             color: colorButton.displayedColor
         }
     }
@@ -65,7 +67,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: colorButton
-                color: "#303030"
+                color: Color.gray1
             }
             PropertyChanges {
                 target: colorMouseAreaButton

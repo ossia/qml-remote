@@ -10,6 +10,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
+import Variable.Global 1.0
+
 Item  {
     id: scoreControlSurfaceList
     anchors.left: parent.left
@@ -69,15 +71,15 @@ Item  {
             contentItem: Rectangle {
                 id: scrollBarContentItem
                 visible: scrollBar.size < 1
-                color: scrollBar.pressed ? "#f6a019" : "#808080"
+                color: scrollBar.pressed ? Color.orange : "#808080"
             }
 
             background: Rectangle {
                 id: scrollBarBackground
                 width: scrollBarContentItem.width
                 anchors.fill: parent
-                color: "#202020"
-                border.color: "#101010"
+                color: Color.darkGray
+                border.color: Color.dark
                 border.width: 2
             }
     }

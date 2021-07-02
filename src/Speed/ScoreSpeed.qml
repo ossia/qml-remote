@@ -8,6 +8,8 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
 
+import Variable.Global 1.0
+
 import "qrc:/ObjectSkeletons"
 
 ScoreSliderSkeleton {
@@ -19,7 +21,7 @@ ScoreSliderSkeleton {
     from: -120
     value: 100
     to: 600
-    controlColor: "#62400a"
+    controlColor: Color.brown
 
     // Send a message to Score to update its progress' timeline
     onMoved: {

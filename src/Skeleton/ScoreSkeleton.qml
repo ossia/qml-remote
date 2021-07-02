@@ -18,6 +18,8 @@ import QtQuick.Controls 2.12
 import QtQuick.Controls.Styles 1.4
 import Qt.labs.settings 1.0
 
+import Variable.Global 1.0
+
 import "qrc:/WebSocket"
 import "qrc:/IpAdress"
 import "qrc:/PlayPauseStop"

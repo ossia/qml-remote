@@ -19,7 +19,7 @@ Rectangle {
                                    : parent.width / 2))
 
     height: colorBackground.width / 2
-    color: "#363636"
+    color: Color.gray2
 
     // Instantiate color picker window
     Colorpicker {
@@ -103,15 +103,15 @@ Rectangle {
             contentItem: Rectangle {
                 id: scrollBarContentItem
                 visible: scrollBar.size < 1
-                color: scrollBar.pressed ? "#f6a019" : "#808080"
+                color: scrollBar.pressed ? Color.orange : "#808080"
             }
 
             background: Rectangle {
                 id: scrollBarBackground
                 width: scrollBarContentItem.width
                 anchors.fill: parent
-                color: "#202020"
-                border.color: "#101010"
+                color: Color.darkGray
+                border.color: Color.dark
                 border.width: 2
             }
     }

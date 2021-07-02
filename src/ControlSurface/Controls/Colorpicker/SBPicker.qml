@@ -1,6 +1,8 @@
 //  Saturation/brightness picking box
 import QtQuick 2.11
 
+import Variable.Global 1.0
+
 Item {
     id: root
     property color hueColor: "blue"
@@ -51,13 +53,13 @@ Item {
             width: r * 2
             height: r * 2
             radius: r
-            border.color: "black"
+            border.color: Color.black
             border.width: 2
             color: "transparent"
             Rectangle {
                 anchors.fill: parent
                 anchors.margins: 2
-                border.color: "white"
+                border.color: Color.white
                 border.width: 2
                 radius: width / 2
                 color: "transparent"

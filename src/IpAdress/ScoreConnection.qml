@@ -12,6 +12,8 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
 
+import Variable.Global 1.0
+
 Button {
     // Connection window
     Dialog {
@@ -22,24 +24,24 @@ Button {
 
         contentItem: Rectangle {
             anchors.fill: parent
-            color: "#303030"
+            color: Color.gray1
 
             Rectangle {
                 id: connectionWindow
                 anchors.fill: parent
                 anchors.margins: 10
-                color: "#303030"
+                color: Color.gray1
 
                 Rectangle {
                     width: parent.width
                     height: 50
                     anchors.top: parent.top
-                    color: "#303030"
+                    color: Color.gray1
 
                     Text {
                         id: ipText
                         text: "Ip adress"
-                        color: "white"
+                        color: Color.white
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -52,12 +54,12 @@ Button {
                         anchors.leftMargin: 10
                         width: parent.width <= 160 ? 65 : 100
                         anchors.verticalCenter: parent.verticalCenter
-                        color: "white"
+                        color: Color.white
 
                         background: Rectangle {
                             anchors.fill: parent
-                            color: "#202020"
-                            border.color: "#62400a"
+                            color: Color.darkGray
+                            border.color: Color.brown
                         }
                     }
                 }
@@ -73,7 +75,7 @@ Button {
 
                     contentItem: Text {
                         id: okButtonText
-                        color: "white"
+                        color: Color.white
                         text: qsTr("OK")
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -110,7 +112,7 @@ Button {
                     background: Rectangle {
                         id: okButtonBackground
                         anchors.fill: parent
-                        color: "#202020"
+                        color: Color.darkGray
                         border.color: "#505050"
                         border.width: 0.5
                     }
@@ -120,7 +122,7 @@ Button {
                             name: "hoveredOK"
                             PropertyChanges {
                                 target: okButtonBackground
-                                border.color: "#62400a"
+                                border.color: Color.brown
                             }
                         },
                         State {
@@ -128,7 +130,7 @@ Button {
                             PropertyChanges {
                                 target: okButtonBackground
                                 border.color: "#e0b01e"
-                                color: "#62400a"
+                                color: Color.brown
                             }
                             PropertyChanges {
                                 target: okButtonText
@@ -148,7 +150,7 @@ Button {
 
                     contentItem: Text {
                         id: cancelButtonText
-                        color: "white"
+                        color: Color.white
                         text: qsTr("Cancel")
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -184,7 +186,7 @@ Button {
                     background: Rectangle {
                         id: cancelButtonBackground
                         anchors.fill: parent
-                        color: "#202020"
+                        color: Color.darkGray
                         border.color: "#505050"
                         border.width: 0.5
                     }
@@ -194,7 +196,7 @@ Button {
                             name: "hoveredCANCEL"
                             PropertyChanges {
                                 target: cancelButtonBackground
-                                border.color: "#62400a"
+                                border.color: Color.brown
                             }
                         },
                         State {
@@ -202,7 +204,7 @@ Button {
                             PropertyChanges {
                                 target: cancelButtonBackground
                                 border.color: "#e0b01e"
-                                color: "#62400a"
+                                color: Color.brown
                             }
                             PropertyChanges {
                                 target: cancelButtonText
@@ -253,6 +255,6 @@ Button {
     }
     background: Rectangle {
         id: zone
-        color: "#202020"
+        color: Color.darkGray
     }
 }

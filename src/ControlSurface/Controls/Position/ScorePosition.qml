@@ -8,6 +8,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 import "qrc:/Utility/utility.js" as Utility
+import Variable.Global 1.0
 
 Rectangle {
     id: positionBackground
@@ -18,7 +19,7 @@ Rectangle {
                : parent.width / 2))
 
     height: positionBackground.width / 2
-    color: "#363636"
+    color: Color.gray2
 
     Rectangle {
         id: position
@@ -27,7 +28,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.top: parent.top
         anchors.margins: 5
-        color: "black"
+        color: Color.black
 
         MouseArea {
             anchors.fill: parent
@@ -40,7 +41,7 @@ Rectangle {
                             parent.width - width)
                 width: 2
                 height: parent.height
-                color: "white"
+                color: Color.white
             }
 
             Rectangle {
@@ -50,7 +51,7 @@ Rectangle {
                             parent.height - height)
                 width: parent.width
                 height: 2
-                color: "white"
+                color: Color.white
             }
         }
     }
@@ -133,15 +134,15 @@ Rectangle {
             contentItem: Rectangle {
                 id: scrollBarContentItem
                 visible: scrollBar.size < 1
-                color: scrollBar.pressed ? "#f6a019" : "#808080"
+                color: scrollBar.pressed ? Color.orange : "#808080"
             }
 
             background: Rectangle {
                 id: scrollBarBackground
                 width: scrollBarContentItem.width
                 anchors.fill: parent
-                color: "#202020"
-                border.color: "#101010"
+                color: Color.darkGray
+                border.color: Color.dark
                 border.width: 2
             }
     }

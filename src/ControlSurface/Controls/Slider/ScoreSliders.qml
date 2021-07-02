@@ -53,7 +53,7 @@ ColumnLayout {
             controlId: _id
             controlUuid: _uuid
             controlSurfacePath: path
-            controlColor: "#62400a"
+            controlColor: Color.brown
 
             // Specific variables to the sliders
             from: _from

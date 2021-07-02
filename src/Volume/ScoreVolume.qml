@@ -10,7 +10,7 @@ ScoreSliderSkeleton {
     controlUnit: "dB "
     height: 20
     width: window.width / 4
-    controlColor: "#62400a"
+    controlColor: Color.brown
     from: -40
     value: -20
     to: 0

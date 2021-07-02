@@ -8,6 +8,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import Variable.Global 1.0
+
 Button {
     id: button
     implicitWidth: (window.width <= 500
@@ -45,17 +47,17 @@ Button {
         implicitHeight: parent.height - 10
         anchors.centerIn: parent
         radius: 25
-        color: button.down ? "#62400a" : "#303030"
+        color: button.down ? Color.brown : Color.gray1
         border.width: 5
-        border.color: "#303030"
+        border.color: Color.gray1
     }
 
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: "#303030"
+        color: Color.gray1
         radius: 25
-        border.color: "#303030"
+        border.color: Color.gray1
     }
 
     onIsPressedChanged: {
@@ -64,11 +66,11 @@ Button {
     }
 
     onHoveredChanged: {
-        background.color = "#303030"
+        background.color = Color.gray1
     }
 
     onPressed: {
-        background.color = "#62400a"
+        background.color = Color.brown
         socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(
                                    button.controlSurfacePath, ', "id":',
                                    button.controlId,
@@ -76,6 +78,6 @@ Button {
     }
 
     onReleased: {
-        background.color = "#303030"
+        background.color = Color.gray1
     }
 }

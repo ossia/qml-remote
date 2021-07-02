@@ -28,7 +28,7 @@ Slider {
 
     Text {
         text: ' ' + controlCustom + ':'
-        color: "white"
+        color: Color.white
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         font.pointSize: parent.width <= 200
@@ -45,7 +45,7 @@ Slider {
                                   slider.from,
                                   slider.to).toFixed(3) + " "
               : slider.value.toFixed(3) + " "
-        color: "white"
+        color: Color.white
         anchors.right: parent.right
         font.pointSize: parent.width <= 200
                         ? 10
@@ -60,7 +60,7 @@ Slider {
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: "#363636"
+        color: Color.gray2
         border.width: 1
         border.color: controlColor
 

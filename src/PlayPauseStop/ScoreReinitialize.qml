@@ -51,6 +51,6 @@ Button {
     }
     background: Rectangle {
         id: zone
-        color: "#202020"
+        color: Color.darkGray
     }
 }
