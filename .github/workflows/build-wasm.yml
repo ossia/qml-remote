@@ -15,12 +15,7 @@ jobs:
 
       - name: Build 
         run: |
-          ls -la
-          ls -la /home
-          ls -la src/
-          ls -la /
-          cd
-          find /home -name "qml-remote"
+          cd src/
           mkdir /build
           cd /build
           qmake ..
