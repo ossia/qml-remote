@@ -7,9 +7,11 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import Variable.Global 1.0
+
 Rectangle {
     id: positionButton
-    color: "#62400a"
+    color: Color.brown
 
     property string controlCustom
     property string controlValueType
@@ -30,13 +32,13 @@ Rectangle {
         anchors.horizontalCenter: positionButton.horizontalCenter
         text: controlCustom
         font.pointSize: parent.height * (9 / 40)
-        color: "white"
+        color: Color.white
     }
 
     Text {
         id: positionValue
         anchors.top: positionName.bottom
-        color: "white"
+        color: Color.white
         anchors.left: positionName.left
         text: "x,y:" + positionButton.controlX.toFixed(
                   2) + "," + positionButton.controlY.toFixed(2)
@@ -59,7 +61,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: positionButton
-                color: "#303030"
+                color: Color.gray1
             }
             PropertyChanges {
                 target: positionMouseAreaButton

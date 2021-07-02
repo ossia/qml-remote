@@ -8,6 +8,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.12
 
+import Variable.Global 1.0
+
 ComboBox {
     id: comboBox
     implicitHeight: window.height<= 500
@@ -40,7 +42,7 @@ ComboBox {
         height: 40
         contentItem: Text {
             text: name
-            color: "white"
+            color: Color.white
             font.pointSize: parent.width <= 200
                             ? 10
                             : parent.width >= 500
@@ -52,7 +54,7 @@ ComboBox {
 
         background: Rectangle {
             opacity: delegateItem.highlighted ? 1 : 0.3
-            color: delegateItem.highlighted ? "#62400a" : "#303030"
+            color: delegateItem.highlighted ? Color.brown : Color.gray1
             //height: parent.height
         }
 
@@ -83,7 +85,7 @@ ComboBox {
             context.lineTo(width, 0)
             context.lineTo(width / 2, height)
             context.closePath()
-            context.fillStyle = "white"
+            context.fillStyle = Color.white
             context.fill()
         }
     }
@@ -93,7 +95,7 @@ ComboBox {
         rightPadding: comboBox.indicator.width + comboBox.spacing
         text: qsTr(controlCustom)
               + ": " + comboBox.displayText
-        color: "white"
+        color: Color.white
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
         font.pointSize: parent.width <= 200
@@ -106,8 +108,8 @@ ComboBox {
     background: Rectangle {
         implicitWidth: 120
         implicitHeight: 40
-        color: "#303030"
-        border.color: comboBox.pressed ? "#62400a" : "#62400a"
+        color: Color.gray1
+        border.color: comboBox.pressed ? Color.brown : Color.brown
     }
 
     popup: Popup {
@@ -133,20 +135,20 @@ ComboBox {
                 contentItem: Rectangle {
                     id: scrollBarContentItem
                     visible: scrollBar.size >= 1 ? false : true
-                    color: scrollBar.pressed ? "#f6a019" : "#808080"
+                    color: scrollBar.pressed ? Color.orange : "#808080"
                 }
 
                 background: Rectangle {
                     id: scrollBarBackground
                     width: scrollBarContentItem.width + 20
-                    color: "#202020"
+                    color: Color.darkGray
                 }
             }
         }
 
         background: Rectangle {
-            color: "#303030"
-            border.color: "#62400a"
+            color: Color.gray1
+            border.color: Color.brown
         }
     }
 

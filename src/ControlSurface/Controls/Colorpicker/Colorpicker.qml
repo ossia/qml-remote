@@ -3,7 +3,7 @@ import QtQuick 2.11
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.4
 
-//import "content"
+import Variable.Global 1.0
 
 Rectangle {
     id: picker
@@ -25,7 +25,7 @@ Rectangle {
 
     clip: true
 
-    color: "#363636"
+    color: Color.gray2
 
     SBPicker {
         id: sbPicker

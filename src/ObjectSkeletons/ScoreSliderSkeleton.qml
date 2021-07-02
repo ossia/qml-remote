@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 
+import Variable.Global 1.0
+
 Slider {
     implicitWidth: 300
     implicitHeight: 20
@@ -39,7 +41,7 @@ Slider {
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: "#363636"
+        color: Color.gray2
         border.width: 1
         border.color: controlColor
 

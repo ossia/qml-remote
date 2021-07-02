@@ -3,6 +3,8 @@ import QtQuick.Controls 2.12
 import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
 
+import Variable.Global 1.0
+
 Button {
     width: parent.width
     height: parent.width
@@ -53,6 +55,6 @@ Button {
     }
     background: Rectangle {
         id: zone
-        color: "#202020"
+        color: Color.darkGray
     }
 }

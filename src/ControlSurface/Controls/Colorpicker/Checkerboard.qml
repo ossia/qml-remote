@@ -13,7 +13,7 @@ Grid {
         Rectangle {
             width: root.cellSide
             height: root.cellSide
-            color: (index % 2 == 0) ? "gray" : "white"
+            color: (index % 2 == 0) ? "gray" : Color.white
         }
     }
 }

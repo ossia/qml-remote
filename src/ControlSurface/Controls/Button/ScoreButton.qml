@@ -47,15 +47,15 @@ Button {
         implicitWidth: parent.width - 10
         implicitHeight: parent.height - 10
         anchors.centerIn: parent
-        color: button.isPressed ? "#62400a" : "#303030"
+        color: button.isPressed ? Color.brown : Color.gray1
         border.width: 5
-        border.color: "#303030"
+        border.color: Color.gray1
     }
 
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: "#62400a"
+        color: Color.brown
     }
 
     onPressedFromScoreChanged: {
@@ -74,13 +74,13 @@ Button {
             if(!isPressed){
                 //isPressed = true
             }
-            indicator.color = isPressed ? "#f6a019" : "#303030"
+            indicator.color = isPressed ? Color.orange : Color.gray1
             firstPressedFromScore = false
             return
         }
         console.log(indicator.color)
         console.log(isPressed)
-        indicator.color = isPressed ? "#303030" : "#f6a019"
+        indicator.color = isPressed ? Color.gray1 : Color.orange
         console.log(indicator.color)
         console.log("PressedFromScore")
         if(isPressed){
@@ -93,7 +93,7 @@ Button {
 
     onClicked: {
         pressedFromRemote = true
-        indicator.color = isPressed ? "#303030" : "#62400a"
+        indicator.color = isPressed ? Color.gray1 : Color.brown
         if (isPressed) {
             isPressed = false
             socket.sendTextMessage(

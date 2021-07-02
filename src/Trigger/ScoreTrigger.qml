@@ -1,6 +1,8 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import Variable.Global 1.0
+
 Button {
     id: button
     property string triggerName: "triggerName"
@@ -22,7 +24,7 @@ Button {
         id: background
         width: parent.width
         height: parent.height
-        color: "#303030"
+        color: Color.gray1
         radius: 5
         anchors.verticalCenter: parent.verticalCenter
         Image {
@@ -35,7 +37,7 @@ Button {
 
     // Send a message when the trigger button is clicked on
     onClicked: {
-        background.color = "#62400a"
+        background.color = Color.brown
         socket.sendTextMessage('{ "Message": "Trigger","Path":'.concat(
                                    scorePath, '}'))
     }

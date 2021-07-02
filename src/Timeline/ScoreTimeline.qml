@@ -8,6 +8,8 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
 
+import Variable.Global 1.0
+
 Slider {
     property int totalTime: 10 * 60 * 1000 // By default, the total duration is set to 10 min
     id: time
@@ -72,12 +74,12 @@ Slider {
         implicitHeight: parent.height
         color: "#161514"
         border.width: 1
-        border.color: "#62400a"
+        border.color: Color.brown
 
         Rectangle {
             width: time.visualPosition * parent.width - y
             height: parent.height
-            color: "#62400a"
+            color: Color.brown
         }
     }
 }
