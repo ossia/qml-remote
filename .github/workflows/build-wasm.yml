@@ -20,7 +20,7 @@ jobs:
           ls -la src/
           ls -la /
           cd
-          locate qml-remote
+          find /home -name "qml-remote"
           mkdir /build
           cd /build
           qmake ..
