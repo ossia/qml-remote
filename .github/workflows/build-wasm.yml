@@ -19,6 +19,8 @@ jobs:
           ls -la /home
           ls -la src/
           ls -la /
+          cd
+          locate qml-remote
           mkdir /build
           cd /build
           qmake ..
