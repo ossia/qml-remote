@@ -15,7 +15,7 @@ jobs:
 
       - name: Build 
         run: |
-          cd src/
+          cd src
           mkdir /build
           cd /build
           qmake ..
