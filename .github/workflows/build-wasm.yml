@@ -13,13 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build Docker
-        run: |
-          git clone https://github.com/guerinoni/qt-wasm.git
-          cd qt-wasm
-          chmod -R 777 /__w/_temp/
-          docker build -t qtwa .
-
       - name: Build 
         run: |
           cd /home/user/qml-remote
