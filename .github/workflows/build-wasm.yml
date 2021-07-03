@@ -16,7 +16,7 @@ jobs:
       - name: Build 
         run: |
           ls
-          cd qt-wasm
+          ls /home
           mkdir /build
           cd /build
           qmake ..
