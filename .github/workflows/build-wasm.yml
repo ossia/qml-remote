@@ -26,11 +26,11 @@ jobs:
       - name: Deploy
         run: |
           git checkout feature/ci
-          ls .
-          ls ..
-          ls ../..
-          ls /home
-          ls /home/qml-remote
+          ls -la .
+          ls -la ..
+          ls -la ../..
+          ls -la /home
+          ls -la /home/qml-remote
           git add build-wasm.tar.gz
           git commit -m "continuous integration"
           git push
