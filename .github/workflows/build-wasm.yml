@@ -27,10 +27,7 @@ jobs:
         run: |
           git checkout feature/ci
           ls -la .
-          ls -la ..
-          ls -la ../..
-          ls -la /home
-          ls -la /home/qml-remote
-          git add build-wasm.tar.gz
+          ls -la qml-remote
+          git add qml-remote/build-wasm.tar.gz
           git commit -m "continuous integration"
           git push
