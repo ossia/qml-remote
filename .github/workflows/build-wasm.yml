@@ -25,7 +25,11 @@ jobs:
           tar -czvf build-wasm.tar.gz build-wasm
       - name: Deploy
         run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
           git checkout feature/ci
+          
           ls -la .
           ls -la qml-remote
           git add qml-remote/build-wasm.tar.gz
