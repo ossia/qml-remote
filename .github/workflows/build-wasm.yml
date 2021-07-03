@@ -17,12 +17,12 @@ jobs:
         run: |
           git clone https://github.com/ossia/qml-remote.git
           cd qml-remote/
-          mkdir build
-          cd build
-          qmake ..
+          mkdir build-wasm
+          cd build-wasm
+          qmake ../src/
           make
-
+          
       - name: Zip
         shell: bash
         run: |
-          tar -czvf /home/qml-remote/build.tar.gz /home/qml-remote/build
+          tar -czvf /home/qml-remote/build-wasm.tar.gz /home/qml-remote/build-wasm
