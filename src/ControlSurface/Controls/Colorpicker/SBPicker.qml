@@ -53,13 +53,13 @@ Item {
             width: r * 2
             height: r * 2
             radius: r
-            border.color: Color.black
+            border.color: Skin.black
             border.width: 2
             color: "transparent"
             Rectangle {
                 anchors.fill: parent
                 anchors.margins: 2
-                border.color: Color.white
+                border.color: Skin.white
                 border.width: 2
                 radius: width / 2
                 color: "transparent"

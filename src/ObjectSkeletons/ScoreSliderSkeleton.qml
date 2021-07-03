@@ -41,7 +41,7 @@ Slider {
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: Color.gray2
+        color: Skin.gray2
         border.width: 1
         border.color: controlColor
 

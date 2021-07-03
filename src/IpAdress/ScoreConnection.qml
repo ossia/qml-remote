@@ -24,24 +24,24 @@ Button {
 
         contentItem: Rectangle {
             anchors.fill: parent
-            color: Color.gray1
+            color: Skin.gray1
 
             Rectangle {
                 id: connectionWindow
                 anchors.fill: parent
                 anchors.margins: 10
-                color: Color.gray1
+                color: Skin.gray1
 
                 Rectangle {
                     width: parent.width
                     height: 50
                     anchors.top: parent.top
-                    color: Color.gray1
+                    color: Skin.gray1
 
                     Text {
                         id: ipText
                         text: "Ip adress"
-                        color: Color.white
+                        color: Skin.white
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -54,12 +54,12 @@ Button {
                         anchors.leftMargin: 10
                         width: parent.width <= 160 ? 65 : 100
                         anchors.verticalCenter: parent.verticalCenter
-                        color: Color.white
+                        color: Skin.white
 
                         background: Rectangle {
                             anchors.fill: parent
-                            color: Color.darkGray
-                            border.color: Color.brown
+                            color: Skin.darkGray
+                            border.color: Skin.brown
                         }
                     }
                 }
@@ -75,7 +75,7 @@ Button {
 
                     contentItem: Text {
                         id: okButtonText
-                        color: Color.white
+                        color: Skin.white
                         text: qsTr("OK")
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -112,7 +112,7 @@ Button {
                     background: Rectangle {
                         id: okButtonBackground
                         anchors.fill: parent
-                        color: Color.darkGray
+                        color: Skin.darkGray
                         border.color: "#505050"
                         border.width: 0.5
                     }
@@ -122,7 +122,7 @@ Button {
                             name: "hoveredOK"
                             PropertyChanges {
                                 target: okButtonBackground
-                                border.color: Color.brown
+                                border.color: Skin.brown
                             }
                         },
                         State {
@@ -130,7 +130,7 @@ Button {
                             PropertyChanges {
                                 target: okButtonBackground
                                 border.color: "#e0b01e"
-                                color: Color.brown
+                                color: Skin.brown
                             }
                             PropertyChanges {
                                 target: okButtonText
@@ -150,7 +150,7 @@ Button {
 
                     contentItem: Text {
                         id: cancelButtonText
-                        color: Color.white
+                        color: Skin.white
                         text: qsTr("Cancel")
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -186,7 +186,7 @@ Button {
                     background: Rectangle {
                         id: cancelButtonBackground
                         anchors.fill: parent
-                        color: Color.darkGray
+                        color: Skin.darkGray
                         border.color: "#505050"
                         border.width: 0.5
                     }
@@ -196,7 +196,7 @@ Button {
                             name: "hoveredCANCEL"
                             PropertyChanges {
                                 target: cancelButtonBackground
-                                border.color: Color.brown
+                                border.color: Skin.brown
                             }
                         },
                         State {
@@ -204,7 +204,7 @@ Button {
                             PropertyChanges {
                                 target: cancelButtonBackground
                                 border.color: "#e0b01e"
-                                color: Color.brown
+                                color: Skin.brown
                             }
                             PropertyChanges {
                                 target: cancelButtonText
@@ -255,6 +255,6 @@ Button {
     }
     background: Rectangle {
         id: zone
-        color: Color.darkGray
+        color: Skin.darkGray
     }
 }

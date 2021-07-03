@@ -14,7 +14,7 @@ import Variable.Global 1.0
 
 Rectangle {
     radius: 9
-    color: Color.darkGray
+    color: Skin.darkGray
 
     ListView {
         id: triggerslist
@@ -53,15 +53,15 @@ Rectangle {
             contentItem: Rectangle {
                 id: scrollBarContentItem
                 visible: scrollBar.size >= 1 ? false : true
-                color: scrollBar.pressed ? Color.orange : "#808080"
+                color: scrollBar.pressed ? Skin.orange : "#808080"
             }
 
             background: Rectangle {
                 id: scrollBarBackground
                 width: scrollBarContentItem.width
                 anchors.fill: parent
-                color: Color.darkGray
-                border.color: Color.dark
+                color: Skin.darkGray
+                border.color: Skin.dark
                 border.width: 2
             }
     }

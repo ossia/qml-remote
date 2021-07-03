@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterSingletonType(QUrl("qrc:///Utility/Uuid.qml"), "Variable.Global", 1, 0, "Uuid");
-    qmlRegisterSingletonType(QUrl("qrc:///Utility/Color.qml"), "Variable.Global", 1, 0, "Color");
+    qmlRegisterSingletonType(QUrl("qrc:///Utility/Skin.qml"), "Variable.Global", 1, 0, "Skin");
 
     app.setOrganizationName("ossia.io");
     app.setOrganizationDomain("Remote Control");

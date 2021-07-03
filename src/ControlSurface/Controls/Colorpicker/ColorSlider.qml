@@ -15,13 +15,13 @@ Item {
             y: -height * 0.5
             width: parent.width + 4
             height: cursorHeight
-            border.color: Color.black
+            border.color: Skin.black
             border.width: 1
             color: "transparent"
             Rectangle {
                 anchors.fill: parent
                 anchors.margins: 2
-                border.color: Color.white
+                border.color: Skin.white
                 border.width: 1
                 color: "transparent"
             }

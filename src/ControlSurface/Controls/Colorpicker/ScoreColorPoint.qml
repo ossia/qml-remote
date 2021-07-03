@@ -11,7 +11,7 @@ import Variable.Global 1.0
 
 Rectangle {
     id: colorButton
-    color: Color.brown
+    color: Skin.brown
 
     property string controlCustom
     property string controlDomain
@@ -31,7 +31,7 @@ Rectangle {
         anchors.horizontalCenter: colorButton.horizontalCenter
         text: controlCustom
         font.pointSize: parent.width <= 200 ? 8 : 10
-        color: Color.white
+        color: Skin.white
     }
 
     PanelBorder {
@@ -46,7 +46,7 @@ Rectangle {
             width: parent.width
             height: parent.height
             border.width: 1
-            border.color: Color.black
+            border.color: Skin.black
             color: colorButton.displayedColor
         }
     }
@@ -67,7 +67,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: colorButton
-                color: Color.gray1
+                color: Skin.gray1
             }
             PropertyChanges {
                 target: colorMouseAreaButton

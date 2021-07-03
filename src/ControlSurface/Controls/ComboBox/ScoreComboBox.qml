@@ -42,7 +42,7 @@ ComboBox {
         height: 40
         contentItem: Text {
             text: name
-            color: Color.white
+            color: Skin.white
             font.pointSize: parent.width <= 200
                             ? 10
                             : parent.width >= 500
@@ -54,7 +54,7 @@ ComboBox {
 
         background: Rectangle {
             opacity: delegateItem.highlighted ? 1 : 0.3
-            color: delegateItem.highlighted ? Color.brown : Color.gray1
+            color: delegateItem.highlighted ? Skin.brown : Skin.gray1
             //height: parent.height
         }
 
@@ -85,7 +85,7 @@ ComboBox {
             context.lineTo(width, 0)
             context.lineTo(width / 2, height)
             context.closePath()
-            context.fillStyle = Color.white
+            context.fillStyle = Skin.white
             context.fill()
         }
     }
@@ -95,7 +95,7 @@ ComboBox {
         rightPadding: comboBox.indicator.width + comboBox.spacing
         text: qsTr(controlCustom)
               + ": " + comboBox.displayText
-        color: Color.white
+        color: Skin.white
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
         font.pointSize: parent.width <= 200
@@ -108,8 +108,8 @@ ComboBox {
     background: Rectangle {
         implicitWidth: 120
         implicitHeight: 40
-        color: Color.gray1
-        border.color: comboBox.pressed ? Color.brown : Color.brown
+        color: Skin.gray1
+        border.color: comboBox.pressed ? Skin.brown : Skin.brown
     }
 
     popup: Popup {
@@ -135,20 +135,20 @@ ComboBox {
                 contentItem: Rectangle {
                     id: scrollBarContentItem
                     visible: scrollBar.size >= 1 ? false : true
-                    color: scrollBar.pressed ? Color.orange : "#808080"
+                    color: scrollBar.pressed ? Skin.orange : "#808080"
                 }
 
                 background: Rectangle {
                     id: scrollBarBackground
                     width: scrollBarContentItem.width + 20
-                    color: Color.darkGray
+                    color: Skin.darkGray
                 }
             }
         }
 
         background: Rectangle {
-            color: Color.gray1
-            border.color: Color.brown
+            color: Skin.gray1
+            border.color: Skin.brown
         }
     }
 

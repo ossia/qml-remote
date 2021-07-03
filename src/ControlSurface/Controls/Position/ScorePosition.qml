@@ -19,7 +19,7 @@ Rectangle {
                : parent.width / 2))
 
     height: positionBackground.width / 2
-    color: Color.gray2
+    color: Skin.gray2
 
     Rectangle {
         id: position
@@ -28,7 +28,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.top: parent.top
         anchors.margins: 5
-        color: Color.black
+        color: Skin.black
 
         MouseArea {
             anchors.fill: parent
@@ -41,7 +41,7 @@ Rectangle {
                             parent.width - width)
                 width: 2
                 height: parent.height
-                color: Color.white
+                color: Skin.white
             }
 
             Rectangle {
@@ -51,7 +51,7 @@ Rectangle {
                             parent.height - height)
                 width: parent.width
                 height: 2
-                color: Color.white
+                color: Skin.white
             }
         }
     }
@@ -134,15 +134,15 @@ Rectangle {
             contentItem: Rectangle {
                 id: scrollBarContentItem
                 visible: scrollBar.size < 1
-                color: scrollBar.pressed ? Color.orange : "#808080"
+                color: scrollBar.pressed ? Skin.orange : "#808080"
             }
 
             background: Rectangle {
                 id: scrollBarBackground
                 width: scrollBarContentItem.width
                 anchors.fill: parent
-                color: Color.darkGray
-                border.color: Color.dark
+                color: Skin.darkGray
+                border.color: Skin.dark
                 border.width: 2
             }
     }

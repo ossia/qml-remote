@@ -24,7 +24,7 @@ Button {
         id: background
         width: parent.width
         height: parent.height
-        color: Color.gray1
+        color: Skin.gray1
         radius: 5
         anchors.verticalCenter: parent.verticalCenter
         Image {
@@ -37,7 +37,7 @@ Button {
 
     // Send a message when the trigger button is clicked on
     onClicked: {
-        background.color = Color.brown
+        background.color = Skin.brown
         socket.sendTextMessage('{ "Message": "Trigger","Path":'.concat(
                                    scorePath, '}'))
     }
