@@ -16,7 +16,6 @@ jobs:
       - name: Build 
         run: |
           ls
-          ls -la home
           mkdir /build
           cd /build
           qmake ..
