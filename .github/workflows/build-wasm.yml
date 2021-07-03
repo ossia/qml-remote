@@ -21,10 +21,5 @@ jobs:
           cd build-wasm
           qmake ../src/
           make
-          
-      - name: Zip
-        shell: bash
-        run: |
-          cd
           cd ..
-          tar -czvf /home/qml-remote/build-wasm.tar.gz /home/qml-remote/build-wasm
+          tar -czvf build-wasm.tar.gz build-wasm
