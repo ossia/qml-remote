@@ -47,17 +47,17 @@ Button {
         implicitHeight: parent.height - 10
         anchors.centerIn: parent
         radius: 25
-        color: button.down ? Color.brown : Color.gray1
+        color: button.down ? Skin.brown : Skin.gray1
         border.width: 5
-        border.color: Color.gray1
+        border.color: Skin.gray1
     }
 
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
-        color: Color.gray1
+        color: Skin.gray1
         radius: 25
-        border.color: Color.gray1
+        border.color: Skin.gray1
     }
 
     onIsPressedChanged: {
@@ -66,11 +66,11 @@ Button {
     }
 
     onHoveredChanged: {
-        background.color = Color.gray1
+        background.color = Skin.gray1
     }
 
     onPressed: {
-        background.color = Color.brown
+        background.color = Skin.brown
         socket.sendTextMessage('{ "Message": "ControlSurface","Path":'.concat(
                                    button.controlSurfacePath, ', "id":',
                                    button.controlId,
@@ -78,6 +78,6 @@ Button {
     }
 
     onReleased: {
-        background.color = Color.gray1
+        background.color = Skin.gray1
     }
 }

@@ -11,7 +11,7 @@ import Variable.Global 1.0
 
 Rectangle {
     id: positionButton
-    color: Color.brown
+    color: Skin.brown
 
     property string controlCustom
     property string controlValueType
@@ -32,13 +32,13 @@ Rectangle {
         anchors.horizontalCenter: positionButton.horizontalCenter
         text: controlCustom
         font.pointSize: parent.height * (9 / 40)
-        color: Color.white
+        color: Skin.white
     }
 
     Text {
         id: positionValue
         anchors.top: positionName.bottom
-        color: Color.white
+        color: Skin.white
         anchors.left: positionName.left
         text: "x,y:" + positionButton.controlX.toFixed(
                   2) + "," + positionButton.controlY.toFixed(2)
@@ -61,7 +61,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: positionButton
-                color: Color.gray1
+                color: Skin.gray1
             }
             PropertyChanges {
                 target: positionMouseAreaButton

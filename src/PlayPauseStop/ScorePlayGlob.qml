@@ -124,6 +124,6 @@ Button {
     }
     background: Rectangle {
         id: zone
-        color: Color.darkGray
+        color: Skin.darkGray
     }
 }

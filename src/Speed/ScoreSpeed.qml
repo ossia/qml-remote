@@ -21,7 +21,7 @@ ScoreSliderSkeleton {
     from: -120
     value: 100
     to: 600
-    controlColor: Color.brown
+    controlColor: Skin.brown
 
     // Send a message to Score to update its progress' timeline
     onMoved: {

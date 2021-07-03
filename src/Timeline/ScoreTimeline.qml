@@ -74,12 +74,12 @@ Slider {
         implicitHeight: parent.height
         color: "#161514"
         border.width: 1
-        border.color: Color.brown
+        border.color: Skin.brown
 
         Rectangle {
             width: time.visualPosition * parent.width - y
             height: parent.height
-            color: Color.brown
+            color: Skin.brown
         }
     }
 }

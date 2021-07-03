@@ -25,7 +25,7 @@ Rectangle {
 
     clip: true
 
-    color: Color.gray2
+    color: Skin.gray2
 
     SBPicker {
         id: sbPicker

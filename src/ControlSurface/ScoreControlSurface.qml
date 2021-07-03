@@ -37,14 +37,14 @@ Column {
     Rectangle {
         width: parent.width
         height: 5
-        color: Color.gray1
+        color: Skin.gray1
     }
 
     // Control surface name
     Button {
         id: controlSurfaceNameButton
         background: Rectangle {
-            color: Color.gray2
+            color: Skin.gray2
         }
 
         contentItem: Row {
@@ -52,7 +52,7 @@ Column {
             Text {
                 id: controlSurfaceName
                 text: name
-                color: controlSurfaceNameButton.pressed ? Color.orange : Color.white
+                color: controlSurfaceNameButton.pressed ? Skin.orange : Skin.white
                 font.pointSize:  window.width <= 500
                                  ? 10
                                  : window.width <= 1200
