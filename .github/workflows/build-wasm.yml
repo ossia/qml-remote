@@ -15,9 +15,8 @@ jobs:
 
       - name: Build 
         run: |
-          ls -la .
-          ls -la ..
-          ls -la ../..
+          git clone https://github.com/ossia/qml-remote.git
+          cd qml-remote/
           mkdir /build
           cd /build
           qmake ..
@@ -26,4 +25,4 @@ jobs:
       - name: Zip
         shell: bash
         run: |
-          tar -czvf /home/user/qml-remote/build.tar.gz /home/user/qml-remote/build
+          tar -czvf /home/qml-remote/build.tar.gz /home/qml-remote/build
