@@ -30,6 +30,8 @@ jobs:
           
           git checkout feature/ci
           
+          mkdir -p build
+          rm -r build
           mkdir build
           mv qml-remote/build-wasm.tar.gz build/build-wasm.tar.gz
           
