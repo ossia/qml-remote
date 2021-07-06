@@ -28,7 +28,9 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          git checkout feature/ci
+          git remote update
+          git fetch
+          git checkout --track origin/feature/ci
           
           mkdir -p build
           rm -r build
@@ -44,7 +46,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/build-wasm.tar.gz
+          file: build*
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
