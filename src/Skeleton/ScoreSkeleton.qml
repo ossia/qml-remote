@@ -99,7 +99,6 @@ Item {
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.topMargin: 5
-        width: window.width <= 500 ? 20 : 30
     }
 
     // Creating the speed list

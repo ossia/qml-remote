@@ -9,13 +9,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 
 Button {
-    id: scoreHideButton
-    anchors.top: parent.top
-    anchors.bottom: scoreSpeed.bottom
-    anchors.right: parent.right
-    anchors.rightMargin: 5
-    anchors.topMargin: 5
-    width: window.width <= 500 ? 20 : 30
+    width: scoreSpeed.height
 
     background: Rectangle {
         color: "#363636"
