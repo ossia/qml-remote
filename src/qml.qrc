@@ -91,5 +91,6 @@
         <file>Icons/indicator_hidden_on.svg</file>
         <file>Icons/indicator_on.svg</file>
         <file>Utility/Skin.qml</file>
+        <file>HideButton/ScoreHideButton.qml</file>
     </qresource>
 </RCC>

@@ -23,11 +23,12 @@ import Variable.Global 1.0
 import "qrc:/WebSocket"
 import "qrc:/IpAdress"
 import "qrc:/PlayPauseStop"
+import "qrc:/Trigger"
 import "qrc:/Speed"
+import "qrc:/Speeds"
+import "qrc:/HideButton"
 import "qrc:/ControlSurface"
 import "qrc:/Timeline"
-import "qrc:/Trigger"
-import "qrc:/Speeds"
 
 Item {
     id: window
@@ -91,42 +92,14 @@ Item {
     }
 
     // Creating the button to hide the top panel (triggers, speeds)
-    Button {
-        id: scoreTopPanel
+    ScoreHideButton {
+        id: scoreHideButton
         anchors.top: parent.top
         anchors.bottom: scoreSpeed.bottom
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.topMargin: 5
         width: window.width <= 500 ? 20 : 30
-
-        background: Rectangle {
-            color: "#363636"
-            width: parent.width
-            height: parent.height
-        }
-
-        contentItem: Image {
-            id: indicator
-            anchors.verticalCenter: parent.verticalCenter
-            width: parent.height
-            height: parent.height
-            source: !scoreTriggers.visible
-                    ? scoreTopPanel.pressed
-                      ? "../Icons/indicator_on.svg"
-                      : "../Icons/indicator.svg"
-                    : scoreTopPanel.pressed
-                      ? "../Icons/indicator_hidden_on.svg"
-                      : "../Icons/indicator_hidden.svg"
-        }
-
-        onReleased: {
-            scoreTriggers.visible = ! scoreTriggers.visible
-            scoreSpeeds.visible = ! scoreSpeeds.visible
-            ipAdress.visible = ! ipAdress.visible
-            window.state = scoreSpeeds.visible ? "" : "hidden"
-            scorePlayPauseStop.state = scoreSpeeds.visible ? "" : "hidden"
-        }
     }
 
     // Creating the speed list
@@ -146,7 +119,7 @@ Item {
     // Creating the main scenario speed slider object
     ScoreSpeed {
         id: scoreSpeed
-        anchors.right: scoreTopPanel.left
+        anchors.right: scoreHideButton.left
         anchors.top: parent.top
         anchors.topMargin: 5
         anchors.rightMargin: 5
@@ -180,7 +153,7 @@ Item {
 
             PropertyChanges {
                 target: ipAdress
-                width: 1.4 * scoreTopPanel.height
+                width: 1.4 * scoreHideButton.height
             }
 
             PropertyChanges {
@@ -202,7 +175,7 @@ Item {
 
             PropertyChanges {
                 target: scoreControlSurfaceList
-                anchors.top: scoreTopPanel.bottom
+                anchors.top: scoreHideButton.bottom
             }
         }
     ]
