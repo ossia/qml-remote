@@ -36,3 +36,13 @@ jobs:
           git add build/build-wasm.tar.gz
           git commit -m "continuous integration"
           git push
+          
+      - name: Upload
+        if: startsWith(github.ref, 'refs/tags')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: cninja-*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
