@@ -34,23 +34,24 @@ Column {
     spacing: 5
     property string name
 
-    Rectangle {
-        width: parent.width
-        height: 5
-        color: Skin.gray1
-    }
-
     // Control surface name
     Button {
         id: controlSurfaceNameButton
+        width: controlSurfaceListColumn.width
+        height: window.height <= 600 ? 30 : 5 + window.height / 25
+
         background: Rectangle {
-            color: Skin.gray2
+            anchors.fill: parent
+            color: Skin.gray1
         }
 
-        contentItem: Row {
-            spacing: 5
+        contentItem: Item {
+            anchors.fill: parent
             Text {
                 id: controlSurfaceName
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 5
                 text: name
                 color: controlSurfaceNameButton.pressed ? Skin.orange : Skin.white
                 font.pointSize:  window.width <= 500
@@ -65,6 +66,8 @@ Column {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.height
                 height: parent.height
+                anchors.right: parent.right
+                anchors.rightMargin: 5
                 source: !controlList.visible
                         ? controlSurfaceNameButton.pressed
                           ? "../Icons/indicator_on.svg"
@@ -130,7 +133,7 @@ Column {
         }
     }
 
-    // Receiving informations about controls in a control surface from score
+    // Receiving information about controls in a control surface from score
     Connections {
         target: controlSurface
         // Adding controls in a control surface
