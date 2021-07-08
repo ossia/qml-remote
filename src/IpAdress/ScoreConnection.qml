@@ -19,6 +19,7 @@ Button {
     hoverEnabled: true
     onPressed: ipButton.state = "ip_on"
     onReleased: { onClicked: ipDialog.open() }
+    background: Rectangle { id: zone; color: Skin.darkGray }
 
     onHoveredChanged: {
         if (ipButton.state === 'ip_on') {
@@ -41,8 +42,6 @@ Button {
             }
         }
     }
-
-    background: Rectangle { id: zone; color: Skin.darkGray }
 
     // Connection window
     Dialog {
@@ -148,6 +147,7 @@ Button {
                     states: [
                         State {
                             name: "hoveredOK"
+
                             PropertyChanges {
                                 target: okButtonBackground
                                 border.color: Skin.brown
@@ -155,6 +155,7 @@ Button {
                         },
                         State {
                             name: "pressedOK"
+
                             PropertyChanges {
                                 target: okButtonBackground
                                 border.color: Skin.orange
@@ -224,6 +225,7 @@ Button {
                     states: [
                         State {
                             name: "hoveredCANCEL"
+
                             PropertyChanges {
                                 target: cancelButtonBackground
                                 border.color: Skin.brown
@@ -231,11 +233,13 @@ Button {
                         },
                         State {
                             name: "pressedCANCEL"
+
                             PropertyChanges {
                                 target: cancelButtonBackground
                                 color: Skin.brown
                                 border.color: Skin.orange
                             }
+
                             PropertyChanges {
                                 target: cancelButtonText
                                 opacity: 0.5

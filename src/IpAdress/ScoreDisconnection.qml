@@ -16,12 +16,58 @@ import QtQuick.Layouts 1.12
 import Variable.Global 1.0
 
 Button {
+
+    background: Rectangle { id: diagDisconnect; color: Skin.darkGray }
+    onPressed: disconnect_image.state = 'disconnect_on'
+    onReleased: disconnectDiag.open()
+    hoverEnabled: true
+    visible: false
+
+    onHoveredChanged: {
+        if (disconnect_image.state === 'disconnect_on') {
+            disconnect_image.state = 'disconnect'
+        }
+    }
+
+    contentItem: Image {
+        id: disconnect_image
+        sourceSize { width: parent.width; height: parent.width }
+        source: "../Icons/disconnected.png"
+        clip: true
+
+        states: [
+            State {
+                name: "disconnect"
+
+                PropertyChanges {
+                    target: disconnect_image
+                    source: "../Icons/disconnected.png"
+                }
+            },
+            State {
+                name: "disconnect_on"
+
+                PropertyChanges {
+                    target: disconnect_image
+                    source: "../Icons/disconnected_on.png"
+                }
+            }
+        ]
+    }
+
     // Disconnection window
     Dialog {
         id: disconnectDiag
+
         title: "Disconnection"
-        width: 300
-        height: 100
+        width: 300; height: 100
+
+        onButtonClicked: {
+            if (clickedButton === StandardButton.Ok) {
+                ip_button.visible = true
+                socket.active = false
+            }
+        }
 
         contentItem: Rectangle {
             anchors.fill: parent
@@ -29,36 +75,34 @@ Button {
 
             Rectangle {
                 id: connectionWindow
-                anchors.fill: parent
-                anchors.margins: 10
+
+                anchors { fill: parent; margins: 10 }
                 color: Skin.gray1
 
                 Rectangle {
-                    width: parent.width
-                    height: 50
+                    width: parent.width; height: 50
                     anchors.top: parent.top
                     color: Skin.gray1
 
                     Text {
                         id: ipText
+
+                        anchors { left: parent.left; verticalCenter: parent.verticalCenter }
                         text: "Do you really want to disconnect?"
                         color: Skin.white
-                        anchors.left: parent.left
-                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
 
                 // OK button
                 Button {
                     id: okButton
-                    anchors.right: cancelButton.left
-                    anchors.bottom: parent.bottom
-                    anchors.rightMargin: 10
-                    width: 75
-                    height: 30
+
+                    width: 75; height: 30
+                    anchors { right: cancelButton.left; bottom: parent.bottom; rightMargin: 10 }
 
                     contentItem: Text {
                         id: okButtonText
+
                         color: Skin.white
                         text: qsTr("OK")
                         horizontalAlignment: Text.AlignHCenter
@@ -85,9 +129,11 @@ Button {
                         case "":
                             okButton.state = "hoveredOK"
                             break
+
                         case "hoveredOK":
                             okButton.state = ""
                             break
+
                         case "pressedOK":
                             okButton.state = ""
                             break
@@ -96,15 +142,16 @@ Button {
 
                     background: Rectangle {
                         id: okButtonBackground
+
                         anchors.fill: parent
                         color: Skin.darkGray
-                        border.color: "#505050"
-                        border.width: 0.5
+                        border { color: Skin.gray3; width: 0.5}
                     }
 
                     states: [
                         State {
                             name: "hoveredOK"
+
                             PropertyChanges {
                                 target: okButtonBackground
                                 border.color: Skin.brown
@@ -112,11 +159,13 @@ Button {
                         },
                         State {
                             name: "pressedOK"
+
                             PropertyChanges {
                                 target: okButtonBackground
                                 border.color: "#e0b01e"
                                 color: Skin.brown
                             }
+
                             PropertyChanges {
                                 target: okButtonText
                                 opacity: 0.5
@@ -128,10 +177,9 @@ Button {
                 // Cancel button
                 Button {
                     id: cancelButton
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    width: 75
-                    height: 30
+
+                    width: 75; height: 30
+                    anchors { right: parent.right; bottom: parent.bottom }
 
                     contentItem: Text {
                         id: cancelButtonText
@@ -149,18 +197,18 @@ Button {
                         }
                     }
 
-                    onReleased: {
-                        disconnectDiag.close()
-                    }
+                    onReleased: disconnectDiag.close()
 
                     onHoveredChanged: {
                         switch (cancelButton.state) {
                         case "":
                             cancelButton.state = "hoveredCANCEL"
                             break
+
                         case "hoveredCANCEL":
                             cancelButton.state = ""
                             break
+
                         case "pressedCANCEL":
                             cancelButton.state = ""
                             break
@@ -169,10 +217,10 @@ Button {
 
                     background: Rectangle {
                         id: cancelButtonBackground
+
                         anchors.fill: parent
                         color: Skin.darkGray
-                        border.color: "#505050"
-                        border.width: 0.5
+                        border { color: Skin.gray3; width: 0.5}
                     }
 
                     states: [
@@ -185,11 +233,13 @@ Button {
                         },
                         State {
                             name: "pressedCANCEL"
+
                             PropertyChanges {
                                 target: cancelButtonBackground
                                 border.color: "#e0b01e"
                                 color: Skin.brown
                             }
+
                             PropertyChanges {
                                 target: cancelButtonText
                                 opacity: 0.5
@@ -199,56 +249,5 @@ Button {
                 }
             }
         }
-
-        onButtonClicked: {
-            if (clickedButton === StandardButton.Ok) {
-                ip_button.visible = true
-                socket.active = false
-            } else {
-
-            }
-        }
     }
-
-    contentItem: Image {
-        id: disconnect_image
-        sourceSize.width: parent.width
-        sourceSize.height: parent.width
-        source: "../Icons/disconnected.png"
-        clip: true
-        states: [
-            State {
-                name: "disconnect"
-                PropertyChanges {
-                    target: disconnect_image
-                    source: "../Icons/disconnected.png"
-                }
-            },
-            State {
-                name: "disconnect_on"
-                PropertyChanges {
-                    target: disconnect_image
-                    source: "../Icons/disconnected_on.png"
-                }
-            }
-        ]
-    }
-    background: Rectangle {
-        id: diagDisconnect
-        color: Skin.darkGray
-    }
-    onPressed: {
-        disconnect_image.state = 'disconnect_on'
-    }
-
-    onReleased: {
-        disconnectDiag.open()
-    }
-    hoverEnabled: true
-    onHoveredChanged: {
-        if (disconnect_image.state === 'disconnect_on') {
-            disconnect_image.state = 'disconnect'
-        }
-    }
-    visible: false
 }
