@@ -14,21 +14,8 @@ import "qrc:/ObjectSkeletons"
 
 ScoreSliderSkeleton {
     id: globalSpeed
-    property var path
-    controlName: "Speed"
-    height: window.height <= 600 ? 30 : 5 + window.height / 25
-    width: window.width / 2
-    from: -120
-    value: 100
-    to: 600
-    controlColor: Skin.brown
 
-    // Send a message to Score to update its progress' timeline
-    onMoved: {
-        socket.sendTextMessage(('{ "Message": "IntervalSpeed", "Path":'.concat(
-                                    globalSpeed.path, ', "Speed": ',
-                                    globalSpeed.value * 6 / 720, '}')))
-    }
+    property var path
 
     Connections {
         target: scoreSpeed
@@ -47,11 +34,22 @@ ScoreSliderSkeleton {
         function onIntervalsMessageReceived(m) {
             var IntervalsObject = m.Intervals
             // The global path is the first one to be created by score
-            if (IntervalsObject[0] && globalSpeed.path === JSON.stringify(
-                        IntervalsObject[0].Path)) {
-                globalSpeed.value = JSON.stringify(
-                            IntervalsObject[0].Speed) * 720 / 6
+            if (IntervalsObject[0] && globalSpeed.path === JSON.stringify(IntervalsObject[0].Path)) {
+                globalSpeed.value = JSON.stringify(IntervalsObject[0].Speed) * 720 / 6
             }
         }
+    }
+
+    controlName: "Speed"
+    height: window.height <= 600 ? 30 : 5 + window.height / 25; width: window.width / 2
+    from: -120; value: 100; to: 600
+    controlColor: Skin.brown
+
+    // Send a message to Score to update its progress' timeline
+    onMoved: {
+        socket.sendTextMessage(
+                    `{ "Message": "IntervalSpeed",
+                       "Path": ${globalSpeed.path},
+                       "Speed": ${globalSpeed.value * 6 / 720} }`)
     }
 }
