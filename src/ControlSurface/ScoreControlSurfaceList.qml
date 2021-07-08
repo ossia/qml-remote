@@ -77,7 +77,7 @@ Item  {
         id: scoreControlSurfaceListView
 
         height: parent.height
-        anchors { left: parent.left; right: scrollBar.right; margins: 5 }
+        anchors { left: parent.left; right: scrollBar.left; margins: 5 }
         spacing: 5
         orientation: ListView.Vertical
         clip: true
