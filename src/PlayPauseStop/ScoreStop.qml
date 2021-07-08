@@ -6,8 +6,8 @@ import QtQuick.Controls.Material 2.3
 import Variable.Global 1.0
 
 Button {
-    width: parent.width
-    height: parent.width
+
+    width: parent.width; height: parent.width
     hoverEnabled: true
 
     // Allow to click on buttons and leave while pressing
@@ -16,6 +16,7 @@ Button {
             stopButton.state = ''
         }
     }
+
     // Change the button color when it is pressed
     onPressed: {
         stopButton.state = 'stopOn'
@@ -23,6 +24,7 @@ Button {
             playPause.stopClicked()
         }
     }
+
     // Specify the behavior of a button when it is clicked on
     onReleased: {
         stopButton.state = ''
@@ -30,15 +32,19 @@ Button {
         scoreTimeline.stopTimeline()
     }
 
+    background: Rectangle { id: zone; color: Skin.darkGray }
+
     contentItem: Image {
         id: stopButton
-        sourceSize.width: parent.width
-        sourceSize.height: parent.width
+
+        sourceSize { width: parent.width; height: parent.width }
         clip: true
         source: "../Icons/stop_off.png"
+
         states: [
             State {
                 name: "stopOn"
+
                 PropertyChanges {
                     target: stopButton
                     source: "../Icons/stop_on.png"
@@ -46,15 +52,12 @@ Button {
             },
             State {
                 name: "hoveredStop"
+
                 PropertyChanges {
                     target: stopButton
                     source: "../Icons/stop_hover.png"
                 }
             }
         ]
-    }
-    background: Rectangle {
-        id: zone
-        color: Skin.darkGray
-    }
+    }    
 }
