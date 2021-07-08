@@ -10,61 +10,10 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.12
 
+import "qrc:/Utility/utility.js" as Utility
 import Variable.Global 1.0
 
 Rectangle {
-    radius: 9
-    color: Skin.darkGray
-
-    ListView {
-        id: triggerslist
-        anchors.left: parent.left
-        anchors.right: scrollBar.left
-        anchors.rightMargin: 5
-        height: parent.height
-        orientation: ListView.Vertical
-        clip: true
-        spacing: 10
-        snapMode: ListView.SnapToItem
-        model: ListModel {
-            id: triggerslistModel
-        }
-
-        delegate: ScoreTrigger {
-            scorePath: path
-            width: triggerslist.width
-            height: 5 + window.height / 25
-            triggerName: name
-        }
-
-        ScrollBar.vertical: scrollBar
-    }
-
-    ScrollBar {
-            id: scrollBar
-            active: triggerslist.count > 0
-            visible: triggerslist.count > 0
-            width: window.width <= 500 ? 20 : 30
-            height: parent.height
-
-            anchors.right: parent.right
-            policy: ScrollBar.AsNeeded
-            snapMode: ScrollBar.SnapAlways
-            contentItem: Rectangle {
-                id: scrollBarContentItem
-                visible: scrollBar.size >= 1 ? false : true
-                color: scrollBar.pressed ? Skin.orange : "#808080"
-            }
-
-            background: Rectangle {
-                id: scrollBarBackground
-                width: scrollBarContentItem.width
-                anchors.fill: parent
-                color: Skin.darkGray
-                border.color: Skin.dark
-                border.width: 2
-            }
-    }
 
     // Receiving informations about trigger from score
     Connections {
@@ -77,16 +26,11 @@ Rectangle {
                                              "name": m.Name,
                                              "path": JSON.stringify(m.Path)
                                          })
-            } // Removing a trigger
+            }
+            // Removing a trigger
             else if (messageObject === "TriggerRemoved") {
-                function find(cond) {
-                    for (var i = 0; i < triggerslistModel.count; ++i)
-                        if (cond(triggerslistModel.get(i)))
-                            return i
-                    return null
-                }
                 //the index of m.Path in the listmodel
-                var s = find(function (item) {
+                var s = Utility.find(triggerslistModel, function (item) {
                     return item.path === JSON.stringify(m.Path)
                 })
                 if (s !== null) {
@@ -98,6 +42,58 @@ Rectangle {
         // Clear the trigger list when the remote is disconnected from score
         function onClearTriggerList() {
             triggerslistModel.clear()
+        }
+    }
+
+    radius: 9
+    color: Skin.darkGray
+
+    ListView {
+        id: triggerslist
+
+        height: parent.height
+        anchors {left: parent.left; right: scrollBar.left; rightMargin: 5}
+        orientation: ListView.Vertical
+        clip: true
+        spacing: 10
+        snapMode: ListView.SnapToItem
+        ScrollBar.vertical: scrollBar
+
+        model: ListModel {
+            id: triggerslistModel
+        }
+
+        delegate: ScoreTrigger {
+            width: triggerslist.width;  height: 5 + window.height / 25
+            scorePath: path
+            triggerName: name
+        }
+    }
+
+    ScrollBar {
+        id: scrollBar
+
+        width: window.width <= 500 ? 20 : 30; height: parent.height
+        anchors.right: parent.right
+        active: triggerslist.count > 0
+        visible: triggerslist.count > 0
+        policy: ScrollBar.AsNeeded
+        snapMode: ScrollBar.SnapAlways
+
+        contentItem: Rectangle {
+            id: scrollBarContentItem
+
+            visible: scrollBar.size < 1
+            color: scrollBar.pressed ? Skin.orange : Skin.lightGray
+        }
+
+        background: Rectangle {
+            id: scrollBarBackground
+
+            width: scrollBarContentItem.width
+            anchors.fill: parent
+            color: Skin.darkGray
+            border { color: Skin.dark; width: 2 }
         }
     }
 }
