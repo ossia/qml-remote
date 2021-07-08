@@ -4,50 +4,48 @@ import QtQuick.Controls 2.12
 import Variable.Global 1.0
 
 Slider {
-    implicitWidth: 300
-    implicitHeight: 20
+
+    id: control
+
     property string controlName: "ControlName"
     property string controlPath: "ControlPath"
     property int controlId
     property string controlUuid
     property string controlUnit: ""
-    property string controlColor: "#e0b01e"
-    id: control
+    property color controlColor: Skin.orange
 
+    implicitWidth: 300; implicitHeight: 20
+
+    // Slider name
     Text {
+        anchors { left: parent.left; verticalCenter: parent.verticalCenter }
         text: ' ' + controlName + ':'
-        color: "#ffedb6"
-        font.bold: true
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
+        color: Skin.white
         font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
                         ? parent.height / 2
                         : (parent.height + parent.width) / 30.0
     }
 
+    // Slider value
     Text {
+        anchors { right: parent.right; verticalCenter: parent.verticalCenter }
         text: control.value.toFixed(3) + ' ' + controlUnit
-        color: "#ffedb6"
-        anchors.right: parent.right
-        font.bold: true
+        color: Skin.white
         font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
                         ? parent.height / 2
                         : (parent.height + parent.width) / 30.0
-        anchors.verticalCenter: parent.verticalCenter
     }
 
-    handle: Rectangle {} // No handle
+    // No handle
+    handle: Rectangle {}
 
     background: Rectangle {
-        implicitWidth: parent.width
-        implicitHeight: parent.height
+        implicitWidth: parent.width; implicitHeight: parent.height
         color: Skin.gray2
-        border.width: 1
-        border.color: controlColor
+        border { width: 1; color: controlColor }
 
         Rectangle {
-            width: control.visualPosition * parent.width - y
-            height: parent.height
+            width: control.visualPosition * parent.width - y; height: parent.height
             color: controlColor
         }
     }
