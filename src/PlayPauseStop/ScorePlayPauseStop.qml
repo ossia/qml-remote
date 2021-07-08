@@ -16,26 +16,6 @@ import QtQuick.Layouts 1.12
 Item {
     id: playPauseStop
 
-    ScorePlayPause {
-        id: playPause
-        anchors.top: parent.top
-        anchors.left: parent.left
-        width: parent.width
-    }
-
-    ScoreStop {
-        id: stop
-        anchors.top: playPause.bottom
-        anchors.left: parent.left
-        width: parent.width
-    }
-
-    /* Same behavior as ScoreStop
-    ScoreReinitialize {
-        id: reinitialize
-    }
-    */
-
     Connections {
         target: scorePlayPauseStop
         function onPlayPauseStopMessageReceived(m) {
@@ -45,18 +25,12 @@ Item {
                 //send signal to playPause Button
                 playPause.clicked()
                 break
+
             case "Stop":
                 //send signal to stop Button
                 stop.clicked()
                 scoreControlSurfaceList.clearListModel()
                 break
-
-                /*
-            case "Restart":
-                //send signal to reinitialize Button
-                reinitialize.clicked()
-                break
-            */
             }
         }
         function onScorePlayPauseStopMessageReceived(m) {
@@ -65,6 +39,7 @@ Item {
             case "IntervalPaused":
                 playPause.pausePressInScore()
                 break
+
             case "IntervalResumed":
                 playPause.playPressInScore()
                 break
@@ -81,28 +56,33 @@ Item {
         }
     }
 
-    states: [
+    ScorePlayPause {
+        id: playPause
 
-        // State in which the top panel (triggers, speeds) is hidden
-        // and the button list is vertical
-        State {
-            name: "hidden"
+        width: parent.width
+        anchors { top: parent.top; left: parent.left }
+    }
 
-            PropertyChanges {
-                target: playPause
-                anchors.top: parent.top
-                anchors.left: parent.left
-                width: parent.width / 2
-                height: parent.height
-            }
+    ScoreStop {
+        id: stop
 
-            PropertyChanges {
-                target: stop
-                anchors.top: parent.top
-                anchors.left: playPause.right
-                width: parent.width / 2
-                height: parent.height
-            }
+        width: parent.width
+        anchors { top: playPause.bottom; left: parent.left }
+    }
+    // State in which the top panel (triggers, speeds) is hidden and the button list is vertical
+    states: State {
+        name: "hidden"
+
+        PropertyChanges {
+            target: playPause
+            width: parent.width / 2; height: parent.height
+            anchors { top: parent.top; left: parent.left }
         }
-    ]
+
+        PropertyChanges {
+            target: stop
+            width: parent.width / 2; height: parent.height
+            anchors { top: parent.top; left: playPause.right }
+        }
+    }
 }
