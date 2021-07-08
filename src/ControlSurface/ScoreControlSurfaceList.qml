@@ -14,75 +14,6 @@ import Variable.Global 1.0
 
 Item  {
     id: scoreControlSurfaceList
-    anchors.left: parent.left
-    anchors.margins: 5
-    anchors.right: parent.right
-    anchors.top: parent.top
-    anchors.bottom: parent.bottom
-    height: parent.height
-
-    ListView {
-        id: scoreControlSurfaceListView
-        spacing: 5
-        anchors.left: parent.left
-        anchors.margins: 5
-        anchors.right: scrollBar.left
-        height: parent.height
-        orientation: ListView.Vertical
-        clip: true
-        snapMode: ListView.SnapToItem
-
-        // ObjectModel's "model" data is the actual item that is going to be displayed
-        model: ObjectModel {
-            id: controlSurfacelist
-        }
-
-        // The Component will serve as a factory to create the individual ControlSurface visual items & data model
-        Component {
-            id: controlSurfaceDataModel
-            Loader {
-                id: controlSurface
-                width: scoreControlSurfaceListView.width
-                property string name
-                property var path
-                property var m
-                signal appendControls(var m)
-                signal modifyControl(var m)
-                source: "ScoreControlSurface.qml"
-                onLoaded: {
-                    controlSurface.appendControls(m)
-                }
-            }
-        }
-
-        ScrollBar.vertical: scrollBar
-    }
-
-    ScrollBar {
-            id: scrollBar
-            active: true
-            visible: scoreControlSurfaceListView.count > 0
-            width: window.width <= 500 ? 20 : 30
-            height: parent.height
-
-            anchors.right: parent.right
-            policy: ScrollBar.AsNeeded
-            snapMode: ScrollBar.SnapAlways
-            contentItem: Rectangle {
-                id: scrollBarContentItem
-                visible: scrollBar.size < 1
-                color: scrollBar.pressed ? Skin.orange : "#808080"
-            }
-
-            background: Rectangle {
-                id: scrollBarBackground
-                width: scrollBarContentItem.width
-                anchors.fill: parent
-                color: Skin.darkGray
-                border.color: Skin.dark
-                border.width: 2
-            }
-    }
 
     // Receiving and handling messages about Control Surfaces from score
     Connections {
@@ -95,10 +26,12 @@ Item  {
                         return i
                 return null
             }
+
             //the index of m.Path in the listmodel
             var s = find(function (item) {
                 return item.path === JSON.stringify(m.Path)
             })
+
             // Adding a control surface
             if (messageObject === "ControlSurfaceAdded") {
                 if (s === null) {
@@ -110,13 +43,16 @@ Item  {
                             })
                     controlSurfacelist.insert(0, newSurfaceModel)
                 }
-            } // Removing a control surface
+            }
+
+            // Removing a control surface
             else if (messageObject === "ControlSurfaceRemoved") {
                 if (s !== null) {
                     controlSurfacelist.remove(s)
                 }
             }
-            /* Modifying a control in a control surface            */
+
+            // Modifying a control in a control surface
             else if (messageObject === "ControlSurfaceControl") {
                 if (s !== null) {
                     let controlSurface = controlSurfacelist.get(parseInt(s))
@@ -128,6 +64,77 @@ Item  {
         // Clear the control surface list when the remote is disconnected from score
         function onClearControlSurfaceList() {
             controlSurfacelist.clear()
+        }
+    }
+
+    anchors {
+        left: parent.left; right: parent.right
+        top: parent.top; bottom: parent.bottom;
+        margins: 5
+    }
+
+    ListView {
+        id: scoreControlSurfaceListView
+
+        height: parent.height
+        anchors { left: parent.left; right: scrollBar.right; margins: 5 }
+        spacing: 5
+        orientation: ListView.Vertical
+        clip: true
+        snapMode: ListView.SnapToItem
+        ScrollBar.vertical: scrollBar
+
+        // ObjectModel's "model" data is the actual item that is going to be displayed
+        model: ObjectModel {
+            id: controlSurfacelist
+        }
+
+        // The Component will serve as a factory to create the individual ControlSurface visual items & data model
+        Component {
+            id: controlSurfaceDataModel
+
+            Loader {
+                id: controlSurface
+
+                property string name
+                property var path
+                property var m
+
+                signal appendControls(var m)
+                signal modifyControl(var m)
+
+                width: scoreControlSurfaceListView.width
+                source: "ScoreControlSurface.qml"
+
+                onLoaded: {
+                    controlSurface.appendControls(m)
+                }
+            }
+        }
+    }
+
+    ScrollBar {
+        id: scrollBar
+
+        width: window.width <= 500 ? 20 : 30; height: parent.height
+        anchors.right: parent.right
+        active: true
+        visible: scoreControlSurfaceListView.count > 0
+        policy: ScrollBar.AsNeeded
+        snapMode: ScrollBar.SnapAlways
+
+        contentItem: Rectangle {
+            id: scrollBarContentItem
+            visible: scrollBar.size < 1
+            color: scrollBar.pressed ? Skin.orange : "#808080"
+        }
+
+        background: Rectangle {
+            id: scrollBarBackground
+            width: scrollBarContentItem.width
+            anchors.fill: parent
+            color: Skin.darkGray
+            border { color: Skin.dark; width: 2}
         }
     }
 }
