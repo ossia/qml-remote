@@ -1,0 +1,48 @@
+name: Build wasm app
+
+on: push
+
+jobs:
+  buster:
+    name: wasm build
+    runs-on: ubuntu-latest
+    container:
+      image: guerra1994/qt-wasm:latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          find / -name PFA11.pro -type f
+          SRC_PATH=$(dirname $(find / -name PFA11.pro -type f))
+          cd $SRC_PATH/..
+
+          ls -la
+
+          mkdir -p build-wasm
+          cd build-wasm
+
+          qmake ../src/
+          make
+
+          cd ..
+          tar -czvf build-wasm.tar.gz build-wasm/*.html build-wasm/*.js build-wasm/*.wasm
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: WASM build
+          path: |
+            build-wasm.tar.gz
+
+      - name: Upload release
+        if: startsWith(github.ref, 'refs/tags')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build-wasm.tar.gz
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
