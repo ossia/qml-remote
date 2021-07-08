@@ -32,11 +32,24 @@ import "qrc:/Timeline"
 
 Item {
     id: window
+
+    // Called when the remote is disconnected from score
+    function disconnect() {
+        // Clear trigger, speed, control surface... lists
+        scoreTriggers.clearTriggerList()
+        scoreSpeeds.clearSpeedList()
+        scoreControlSurfaceList.clearControlSurfaceList()
+        // Reset timeline
+        scoreTimeline.stopTimeline()
+
+    }
+
     anchors.fill: parent
 
     // A field to save the IP adress
     Settings {
         id: settings
+
         property string ip_adress: "127.0.0.1"
     }
 
@@ -48,23 +61,24 @@ Item {
     // Creating the IP adress button object
     ScoreIpAdress {
         id: ipAdress
-        anchors.top: parent.top
-        anchors.left: parent.left
-        width: 20 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
+
         signal playPauseStopMessageReceived(var n)
+
+        anchors { left: parent.left; top: parent.top }
+        width: 20 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
     }
 
     // Creating play, pause and stop button objects
     ScorePlayPauseStop {
         id: scorePlayPauseStop
-        anchors.left: ipAdress.left
-        anchors.top: ipAdress.bottom
-        height: 2 * this.width
-        width: ipAdress.width
+
         signal playPauseStopMessageReceived(var n)
         signal scorePlayPauseStopMessageReceived(var n)
         signal connectedToScore()
         signal disconnectedFromScore()
+
+        height: 2 * this.width; width: ipAdress.width
+        anchors { left: ipAdress.left; top: ipAdress.bottom }
     }
 
     /*
@@ -82,111 +96,105 @@ Item {
     // Creating the trigger list
     ScoreTriggers {
         id: scoreTriggers
-        anchors.margins: 5
-        anchors.left: ipAdress.right
-        anchors.top: parent.top
-        anchors.right: scoreSpeed.left
-        anchors.bottom: scorePlayPauseStop.bottom
+
         signal triggerMessageReceived(var n)
         signal clearTriggerList()
+
+        anchors {
+            left: ipAdress.right; right: scoreSpeed.left
+            top: parent.top; bottom: scorePlayPauseStop.bottom; margins: 5
+        }
     }
 
     // Creating the button to hide the top panel (triggers, speeds)
     ScoreHideButton {
         id: scoreHideButton
-        anchors.top: parent.top
-        anchors.bottom: scoreSpeed.bottom
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.topMargin: 5
+
+        anchors {
+            right: parent.right
+            top: parent.top; bottom: scoreSpeed.bottom
+            rightMargin: 5; topMargin: 5
+        }
     }
 
     // Creating the speed list
     ScoreSpeeds {
         id: scoreSpeeds
-        anchors.topMargin: 5
-        anchors.rightMargin: 5
-        anchors.right: parent.right
-        anchors.bottom: scorePlayPauseStop.bottom
-        anchors.top: scoreSpeed.bottom
-        anchors.left: scoreSpeed.left
+
         signal intervalMessageReceived(var n)
         signal intervalsMessageReceived(var n)
         signal clearSpeedList()
+
+        anchors {
+            left: scoreSpeed.left; right: parent.right
+            top: scoreSpeed.bottom; bottom: scorePlayPauseStop.bottom
+            rightMargin: 5; topMargin: 5
+        }
     }
 
     // Creating the main scenario speed slider object
     ScoreSpeed {
         id: scoreSpeed
-        anchors.right: scoreHideButton.left
-        anchors.top: parent.top
-        anchors.topMargin: 5
-        anchors.rightMargin: 5
+
         signal intervalMessageReceived(var n)
         signal intervalsMessageReceived(var n)
+
+        anchors {
+            right: scoreHideButton.left; top: parent.top
+            rightMargin: 5; topMargin: 5
+        }
     }
 
     // Creating the control surface list
     ScoreControlSurfaceList {
         id: scoreControlSurfaceList
-        anchors.top: scorePlayPauseStop.bottom
-        anchors.bottom: scoreTimeline.top
-        anchors.topMargin: 5
-        anchors.left: parent.left
-        anchors.right: parent.right
+
         signal controlSurfacesMessageReceived(var n)
         signal clearControlSurfaceList()
+
+        anchors {
+            left: parent.left; right: parent.right
+            top: scorePlayPauseStop.bottom; bottom: scoreTimeline.top
+            topMargin: 5
+        }
     }
 
     // Creating the timeline slider object
     ScoreTimeline {
         id: scoreTimeline
-        anchors.bottom: parent.bottom
+
         signal intervalsMessageReceived(var n)
+
+        anchors.bottom: parent.bottom
     }
 
-    states: [
-        // State in which the top panel (triggers, speeds) is hidden
-        State {
-            name: "hidden"
+    // State in which the top panel (triggers, speeds) is hidden
+    states: State {
+        name: "hidden"
 
-            PropertyChanges {
-                target: ipAdress
-                width: 1.4 * scoreHideButton.height
-            }
+        PropertyChanges {
+            target: ipAdress
+            width: 1.4 * scoreHideButton.height
+        }
 
-            PropertyChanges {
-                target: scorePlayPauseStop
-                anchors.top: window.top
-                anchors.left: window.left
-                width: 2 * ipAdress.width
-                height: ipAdress.width
-            }
+        PropertyChanges {
+            target: scorePlayPauseStop
+            width: 2 * ipAdress.width; height: ipAdress.width
+            anchors { left: window.left; top: window.top }
+        }
 
-            PropertyChanges {
-                target: scoreTriggers
-                anchors.margins: 5
-                anchors.left: scorePlayPauseStop.right
-                anchors.top: parent.top
-                anchors.right: scoreSpeed.left
-                anchors.bottom: scorePlayPauseStop.bottom
-            }
-
-            PropertyChanges {
-                target: scoreControlSurfaceList
-                anchors.top: scoreHideButton.bottom
+        PropertyChanges {
+            target: scoreTriggers
+            anchors {
+                left: scorePlayPauseStop.right; right: scoreSpeed.left
+                top: parent.top; bottom: scorePlayPauseStop.bottom
+                margins: 5
             }
         }
-    ]
 
-    // Called when the remote is disconnected from score
-    function disconnect() {
-        // Clear trigger, speed, control surface... lists
-        scoreTriggers.clearTriggerList()
-        scoreSpeeds.clearSpeedList()
-        scoreControlSurfaceList.clearControlSurfaceList()
-        // Reset timeline
-        scoreTimeline.stopTimeline()
-
+        PropertyChanges {
+            target: scoreControlSurfaceList
+            anchors.top: scoreHideButton.bottom
+        }
     }
 }
