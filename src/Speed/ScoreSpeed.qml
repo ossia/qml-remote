@@ -48,8 +48,6 @@ ScoreSliderSkeleton {
     // Send a message to Score to update its progress' timeline
     onMoved: {
         socket.sendTextMessage(
-                    `{ "Message": "IntervalSpeed",
-                       "Path": ${globalSpeed.path},
-                       "Speed": ${globalSpeed.value * 6 / 720} }`)
+                    `{ "Message": "IntervalSpeed", "Path": ${globalSpeed.path}, "Speed": ${globalSpeed.value * 6 / 720} }`)
     }
 }
