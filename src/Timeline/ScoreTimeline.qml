@@ -11,19 +11,10 @@ import QtQml 2.12
 import Variable.Global 1.0
 
 Slider {
-    property int totalTime: 10 * 60 * 1000 // By default, the total duration is set to 10 min
     id: time
-    value: 0
-    implicitWidth: window.width
-    implicitHeight: window.height <= 600 ? 25 : 5 + window.height / 25
 
-    // Sends a message to Score to update its progress' timeline
-    onMoved: {
-        socket.sendTextMessage(
-                    ('{ "Message": "Transport", "Milliseconds":').concat(
-                        time.value * time.totalTime, '}'))
-        // console.log(('{ "Message": "Transport", "Milliseconds":').concat(time.value * time.totalTime, '}'));
-    }
+    // By default, the total duration is set to 10 min
+    property int totalTime: 10 * 60 * 1000
 
     // Receives a message from Score to update the current value IRT
     Connections {
@@ -44,8 +35,10 @@ Slider {
 
     // Convert milliseconds to a hh:mm:ss.zz format
     function msToTime(duration, currentDate) {
-        var milliseconds = parseInt(
-                    (duration % 1000) / 100), seconds = Math.floor((duration / 1000) % 60), minutes = Math.floor((duration / (1000 * 60)) % 60), hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
+        var milliseconds = parseInt( ( duration % 1000 ) / 100 ),
+        seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
 
         hours = (hours < 10) ? "0" + hours : hours
         minutes = (minutes < 10) ? "0" + minutes : minutes
@@ -54,32 +47,39 @@ Slider {
         return hours + ":" + minutes + ":" + seconds + "." + milliseconds
     }
 
+    value: 0
+    implicitWidth: window.width
+    implicitHeight: window.height <= 600 ? 25 : 5 + window.height / 25
+
+    // Sends a message to Score to update its progress' timeline
+    onMoved: {
+        socket.sendTextMessage(
+                    `{ "Message": "Transport", "Milliseconds": ${time.value * time.totalTime}}`)
+    }
+
+    // No handle
+    handle: Rectangle {}
+
+    background: Rectangle {
+        implicitWidth: parent.width; implicitHeight: parent.height
+        color: "#161514"
+        border { width: 1; color: Skin.brown}
+
+        Rectangle {
+            width: time.visualPosition * parent.width - y; height: parent.height
+            color: Skin.brown
+        }
+    }
+
+    // Basically the slider's ratio times the totalTime (ms) gives the elasped time (ms)
+    // Which must then be converted into a date type
     Text {
-        // Basically the slider's ratio times the totalTime (ms) gives the elasped time (ms)
-        // Which must then be converted into a date type
-        text: msToTime(time.value * totalTime)
-        color: "#f0f0f0"
-        font.bold: true
         width: time.width
+        text: msToTime(time.value * totalTime)
+        color: Skin.white
         anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: parent.height === 0 ? 1 : parent.height / 2.5
-    }
-
-    handle: Rectangle {} // No handle
-
-    background: Rectangle {
-        implicitWidth: parent.width
-        implicitHeight: parent.height
-        color: "#161514"
-        border.width: 1
-        border.color: Skin.brown
-
-        Rectangle {
-            width: time.visualPosition * parent.width - y
-            height: parent.height
-            color: Skin.brown
-        }
     }
 }
