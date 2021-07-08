@@ -12,16 +12,14 @@ Button {
     width: scoreSpeed.height
 
     background: Rectangle {
+        width: parent.width; height: parent.height
         color: "#363636"
-        width: parent.width
-        height: parent.height
     }
 
     contentItem: Image {
         id: indicator
+        width: parent.height; height: parent.height
         anchors.verticalCenter: parent.verticalCenter
-        width: parent.height
-        height: parent.height
         source: !scoreTriggers.visible
                 ? scoreHideButton.pressed
                   ? "../Icons/indicator_on.svg"
