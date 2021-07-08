@@ -15,12 +15,41 @@ import QtQuick.Layouts 1.12
 import Variable.Global 1.0
 
 Button {
+
+    hoverEnabled: true
+    onPressed: ipButton.state = "ip_on"
+    onReleased: { onClicked: ipDialog.open() }
+
+    onHoveredChanged: {
+        if (ipButton.state === 'ip_on') {
+            ipButton.state = ""
+        }
+    }
+
+    contentItem: Image {
+        id: ipButton
+        sourceSize { width: parent.width; height: parent.width }
+        source: "../Icons/ip_adress.png"
+        clip: true
+
+        states: State {
+            name: "ip_on"
+
+            PropertyChanges {
+                target: ipButton
+                source: "../Icons/ip_adress_on.png"
+            }
+        }
+    }
+
+    background: Rectangle { id: zone; color: Skin.darkGray }
+
     // Connection window
     Dialog {
         id: ipDialog
+
         title: "Connection"
-        width: 300
-        height: 100
+        width: 300; height: 100
 
         contentItem: Rectangle {
             anchors.fill: parent
@@ -28,32 +57,30 @@ Button {
 
             Rectangle {
                 id: connectionWindow
-                anchors.fill: parent
-                anchors.margins: 10
+
+                anchors { fill: parent; margins: 10 }
                 color: Skin.gray1
 
                 Rectangle {
-                    width: parent.width
-                    height: 50
+                    width: parent.width; height: 50
                     anchors.top: parent.top
                     color: Skin.gray1
 
                     Text {
                         id: ipText
+
+                        anchors { left: parent.left; verticalCenter: parent.verticalCenter }
                         text: "Ip adress"
                         color: Skin.white
-                        anchors.left: parent.left
-                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     // TextField to enter the IP adress
                     TextField {
                         id: ipInput
-                        text: settings.ip_adress
-                        anchors.left: ipText.right
-                        anchors.leftMargin: 10
+
                         width: parent.width <= 160 ? 65 : 100
-                        anchors.verticalCenter: parent.verticalCenter
+                        anchors { left: ipText.right; leftMargin: 10; verticalCenter: parent.verticalCenter }
+                        text: settings.ip_adress
                         color: Skin.white
 
                         background: Rectangle {
@@ -67,14 +94,13 @@ Button {
                 // OK button
                 Button {
                     id: okButton
-                    anchors.right: cancelButton.left
-                    anchors.bottom: parent.bottom
-                    anchors.rightMargin: 10
-                    width: 75
-                    height: 30
+
+                    width: 75; height: 30
+                    anchors { right: cancelButton.left; bottom: parent.bottom; rightMargin: 10 }
 
                     contentItem: Text {
                         id: okButtonText
+
                         color: Skin.white
                         text: qsTr("OK")
                         horizontalAlignment: Text.AlignHCenter
@@ -100,9 +126,11 @@ Button {
                         case "":
                             okButton.state = "hoveredOK"
                             break
+
                         case "hoveredOK":
                             okButton.state = ""
                             break
+
                         case "pressedOK":
                             okButton.state = ""
                             break
@@ -111,10 +139,10 @@ Button {
 
                     background: Rectangle {
                         id: okButtonBackground
+
                         anchors.fill: parent
                         color: Skin.darkGray
-                        border.color: "#505050"
-                        border.width: 0.5
+                        border { color: Skin.gray3; width: 0.5}
                     }
 
                     states: [
@@ -129,9 +157,10 @@ Button {
                             name: "pressedOK"
                             PropertyChanges {
                                 target: okButtonBackground
-                                border.color: "#e0b01e"
+                                border.color: Skin.orange
                                 color: Skin.brown
                             }
+
                             PropertyChanges {
                                 target: okButtonText
                                 opacity: 0.5
@@ -143,10 +172,9 @@ Button {
                 // Cancel button
                 Button {
                     id: cancelButton
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    width: 75
-                    height: 30
+
+                    width: 75; height: 30
+                    anchors { right: parent.right; bottom: parent.bottom }
 
                     contentItem: Text {
                         id: cancelButtonText
@@ -174,9 +202,11 @@ Button {
                         case "":
                             cancelButton.state = "hoveredCANCEL"
                             break
+
                         case "hoveredCANCEL":
                             cancelButton.state = ""
                             break
+
                         case "pressedCANCEL":
                             cancelButton.state = ""
                             break
@@ -185,10 +215,10 @@ Button {
 
                     background: Rectangle {
                         id: cancelButtonBackground
+
                         anchors.fill: parent
                         color: Skin.darkGray
-                        border.color: "#505050"
-                        border.width: 0.5
+                        border { color: Skin.gray3; width: 0.5}
                     }
 
                     states: [
@@ -203,8 +233,8 @@ Button {
                             name: "pressedCANCEL"
                             PropertyChanges {
                                 target: cancelButtonBackground
-                                border.color: "#e0b01e"
                                 color: Skin.brown
+                                border.color: Skin.orange
                             }
                             PropertyChanges {
                                 target: cancelButtonText
@@ -215,46 +245,5 @@ Button {
                 }
             }
         }
-    }
-
-    hoverEnabled: true
-    onPressed: {
-        ipButton.state = "ip_on"
-    }
-
-    onReleased: {
-        onClicked: ipDialog.open()
-    }
-
-    onHoveredChanged: {
-        if (ipButton.state === 'ip_on') {
-            ipButton.state = ""
-        }
-    }
-
-    contentItem: Image {
-        id: ipButton
-        sourceSize.width: parent.width
-        sourceSize.height: parent.width
-        source: "../Icons/ip_adress.png"
-        clip: true
-        states: [
-            State {
-
-
-                /* play symbol is displayed
-            * "paused" is the scenario's state.
-            */
-                name: "ip_on"
-                PropertyChanges {
-                    target: ipButton
-                    source: "../Icons/ip_adress_on.png"
-                }
-            }
-        ]
-    }
-    background: Rectangle {
-        id: zone
-        color: Skin.darkGray
     }
 }
