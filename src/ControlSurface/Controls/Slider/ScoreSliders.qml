@@ -15,77 +15,18 @@ import Variable.Global 1.0
 
 ColumnLayout {
     id: sliderColumn
-    implicitWidth: (parent.width <= 500 ? (parent.width)
-                                        : (parent.width >= 1200
-                                           ? 400
-                                           : parent.width / 3))
-    spacing: 5
+
     property alias model: sliderListModel
 
-    Repeater {
-        id: sliderList
-        clip: true
-        Layout.fillHeight: parent.height
-        Layout.fillWidth: parent.height
-
-        model: ListModel {
-            id: sliderListModel
-        }
-
-        delegate: ScoreSlider {
-            id: slider
-            implicitHeight: window.height <= 500
-                            ? 30
-                            : 5 + window.height / 25
-            implicitWidth: (controlSurfaceListColumn.width <= 500
-                    ? (controlSurfaceListColumn.width)
-                    : (controlSurfaceListColumn.width >= 1200
-                       ? 400
-                       : controlSurfaceListColumn.width / 3))
-            width: (controlSurfaceListColumn.width <= 500
-                    ? (controlSurfaceListColumn.width)
-                    : (controlSurfaceListColumn.width >= 1200
-                       ? 400
-                       : controlSurfaceListColumn.width / 3))
-
-            // Control values
-            controlCustom: _custom
-            controlId: _id
-            controlUuid: _uuid
-            controlSurfacePath: path
-            controlColor: Skin.brown
-
-            // Specific variables to the sliders
-            from: _from
-            value: _value
-            to: _to
-            stepSize: _stepSize
-
-            onMoved: {
-                socket.sendTextMessage(
-                            '{ "Message": "ControlSurface",
-                                          "Path":'.concat(slider.controlSurfacePath, ', "id":',
-                                                          slider.controlId, ', "Value": {"Float":',
-                                                          (slider.controlUuid === Uuid.logFloatSliderUUID
-                                                           ? Utility.logSlider(slider.value, slider.from, slider.to).toFixed(3) + " "
-                                                           : slider.value.toFixed(3)) + " ", '}}'))
-            }
-        }
-    }
-
-    // Receving informations about sliders in control surface from score
+    // Receiving information about sliders in control surface from score
     Connections {
+
         // Adding a slider in the control surface
         function onAppendSlider(s, ind) {
-            function find(cond) {
-                for (var i = 0; i < sliderListModel.count; ++i)
-                    if (cond(sliderListModel.get(i)))
-                        return i
-                return null
-            }
-            var a = find(function (item) {
+            //the index of m.Path in the list model
+            var a = Utility.find(sliderListModel, function (item) {
                 return item.id === JSON.stringify(s.id)
-            }) //the index of m.Path in the listmodel
+            })
             if (a === null) {
                 var tmpFrom, tmpValue, tmpTo
                 var tmpStepSize
@@ -124,6 +65,7 @@ ColumnLayout {
                                        })
             }
         }
+
         // Modifying a slider in the control surface
         function onModifySlider(s) {
             for (var i = 0; i < sliderListModel.count; ++i) {
@@ -145,14 +87,62 @@ ColumnLayout {
                     default:
                         return
                     }
-
-
-                    /*
-                    sliderListModel.set(i, {
-                                            "_value": tmpValue
-                                        }
-                    */
                 }
+            }
+        }
+    }
+
+    implicitWidth: parent.width <= 500
+                    ? (parent.width)
+                    : (parent.width >= 1200
+                       ? 400
+                       : parent.width / 3)
+    spacing: 5
+
+    Repeater {
+        id: sliderList
+
+        clip: true
+        Layout.fillHeight: parent.height
+        Layout.fillWidth: parent.height
+
+        model: ListModel {
+            id: sliderListModel
+        }
+
+        delegate: ScoreSlider {
+            id: slider
+
+            width: (controlSurfaceListColumn.width <= 500
+                    ? (controlSurfaceListColumn.width)
+                    : (controlSurfaceListColumn.width >= 1200
+                       ? 400
+                       : controlSurfaceListColumn.width / 3))
+            implicitHeight: window.height <= 500
+                            ? 30
+                            : 5 + window.height / 25
+            implicitWidth: (controlSurfaceListColumn.width <= 500
+                    ? (controlSurfaceListColumn.width)
+                    : (controlSurfaceListColumn.width >= 1200
+                       ? 400
+                       : controlSurfaceListColumn.width / 3))
+
+            // Control values
+            controlCustom: _custom
+            controlId: _id
+            controlUuid: _uuid
+            controlSurfacePath: path
+            controlColor: Skin.brown
+
+            // Specific variables to the sliders
+            from: _from
+            value: _value
+            to: _to
+            stepSize: _stepSize
+
+            onMoved: {
+                socket.sendTextMessage(
+                            `{ "Message": "ControlSurface", "Path": ${slider.controlSurfacePath}, "id": ${slider.controlId}, "Value": {"Float": ${slider.controlUuid === Uuid.logFloatSliderUUID ? Utility.logSlider(slider.value, slider.from, slider.to).toFixed(3) + " " : slider.value.toFixed(3) + " "} }}`)
             }
         }
     }
