@@ -11,7 +11,6 @@ import Variable.Global 1.0
 
 Rectangle {
     id: positionButton
-    color: Skin.brown
 
     property string controlCustom
     property string controlValueType
@@ -19,11 +18,12 @@ Rectangle {
     property int controlId
     property string controlUuid
     property string controlSurfacePath
-
     property real controlX: controlMin + vertical.x * (controlDomain / position.height)
     property real controlY: controlMin + horizontal.y * (controlDomain / position.height)
     property real controlDomain
     property real controlMin
+
+    color: Skin.brown
 
     Text {
         id: positionName
@@ -37,16 +37,16 @@ Rectangle {
 
     Text {
         id: positionValue
-        anchors.top: positionName.bottom
+
+        anchors { left: positionName.left; top: positionName.bottom}
         color: Skin.white
-        anchors.left: positionName.left
-        text: "x,y:" + positionButton.controlX.toFixed(
-                  2) + "," + positionButton.controlY.toFixed(2)
+        text: "x,y:" + positionButton.controlX.toFixed(2) + "," + positionButton.controlY.toFixed(2)
         font.pointSize: parent.height * (9 / 40)
     }
 
     MouseArea {
         id: positionMouseAreaButton
+
         anchors.fill: parent
         onClicked: positionButton.state = 'off'
     }
@@ -54,15 +54,18 @@ Rectangle {
     states: [
         State {
             name: "off"
+
             PropertyChanges {
                 target: positionButton
                 controlX: controlX
                 controlY: controlY
             }
+
             PropertyChanges {
                 target: positionButton
                 color: Skin.gray1
             }
+
             PropertyChanges {
                 target: positionMouseAreaButton
                 onClicked: positionButton.state = 'on'
@@ -70,6 +73,7 @@ Rectangle {
         },
         State {
             name: "on"
+
             PropertyChanges {
                 target: positionButton
                 controlX: controlMin + vertical.x * (controlDomain / position.height)
