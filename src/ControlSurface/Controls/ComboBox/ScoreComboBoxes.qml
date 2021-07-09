@@ -15,41 +15,14 @@ import Variable.Global 1.0
 
 ColumnLayout {
     id: scoreComboBoxList
-    implicitWidth: (window.width <= 500
-                    ? (window.width - 10)
-                    : (window.width >= 1200
-                       ? 400
-                       : window.width / 3))
-    spacing: 5
 
-    Repeater {
-        id: comboBoxList
-        clip: true
-        Layout.fillHeight: parent.height
-        Layout.fillWidth: parent.height
-
-        model: ListModel {
-            id: comboBoxListModel
-        }
-
-        delegate: Loader {
-            id: comboBoxItem
-            property var message: _message
-            signal appendItems(var message, var path)
-            source: "ScoreComboBox.qml"
-
-            onLoaded: {
-                comboBoxItem.appendItems(message, path)
-            }
-        }
-    }
-
-    // Receving informations about comboBoxs in control surface from score
+    // Receiving information about comboboxes in control surface from score
     Connections {
         target: scoreComboBoxList
+
         // Adding a comboBox in the control surface
         function onAppendComboBox(s, ind) {
-            //the index of m.Path in the listmodel
+            //the index of m.Path in the list model
             var a = Utility.find(comboBoxList.model, function (item) {
                 return item.id === JSON.stringify(s.id)
             })
@@ -61,6 +34,36 @@ ColumnLayout {
                                              "_message": s
                                          })
             }
+        }
+    }
+
+    implicitWidth: (window.width <= 500
+                    ? (window.width - 10)
+                    : (window.width >= 1200
+                       ? 400
+                       : window.width / 3))
+    spacing: 5
+
+    Repeater {
+        id: comboBoxList
+
+        clip: true
+        Layout.fillHeight: parent.height
+        Layout.fillWidth: parent.height
+
+        model: ListModel {
+            id: comboBoxListModel
+        }
+
+        delegate: Loader {
+            id: comboBoxItem
+
+            property var message: _message
+            signal appendItems(var message, var path)
+
+            source: "ScoreComboBox.qml"
+
+            onLoaded: comboBoxItem.appendItems(message, path)
         }
     }
 }
