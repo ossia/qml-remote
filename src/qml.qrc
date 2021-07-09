@@ -68,10 +68,8 @@
         <file>main.qml</file>
         <file>ControlSurface/Controls/Control.qml</file>
         <file>ObjectSkeletons/ScoreSliderSkeleton.qml</file>
-        <file>ControlSurface/Controls/Colorpicker/Checkerboard.qml</file>
         <file>ControlSurface/Controls/Colorpicker/Colorpicker.qml</file>
         <file>ControlSurface/Controls/Colorpicker/ColorSlider.qml</file>
-        <file>ControlSurface/Controls/Colorpicker/NumberBox.qml</file>
         <file>ControlSurface/Controls/Colorpicker/PanelBorder.qml</file>
         <file>ControlSurface/Controls/Colorpicker/SBPicker.qml</file>
         <file>ControlSurface/Controls/Colorpicker/ScoreColorpicker.qml</file>

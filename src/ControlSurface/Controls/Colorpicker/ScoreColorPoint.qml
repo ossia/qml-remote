@@ -11,7 +11,6 @@ import Variable.Global 1.0
 
 Rectangle {
     id: colorButton
-    color: Skin.brown
 
     property string controlCustom
     property string controlDomain
@@ -20,59 +19,59 @@ Rectangle {
     property int controlId
     property string controlUuid
     property string controlSurfacePath
-
     property color controlColor
     property color displayedColor: "#a7dd0dFF"
 
+    color: Skin.brown
+
     Text {
         id: colorName
-        anchors.left: colorButton.left
-        anchors.leftMargin: 5
-        anchors.horizontalCenter: colorButton.horizontalCenter
+
+        anchors { left: colorButton.left; leftMargin: 5; horizontalCenter: colorButton.horizontalCenter }
         text: controlCustom
         font.pointSize: parent.width <= 200 ? 8 : 10
         color: Skin.white
     }
 
     PanelBorder {
-        anchors.right: parent.right
-        anchors.left: colorName.left
-        anchors.top: colorName.bottom
-        anchors.bottom: parent.bottom
-        anchors.margins: 5
+        anchors {
+            left: colorName.left; right: parent.right
+            top: colorName.bottom; bottom: parent.bottom
+            margins: 5
+        }
 
         Rectangle {
             id: colorValue
-            width: parent.width
-            height: parent.height
-            border.width: 1
-            border.color: Skin.black
+
+            width: parent.width; height: parent.height
+            border { color: Skin.black; width: 1 }
             color: colorButton.displayedColor
         }
     }
 
     MouseArea {
         id: colorMouseAreaButton
+
         anchors.fill: parent
         onClicked: colorButton.state = "off"
     }
 
-    states: [
+    states: State {
+        name: "off"
 
-        State {
-            name: "off"
-            PropertyChanges {
-                target: colorValue
-                color: colorValue.color
-            }
-            PropertyChanges {
-                target: colorButton
-                color: Skin.gray1
-            }
-            PropertyChanges {
-                target: colorMouseAreaButton
-                onClicked: colorButton.state = ""
-            }
+        PropertyChanges {
+            target: colorValue
+            color: colorValue.color
         }
-    ]
+
+        PropertyChanges {
+            target: colorButton
+            color: Skin.gray1
+        }
+
+        PropertyChanges {
+            target: colorMouseAreaButton
+            onClicked: colorButton.state = ""
+        }
+    }
 }

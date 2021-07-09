@@ -1,25 +1,21 @@
 //  Fancy pseudo-3d control border
+
 import QtQuick 2.9
 
+import Variable.Global 1.0
+
 Rectangle {
-    width: 40
-    height: 15
+    width: 40; height: 15
+    anchors { leftMargin: 1; topMargin: 3 }
+    border { width: 1; color: Skin.black }
     radius: 2
-    border.width: 1
-    border.color: "#FF101010"
-    color: "transparent"
-    anchors.leftMargin: 1
-    anchors.topMargin: 3
+    color: Skin.transparent
     clip: true
+
     Rectangle {
-        anchors.fill: parent
+        anchors { fill: parent; leftMargin: -1; topMargin: -1; rightMargin: 0; bottomMargin: 0 }
         radius: 2
-        anchors.leftMargin: -1
-        anchors.topMargin: -1
-        anchors.rightMargin: 0
-        anchors.bottomMargin: 0
-        border.width: 1
-        border.color: "#FF525255"
-        color: "transparent"
+        border { width: 1; color: Skin.lightGray }
+        color: Skin.transparent
     }
 }
