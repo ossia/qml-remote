@@ -1,15 +1,17 @@
 /*
   * WebSocket object :
   * - call some remote functions according to the socket state
-  * - handle messages from score and call fonctions of the
-  * correspondings objects
+  * - handle messages from score and call functions of the
+  * corresponding objects
   */
 
 import QtWebSockets 1.0
 
 WebSocket {
     id: socket
+
     url: "ws://" + settings.ip_adress + ":10212"
+    active: false
 
     // Handling message from score
     onTextMessageReceived: {
@@ -22,51 +24,46 @@ WebSocket {
             }
 
             var jsonObject = JSON.parse(message)
+            var typeOfMessage = jsonObject.Message
             if (jsonObject.Intervals) {
-
-
-                /* Supposing the timeline receives the progress
-                * of all the intervals inclunding itself
-                */
+                // Supposing the timeline receives the progress
+                // of all the intervals including itself
                 scoreTimeline.intervalsMessageReceived(jsonObject)
-                // scoreVolume.intervalsMessageReceived(jsonObject);
                 scoreSpeed.intervalsMessageReceived(jsonObject)
                 scoreSpeeds.intervalsMessageReceived(jsonObject)
             } else {
-                var typeOfMessage = jsonObject.Message
-                if (typeOfMessage === "TriggerRemoved"
-                        || typeOfMessage === "TriggerAdded") {
+                switch (true) {
+                case (typeOfMessage === "TriggerRemoved" || typeOfMessage === "TriggerAdded"):
                     // Handling messages about triggers
                     scoreTriggers.triggerMessageReceived(jsonObject)
-                } else if (typeOfMessage === "IntervalRemoved"
-                           || typeOfMessage === "IntervalAdded") {
+                    break
+
+                case (typeOfMessage === "IntervalRemoved" || typeOfMessage === "IntervalAdded"):
                     // Handling messages about interval speeds
                     scoreSpeed.intervalMessageReceived(jsonObject)
                     scoreSpeeds.intervalMessageReceived(jsonObject)
-                    scoreVolume.intervalMessageReceived(jsonObject)
-                } else if (typeOfMessage === "Play" || typeOfMessage === "Pause"
-                           || typeOfMessage === "Restart") {
+                    break
+
+                case (typeOfMessage === "Play" || typeOfMessage === "Pause" || typeOfMessage === "Restart"):
                     // Handling messages about play, pause and stop
                     scorePlayPauseStop.playPauseStopMessageReceived(jsonObject)
-                } else if (typeOfMessage === "ControlSurfaceRemoved"
-                           || typeOfMessage === "ControlSurfaceAdded"
-                           || typeOfMessage === "ControlSurfaceControl") {
+                    break
+
+                case (typeOfMessage === "ControlSurfaceRemoved" || typeOfMessage === "ControlSurfaceAdded" || typeOfMessage === "ControlSurfaceControl"):
                     // Handling  messages about control surfaces
-                    scoreControlSurfaceList.controlSurfacesMessageReceived(
-                                jsonObject)
-                } else if (typeOfMessage === "IntervalPaused"
-                           || typeOfMessage === "IntervalResumed") {
+                    scoreControlSurfaceList.controlSurfacesMessageReceived(jsonObject)
+                    break
+
+                case (typeOfMessage === "IntervalPaused" || typeOfMessage === "IntervalResumed"):
                     // Handling messages about play, pause and stop
-                    scorePlayPauseStop.scorePlayPauseStopMessageReceived(
-                                jsonObject)
-                } else {
+                    scorePlayPauseStop.scorePlayPauseStopMessageReceived(jsonObject)
+                    break
+
+                default:
 
                 }
             }
-            // TODO: handle volume
-        } catch (error) {
-
-        }
+        } catch (error) { }
     }
 
     // Calling remote functions according to the socket state
@@ -74,18 +71,20 @@ WebSocket {
         switch (socket.status) {
         case WebSocket.Error:
             break
+
         case WebSocket.Open:
             ipAdress.connected()
             scorePlayPauseStop.connectedToScore()
             break
+
         case WebSocket.Closed:
             window.state = ""
             ipAdress.disconnected()
             scorePlayPauseStop.disconnectedFromScore()
             break
+
         default:
 
         }
     }
-    active: false
 }
