@@ -13,8 +13,6 @@ import Variable.Global 1.0
 
 Slider {
     id: slider
-    implicitWidth: 300
-    implicitHeight: 20
 
     property string controlCustom
     property string controlDomain
@@ -23,51 +21,44 @@ Slider {
     property int controlId
     property string controlUuid
     property string controlSurfacePath
+    property color controlColor: Skin.orange
 
-    property color controlColor: "#e0b01e"
-
-    Text {
-        text: ' ' + controlCustom + ':'
-        color: Skin.white
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        font.pointSize: parent.width <= 200
-                        ? 10
-                        : parent.width >= 500
-                          ? parent.height / 2
-                          : 15
-    }
-
-    Text {
-        text: slider.controlUuid
-              === Uuid.logFloatSliderUUID
-              ? Utility.logSlider(slider.value,
-                                  slider.from,
-                                  slider.to).toFixed(3) + " "
-              : slider.value.toFixed(3) + " "
-        color: Skin.white
-        anchors.right: parent.right
-        font.pointSize: parent.width <= 200
-                        ? 10
-                        : parent.width >= 500
-                          ? parent.height / 2
-                          : 15
-        anchors.verticalCenter: parent.verticalCenter
-    }
+    implicitWidth: 300; implicitHeight: 20
 
     handle: Rectangle {} // No handle
 
     background: Rectangle {
-        implicitWidth: parent.width
-        implicitHeight: parent.height
+        implicitWidth: parent.width; implicitHeight: parent.height
         color: Skin.gray2
-        border.width: 1
-        border.color: controlColor
+        border { color: controlColor; width: 1 }
 
         Rectangle {
-            width: slider.visualPosition * parent.width - y
-            height: parent.height
+            height: parent.height; width: slider.visualPosition * parent.width - y
             color: controlColor
         }
+    }
+
+    Text {
+        anchors { left: parent.left; verticalCenter: parent.verticalCenter }
+        text: ' ' + controlCustom + ':'
+        color: Skin.white
+        font.pointSize: parent.width <= 200
+                        ? 10
+                        : parent.width >= 500
+                          ? parent.height / 2
+                          : 15
+    }
+
+    Text {
+        anchors { right: parent.right; verticalCenter: parent.verticalCenter }
+        text: slider.controlUuid === Uuid.logFloatSliderUUID
+              ? Utility.logSlider(slider.value, slider.from, slider.to).toFixed(3) + " "
+              : slider.value.toFixed(3) + " "
+        color: Skin.white
+        font.pointSize: parent.width <= 200
+                        ? 10
+                        : parent.width >= 500
+                          ? parent.height / 2
+                          : 15
     }
 }
