@@ -3,9 +3,8 @@ matrix:
   aspell:
     lang: en
   dictionary:
-    wordlists:
-    - .wordlist.txt
     encoding: utf-8
-  sources:
+  pipeline:
+  - pyspelling.filters.text:
   - '**/*.qml'
   default_encoding: utf-8
