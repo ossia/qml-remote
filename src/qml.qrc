@@ -50,14 +50,10 @@
         <file>Icons/scenario_trigger.png</file>
         <file>Icons/connection_hover.png</file>
         <file>Icons/connection_hover.svg</file>
-        <file>Icons/ip_address.svg</file>
         <file>IpAddress/ScoreIpAddress.qml</file>
-        <file>Icons/ip_address.png</file>
         <file>Icons/play_glob_on.png</file>
         <file>Icons/connection_on.png</file>
         <file>Icons/connection_on.svg</file>
-        <file>Icons/ip_address_on.png</file>
-        <file>Icons/ip_address_on.svg</file>
         <file>Icons/disconnected.png</file>
         <file>Icons/disconnected_on.svg</file>
         <file>Icons/disconnected_on.png</file>
@@ -88,5 +84,9 @@
         <file>Icons/indicator_on.svg</file>
         <file>Utility/Skin.qml</file>
         <file>HideButton/ScoreHideButton.qml</file>
+        <file>Icons/ip_address.png</file>
+        <file>Icons/ip_address.svg</file>
+        <file>Icons/ip_address_on.png</file>
+        <file>Icons/ip_address_on.svg</file>
     </qresource>
 </RCC>
