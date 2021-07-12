@@ -6,5 +6,6 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.text:
+  sources:
   - '**/*.qml'
   default_encoding: utf-8
