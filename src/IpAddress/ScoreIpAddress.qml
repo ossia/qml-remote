@@ -1,7 +1,7 @@
 /*
   * At the top left of the interface with others buttons
   * Contain ScoreConnection and ScoreDisconnection :
-  * - ScoreConnection : a window which is asking for ip adress
+  * - ScoreConnection : a window which is asking for ip address
   * - ScoreDisconnection : a window for disconnection
   */
 

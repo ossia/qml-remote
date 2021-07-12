@@ -10,7 +10,7 @@ import QtWebSockets 1.0
 WebSocket {
     id: socket
 
-    url: "ws://" + settings.ip_adress + ":10212"
+    url: "ws://" + settings.ip_address + ":10212"
     active: false
 
     // Handling message from score
@@ -73,13 +73,13 @@ WebSocket {
             break
 
         case WebSocket.Open:
-            ipAdress.connected()
+            ipAddress.connected()
             scorePlayPauseStop.connectedToScore()
             break
 
         case WebSocket.Closed:
             window.state = ""
-            ipAdress.disconnected()
+            ipAddress.disconnected()
             scorePlayPauseStop.disconnectedFromScore()
             break
 

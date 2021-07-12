@@ -21,7 +21,7 @@ import Qt.labs.settings 1.0
 import Variable.Global 1.0
 
 import "qrc:/WebSocket"
-import "qrc:/IpAdress"
+import "qrc:/IpAddress"
 import "qrc:/PlayPauseStop"
 import "qrc:/Trigger"
 import "qrc:/Speed"
@@ -46,7 +46,7 @@ Item {
 
     anchors.fill: parent
 
-    // A field to save the IP adress
+    // A field to save the IP address
     Settings {
         id: settings
 
@@ -71,7 +71,7 @@ Item {
     // Creating play, pause and stop button objects
     ScorePlayPauseStop {
         id: scorePlayPauseStop
-
+        
         signal playPauseStopMessageReceived(var n)
         signal scorePlayPauseStopMessageReceived(var n)
         signal connectedToScore()
@@ -96,7 +96,7 @@ Item {
     // Creating the trigger list
     ScoreTriggers {
         id: scoreTriggers
-
+        
         signal triggerMessageReceived(var n)
         signal clearTriggerList()
 

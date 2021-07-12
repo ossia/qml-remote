@@ -2,7 +2,7 @@
   * Connection Button :
   * - at the top left of the interface with others buttons
   * - visible when the remote is disconnected form score
-  * - when the button is pressed: a window appears asking for IP adress
+  * - when the button is pressed: a window appears asking for IP address
   */
 
 import QtQuick 2.0
@@ -30,7 +30,7 @@ Button {
     contentItem: Image {
         id: ipButton
         sourceSize { width: parent.width; height: parent.width }
-        source: "../Icons/ip_adress.png"
+        source: "../Icons/ip_address.png"
         clip: true
 
         states: State {
@@ -38,7 +38,7 @@ Button {
 
             PropertyChanges {
                 target: ipButton
-                source: "../Icons/ip_adress_on.png"
+                source: "../Icons/ip_address_on.png"
             }
         }
     }
@@ -69,17 +69,17 @@ Button {
                         id: ipText
 
                         anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-                        text: "Ip adress"
+                        text: "Ip address"
                         color: Skin.white
                     }
 
-                    // TextField to enter the IP adress
+                    // TextField to enter the IP address
                     TextField {
                         id: ipInput
 
                         width: parent.width <= 160 ? 65 : 100
                         anchors { left: ipText.right; leftMargin: 10; verticalCenter: parent.verticalCenter }
-                        text: settings.ip_adress
+                        text: settings.ip_address
                         color: Skin.white
 
                         background: Rectangle {
@@ -116,7 +116,7 @@ Button {
 
                     onReleased: {
                         window.state = "connected"
-                        settings.ip_adress = ipInput.text
+                        settings.ip_address = ipInput.text
                         ipDialog.close()
                     }
 
@@ -194,7 +194,7 @@ Button {
                     }
 
                     onReleased: {
-                        ipInput.text = settings.ip_adress
+                        ipInput.text = settings.ip_address
                         ipDialog.close()
                     }
 
