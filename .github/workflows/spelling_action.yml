@@ -1,16 +1,14 @@
-# This is workflow for spell checking using PySpelling lib (https://pypi.org/project/pyspelling/)
-name: Spellcheck
-# Controls when the action will run.
+name: Spellcheck Action
 on: push
-
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    name: Spellcheck
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Spellcheck
-      - uses: actions/checkout@v2
-      - uses: igsekor/pyspelling-any@v0.0.2
-        name: Spellcheck
+    - uses: actions/checkout@master
+    - uses: rojopolis/spellcheck-github-actions@0.14.0
+      name: Spellcheck
+      with:
+        config_path: config/.spellcheck.yml # path to configuration file here
+        source_files: src/*
+        task_name: Qml
