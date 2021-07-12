@@ -50,14 +50,14 @@
         <file>Icons/scenario_trigger.png</file>
         <file>Icons/connection_hover.png</file>
         <file>Icons/connection_hover.svg</file>
-        <file>Icons/ip_adress.svg</file>
-        <file>IpAdress/ScoreIpAdress.qml</file>
-        <file>Icons/ip_adress.png</file>
+        <file>Icons/ip_address.svg</file>
+        <file>IpAddress/ScoreIpAddress.qml</file>
+        <file>Icons/ip_address.png</file>
         <file>Icons/play_glob_on.png</file>
         <file>Icons/connection_on.png</file>
         <file>Icons/connection_on.svg</file>
-        <file>Icons/ip_adress_on.png</file>
-        <file>Icons/ip_adress_on.svg</file>
+        <file>Icons/ip_address_on.png</file>
+        <file>Icons/ip_address_on.svg</file>
         <file>Icons/disconnected.png</file>
         <file>Icons/disconnected_on.svg</file>
         <file>Icons/disconnected_on.png</file>
@@ -78,8 +78,8 @@
         <file>ControlSurface/Controls/ImpulseButton/ScoreImpulseButtons.qml</file>
         <file>Utility/utility.js</file>
         <file>Utility/Uuid.qml</file>
-        <file>IpAdress/ScoreConnection.qml</file>
-        <file>IpAdress/ScoreDisconnection.qml</file>
+        <file>IpAddress/ScoreConnection.qml</file>
+        <file>IpAddress/ScoreDisconnection.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBox.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBoxes.qml</file>
         <file>Icons/indicator.svg</file>
