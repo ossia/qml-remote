@@ -8,7 +8,6 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.text:
-  - pyspelling.filters.qml:
     comments: true
   sources:
   - '**/*.qml'
