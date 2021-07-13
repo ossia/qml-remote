@@ -48,7 +48,7 @@ Button {
         id: ipDialog
 
         title: "Connection"
-        width: 300; height: 100
+        //width: 300; height: 100
 
         contentItem: Rectangle {
             anchors.fill: parent
