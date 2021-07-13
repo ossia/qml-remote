@@ -8,6 +8,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import Variable.Global 1.0
+
 Button {
     id: button
     implicitWidth: (window.width <= 500
