@@ -50,7 +50,7 @@ Item {
     Settings {
         id: settings
 
-        property string ip_adress: "127.0.0.1"
+        property string ip_address: "127.0.0.1"
     }
 
     // Creating the websocket
@@ -58,9 +58,9 @@ Item {
         id: socket
     }
 
-    // Creating the IP adress button object
-    ScoreIpAdress {
-        id: ipAdress
+    // Creating the IP address button object
+    ScoreIpAddress {
+        id: ipAddress
 
         signal playPauseStopMessageReceived(var n)
 
@@ -77,8 +77,8 @@ Item {
         signal connectedToScore()
         signal disconnectedFromScore()
 
-        height: 2 * this.width; width: ipAdress.width
-        anchors { left: ipAdress.left; top: ipAdress.bottom }
+        height: 2 * this.width; width: ipAddress.width
+        anchors { left: ipAddress.left; top: ipAddress.bottom }
     }
 
     /*
@@ -101,7 +101,7 @@ Item {
         signal clearTriggerList()
 
         anchors {
-            left: ipAdress.right; right: scoreSpeed.left
+            left: ipAddress.right; right: scoreSpeed.left
             top: parent.top; bottom: scorePlayPauseStop.bottom; margins: 5
         }
     }
@@ -173,13 +173,13 @@ Item {
         name: "hidden"
 
         PropertyChanges {
-            target: ipAdress
+            target: ipAddress
             width: 1.4 * scoreHideButton.height
         }
 
         PropertyChanges {
             target: scorePlayPauseStop
-            width: 2 * ipAdress.width; height: ipAdress.width
+            width: 2 * ipAddress.width; height: ipAddress.width
             anchors { left: window.left; top: window.top }
         }
 

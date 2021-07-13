@@ -18,7 +18,7 @@ Button {
 
     contentItem: Image {
         id: indicator
-        width: parent.height; height: parent.height
+        width: parent.height; height: parent.height 
         anchors.verticalCenter: parent.verticalCenter
         source: !scoreTriggers.visible
                 ? scoreHideButton.pressed
@@ -32,7 +32,7 @@ Button {
     onReleased: {
         scoreTriggers.visible = ! scoreTriggers.visible
         scoreSpeeds.visible = ! scoreSpeeds.visible
-        ipAdress.visible = ! ipAdress.visible
+        ipAddress.visible = ! ipAddress.visible
         window.state = scoreSpeeds.visible ? "" : "hidden"
         scorePlayPauseStop.state = scoreSpeeds.visible ? "" : "hidden"
     }
