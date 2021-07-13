@@ -33,7 +33,6 @@ Button {
     onReleased: {
         scoreTriggers.visible = ! scoreTriggers.visible
         scoreSpeeds.visible = ! scoreSpeeds.visible
-        ipAddress.visible = ! ipAddress.visible
         window.state = scoreSpeeds.visible ? "" : "hidden"
         scorePlayPauseStop.state = scoreSpeeds.visible ? "" : "hidden"
     }
