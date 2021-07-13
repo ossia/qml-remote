@@ -33,12 +33,21 @@ import "qrc:/Timeline"
 Item {
     id: window
 
+    // Called when the remote needs to reconnect to score
+    function reconnect() {
+        if (mainWindow.active) {
+            socket.status = WebSocket.Open
+        }
+    }
+
     // Called when the remote is disconnected from score
     function disconnect() {
+
         // Clear trigger, speed, control surface... lists
         scoreTriggers.clearTriggerList()
         scoreSpeeds.clearSpeedList()
         scoreControlSurfaceList.clearControlSurfaceList()
+
         // Reset timeline
         scoreTimeline.stopTimeline()
 
