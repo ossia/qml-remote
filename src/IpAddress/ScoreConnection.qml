@@ -5,7 +5,7 @@
   * - when the button is pressed: a window appears asking for IP address
   */
 
-import QtQuick 2.15
+import QtQuick 2
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.3
 import QtQuick.Controls.Material 2.3
