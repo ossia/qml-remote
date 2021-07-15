@@ -88,6 +88,7 @@ Button {
 
                             anchors { fill: parent; leftMargin: 5; rightMargin: 5 }
                             horizontalAlignment: TextInput.AlignLeft; verticalAlignment: TextInput.AlignVCenter
+                            onAccepted: processText()
                             text: settings.ip_address
                             color: Skin.white
                             clip: true
