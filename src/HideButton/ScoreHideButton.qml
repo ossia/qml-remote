@@ -18,6 +18,7 @@ Button {
 
     contentItem: Image {
         id: indicator
+
         width: parent.height; height: parent.height 
         anchors.verticalCenter: parent.verticalCenter
         source: !scoreTriggers.visible
