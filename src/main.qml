@@ -12,7 +12,7 @@ Window {
     height: 600
     visible: true
     title: qsTr("Remote Control")
-    color: Skin.red
+    color: Skin.green
 
     // Creation of the application's skeleton
     ScoreSkeleton {}
