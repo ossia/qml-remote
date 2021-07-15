@@ -22,11 +22,11 @@ Button {
         anchors.verticalCenter: parent.verticalCenter
         source: !scoreTriggers.visible
                 ? scoreHideButton.pressed
-                  ? "../Icons/indicator_on.svg"
-                  : "../Icons/indicator.svg"
+                  ? "../Icons/indicator_on.png"
+                  : "../Icons/indicator.png"
                 : scoreHideButton.pressed
-                  ? "../Icons/indicator_hidden_on.svg"
-                  : "../Icons/indicator_hidden.svg"
+                  ? "../Icons/indicator_hidden_on.png"
+                  : "../Icons/indicator_hidden.png"
     }
 
     onReleased: {
