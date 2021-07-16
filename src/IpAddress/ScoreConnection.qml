@@ -82,6 +82,15 @@ Button {
                         color: Skin.darkGray
                         border.color: Skin.brown
 
+                        TextField {
+                            id: digitsField
+                            width: parent.width
+                            placeholderText: "Digits only field"
+                            inputMethodHints: Qt.ImhDigitsOnly
+                            onAccepted: textArea.focus = true
+                        }
+
+                        /*
                         // TextField to enter the IP address
                         TextInput {
                             id: ipInput
@@ -93,6 +102,7 @@ Button {
                             color: Skin.white
                             clip: true
                         }
+                        */
                     }
 
                 }
