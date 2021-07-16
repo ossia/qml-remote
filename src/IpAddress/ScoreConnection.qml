@@ -83,11 +83,12 @@ Button {
                         border.color: Skin.brown
 
                         TextField {
-                            id: digitsField
+                            id: ipInput
+
                             width: parent.width
-                            placeholderText: "Digits only field"
+                            placeholderText: "192.168.1.40"
                             inputMethodHints: Qt.ImhDigitsOnly
-                            onAccepted: textArea.focus = true
+                            //onAccepted: textArea.focus = true
                         }
 
                         /*
