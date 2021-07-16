@@ -12,6 +12,8 @@ matrix:
       jsdocs: true
       line_comments: true
       block_comments: true
+      group_comments: true
+      strings: true
   sources:
   - '**/*.qml'
   default_encoding: utf-8
