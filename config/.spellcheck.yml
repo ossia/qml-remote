@@ -7,8 +7,8 @@ matrix:
     - .wordlist.txt
     encoding: utf-8
   pipeline:
-  - pyspelling.filters.text:
-  - pyspelling.filters.javascript:
+  - pyspelling.filters.text
+  - pyspelling.filters.javascript
       jsdocs: true
       line_comments: true
       block_comments: true
