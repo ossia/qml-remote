@@ -9,7 +9,7 @@ import QtQuick.Controls 2.12
 import Variable.Global 1.0
 
 Button {
-    id: scroreButtonPanel
+    id: scorePanelButton
 
     background: Rectangle {
         width: parent.width; height: parent.height
@@ -22,23 +22,23 @@ Button {
         width: parent.height; height: parent.height
         anchors.verticalCenter: parent.verticalCenter
         source: !scoreControlSurfaceList.visible
-                ? scroreButtonPanel.pressed
-                  ? "../Icons/main_panel.png"
-                  : "../Icons/main_panel_on.png"
-                : scroreButtonPanel.pressed
+                ? scorePanelButton.pressed
+                  ? "../Icons/main_panel_on.png"
+                  : "../Icons/main_panel.png"
+                : scorePanelButton.pressed
                   ? "../Icons/audio_on.png"
                   : "../Icons/audio.png"
     }
 
     onReleased: {
-        /*
-        scoreTriggers.visible = ! scoreTriggers.visible
-        scoreSpeeds.visible = ! scoreSpeeds.visible
         ipAddress.visible = ! ipAddress.visible
-        window.state = scoreSpeeds.visible ? "" : "hidden"
-        scorePlayPauseStop.state = scoreSpeeds.visible ? "" : "hidden"
-        */
+        scoreTriggers.visible = ! scoreTriggers.visible
         scoreControlSurfaceList.visible = ! scoreControlSurfaceList.visible
+        scoreSpeed.visible = ! scoreSpeed.visible
+        scoreSpeeds.visible = ! scoreSpeeds.visible
+        scoreHideButton.visible = ! scoreHideButton.visible
+        window.state = window.state != "volume_panel" ? "volume_panel" : ""
+        scorePlayPauseStop.state = scoreSpeed.visible ? "" : "hidden"
     }
 }
 

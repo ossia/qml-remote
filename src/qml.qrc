@@ -91,7 +91,7 @@
         <file>Icons/indicator_hidden.png</file>
         <file>Icons/indicator_hidden_on.png</file>
         <file>Icons/indicator_on.png</file>
-        <file>Skeleton/ScoreButtonPanel.qml</file>
+        <file>Skeleton/ScorePanelButton.qml</file>
         <file>Icons/audio.png</file>
         <file>Icons/audio.svg</file>
         <file>Icons/audio_on.png</file>

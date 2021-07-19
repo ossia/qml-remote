@@ -58,8 +58,8 @@ Item {
         id: socket
     }
 
-    ScoreButtonPanel {
-        id: scroreButtonPanel
+    ScorePanelButton {
+        id: scorePanelButton
 
         height: this.width; width: ipAddress.width
         anchors { left: parent.left; top: parent.top }
@@ -71,7 +71,7 @@ Item {
 
         signal playPauseStopMessageReceived(var n)
 
-        anchors { left: parent.left; top: scroreButtonPanel.bottom }
+        anchors { left: parent.left; top: scorePanelButton.bottom }
         width: 15 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
     }
 
@@ -209,10 +209,15 @@ Item {
             name: "volume_panel"
 
             PropertyChanges {
-                target: scoreControlSurfaceList
-                visible: false
+                target: ipAddress
+                width: 1.4 * scoreHideButton.height
+            }
+
+            PropertyChanges {
+                target: scorePlayPauseStop
+                width: 2 * ipAddress.width; height: ipAddress.width
+                anchors { left: scorePanelButton.right; top: scorePanelButton.top }
             }
         }
-
     ]
 }
