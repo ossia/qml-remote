@@ -58,14 +58,21 @@ Item {
         id: socket
     }
 
+    ScoreButtonPanel {
+        id: scroreButtonPanel
+
+        height: this.width; width: ipAddress.width
+        anchors { left: parent.left; top: parent.top }
+    }
+
     // Creating the IP address button object
     ScoreIpAddress {
         id: ipAddress
 
         signal playPauseStopMessageReceived(var n)
 
-        anchors { left: parent.left; top: parent.top }
-        width: 20 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
+        anchors { left: parent.left; top: scroreButtonPanel.bottom }
+        width: 15 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
     }
 
     // Creating play, pause and stop button objects
@@ -169,32 +176,43 @@ Item {
     }
 
     // State in which the top panel (triggers, speeds) is hidden
-    states: State {
-        name: "hidden"
+    states: [
+        State {
+            name: "hidden"
 
-        PropertyChanges {
-            target: ipAddress
-            width: 1.4 * scoreHideButton.height
-        }
+            PropertyChanges {
+                target: ipAddress
+                width: 1.4 * scoreHideButton.height
+            }
 
-        PropertyChanges {
-            target: scorePlayPauseStop
-            width: 2 * ipAddress.width; height: ipAddress.width
-            anchors { left: window.left; top: window.top }
-        }
+            PropertyChanges {
+                target: scorePlayPauseStop
+                width: 2 * ipAddress.width; height: ipAddress.width
+                anchors { left: window.left; top: window.top }
+            }
 
-        PropertyChanges {
-            target: scoreTriggers
-            anchors {
-                left: scorePlayPauseStop.right; right: scoreSpeed.left
-                top: parent.top; bottom: scorePlayPauseStop.bottom
-                margins: 5
+            PropertyChanges {
+                target: scoreTriggers
+                anchors {
+                    left: scorePlayPauseStop.right; right: scoreSpeed.left
+                    top: parent.top; bottom: scorePlayPauseStop.bottom
+                    margins: 5
+                }
+            }
+
+            PropertyChanges {
+                target: scoreControlSurfaceList
+                anchors.top: scoreHideButton.bottom
+            }
+        },
+        State {
+            name: "volume_panel"
+
+            PropertyChanges {
+                target: scoreControlSurfaceList
+                visible: false
             }
         }
 
-        PropertyChanges {
-            target: scoreControlSurfaceList
-            anchors.top: scoreHideButton.bottom
-        }
-    }
+    ]
 }
