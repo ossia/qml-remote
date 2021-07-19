@@ -18,12 +18,10 @@ Button {
     }
 
     // Change the button color when it is pressed
-    onPressed: {
-        stopButton.state = 'stopOn'
-    }
+    onPressed: stopButton.state = 'stopOn'
 
     // Specify the behavior of a button when it is clicked on
-    onReleased: {
+    onClicked: {
         stopButton.state = ''
         if (playPause.isConnected()) {
             playPause.stopClicked()
