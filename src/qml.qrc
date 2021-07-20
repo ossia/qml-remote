@@ -100,5 +100,6 @@
         <file>Icons/main_panel.svg</file>
         <file>Icons/main_panel_on.png</file>
         <file>Icons/main_panel_on.svg</file>
+        <file>Volume/ScoreAudioPanel.qml</file>
     </qresource>
 </RCC>

@@ -37,6 +37,8 @@ Button {
         scoreSpeed.visible = ! scoreSpeed.visible
         scoreSpeeds.visible = ! scoreSpeeds.visible
         scoreHideButton.visible = ! scoreHideButton.visible
+        scoreAudioPanel.visible = ! scoreAudioPanel.visible
+        scoreTimeline.visible = ! scoreTimeline.visible
         window.state = window.state != "volume_panel" ? "volume_panel" : ""
         scorePlayPauseStop.state = scoreSpeed.visible ? "" : "hidden"
     }

@@ -27,6 +27,7 @@ import "qrc:/Trigger"
 import "qrc:/Speed"
 import "qrc:/Speeds"
 import "qrc:/HideButton"
+import "qrc:/Volume"
 import "qrc:/ControlSurface"
 import "qrc:/Timeline"
 
@@ -72,7 +73,7 @@ Item {
         signal playPauseStopMessageReceived(var n)
 
         anchors { left: parent.left; top: scorePanelButton.bottom }
-        width: 15 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
+        width: 12 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
     }
 
     // Creating play, pause and stop button objects
@@ -99,6 +100,17 @@ Item {
         signal intervalsMessageReceived(var n)
 
     }*/
+
+    // Creating the audio panel
+    ScoreAudioPanel {
+        id: scoreAudioPanel
+
+        visible: false
+        anchors {
+            left: parent.left; right: parent.right
+            top: scorePanelButton.bottom; bottom: parent.bottom; margins: 5
+        }
+    }
 
     // Creating the trigger list
     ScoreTriggers {
@@ -175,10 +187,9 @@ Item {
         anchors.bottom: parent.bottom
     }
 
-    // State in which the top panel (triggers, speeds) is hidden
     states: [
         State {
-            name: "hidden"
+            name: "hidden" // State in which the top panel (triggers, speeds) is hidden
 
             PropertyChanges {
                 target: ipAddress
@@ -206,7 +217,7 @@ Item {
             }
         },
         State {
-            name: "volume_panel"
+            name: "volume_panel" // State in which the volume panel is displayed
 
             PropertyChanges {
                 target: ipAddress
