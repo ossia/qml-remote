@@ -59,6 +59,7 @@ Item {
         id: socket
     }
 
+    // Creating the button to switch between home and audio panels
     ScorePanelButton {
         id: scorePanelButton
 
@@ -100,17 +101,6 @@ Item {
         signal intervalsMessageReceived(var n)
 
     }*/
-
-    // Creating the audio panel
-    ScoreAudioPanel {
-        id: scoreAudioPanel
-
-        visible: false
-        anchors {
-            left: parent.left; right: parent.right
-            top: scorePanelButton.bottom; bottom: parent.bottom; margins: 5
-        }
-    }
 
     // Creating the trigger list
     ScoreTriggers {
@@ -175,6 +165,18 @@ Item {
             left: parent.left; right: parent.right
             top: scorePlayPauseStop.bottom; bottom: scoreTimeline.top
             topMargin: 5
+        }
+    }
+
+
+    // Creating the audio panel
+    ScoreAudioPanel {
+        id: scoreAudioPanel
+
+        visible: false
+        anchors {
+            left: parent.left; right: parent.right
+            top: scorePanelButton.bottom; bottom: parent.bottom; margins: 5
         }
     }
 
