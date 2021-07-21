@@ -59,7 +59,7 @@ Item {
     Settings {
         id: settings
 
-        property string ip_address: "127.0.0.1"
+        property string ip_address: "192.168.1.40"
     }
 
     // Creating the websocket
