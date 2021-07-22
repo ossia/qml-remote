@@ -30,6 +30,7 @@ Slider {
         font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
                         ? parent.height / 2
                         : (parent.height + parent.width) / 30.0
+        renderType: Text.NativeRendering
     }
 
     // Slider value
@@ -40,6 +41,7 @@ Slider {
         font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
                         ? parent.height / 2
                         : (parent.height + parent.width) / 30.0
+        renderType: Text.NativeRendering
     }
 
     // No handle
