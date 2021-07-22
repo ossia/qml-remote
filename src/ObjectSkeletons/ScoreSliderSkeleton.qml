@@ -42,6 +42,7 @@ Slider {
                         ? parent.height / 2
                         : (parent.height + parent.width) / 30.0
         renderType: Text.NativeRendering
+        layer.mipmap: true
     }
 
     // No handle
