@@ -4,7 +4,7 @@
   */
 
 import QtQuick 2.12
-import QtQuick.Window 2.12
+import QtQuick.Window 2.2
 
 import "Skeleton"
 
@@ -14,7 +14,7 @@ import Variable.Global 1.0
 Window {
     id: mainWindow
 
-    width: 1000; height: 600
+    width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight
     visible: true
     title: qsTr("Remote Control")
     color: Skin.darkGray
