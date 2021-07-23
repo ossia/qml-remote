@@ -126,15 +126,16 @@ Rectangle {
                             `{ "Message": "IntervalSpeed", "Path": ${speed.controlPath}, "Speed": ${speed.value * 6 / 720} }`)
             }
 
-
             // To see the time advance over an interval
             Rectangle {
+                id: left
 
                 height: parent.height; width: 2
                 color: Skin.green2
             }
 
             Rectangle {
+                id: bottom
 
                 height: 2; width: parent.width
                 anchors.bottom: parent.bottom
@@ -142,32 +143,33 @@ Rectangle {
             }
 
             Rectangle {
+                id: top
 
                 height: 2; width: parent.width
                 color: Skin.blue2
             }
 
-
             Rectangle {
-
-                height: 2; width: parent.controlProgress * parent.width
-                color: Skin.green2
-            }
-
-
-            Rectangle {
+                id: bottomProgress
 
                 height: 2; width: parent.controlProgress * parent.width
                 anchors.bottom: parent.bottom
                 color: Skin.green2
             }
 
+            Rectangle {
+                id: topProgress
+
+                height: 2; width: parent.controlProgress * parent.width
+                color: Skin.green2
+            }
 
             Rectangle {
+                id: right
 
                 height: parent.height; width: 2
                 anchors.right: parent.right
-                color: Skin.blue2
+                color: parent.controlProgress <= 1 ? Skin.blue2 : Skin.green2
             }
         }
     }
