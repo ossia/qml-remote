@@ -41,7 +41,9 @@ Rectangle {
                     intervalsListModel.insert(0, {
                                                   "name": m.Name,
                                                   "path": JSON.stringify(m.Path),
-                                                  "speedValue": JSON.stringify(m.Speed) * 720 / 6
+                                                  "speedValue": JSON.stringify(m.Speed) * 720 / 6,
+                                                  "progressValue": 0,
+                                                  "defaultDurationValue": m.DefaultDuration
                                               })
                 }
             } else if (messageObject === "IntervalRemoved") {
@@ -69,7 +71,8 @@ Rectangle {
                     if (intervalsListModel.get(i).path === JSON.stringify(IntervalsObject[count].Path)) {
                         // The global path is the first one to be created by score
                         intervalsListModel.set(i, {
-                                                   "speedValue": JSON.stringify(IntervalsObject[count].Speed) * 720 / 6
+                                                   "speedValue": JSON.stringify(IntervalsObject[count].Speed) * 720 / 6,
+                                                   "progressValue": IntervalsObject[count].Progress
                                                })
                     }
                 }
@@ -108,6 +111,9 @@ Rectangle {
         delegate: ScoreSliderSkeleton {
             id: speed
 
+            property double controlProgress: progressValue
+            property double controlDefaultDuration: defaultDurationValue
+
             height: 5 + window.height / 25; width: lView.width
             controlName: name
             from: -120; value: speedValue; to: 600
@@ -118,6 +124,27 @@ Rectangle {
             onMoved: {
                 socket.sendTextMessage(
                             `{ "Message": "IntervalSpeed", "Path": ${speed.controlPath}, "Speed": ${speed.value * 6 / 720} }`)
+            }
+
+
+            // To see the time advance over an interval
+            Rectangle {
+
+                height: 2; width: parent.controlProgress * parent.width
+                color: Skin.green2
+            }
+
+            Rectangle {
+
+                height: parent.height; width: 2
+                color: Skin.green2
+            }
+
+            Rectangle {
+
+                height: 2; width: parent.controlProgress * parent.width
+                anchors.bottom: parent.bottom
+                color: Skin.green2
             }
         }
     }
