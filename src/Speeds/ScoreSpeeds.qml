@@ -130,21 +130,44 @@ Rectangle {
             // To see the time advance over an interval
             Rectangle {
 
-                height: 2; width: parent.controlProgress * parent.width
-                color: Skin.green2
-            }
-
-            Rectangle {
-
                 height: parent.height; width: 2
                 color: Skin.green2
             }
 
             Rectangle {
 
+                height: 2; width: parent.width
+                anchors.bottom: parent.bottom
+                color: Skin.blue2
+            }
+
+            Rectangle {
+
+                height: 2; width: parent.width
+                color: Skin.blue2
+            }
+
+
+            Rectangle {
+
+                height: 2; width: parent.controlProgress * parent.width
+                color: Skin.green2
+            }
+
+
+            Rectangle {
+
                 height: 2; width: parent.controlProgress * parent.width
                 anchors.bottom: parent.bottom
                 color: Skin.green2
+            }
+
+
+            Rectangle {
+
+                height: parent.height; width: 2
+                anchors.right: parent.right
+                color: Skin.blue2
             }
         }
     }
