@@ -22,7 +22,7 @@ QtObject {
     readonly property color green2: "#93FF2B"
     readonly property color turquoise: "#00FFFF"
     readonly property color blue1: "#0000FF"
-    readonly property color blue2: "#96CAE6"
+    readonly property color blue2: "#85BAD6"
     readonly property color purple: "#FF00FF"
     readonly property color transparent: "transparent"
     readonly property color transparentPurple: "#a7dd0dFF"

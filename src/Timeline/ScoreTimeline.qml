@@ -59,12 +59,12 @@ Slider {
 
     background: Rectangle {
         implicitWidth: parent.width; implicitHeight: parent.height
-        color: "#161514"
-        border { width: 1; color: Skin.brown}
+        color: Skin.blue2
+        border { width: 1; color: Skin.blue2}
 
         Rectangle {
             width: time.visualPosition * parent.width - y; height: parent.height
-            color: Skin.brown
+            color: Skin.green2
         }
     }
 
@@ -73,7 +73,7 @@ Slider {
     Text {
         width: time.width
         text: msToTime(time.value * totalTime)
-        color: Skin.white
+        color: Skin.darkGray
         anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
