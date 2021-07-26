@@ -41,7 +41,7 @@ Rectangle {
                     intervalsListModel.insert(0, {
                                                   "name": m.Name,
                                                   "path": JSON.stringify(m.Path),
-                                                  "speedValue": JSON.stringify(m.Speed) * 720 / 6,
+                                                  "speedValue": m.Speed * 720 / 6,
                                                   "progressValue": 0,
                                                   "defaultDurationValue": m.DefaultDuration
                                               })
