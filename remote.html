@@ -30,7 +30,7 @@
         <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
       </center>
     </figure>
-    <canvas id="qtcanvas"  contenteditable="true" inputmode="none"></canvas>
+    <canvas id="qtcanvas"  contenteditable="true" inputmode="none" canvas.width = window.innerWidth canvas.height = window.innerHeight></canvas>
     
     <script type='text/javascript'>
         function init() {
@@ -64,6 +64,10 @@
                   canvas.style.display = 'block';
               },
           });
+
+          document.webkitCancelFullScreen(); //Chrome
+          document.mozCancelFullScreen(); //Firefox
+
           qtLoader.loadEmscriptenModule("PFA11");
       }
     </script>
