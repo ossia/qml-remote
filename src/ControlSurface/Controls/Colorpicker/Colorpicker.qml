@@ -111,7 +111,7 @@ Rectangle {
 
                 GradientStop {
                     position: 0.76
-                    color: Skin.green
+                    color: Skin.green1
                 }
 
                 GradientStop {
@@ -121,7 +121,7 @@ Rectangle {
 
                 GradientStop {
                     position: 0.33
-                    color: Skin.blue
+                    color: Skin.blue1
                 }
 
                 GradientStop {
