@@ -16,9 +16,15 @@ int main(int argc, char *argv[])
     app.setOrganizationName("ossia.io");
     app.setOrganizationDomain("Remote Control");
 
+
+    // for debug
     QQmlApplicationEngine engine;
     const bool debugEnabled = qEnvironmentVariableIntValue("SCORE_QML_REMOTE_DEBUG") > 0;
     engine.rootContext()->setContextProperty("g_debugMessagesEnabled", debugEnabled);
+
+    // getting ip address from score
+    const QString tmp_score_ip_address = qEnvironmentVariable("SCORE_IP_ADDRESS");
+    engine.rootContext()->setContextProperty("score_ip_address", tmp_score_ip_address);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
