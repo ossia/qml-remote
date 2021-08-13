@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("is_mobile", tmp_is_mobile);
     
     // getting ip address from score
-    const QString tmp_score_ip_address = qEnvironmentVariable("SCORE_IP_ADDRESS");
+    const QString tmp_score_ip_address = qEnvironmentVariableIsSet("SCORE_IP_ADDRESS") ? qEnvironmentVariable("SCORE_IP_ADDRESS") : "0.0.0.0";
     engine.rootContext()->setContextProperty("score_ip_address", tmp_score_ip_address);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
