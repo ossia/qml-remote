@@ -40,7 +40,7 @@
 
           var qtLoader = QtLoader({
               canvasElements : [canvas],
-              environment : {"SCORE_IP_ADDRESS" : "127.0.0.1"},
+              environment : {"SCORE_IP_ADDRESS" : %SCORE_IP_ADDRESS%},
               showLoader: function(loaderStatus) {
                   spinner.style.display = 'block';
                   canvas.style.display = 'none';
