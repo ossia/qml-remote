@@ -25,7 +25,7 @@ jobs:
           make
           cd ..
           cp remote.html build-wasm/
-          tar -czvf build-wasm.tar.gz build-wasm/remote.html build-wasm/*.js build-wasm/*.wasm
+          tar -czvf build-wasm.tar.gz build-wasm/remote.html build-wasm/*.js build-wasm/*.wasm build-wasm/*.svg
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
