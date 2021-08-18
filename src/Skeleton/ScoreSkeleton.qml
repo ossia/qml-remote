@@ -56,7 +56,7 @@ Item {
     Settings {
         id: settings
 
-        property string ip_address: "127.0.0.1"
+        property string ip_address: score_ip_address
     }
 
     // Creating the websocket
