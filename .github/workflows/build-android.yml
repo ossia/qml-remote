@@ -1,0 +1,49 @@
+name: Build Android app
+
+on: push
+
+jobs:
+  buster:
+    name: Android build
+    runs-on: ubuntu-latest
+    container:
+      image: reivilo1234/qt-android-cmake:qt5.15.1-api30-ndk28.0.3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          export ANDROID_NDK_ROOT=/opt/android-sdk/ndk-bundle
+          find / -name PFA11.pro -type f
+          SRC_PATH=$(dirname $(find / -name PFA11.pro -type f))
+          cd $SRC_PATH/..
+
+          ls -la
+
+          mkdir -p build-android
+          cd build-android
+
+          qmake CONFIG+=release ../src/
+          make
+          make apk
+
+          mv PFA11.apk ../ossia-remote.apk
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: WASM build
+          path: |
+            ossia-remote.apk
+
+      - name: Upload release
+        if: startsWith(github.ref, 'refs/tags')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ossia-remote.apk
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
