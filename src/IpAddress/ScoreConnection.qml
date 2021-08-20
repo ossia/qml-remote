@@ -18,7 +18,10 @@ Button {
 
     hoverEnabled: true
     onPressed: ipButton.state = "ip_on"
-    onReleased: { onClicked: ipDialog.open() }
+    onReleased: {
+        window.anchors.fill = parent
+        onClicked: ipDialog.open()
+    }
     background: Rectangle { id: zone; color: Skin.darkGray }
 
     onHoveredChanged: {
@@ -48,8 +51,8 @@ Button {
         id: ipDialog
 
         title: "Connection"
-        //width: 300; height: 100
-        width: window.width; height: window.height
+        width: 300; height: 100
+        //width: window.width; height: window.height
 
         contentItem: Rectangle {
             anchors.fill: parent
