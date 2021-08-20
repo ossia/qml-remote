@@ -29,9 +29,10 @@ Button {
         anchors.verticalCenter: parent.verticalCenter
 
         Image {
-            width: parent.height - 4; height: parent.height - 4
+            sourceSize { width: parent.height - 4; height: parent.height - 4 }
             anchors.verticalCenter: parent.verticalCenter
             source: "../Icons/scenario_trigger.png"
+            clip: true
         }
     }
 
