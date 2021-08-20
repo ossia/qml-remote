@@ -18,25 +18,20 @@ jobs:
           find / -name PFA11.pro -type f
           SRC_PATH=$(dirname $(find / -name PFA11.pro -type f))
           cd $SRC_PATH/..
-
           ls -la
-
           mkdir -p build-wasm
           cd build-wasm
-
           qmake ../src/
           make
-
           cd ..
-          tar -czvf build-wasm.tar.gz build-wasm/*.html build-wasm/*.js build-wasm/*.wasm
-
+          cp remote.html build-wasm/
+          tar -czvf build-wasm.tar.gz build-wasm/remote.html build-wasm/*.js build-wasm/*.wasm build-wasm/*.svg
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: WASM build
           path: |
             build-wasm.tar.gz
-
       - name: Upload release
         if: startsWith(github.ref, 'refs/tags')
         uses: svenstaro/upload-release-action@v2

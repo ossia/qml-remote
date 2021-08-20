@@ -79,7 +79,7 @@ Button {
 
                         width: parent.width <= 160 ? 65 : 100
                         anchors { left: ipText.right; leftMargin: 10; verticalCenter: parent.verticalCenter }
-                        text: settings.ip_address
+                        text: score_ip_address
                         color: Skin.white
 
                         background: Rectangle {
