@@ -15,13 +15,81 @@ import QtQuick.Layouts 1.12
 import Variable.Global 1.0
 
 Button {
+    id: ip_button
+    Dialog {
+        id: ipDialog
+        title: "Adresse IP:"
+        standardButtons: StandardButton.Ok | StandardButton.Cancel
+        Column {
+            anchors.fill: parent
+            Rectangle {
+                anchors.top: ipDialog.top
+                color: "#202020"
+                TextInput {
+                    id: ipInput
+                    text: settings.ip_address
+                }
+            }
+        }
+
+        onButtonClicked: {
+            console.log("HELLO")
+            if (clickedButton === StandardButton.Ok) {
+                settings.ip_adress = ipInput.text
+                console.log(" socket url " + socket.url)
+                console.log("adresse ip = " + settings.ip_adress)
+            } else {
+                console.log("Rejected url = " + socket.url)
+            }
+        }
+    }
+    hoverEnabled: true
+    onPressed: {
+        ipButton.state = "ip_on"
+    }
+    onReleased: {
+        console.log("avant cc = " + settings.cc)
+        onClicked: ipDialog.open()
+    }
+
+    onHoveredChanged: {
+        if (ipButton.state === 'ip_on') {
+            ipButton.state = ""
+        }
+    }
+
+    contentItem: Image {
+        id: ipButton
+        sourceSize { width: parent.width; height: parent.width }
+
+        source: "../Icons/ip_address.png"
+        clip: true
+        states: [
+            State {
+
+                /* play symbol is displayed
+            * "paused" is the scenario's state.
+            */
+                name: "ip_on"
+                PropertyChanges {
+                    target: ipButton
+                    source: "../Icons/ip_address_on.png"
+                }
+            }
+        ]
+    }
+    background: Rectangle {
+        id: zone
+        color: "#202020"
+    }
+}
+
+/*
+Button {
 
     hoverEnabled: true
     onPressed: ipButton.state = "ip_on"
-    onReleased: {
-        window.anchors.fill = parent
-        onClicked: ipDialog.open()
-    }
+    onReleased: { onClicked: ipDialog.open() }
     background: Rectangle { id: zone; color: Skin.darkGray }
 
     onHoveredChanged: {
@@ -254,3 +322,4 @@ Button {
         }
     }
 }
+*/
