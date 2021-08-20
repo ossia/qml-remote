@@ -60,7 +60,6 @@ Button {
         id: disconnectDiag
 
         title: "Disconnection"
-        width: 300; height: 100
 
         onButtonClicked: {
             if (clickedButton === StandardButton.Ok) {
@@ -70,7 +69,7 @@ Button {
         }
 
         contentItem: Rectangle {
-            anchors.fill: parent
+            width: 300; height: 100
             color: Skin.gray1
 
             Rectangle {
