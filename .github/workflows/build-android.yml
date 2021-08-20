@@ -28,8 +28,10 @@ jobs:
           qmake CONFIG+=release ../src/
           make
           make apk
+          
+          find . -name '*.apk'
 
-          mv PFA11.apk ../ossia-remote.apk
+          mv /__w/qml-remote/qml-remote/build-android/android-build//build/outputs/apk/debug/android-build-debug.apk ../ossia-remote.apk
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
