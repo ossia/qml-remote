@@ -47,11 +47,11 @@ Button {
         id: ipDialog
 
         title: "Connection"
-        width: 300; height: 100
+        //width: 300; height: 100
         //width: window.width; height: window.height
 
         contentItem: Rectangle {
-            anchors.fill: parent
+            width: 300; height: 100
             color: Skin.gray1
 
             Rectangle {
