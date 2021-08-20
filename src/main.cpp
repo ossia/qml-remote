@@ -20,6 +20,11 @@ int main(int argc, char *argv[])
     const bool debugEnabled = qEnvironmentVariableIntValue("SCORE_QML_REMOTE_DEBUG") > 0;
     engine.rootContext()->setContextProperty("g_debugMessagesEnabled", debugEnabled);
 
+    // The timeline it does not appear on the screen when the application
+    // is used on a device other than the computer
+    const bool tmp_is_mobile = qEnvironmentVariableIsSet("IS_MOBILE") ? qEnvironmentVariableIntValue("IS_MOBILE") > 0 : false;
+    engine.rootContext()->setContextProperty("is_mobile", tmp_is_mobile);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

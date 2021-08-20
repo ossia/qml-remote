@@ -45,7 +45,12 @@ Item {
         scoreTimeline.stopTimeline()
     }
 
-    anchors.fill: parent
+    anchors {
+        fill: parent
+        // The timeline it does not appear on the screen when the application
+        // is used on a device other than the computer
+        bottomMargin: is_mobile ? 50 : 0
+    }
 
     // A field to save the IP address
     Settings {
