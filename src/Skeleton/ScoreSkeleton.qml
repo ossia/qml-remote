@@ -29,6 +29,7 @@ import "qrc:/Speeds"
 import "qrc:/HideButton"
 import "qrc:/ControlSurface"
 import "qrc:/Timeline"
+import "qrc:/Explorer"
 
 Item {
     id: window
@@ -40,6 +41,7 @@ Item {
         scoreTriggers.clearTriggerList()
         scoreSpeeds.clearSpeedList()
         scoreControlSurfaceList.clearControlSurfaceList()
+        scoreDeviceExplorer.clearExplorer();
 
         // Reset timeline
         scoreTimeline.stopTimeline()
@@ -77,7 +79,7 @@ Item {
     // Creating play, pause and stop button objects
     ScorePlayPauseStop {
         id: scorePlayPauseStop
-        
+
         signal playPauseStopMessageReceived(var n)
         signal scorePlayPauseStopMessageReceived(var n)
         signal connectedToScore()
@@ -98,11 +100,11 @@ Item {
         signal intervalsMessageReceived(var n)
 
     }*/
-
+/*
     // Creating the trigger list
     ScoreTriggers {
         id: scoreTriggers
-        
+
         signal triggerMessageReceived(var n)
         signal clearTriggerList()
 
@@ -172,6 +174,17 @@ Item {
         signal intervalsMessageReceived(var n)
 
         anchors.bottom: parent.bottom
+    }
+    */
+
+    Explorer {
+        visible: true
+
+        anchors {
+            left: scorePlayPauseStop.right; right: parent.right
+            top: parent.top; bottom: parent.bottom
+            topMargin: 5
+        }
     }
 
     // State in which the top panel (triggers, speeds) is hidden

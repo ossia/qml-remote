@@ -56,7 +56,7 @@ Rectangle {
     SBPicker {
         id: sbPicker
 
-        width: colorpicker.width * (83 / 100)
+        width: picker.width * (83 / 100)
         anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
 
         hueColor: {
@@ -85,7 +85,7 @@ Rectangle {
     Item {
         id: huePicker
 
-        width: colorpicker.width * (15 / 100)
+        width: picker.width * (15 / 100)
         anchors {
             right: parent.right; top: parent.top; bottom: parent.bottom
             leftMargin: 5; rightMargin: 5; topMargin: colorHandleRadius; bottomMargin: colorHandleRadius

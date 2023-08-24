@@ -91,5 +91,6 @@
         <file>Icons/indicator_hidden.png</file>
         <file>Icons/indicator_hidden_on.png</file>
         <file>Icons/indicator_on.png</file>
+	<file>Explorer/Explorer.qml</file>
     </qresource>
 </RCC>

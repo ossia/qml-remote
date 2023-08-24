@@ -62,8 +62,8 @@ Button {
         pressedFromRemote = true
         indicator.color = isPressed ? Skin.gray1 : Skin.brown
         isPressed = ! isPressed
-        socket.sendTextMessage(
-                    `{ "Message": "ControlSurface","Path": ${button.controlSurfacePath}, "id": ${button.controlId}, "Value": {"Bool": ${isPressed} }}`)
+        // socket.sendTextMessage(
+        //             `{ "Message": "ControlSurface","Path": ${button.controlSurfacePath}, "id": ${button.controlId}, "Value": {"Bool": ${isPressed} }}`)
     }
 
     onPressedFromScoreChanged: {
