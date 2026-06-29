@@ -3,8 +3,8 @@
   * - not used in the remote for now
   */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Layouts
 
 import "qrc:/ObjectSkeletons"
 

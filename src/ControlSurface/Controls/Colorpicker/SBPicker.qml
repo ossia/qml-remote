@@ -1,6 +1,6 @@
 //  Saturation/brightness picking box
 
-import QtQuick 2.11
+import QtQuick
 
 import Variable.Global 1.0
 
@@ -83,7 +83,7 @@ Item {
         anchors.fill: colorlessGradient
         x: r; y: r
         drag.target: this
-        onPositionChanged: handleMouse(mouse)
-        onPressed: handleMouse(mouse)
+        onPositionChanged: (mouse) => handleMouse(mouse)
+        onPressed: (mouse) => handleMouse(mouse)
     }
 }

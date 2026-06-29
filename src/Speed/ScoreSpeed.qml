@@ -4,9 +4,9 @@
   * - modify its value in the remote modifies the value in score
   */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.12
-import QtQml 2.12
+import QtQuick
+import QtQuick.Controls
+import QtQml
 
 import Variable.Global 1.0
 

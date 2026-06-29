@@ -5,7 +5,7 @@
   * corresponding objects
   */
 
-import QtWebSockets 1.0
+import QtWebSockets
 
 WebSocket {
     id: socket

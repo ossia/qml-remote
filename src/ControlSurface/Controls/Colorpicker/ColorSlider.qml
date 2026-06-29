@@ -1,5 +1,5 @@
 // Vertical "slider" control used in colorpicker
-import QtQuick 2.11
+import QtQuick
 
 import Variable.Global 1.0
 
@@ -43,7 +43,7 @@ Item {
         anchors { left: parent.left; right: parent.right; top: parent.top; bottom: parent.bottom }
         drag.target: this
         y: -Math.round(cursorHeight / 2)
-        onPositionChanged: handleMouse(mouse)
-        onPressed: handleMouse(mouse)
+        onPositionChanged: (mouse) => handleMouse(mouse)
+        onPressed: (mouse) => handleMouse(mouse)
     }
 }

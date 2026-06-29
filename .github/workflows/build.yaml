@@ -3,32 +3,47 @@ name: Build app
 on: push
 
 jobs:
-  buster:
+  desktop:
     name: Ubuntu build
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:20.04
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install Qt 6.11
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.11.*'
+          host: linux
+          target: desktop
+          arch: linux_gcc_64
+          modules: qtwebsockets
+
+      - name: Install build tools
         run: |
-          apt-get update -qq
-          DEBIAN_FRONTEND="noninteractive" apt-get install -qq --force-yes git build-essential qt5-default qtbase5-dev qtdeclarative5-dev libqt5websockets5-dev qtquickcontrols2-5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-extras qml-module-qt-websockets qml-module-qtqml-models2 qml-module-qt-labs-qmlmodels  qml-module-qt-labs-settings qml-module-qtquick-layouts
+          sudo apt-get update -qq
+          sudo apt-get install -y ninja-build libgl1-mesa-dev
 
       - name: Build
         run: |
-          mkdir /build
-          cd /build
-          qmake "$GITHUB_WORKSPACE/src"
-          make -j4
+          cmake -G Ninja -S src -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
 
-      - name: Test
-        shell: bash
+      # Headless smoke test: load the QML scene with the offscreen platform and
+      # the software backend (no GPU on CI). main.cpp exits non-zero if the root
+      # component fails to load, so an early exit fails the job; staying up until
+      # the timeout (124) means the whole QML tree instantiated cleanly.
+      - name: Smoke test (headless load)
         run: |
-          cd /build
-          (sleep 5 ; pkill -SIGTERM PFA11) &
-          (./PFA11 -platform minimal || [[ $? == 143 ]] && exit 0 || exit $?)
-
+          export QT_QPA_PLATFORM=offscreen
+          export QT_QUICK_BACKEND=software
+          export QT_FORCE_STDERR_LOGGING=1
+          timeout 8 ./build/ossia_remote
+          code=$?
+          if [ "$code" -eq 124 ]; then
+            echo "QML scene loaded and ran until timeout — OK"
+            exit 0
+          fi
+          echo "App exited early (code $code) — QML failed to load"
+          exit 1

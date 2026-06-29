@@ -5,8 +5,8 @@
   * - play and pause buttons and the main speed are always visible
   */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.12
+import QtQuick
+import QtQuick.Controls
 
 Button {
     width: scoreSpeed.height
