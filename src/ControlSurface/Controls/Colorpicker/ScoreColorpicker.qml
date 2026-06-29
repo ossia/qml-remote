@@ -4,10 +4,10 @@
   * All colorpickers of a same control surface in score share a common colorpanel
   */
 
-import QtQuick 2.0
-import QtQml.Models 2.12
- import QtQuick.Controls 2.15
-import QtQml 2.15
+import QtQuick
+import QtQml.Models
+ import QtQuick.Controls
+import QtQml
 
 import Variable.Global 1.0
 import "qrc:/Utility/utility.js" as Utility

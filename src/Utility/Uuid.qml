@@ -1,5 +1,5 @@
 pragma Singleton
-import QtQuick 2.0
+import QtQuick
 
 QtObject  {
     property string floatSliderUUID: "af2b4fc3-aecb-4c15-a5aa-1c573a239925"

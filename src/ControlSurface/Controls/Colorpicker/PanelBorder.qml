@@ -1,6 +1,6 @@
 //  Fancy pseudo-3d control border
 
-import QtQuick 2.9
+import QtQuick
 
 import Variable.Global 1.0
 

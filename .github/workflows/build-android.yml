@@ -3,40 +3,72 @@ name: Build Android app
 on: push
 
 jobs:
-  buster:
+  android:
     name: Android build
     runs-on: ubuntu-latest
-    container:
-      image: reivilo1234/qt-android-cmake:qt5.15.1-api30-ndk28.0.3
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      # Host Qt: androiddeployqt + qt-cmake host tools. Installed alongside the
+      # android Qt so qt-cmake auto-detects QT_HOST_PATH from the sibling.
+      - name: Install Qt (host)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.11.*'
+          host: linux
+          target: desktop
+          arch: linux_gcc_64
+          modules: qtwebsockets
+          dir: ${{ runner.temp }}/qt
+
+      - name: Install Qt (android arm64)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.11.*'
+          host: linux
+          target: android
+          arch: android_arm64_v8a
+          modules: qtwebsockets
+          dir: ${{ runner.temp }}/qt
+
+      # ubuntu-latest ships an Android SDK/NDK; Qt 6.11 expects NDK r26b (26.1.x).
+      # Pin it so the build is reproducible.
+      - name: Install Android NDK 26.1.10909125
+        run: |
+          sdkmanager --install "ndk;26.1.10909125"
+          echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> "$GITHUB_ENV"
 
       - name: Build
         run: |
-          export ANDROID_NDK_ROOT=/opt/android-sdk/ndk-bundle
-          find / -name PFA11.pro -type f
-          SRC_PATH=$(dirname $(find / -name PFA11.pro -type f))
-          cd $SRC_PATH/..
+          # $QT_ROOT_DIR is set by install-qt-action to the last (android) install.
+          "$QT_ROOT_DIR/bin/qt-cmake" -G Ninja -S src -B build-android \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DANDROID_SDK_ROOT="$ANDROID_SDK_ROOT" \
+            -DANDROID_NDK_ROOT="$ANDROID_NDK_ROOT" \
+            -DQT_ANDROID_BUILD_ALL_ABIS=OFF
+          cmake --build build-android
+          cmake --build build-android --target apk
 
-          ls -la
-
-          mkdir -p build-android
-          cd build-android
-
-          qmake CONFIG+=release ../src/
-          make
-          make apk
-
-          mv ./android-build/PFA11.apk ../ossia-remote.apk
+      # Qt 6 + CMake emits the APK under the gradle output tree.
+      - name: Collect APK
+        run: |
+          APK=$(find build-android -name '*.apk' | head -n1)
+          echo "Found APK: $APK"
+          cp "$APK" ossia-remote.apk
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Android build
-          path: |
-            ossia-remote.apk
+          path: ossia-remote.apk
 
       - name: Upload release
         if: startsWith(github.ref, 'refs/tags')

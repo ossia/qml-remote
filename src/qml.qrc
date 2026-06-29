@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>qtquickcontrols2.conf</file>
         <file>ControlSurface/ScoreControlSurface.qml</file>
         <file>ControlSurface/ScoreControlSurfaceList.qml</file>
         <file>PlayPauseStop/ScorePlayPause.qml</file>
@@ -60,7 +61,6 @@
         <file>ControlSurface/Controls/Button/ScoreButtons.qml</file>
         <file>Icons/disconnected.svg</file>
         <file>ControlSurface/Controls/Button/ScoreButton.qml</file>
-        <file>main.cpp</file>
         <file>main.qml</file>
         <file>ObjectSkeletons/ScoreSliderSkeleton.qml</file>
         <file>ControlSurface/Controls/Colorpicker/Colorpicker.qml</file>

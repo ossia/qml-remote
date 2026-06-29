@@ -5,10 +5,9 @@
   * the value of this slider in score
   */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.12
-import QtQuick.Controls.Styles 1.4
-import QtQml.Models 2.12
+import QtQuick
+import QtQuick.Layouts
+import QtQml.Models
 
 import "qrc:/Utility/utility.js" as Utility
 import Variable.Global 1.0

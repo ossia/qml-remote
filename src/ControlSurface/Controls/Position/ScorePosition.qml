@@ -4,8 +4,8 @@
   * All positions of a same control surface in score share a common position display
   */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick
+import QtQuick.Controls
 
 import "qrc:/Utility/utility.js" as Utility
 import Variable.Global 1.0

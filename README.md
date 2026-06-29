@@ -35,4 +35,4 @@ Getting Started
     cd build-wasm/
     python -m SimpleHTTPServer 8087 // python -m http.server 8087 for windows
 ```
-* Go to : http://[ipAdress]:8087/PFA11.html
+* Go to : http://[ipAdress]:8087/ossia_remote.html

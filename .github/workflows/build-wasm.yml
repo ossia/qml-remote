@@ -3,39 +3,57 @@ name: Build wasm app
 on: push
 
 jobs:
-  buster:
+  wasm:
     name: wasm build
     runs-on: ubuntu-latest
-    container:
-      image: guerra1994/qt-wasm:latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      # Host Qt: provides qt-cmake / androiddeployqt-style host tools for the
+      # wasm cross-build. Installed into the same dir as the wasm Qt so that
+      # qt-cmake auto-detects QT_HOST_PATH from the sibling desktop install.
+      - name: Install Qt (host)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.11.*'
+          host: linux
+          target: desktop
+          arch: linux_gcc_64
+          modules: qtwebsockets
+          dir: ${{ runner.temp }}/qt
+
+      - name: Install Qt (wasm)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.11.*'
+          host: linux
+          target: wasm
+          arch: wasm_singlethread
+          modules: qtwebsockets
+          dir: ${{ runner.temp }}/qt
+
+      # Qt 6.11 targets Emscripten 4.0.7 exactly (no ABI guarantee across versions).
+      - name: Setup Emscripten 4.0.7
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: 4.0.7
 
       - name: Build
         run: |
-          find / -name PFA11.pro -type f
-          SRC_PATH=$(dirname $(find / -name PFA11.pro -type f))
-          cd $SRC_PATH/..
+          # $QT_ROOT_DIR is set by install-qt-action to the last (wasm) install.
+          "$QT_ROOT_DIR/bin/qt-cmake" -G Ninja -S src -B build-wasm
+          cmake --build build-wasm
 
-          ls -la
-
-          mkdir -p build-wasm
-          cd build-wasm
-
-          qmake ../src/
-          make
-
-          cd ..
-          tar -czvf build-wasm.tar.gz build-wasm/*.html build-wasm/*.js build-wasm/*.wasm
+      - name: Package
+        run: tar -czvf build-wasm.tar.gz build-wasm/*.html build-wasm/*.js build-wasm/*.wasm
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: WASM build
-          path: |
-            build-wasm.tar.gz
+          path: build-wasm.tar.gz
 
       - name: Upload release
         if: startsWith(github.ref, 'refs/tags')
