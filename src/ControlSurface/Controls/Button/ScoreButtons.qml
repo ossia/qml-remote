@@ -56,7 +56,6 @@ Flow {
         }
     }
 
-    width: parent.width
     spacing: 5
 
     Repeater {

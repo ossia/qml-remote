@@ -44,8 +44,13 @@ Slider {
                         : (parent.height + parent.width) / 30.0
     }
 
-    // No handle
-    handle: Rectangle {}
+    // Visible grip so the slider reads as draggable
+    handle: Rectangle {
+        x: control.visualPosition * (control.width - width)
+        width: 6; height: control.height; radius: 2
+        color: Skin.white
+        border { color: Skin.dark; width: 1 }
+    }
 
     background: Rectangle {
         implicitWidth: parent.width; implicitHeight: parent.height

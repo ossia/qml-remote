@@ -25,7 +25,13 @@ Slider {
 
     implicitWidth: 300; implicitHeight: 20
 
-    handle: Rectangle {} // No handle
+    // Visible grip so the slider reads as draggable
+    handle: Rectangle {
+        x: slider.visualPosition * (slider.width - width)
+        width: 6; height: slider.height; radius: 2
+        color: Skin.white
+        border { color: Skin.dark; width: 1 }
+    }
 
     background: Rectangle {
         implicitWidth: parent.width; implicitHeight: parent.height

@@ -93,6 +93,7 @@
         <file>ControlSurface/Controls/Bargraph/ScoreBargraphs.qml</file>
         <file>ControlSurface/Controls/XYList/ScoreXYList.qml</file>
         <file>ControlSurface/Controls/XYList/ScoreXYLists.qml</file>
+        <file>ControlSurface/Controls/ScoreControl.qml</file>
         <file>Icons/indicator.svg</file>
         <file>Icons/indicator_hidden.svg</file>
         <file>Icons/indicator_hidden_on.svg</file>
