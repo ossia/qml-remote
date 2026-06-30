@@ -93,7 +93,7 @@ ComboBox {
 
         contentItem: Text {
             text: name
-            color: Skin.white
+            color: delegateItem.highlighted ? Skin.dark : Skin.white
             font.pointSize: parent.width <= 200
                             ? 10
                             : parent.width >= 500
@@ -104,8 +104,7 @@ ComboBox {
         }
 
         background: Rectangle {
-            opacity: delegateItem.highlighted ? 1 : 0.3
-            color: delegateItem.highlighted ? Skin.brown : Skin.gray1
+            color: delegateItem.highlighted ? Skin.orange : Skin.gray2
         }
     }
 
@@ -139,8 +138,9 @@ ComboBox {
 
     background: Rectangle {
         implicitWidth: 120; implicitHeight: 40
-        color: Skin.gray1
-        border.color: comboBox.pressed ? Skin.brown : Skin.brown
+        color: Skin.gray2
+        radius: 4
+        border.color: comboBox.pressed ? Skin.orange : Skin.gray3
     }
 
     popup: Popup {
@@ -179,8 +179,9 @@ ComboBox {
         }
 
         background: Rectangle {
-            color: Skin.gray1
-            border.color: Skin.brown
+            color: Skin.gray2
+            radius: 4
+            border.color: Skin.gray3
         }
     }
 

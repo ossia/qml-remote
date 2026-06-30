@@ -1,8 +1,6 @@
 /*
-  * Button control  :
-  * - in a list of buttons in a control surface
-  * - modify button value in the remote modify
-  * the value of this button in score
+  * Button control (toggle): flat filled button — accent fill + dark label when
+  * on, neutral surface + white label when off.
   */
 
 import QtQuick
@@ -31,59 +29,31 @@ Button {
                     : (window.width <= 1200
                        ? 100
                        : 100 + ((window.width + window.height) / 100)))
-    implicitHeight: (window.width <= 500
-                     ? 75
-                     : (window.width <= 1200
-                        ? 100
-                        : 100 + ((window.width + window.height) / 100)))
+    implicitHeight: implicitWidth
 
     contentItem: Text {
-        text: controlCustom
-        color: Skin.white
+        text: button.controlCustom
+        color: button.isPressed ? Skin.dark : Skin.white
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: parent.height === 0 ? 1 : parent.height / 9
         elide: Text.ElideRight
     }
 
-    indicator: Rectangle {
-        implicitWidth: parent.width - 10; implicitHeight: parent.height - 10
-        anchors.centerIn: parent
-        color: button.isPressed ? Skin.brown : Skin.gray1
-        border { width: 5; color: Skin.gray1 }
-    }
-
     background: Rectangle {
-        implicitWidth: parent.width; implicitHeight: parent.height
-        color: Skin.brown
+        radius: 6
+        color: button.isPressed ? Skin.orange : (button.down ? Skin.gray3 : Skin.gray2)
+        border { color: button.isPressed ? Skin.orange : Skin.gray3; width: 1 }
     }
 
     onClicked: {
         pressedFromRemote = true
-        indicator.color = isPressed ? Skin.gray1 : Skin.brown
-        isPressed = ! isPressed
+        isPressed = !isPressed
         socket.sendTextMessage(
                     `{ "Message": "ControlSurface","Path": ${button.controlSurfacePath}, "id": ${button.controlId}, "Value": {"Bool": ${isPressed} }}`)
     }
 
     onPressedFromScoreChanged: {
-        // Almost works
-        /*
-        if (pressedFromRemote) {
-            pressedFromRemote = false
-            return
-        }
-        console.log("onPressedFromScoreChanged")
-        if(firstPressedFromScore){
-            if(!isPressed){
-                //isPressed = true
-            }
-            indicator.color = isPressed ? Skin.orange : Skin.gray1
-            firstPressedFromScore = false
-            return
-        }
-        indicator.color = isPressed ? Skin.gray1 : Skin.orange
-        isPressed = ! isPressed
-        */
+        // Score-driven state sync intentionally left as before (see history).
     }
 }

@@ -50,7 +50,12 @@ Item {
             verticalAlignment: TextInput.AlignVCenter
             topPadding: 0; bottomPadding: 0
             selectByMouse: true
-            background: Rectangle { color: Skin.darkGray; border.color: root.controlColor }
+            placeholderText: qsTr("set value…")
+            placeholderTextColor: Skin.gray3
+            background: Rectangle {
+                color: Skin.gray2; radius: 4
+                border.color: field.activeFocus ? Skin.orange : Skin.gray3
+            }
 
             onEditingFinished: socket.sendTextMessage(
                 `{ "Message": "ControlSurface","Path": ${root.controlSurfacePath}, "id": ${root.controlId}, "Value": {"String": ${JSON.stringify(field.text)} } }`)
