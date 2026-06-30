@@ -14,6 +14,7 @@ import Variable.Global 1.0
 Button {
     id: control
 
+    padding: 0; topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
     hoverEnabled: true
     onClicked: ipDialog.open()
     background: Rectangle { color: Skin.darkGray }
@@ -59,8 +60,14 @@ Button {
                 Layout.fillWidth: true
                 text: settings.ip_address
                 placeholderText: "127.0.0.1"
+                color: Skin.white
+                verticalAlignment: TextInput.AlignVCenter
                 inputMethodHints: Qt.ImhPreferNumbers
                 onAccepted: ipDialog.accept()
+                background: Rectangle {
+                    color: Skin.darkGray
+                    border.color: Skin.brown
+                }
             }
         }
     }

@@ -31,14 +31,29 @@ ComboBox {
                 controlUuid = message.uuid
                 controlSurfacePath = path
                 var i = 0
-                var itemMessage = message.Values[i]
-                while (itemMessage) {
-                    comboBoxItemsListModel.append({
-                                                      "_num": JSON.stringify(itemMessage[1]),
-                                                      "_name": itemMessage[0]
-                                                  })
-                    i++
-                    itemMessage = message.Values[i]
+                if (message.uuid === Uuid.enumUUID
+                        || message.uuid === Uuid.chooserToggleUUID) {
+                    // Enum / ChooserToggle: Values is a flat list of strings; the value IS the string
+                    var name = message.Values[i]
+                    while (name !== undefined) {
+                        comboBoxItemsListModel.append({
+                                                          "_num": JSON.stringify({ "String": name }),
+                                                          "_name": name
+                                                      })
+                        i++
+                        name = message.Values[i]
+                    }
+                } else {
+                    // ComboBox: Values is a list of [name, value] pairs
+                    var itemMessage = message.Values[i]
+                    while (itemMessage) {
+                        comboBoxItemsListModel.append({
+                                                          "_num": JSON.stringify(itemMessage[1]),
+                                                          "_name": itemMessage[0]
+                                                      })
+                        i++
+                        itemMessage = message.Values[i]
+                    }
                 }
             }
 

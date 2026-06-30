@@ -15,6 +15,7 @@ Button {
     id: control
 
     visible: false
+    padding: 0; topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
     hoverEnabled: true
     onClicked: disconnectDiag.open()
     background: Rectangle { color: Skin.darkGray }

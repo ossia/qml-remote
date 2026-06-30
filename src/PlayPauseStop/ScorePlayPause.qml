@@ -21,6 +21,7 @@ import Variable.Global 1.0
 Button {
 
     width: parent.width; height: parent.width
+    padding: 0; topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
     hoverEnabled: true
 
     // Detecting when buttons are pressed whether in the interface or on score
@@ -109,6 +110,7 @@ Button {
         id: pauseButton
 
         sourceSize { width: parent.width; height: parent.width }
+        fillMode: Image.PreserveAspectFit
         source: "../Icons/connection.png"
         clip: true
 

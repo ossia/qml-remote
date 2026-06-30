@@ -77,6 +77,22 @@
         <file>IpAddress/ScoreDisconnection.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBox.qml</file>
         <file>ControlSurface/Controls/ComboBox/ScoreComboBoxes.qml</file>
+        <file>ControlSurface/Controls/Knob/ScoreKnob.qml</file>
+        <file>ControlSurface/Controls/Knob/ScoreKnobs.qml</file>
+        <file>ControlSurface/Controls/SpinBox/ScoreSpinBox.qml</file>
+        <file>ControlSurface/Controls/SpinBox/ScoreSpinBoxes.qml</file>
+        <file>ControlSurface/Controls/LineEdit/ScoreLineEdit.qml</file>
+        <file>ControlSurface/Controls/LineEdit/ScoreLineEdits.qml</file>
+        <file>ControlSurface/Controls/RangeSlider/ScoreRangeSlider.qml</file>
+        <file>ControlSurface/Controls/RangeSlider/ScoreRangeSliders.qml</file>
+        <file>ControlSurface/Controls/VectorSlider/ScoreVectorSlider.qml</file>
+        <file>ControlSurface/Controls/VectorSlider/ScoreVectorSliders.qml</file>
+        <file>ControlSurface/Controls/VectorSpinBox/ScoreVectorSpinBox.qml</file>
+        <file>ControlSurface/Controls/VectorSpinBox/ScoreVectorSpinBoxes.qml</file>
+        <file>ControlSurface/Controls/Bargraph/ScoreBargraph.qml</file>
+        <file>ControlSurface/Controls/Bargraph/ScoreBargraphs.qml</file>
+        <file>ControlSurface/Controls/XYList/ScoreXYList.qml</file>
+        <file>ControlSurface/Controls/XYList/ScoreXYLists.qml</file>
         <file>Icons/indicator.svg</file>
         <file>Icons/indicator_hidden.svg</file>
         <file>Icons/indicator_hidden_on.svg</file>

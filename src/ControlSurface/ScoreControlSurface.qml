@@ -25,6 +25,14 @@ import "qrc:/ControlSurface/Controls/Button"
 import "qrc:/ControlSurface/Controls/Position"
 import "qrc:/ControlSurface/Controls/ImpulseButton"
 import "qrc:/ControlSurface/Controls/ComboBox"
+import "qrc:/ControlSurface/Controls/Knob"
+import "qrc:/ControlSurface/Controls/SpinBox"
+import "qrc:/ControlSurface/Controls/LineEdit"
+import "qrc:/ControlSurface/Controls/RangeSlider"
+import "qrc:/ControlSurface/Controls/VectorSlider"
+import "qrc:/ControlSurface/Controls/VectorSpinBox"
+import "qrc:/ControlSurface/Controls/Bargraph"
+import "qrc:/ControlSurface/Controls/XYList"
 
 
 import Variable.Global 1.0
@@ -83,8 +91,68 @@ Column {
                     break
 
                 case Uuid.comboBoxUUID:
-                    // ComboBox
+                case Uuid.enumUUID:
+                case Uuid.chooserToggleUUID:
+                    // ComboBox / Enum / ChooserToggle
                     scoreComboBox.appendComboBox(controlMessage)
+                    break
+
+                case Uuid.intRangeSliderUUID:
+                case Uuid.floatRangeSliderUUID:
+                case Uuid.intRangeSpinBoxUUID:
+                case Uuid.floatRangeSpinBoxUUID:
+                    // Range sliders (value is a Vec2f [low, high])
+                    scoreRangeSliders.appendRangeSlider(controlMessage, i)
+                    break
+
+                case Uuid.xyzSliderUUID:
+                case Uuid.multiSliderUUID:
+                    // Vector / multi sliders (N sub-sliders)
+                    scoreVectorSliders.appendVectorSlider(controlMessage, i)
+                    break
+
+                case Uuid.xySpinboxesUUID:
+                case Uuid.xyzSpinboxesUUID:
+                    // Vector spinboxes (N numeric fields)
+                    scoreVectorSpinBoxes.appendVectorSpinBox(controlMessage, i)
+                    break
+
+                case Uuid.bargraphUUID:
+                    // Read-only level meter
+                    scoreBargraphs.appendBargraph(controlMessage, i)
+                    break
+
+                case Uuid.multiSliderXYUUID:
+                case Uuid.pathGeneratorXYUUID:
+                    // List of 2D points (read-only plot)
+                    scoreXYLists.appendXYList(controlMessage, i)
+                    break
+
+                case Uuid.floatKnobUUID:
+                    // Knob
+                    scoreKnobs.appendKnob(controlMessage, i)
+                    break
+
+                case Uuid.intSpinBoxUUID:
+                case Uuid.floatSpinBoxUUID:
+                case Uuid.timeChooserUUID:
+                    // Spinboxes (int/float) and time chooser
+                    scoreSpinBoxes.appendSpinBox(controlMessage, i)
+                    break
+
+                case Uuid.realButtonUUID:
+                    // Momentary button (score Button)
+                    scoreButtons.appendButton(controlMessage)
+                    break
+
+                case Uuid.lineEditUUID:
+                case Uuid.programEditUUID:
+                case Uuid.fileChooserUUID:
+                case Uuid.folderChooserUUID:
+                case Uuid.audioFileChooserUUID:
+                case Uuid.videoFileChooserUUID:
+                    // Text fields and file/folder choosers
+                    scoreLineEdits.appendLineEdit(controlMessage, i)
                     break
 
                 default:
@@ -103,6 +171,14 @@ Column {
                 scoreColorpicker.modifyColorpicker(m)
                 scoreImpulseButtons.modifyImpulseButton(m)
                 scoreButtons.modifyButton(m)
+                scoreKnobs.modifyKnob(m)
+                scoreSpinBoxes.modifySpinBox(m)
+                scoreLineEdits.modifyLineEdit(m)
+                scoreRangeSliders.modifyRangeSlider(m)
+                scoreVectorSliders.modifyVectorSlider(m)
+                scoreVectorSpinBoxes.modifyVectorSpinBox(m)
+                scoreBargraphs.modifyBargraph(m)
+                scoreXYLists.modifyXYList(m)
             }
         }
     }
@@ -214,6 +290,70 @@ Column {
             id: scoreComboBox
 
             signal appendComboBox(var msg)
+        }
+
+        // List of knobs
+        ScoreKnobs {
+            id: scoreKnobs
+
+            signal appendKnob(var msg, var ind)
+            signal modifyKnob(var msg)
+        }
+
+        // List of spinboxes (int/float/time)
+        ScoreSpinBoxes {
+            id: scoreSpinBoxes
+
+            signal appendSpinBox(var msg, var ind)
+            signal modifySpinBox(var msg)
+        }
+
+        // List of text fields (line edit / program / file choosers)
+        ScoreLineEdits {
+            id: scoreLineEdits
+
+            signal appendLineEdit(var msg, var ind)
+            signal modifyLineEdit(var msg)
+        }
+
+        // List of range sliders
+        ScoreRangeSliders {
+            id: scoreRangeSliders
+
+            signal appendRangeSlider(var msg, var ind)
+            signal modifyRangeSlider(var msg)
+        }
+
+        // List of vector / multi sliders
+        ScoreVectorSliders {
+            id: scoreVectorSliders
+
+            signal appendVectorSlider(var msg, var ind)
+            signal modifyVectorSlider(var msg)
+        }
+
+        // List of vector spinboxes
+        ScoreVectorSpinBoxes {
+            id: scoreVectorSpinBoxes
+
+            signal appendVectorSpinBox(var msg, var ind)
+            signal modifyVectorSpinBox(var msg)
+        }
+
+        // List of bargraphs (read-only meters)
+        ScoreBargraphs {
+            id: scoreBargraphs
+
+            signal appendBargraph(var msg, var ind)
+            signal modifyBargraph(var msg)
+        }
+
+        // List of XY-point lists (read-only plots)
+        ScoreXYLists {
+            id: scoreXYLists
+
+            signal appendXYList(var msg, var ind)
+            signal modifyXYList(var msg)
         }
     }
 }
