@@ -24,11 +24,13 @@ jobs:
           modules: qtwebsockets
           dir: ${{ runner.temp }}/qt
 
+      # Qt 6.8+ publishes wasm under the unified "all_os" host (the "linux" host
+      # rejects target: wasm).
       - name: Install Qt (wasm)
         uses: jurplel/install-qt-action@v4
         with:
           version: '6.12.*'
-          host: linux
+          host: all_os
           target: wasm
           arch: wasm_singlethread
           modules: qtwebsockets
