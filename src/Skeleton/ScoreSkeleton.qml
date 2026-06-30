@@ -60,7 +60,10 @@ Item {
     // A field to save the IP address + UI zoom
     Settings {
         id: settings
-        property string ip_address: "127.0.0.1"
+        // Default to the address score injects via SCORE_IP_ADDRESS (so the
+        // remote auto-connects when served/launched by score); else localhost.
+        property string ip_address: (score_ip_address && score_ip_address.length > 0)
+                                    ? score_ip_address : "127.0.0.1"
         property real uiScale: 1.0
     }
 

@@ -25,6 +25,11 @@ int main(int argc, char *argv[])
     const bool tmp_is_mobile = qEnvironmentVariableIsSet("IS_MOBILE") ? qEnvironmentVariableIntValue("IS_MOBILE") > 0 : false;
     engine.rootContext()->setContextProperty("is_mobile", tmp_is_mobile);
 
+    // Score injects its own address via SCORE_IP_ADDRESS when it serves or
+    // launches the remote, so the connection can default to it (empty when
+    // unset, in which case the saved IP / localhost is used).
+    engine.rootContext()->setContextProperty("score_ip_address", qEnvironmentVariable("SCORE_IP_ADDRESS"));
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
