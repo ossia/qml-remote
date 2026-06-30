@@ -1,184 +1,67 @@
 /*
-  * Play and Pause buttons :
-  * - at the top left of the interface with others buttons
-  * - visible when the remote is connected to score
-  * - synchronize with score
-  * - play button pressed :
-  *     - play in score
-  *     - pause button displayed
-  * - pause button pressed :
-  *     - pause in score
-  *     - play button displayed
+  * Play / Pause / Connect button :
+  * - at the top left, doubles as the connect button when disconnected
+  * - touch- and mouse-friendly: logical "mode" drives the base icon, the
+  *   pressed/hovered state drives the highlight, and onClicked performs the
+  *   action (so a tap acts and a slide-off cancels, on both touch and mouse)
   */
 
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Window
-import QtQuick.Controls.Material
 
 import Variable.Global 1.0
 
 Button {
+    id: control
 
     width: parent.width; height: parent.width
     padding: 0; topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
     hoverEnabled: true
 
-    // Detecting when buttons are pressed whether in the interface or on score
-    function stopClicked() {
-        pauseButton.state = 'playDisplayed'
-    }
+    // "connection" = disconnected, "play" = connected/stopped, "pause" = playing
+    property string mode: "connection"
 
-    function isConnected() {
-        return (pauseButton.state !== '')
-    }
+    function stopClicked() { control.mode = "play" }
+    function isConnected() { return control.mode !== "connection" }
+    function isPaused() { return control.mode === "play" }
+    function playPressInScore() { control.mode = "pause" }
+    function pausePressInScore() { control.mode = "play" }
+    function connectedToScore() { control.mode = "play" }
+    function disonnectedFromScore() { control.mode = "connection" }
 
-    function isPaused() {
-        return (pauseButton.state === 'hoveredPlayOff')
-    }
-
-    function playPressInScore() {
-        pauseButton.state = 'pauseDisplayed'
-    }
-
-    function pausePressInScore() {
-        pauseButton.state = 'playDisplayed'
-    }
-
-    function connectedToScore() {
-        pauseButton.state = 'playDisplayed'
-    }
-
-    function disonnectedFromScore() {
-        pauseButton.state = ''
-    }
-
-    // Allow to click on buttons and leave while pressing
-    onHoveredChanged: {
-        switch (pauseButton.state) {
-        case 'connectionOn':
-            pauseButton.state = ''
-            break
-
-        case 'connectionOff':
-            pauseButton.state = ''
-            break
-
-        case 'playPressed':
-            pauseButton.state = 'playDisplayed'
-            break
-        }
-    }
-
-    // Change the button color when it is pressed
-    onPressed: {
-        switch (pauseButton.state) {
-        case '':
-            pauseButton.state = 'connectionOn'
-            break
-
-        case 'playDisplayed':
-            pauseButton.state = 'playPressed'
-            break
-        }
-    }
-
-    // Specify the behavior of a button when it is clicked on
-    onReleased: {
-        switch (pauseButton.state) {
-        case 'connectionOn':
+    onClicked: {
+        switch (control.mode) {
+        case "connection":
             socket.active = !socket.active
             break
-
-        case 'playPressed':
-            pauseButton.state = 'pauseDisplayed'
+        case "play":
             socket.sendTextMessage('{ "Message": "Play" }')
+            control.mode = "pause"
             break
-
-        case 'pauseDisplayed':
-            pauseButton.state = 'playDisplayed'
+        case "pause":
             socket.sendTextMessage('{ "Message": "Pause" }')
+            control.mode = "play"
             break
-
-        default:
         }
     }
 
-    background: Rectangle { id: zone; color: Skin.darkGray }
+    background: Rectangle { color: Skin.darkGray }
 
     contentItem: Image {
         id: pauseButton
 
         sourceSize { width: parent.width; height: parent.width }
         fillMode: Image.PreserveAspectFit
-        source: "../Icons/connection.png"
         clip: true
-
-        states: [
-            State {
-                name: "connectionOn"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/connection_on.png"
-                }
-            },
-            State {
-                name: "connectionOff"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/connection.png"
-                }
-            },
-            State {
-                name: "playDisplayed"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/play_glob_off.png"
-                }
-            },
-            State {
-                name: "playPressed"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/play_glob_on.png"
-                }
-            },
-            State {
-                name: "hoveredConnection"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/connection_hover.png"
-                }
-            },
-            State {
-                name: "pauseDisplayed"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/pause_on.png"
-                }
-            },
-            State {
-                name: "hoveredPlayOff"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/play_glob_hover.png"
-                }
-            },
-            State {
-                name: "hoveredPlayOn"
-
-                PropertyChanges {
-                    target: pauseButton
-                    source: "../Icons/pause_hover.png"
-                }
-            }
-        ]
+        source: control.mode === "connection"
+                ? (control.down ? "../Icons/connection_on.png"
+                   : control.hovered ? "../Icons/connection_hover.png"
+                     : "../Icons/connection.png")
+                : control.mode === "play"
+                  ? (control.down ? "../Icons/play_glob_on.png"
+                     : control.hovered ? "../Icons/play_glob_hover.png"
+                       : "../Icons/play_glob_off.png")
+                  : (control.down ? "../Icons/pause_hover.png"
+                     : "../Icons/pause_on.png")
     }
 }

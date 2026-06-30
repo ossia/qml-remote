@@ -33,11 +33,7 @@ Button {
                         ? 100
                         : 100 + ((window.width + window.height) / 100)))
 
-    onHoveredChanged: background.color = Skin.gray1
-    onReleased: background.color = Skin.gray1
-
     onPressed: {
-        background.color = Skin.brown
         socket.sendTextMessage(
                     `{ "Message": "ControlSurface","Path": ${button.controlSurfacePath}, "id": ${button.controlId}, "Value": {"Impulse":1} }`)
     }
@@ -61,7 +57,7 @@ Button {
 
     background: Rectangle {
         implicitWidth: parent.width; implicitHeight: parent.height
-        color: Skin.gray1
+        color: button.down ? Skin.brown : Skin.gray1
         radius: 25
         border.color: Skin.gray1
     }

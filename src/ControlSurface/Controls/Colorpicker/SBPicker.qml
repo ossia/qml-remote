@@ -74,10 +74,8 @@ Item {
     MouseArea {
 
         function handleMouse(mouse) {
-            if (mouse.buttons & Qt.LeftButton) {
-                pickerCursor.x = Math.max(0, Math.min(width, mouse.x))
-                pickerCursor.y = Math.max(0, Math.min(height, mouse.y))
-            }
+            pickerCursor.x = Math.max(0, Math.min(width, mouse.x))
+            pickerCursor.y = Math.max(0, Math.min(height, mouse.y))
         }
 
         anchors.fill: colorlessGradient
