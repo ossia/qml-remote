@@ -11,6 +11,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+# Building against the static ossia SDK: point CMake at its bundled static Qt6
+# and the sysroot deps (zlib / freetype / harfbuzz), like ossia/score does.
+if(OSSIA_SDK)
+  list(PREPEND CMAKE_PREFIX_PATH
+    "${OSSIA_SDK}/qt6-static"
+    "${OSSIA_SDK}/sysroot")
+endif()
+
 find_package(Qt6 6.11 REQUIRED COMPONENTS Quick Gui Qml WebSockets)
 
 qt_standard_project_setup(REQUIRES 6.11)

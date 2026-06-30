@@ -30,9 +30,9 @@ jobs:
         run: |
           cmake -G Ninja -S src -B build \
             -DCMAKE_BUILD_TYPE=Release \
+            -DOSSIA_SDK=c:/ossia-sdk-x86_64 \
             -DCMAKE_C_COMPILER=c:/ossia-sdk-x86_64/llvm/bin/clang.exe \
-            -DCMAKE_CXX_COMPILER=c:/ossia-sdk-x86_64/llvm/bin/clang++.exe \
-            -DCMAKE_PREFIX_PATH=c:/ossia-sdk-x86_64/qt6-static
+            -DCMAKE_CXX_COMPILER=c:/ossia-sdk-x86_64/llvm/bin/clang++.exe
           cmake --build build
 
       - name: Upload artifact
