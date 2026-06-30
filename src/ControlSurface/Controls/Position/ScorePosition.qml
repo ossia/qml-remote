@@ -48,13 +48,16 @@ Rectangle {
         }
     }
 
-    width: (parent.width <= 500
-            ? (parent.width)
-            : (parent.width >= 1200
-               ? 600
-               : parent.width / 2))
+    // Use implicitWidth/Height (not width/height): loaded by the width-less
+    // dispatcher Loader (ScoreControl), so parent.width is 0 and would collapse
+    // the widget. Size from the control-surface column instead.
+    implicitWidth: (controlSurfaceListColumn.width <= 500
+                    ? controlSurfaceListColumn.width
+                    : (controlSurfaceListColumn.width >= 1200
+                       ? 600
+                       : controlSurfaceListColumn.width / 2))
 
-    height: positionBackground.width / 2
+    implicitHeight: positionBackground.width / 2
     color: Skin.gray2
 
     Rectangle {

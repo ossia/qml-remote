@@ -64,11 +64,16 @@ Rectangle {
         }
     }
 
-    width: (parent.width <= 500 ? (parent.width)
-                                : (parent.width >= 1200
-                                   ? 600
-                                   : parent.width / 2))
-    height: colorBackground.width / 2
+    // Use implicitWidth/Height (not width/height): this widget is loaded by the
+    // width-less dispatcher Loader (ScoreControl), so binding to parent.width
+    // would resolve to 0 and collapse the picker. Size from the control-surface
+    // column instead, and let the Loader/Flow adopt the implicit size.
+    implicitWidth: (controlSurfaceListColumn.width <= 500
+                    ? controlSurfaceListColumn.width
+                    : (controlSurfaceListColumn.width >= 1200
+                       ? 600
+                       : controlSurfaceListColumn.width / 2))
+    implicitHeight: colorBackground.width / 2
     color: Skin.gray2
 
     // Instantiate color picker window
