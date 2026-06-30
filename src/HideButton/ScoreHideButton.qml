@@ -8,19 +8,23 @@
 import QtQuick
 import QtQuick.Controls
 
+import Variable.Global 1.0
+
 Button {
     width: scoreSpeed.height
+    padding: 0; topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
 
     background: Rectangle {
         width: parent.width; height: parent.height
-        color: "#363636"
+        color: Skin.gray2
     }
 
+    // Same pattern as the (square, centered) play/pause/stop buttons.
     contentItem: Image {
         id: indicator
 
-        width: parent.height; height: parent.height 
-        anchors.verticalCenter: parent.verticalCenter
+        sourceSize { width: parent.width; height: parent.width }
+        fillMode: Image.PreserveAspectFit
         source: !scoreTriggers.visible
                 ? scoreHideButton.pressed
                   ? "../Icons/indicator_on.png"

@@ -17,6 +17,7 @@ import Variable.Global 1.0
 Button {
 
     width: parent.width; height: parent.width
+    padding: 0; topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
     hoverEnabled: true
 
     // Allow to click on buttons and leave while pressing
@@ -45,6 +46,7 @@ Button {
         id: stopButton
 
         sourceSize { width: parent.width; height: parent.width }
+        fillMode: Image.PreserveAspectFit
         clip: true
         source: "../Icons/stop_off.png"
 

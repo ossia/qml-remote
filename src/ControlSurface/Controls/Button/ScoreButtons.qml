@@ -41,7 +41,8 @@ Flow {
                 if (buttonListModel.get(i)._id === s.Control) {
                     switch (buttonListModel.get(i)._uuid) {
                     case Uuid.buttonUUID:
-                        // Button
+                    case Uuid.realButtonUUID:
+                        // Toggle / momentary Button
                         buttonListModel.set(i, {
                                                 "_pressedFromScore": s.Value.Bool
                                             })

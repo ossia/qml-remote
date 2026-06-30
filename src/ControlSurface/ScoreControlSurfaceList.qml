@@ -125,7 +125,7 @@ Item  {
         contentItem: Rectangle {
             id: scrollBarContentItem
             visible: scrollBar.size < 1
-            color: scrollBar.pressed ? Skin.orange : "#808080"
+            color: scrollBar.pressed ? Skin.orange : Skin.lightGray
         }
 
         background: Rectangle {

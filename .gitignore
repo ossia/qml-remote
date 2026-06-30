@@ -20,3 +20,7 @@ Makefile
 
 # OS
 .DS_Store
+
+# Local planning docs (kept on disk, not tracked)
+/docs/plan-qt6-port.md
+/docs/plan-controls-coverage.md

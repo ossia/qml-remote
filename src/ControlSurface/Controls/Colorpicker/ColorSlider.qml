@@ -23,12 +23,12 @@ Item {
             width: parent.width + 4; height: cursorHeight
             x: -3;  y: -height * 0.5
             border { color: Skin.black; width: 1 }
-            color: "transparent"
+            color: Skin.transparent
 
             Rectangle {
                 anchors { fill: parent; margins: 2 }
                 border { color: Skin.white; width: 1}
-                color: "transparent"
+                color: Skin.transparent
             }
         }
     }

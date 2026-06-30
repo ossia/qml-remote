@@ -20,7 +20,7 @@ Rectangle {
     property string controlUuid
     property string controlSurfacePath
     property color controlColor
-    property color displayedColor: "#a7dd0dFF"
+    property color displayedColor: Skin.transparentPurple
 
     color: Skin.brown
 
