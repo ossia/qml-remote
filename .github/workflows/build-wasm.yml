@@ -47,6 +47,9 @@ jobs:
       - name: Build
         run: |
           # $QT_ROOT_DIR is set by install-qt-action to the last (wasm) install.
+          # install-qt-action's all_os/wasm extraction drops the +x bit on the
+          # bundled tools, so restore it before invoking qt-cmake.
+          chmod -R u+x "$QT_ROOT_DIR/bin" "$QT_ROOT_DIR/libexec" 2>/dev/null || true
           "$QT_ROOT_DIR/bin/qt-cmake" -G Ninja -S src -B build-wasm
           cmake --build build-wasm
 
