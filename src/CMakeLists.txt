@@ -27,6 +27,11 @@ target_link_libraries(ossia_remote PRIVATE
   Qt6::WebSockets
 )
 
+# Also import the offscreen platform plugin so the binary can run headless for
+# CI smoke tests. No-op for shared builds; for static builds (ossia SDK) it is
+# linked in alongside the auto-imported native platform plugin.
+qt_import_plugins(ossia_remote INCLUDE Qt6::QOffscreenIntegrationPlugin)
+
 # Desktop install rules (Android/WASM use Qt's own deployment integration).
 include(GNUInstallDirs)
 install(TARGETS ossia_remote
