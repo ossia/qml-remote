@@ -189,7 +189,7 @@ Column {
     Button {
         id: controlSurfaceNameButton
         width: controlSurfaceListColumn.width
-        height: window.height <= 600 ? 30 : 5 + window.height / 25
+        height: Math.max(Skin.minTouch, window.height <= 600 ? 30 : 5 + window.height / 25)
 
         background: Rectangle {
             anchors.fill: parent

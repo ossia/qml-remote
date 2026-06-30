@@ -41,7 +41,7 @@ ScoreSliderSkeleton {
     }
 
     controlName: "Speed"
-    height: window.height <= 600 ? 30 : 5 + window.height / 25; width: window.width / 2
+    height: Math.max(Skin.minTouch, window.height <= 600 ? 30 : 5 + window.height / 25); width: window.width / 2
     from: -120; value: 100; to: 600
     controlColor: Skin.brown
 

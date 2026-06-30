@@ -115,7 +115,7 @@ Rectangle {
         delegate: ScorePositionPoint {
             id: positionPoint
 
-            width: parent.width; height: 5 + window.height / 20
+            width: parent.width; height: Math.max(Skin.minTouch, 5 + window.height / 20)
             controlCustom: _custom
             controlId: _id
             controlUuid: _uuid

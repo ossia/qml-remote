@@ -24,7 +24,7 @@ Item {
                     : controlSurfaceListColumn.width >= 1200
                       ? 400
                       : controlSurfaceListColumn.width / 3)
-    implicitHeight: window.height <= 500 ? 30 : 5 + window.height / 25
+    implicitHeight: Math.max(Skin.minTouch, window.height <= 500 ? 30 : 5 + window.height / 25)
 
     Rectangle {
         anchors.fill: parent

@@ -67,9 +67,9 @@ ComboBox {
         }
     }
 
-    implicitHeight: window.height<= 500
+    implicitHeight: Math.max(Skin.minTouch, window.height<= 500
                     ? 30
-                    : 5 + window.height / 25
+                    : 5 + window.height / 25)
     implicitWidth: (controlSurfaceListColumn.width <= 500
             ? (controlSurfaceListColumn.width)
             : (controlSurfaceListColumn.width >= 1200
@@ -88,7 +88,7 @@ ComboBox {
         property string num: _num
         property string name: _name
 
-        width: comboBox.width; height: 40
+        width: comboBox.width; height: Skin.minTouch
         highlighted: comboBox.highlightedIndex === index
 
         contentItem: Text {

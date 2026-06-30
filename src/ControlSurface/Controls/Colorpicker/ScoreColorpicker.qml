@@ -102,7 +102,7 @@ Rectangle {
         delegate: Item {
             id: background
 
-            width: parent.width; height: 5 + window.height / 20
+            width: parent.width; height: Math.max(Skin.minTouch, 5 + window.height / 20)
 
             ScoreColorPoint {
                 id: colorPoint
@@ -111,7 +111,7 @@ Rectangle {
                     return "[" + hex.r + ", " + hex.g + ", " + hex.b + ", " + hex.a + "]"
                 }
 
-                width: parent.width; height: 5 + window.height / 20
+                width: parent.width; height: Math.max(Skin.minTouch, 5 + window.height / 20)
                 controlCustom: _custom
                 controlId: _id
                 controlUuid: _uuid

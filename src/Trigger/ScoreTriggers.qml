@@ -63,7 +63,7 @@ Rectangle {
         }
 
         delegate: ScoreTrigger {
-            width: triggerList.width;  height: 5 + window.height / 25
+            width: triggerList.width;  height: Math.max(Skin.minTouch, 5 + window.height / 25)
             scorePath: path
             triggerName: name
         }
