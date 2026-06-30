@@ -126,7 +126,7 @@ ComboBox {
     contentItem: Text {
         leftPadding: 5
         rightPadding: comboBox.indicator.width + comboBox.spacing
-        text: qsTr(controlCustom) + ": " + comboBox.displayText
+        text: qsTr(controlCustom) + " " + comboBox.displayText
         color: Skin.white
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight

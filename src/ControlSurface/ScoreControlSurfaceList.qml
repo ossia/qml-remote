@@ -14,6 +14,8 @@ import Variable.Global 1.0
 Item  {
     id: scoreControlSurfaceList
 
+    property alias surfaceCount: controlSurfacelist.count
+
     // Receiving and handling messages about Control Surfaces from score
     Connections {
         target: scoreControlSurfaceList

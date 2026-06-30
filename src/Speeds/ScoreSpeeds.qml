@@ -20,6 +20,8 @@ import Variable.Global 1.0
 Rectangle {
     id: scoreSpeeds
 
+    property alias count: lView.count
+
     // Receiving and handling messages about intervals
     Connections {
         target: scoreSpeeds

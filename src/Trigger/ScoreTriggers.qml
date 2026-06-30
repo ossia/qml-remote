@@ -14,6 +14,8 @@ import Variable.Global 1.0
 
 Rectangle {
 
+    property alias count: triggerList.count
+
     // Receiving information about trigger from score
     Connections {
         target: scoreTriggers

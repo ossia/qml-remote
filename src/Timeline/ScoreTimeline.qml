@@ -70,13 +70,20 @@ Slider {
 
     // Basically the slider's ratio times the totalTime (ms) gives the elasped time (ms)
     // Which must then be converted into a date type
-    Text {
-        width: time.width
-        text: msToTime(time.value * totalTime)
-        color: Skin.darkGray
-        anchors.fill: parent
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pointSize: parent.height === 0 ? 1 : parent.height / 2.5
+    // Readable time chip (legible over both the track and the progress fill)
+    Rectangle {
+        anchors.centerIn: parent
+        width: timeLabel.implicitWidth + 16
+        height: timeLabel.implicitHeight + 4
+        radius: 4
+        color: Qt.rgba(0, 0, 0, 0.5)
+
+        Text {
+            id: timeLabel
+            anchors.centerIn: parent
+            text: msToTime(time.value * totalTime)
+            color: Skin.white
+            font.pointSize: time.height <= 0 ? 1 : Math.max(8, time.height / 2.8)
+        }
     }
 }

@@ -41,7 +41,7 @@ Item {
     Text {
         id: label
         anchors { left: parent.left; top: parent.top; leftMargin: 4 }
-        text: ' ' + root.controlCustom + ': ['
+        text: ' ' + root.controlCustom + ' ['
               + (root.isInt ? Math.round(slider.first.value) : slider.first.value.toFixed(2)) + ', '
               + (root.isInt ? Math.round(slider.second.value) : slider.second.value.toFixed(2)) + ']'
         color: Skin.white
@@ -73,7 +73,7 @@ Item {
                 x: slider.first.position * parent.width
                 width: slider.second.position * parent.width - x
                 height: parent.height
-                color: root.controlColor
+                color: Skin.orange
             }
         }
 

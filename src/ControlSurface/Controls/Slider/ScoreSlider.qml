@@ -34,14 +34,15 @@ Slider {
 
         Rectangle {
             height: parent.height; width: slider.visualPosition * parent.width - y
-            color: controlColor
+            color: Skin.orange
         }
     }
 
     Text {
         anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-        text: ' ' + controlCustom + ':'
+        text: ' ' + controlCustom
         color: Skin.white
+        style: Text.Outline; styleColor: Skin.dark
         font.pointSize: parent.width <= 200
                         ? 10
                         : parent.width >= 500
@@ -55,6 +56,7 @@ Slider {
               ? Utility.logSlider(slider.value, slider.from, slider.to).toFixed(3) + " "
               : slider.value.toFixed(3) + " "
         color: Skin.white
+        style: Text.Outline; styleColor: Skin.dark
         font.pointSize: parent.width <= 200
                         ? 10
                         : parent.width >= 500
