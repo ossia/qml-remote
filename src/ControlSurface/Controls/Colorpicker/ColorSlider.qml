@@ -35,9 +35,7 @@ Item {
 
     MouseArea {
         function handleMouse(mouse) {
-            if (mouse.buttons & Qt.LeftButton) {
-                pickerCursor.y = Math.max(0, Math.min(height, mouse.y))
-            }
+            pickerCursor.y = Math.max(0, Math.min(height, mouse.y))
         }
 
         anchors { left: parent.left; right: parent.right; top: parent.top; bottom: parent.bottom }
