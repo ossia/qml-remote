@@ -2,6 +2,9 @@ name: Build Windows app
 
 on: push
 
+permissions:
+  contents: write
+
 jobs:
   windows:
     name: Windows build
@@ -38,8 +41,29 @@ jobs:
             -DCMAKE_CXX_COMPILER=c:/ossia-sdk-x86_64/llvm/bin/clang++.exe
           cmake --build build
 
+      - name: Package
+        shell: bash
+        run: cp build/ossia_remote.exe ossia-remote-windows-x86_64.exe
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows build
-          path: build/ossia_remote.exe
+          path: ossia-remote-windows-x86_64.exe
+
+      - name: Continuous release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Continuous
+          tag_name: continuous
+          prerelease: true
+          body: "Rolling build from the latest commit on `main`. For stable versions, see the tagged releases."
+          files: ossia-remote-windows-x86_64.exe
+
+      - name: Tagged release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true
+          files: ossia-remote-windows-x86_64.exe
