@@ -46,4 +46,7 @@ QtObject  {
     property string multiSliderXYUUID: "ce12611f-f3b0-4f99-b3c0-3f0b25a38aa1"
     property string pathGeneratorXYUUID: "b60d0059-733b-4b57-a1c1-65fa140d3b8a"
     property string bargraphUUID: "f6d740ce-acc0-44c0-932a-0a03345af84f"
+
+    // --- Generic fallback: score's base Process::ControlInlet (no widget) ---
+    property string controlInletUUID: "9a13fb32-269a-47bf-99a9-930188c1f19c"
 }
