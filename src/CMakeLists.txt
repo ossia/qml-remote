@@ -11,12 +11,40 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-# Building against the static ossia SDK: point CMake at its bundled static Qt6
-# and the sysroot deps (zlib / freetype / harfbuzz), like ossia/score does.
+# Building against the static ossia SDK: point CMake exclusively at the SDK's
+# bundled Qt6 + dependencies, and never fall back to Homebrew / system libs
+# (which are the wrong architecture when cross-compiling x86_64 on Apple
+# Silicon). Mirrors ossia/score. Non-existent dirs are simply ignored, so the
+# same list covers the macOS layout (freetype/harfbuzz as top-level dirs) and
+# the mingw/linux layout (deps under sysroot).
 if(OSSIA_SDK)
   list(PREPEND CMAKE_PREFIX_PATH
+    "${OSSIA_SDK}"
     "${OSSIA_SDK}/qt6-static"
-    "${OSSIA_SDK}/sysroot")
+    "${OSSIA_SDK}/zlib"
+    "${OSSIA_SDK}/openssl"
+    "${OSSIA_SDK}/freetype"
+    "${OSSIA_SDK}/harfbuzz"
+    "${OSSIA_SDK}/sysroot"
+    "${OSSIA_SDK}/sysroot/lib"
+    "${OSSIA_SDK}/sysroot/lib/cmake"
+    "${OSSIA_SDK}/sysroot/lib/cmake/freetype"
+    "${OSSIA_SDK}/sysroot/lib/cmake/harfbuzz"
+    "${OSSIA_SDK}/qt6-static/lib64"
+    "${OSSIA_SDK}/zlib/lib64"
+    "${OSSIA_SDK}/freetype/lib64"
+    "${OSSIA_SDK}/harfbuzz/lib64")
+
+  # Never search Homebrew / other system prefixes for libraries or packages.
+  set(_ossia_ignore "/opt/homebrew;/usr/local;/usr/X11R6;/usr/pkg;/sw;/opt/local")
+  set(CMAKE_IGNORE_PATH "${_ossia_ignore}")
+  set(CMAKE_SYSTEM_IGNORE_PATH "${_ossia_ignore}")
+  set(CMAKE_IGNORE_PREFIX_PATH "${_ossia_ignore}")
+  set(CMAKE_SYSTEM_IGNORE_PREFIX_PATH "${_ossia_ignore}")
+  foreach(_xp "/opt/homebrew" "/usr/local" "/usr/X11R6" "/usr/pkg" "/opt" "/sw" "/opt/local")
+    list(REMOVE_ITEM CMAKE_SYSTEM_PREFIX_PATH "${_xp}")
+    list(REMOVE_ITEM CMAKE_PREFIX_PATH "${_xp}")
+  endforeach()
 endif()
 
 find_package(Qt6 6.11 REQUIRED COMPONENTS Quick Gui Qml WebSockets)
