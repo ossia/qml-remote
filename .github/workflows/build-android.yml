@@ -2,6 +2,9 @@ name: Build Android app
 
 on: push
 
+permissions:
+  contents: write
+
 jobs:
   android:
     name: Android build
@@ -73,12 +76,19 @@ jobs:
           name: Android build
           path: ossia-remote.apk
 
-      - name: Upload release
-        if: startsWith(github.ref, 'refs/tags')
-        uses: svenstaro/upload-release-action@v2
+      - name: Continuous release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v3
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ossia-remote.apk
-          tag: ${{ github.ref }}
-          overwrite: true
-          file_glob: true
+          name: Continuous
+          tag_name: continuous
+          prerelease: true
+          body: "Rolling build from the latest commit on `main`. For stable versions, see the tagged releases."
+          files: ossia-remote.apk
+
+      - name: Tagged release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true
+          files: ossia-remote.apk
