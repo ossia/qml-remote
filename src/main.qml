@@ -19,6 +19,14 @@ Window {
     title: qsTr("Remote Control")
     color: Skin.darkGray
 
-    // Creation of the application's skeleton
-    ScoreSkeleton {}
+    // The whole UI is rendered at a logical size and uniformly scaled by the
+    // user's zoom factor (uiScale); all responsive sizing then runs on logical
+    // pixels, so layout reflow + density both follow the zoom.
+    ScoreSkeleton {
+        id: skeleton
+        transformOrigin: Item.TopLeft
+        scale: skeleton.uiScale
+        width: mainWindow.width / skeleton.uiScale
+        height: mainWindow.height / skeleton.uiScale
+    }
 }

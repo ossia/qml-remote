@@ -53,17 +53,30 @@ Item {
         scoreTimeline.stopTimeline()
     }
 
-    anchors {
-        fill: parent
-        // Reserve space at the bottom on mobile so the timeline isn't hidden
-        // behind the browser / system chrome.
-        bottomMargin: is_mobile ? 50 : 0
-    }
+    // Persisted global UI zoom. The window sizes + scales this item (main.qml),
+    // so this multiplies the whole UI (sizes, fonts, spacing, touch targets).
+    property alias uiScale: settings.uiScale
 
-    // A field to save the IP address
+    // A field to save the IP address + UI zoom
     Settings {
         id: settings
         property string ip_address: "127.0.0.1"
+        property real uiScale: 1.0
+    }
+
+    // Pinch (touch) and Ctrl+wheel (desktop / web) adjust the global zoom.
+    PinchHandler {
+        target: null
+        property real base: 1
+        onActiveChanged: if (active) base = settings.uiScale
+        onActiveScaleChanged: settings.uiScale = Math.max(0.7, Math.min(1.6, base * activeScale))
+    }
+    WheelHandler {
+        acceptedModifiers: Qt.ControlModifier
+        onWheel: (ev) => {
+            var s = settings.uiScale * (ev.angleDelta.y > 0 ? 1.08 : 1 / 1.08)
+            settings.uiScale = Math.max(0.7, Math.min(1.6, s))
+        }
     }
 
     // The websocket
@@ -74,6 +87,9 @@ Item {
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 5
+        // Reserve space at the bottom on mobile so the timeline isn't hidden
+        // behind the browser / system chrome.
+        anchors.bottomMargin: is_mobile ? 50 : 5
         spacing: 5
 
         // ===== TOP BAR (wraps on narrow screens) =====
