@@ -63,6 +63,15 @@ target_link_libraries(ossia_remote PRIVATE
   Qt6::WebSockets
 )
 
+# The ossia SDK's llvm-mingw clang links its C++ runtime (libc++, libc++abi,
+# libunwind, libwinpthread) as DLLs by default, so the produced .exe would only
+# run with those DLLs alongside it. -static pulls in the static (.a) variants
+# instead — all present in the SDK — yielding a single self-contained binary.
+# The Qt in the SDK is already static, so every other dependency is .a too.
+if(OSSIA_SDK AND WIN32)
+  target_link_options(ossia_remote PRIVATE -static)
+endif()
+
 # Also import the offscreen platform plugin so the binary can run headless for
 # CI smoke tests. No-op for shared builds; for static builds (ossia SDK) it is
 # linked in alongside the auto-imported native platform plugin.
