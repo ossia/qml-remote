@@ -28,6 +28,9 @@ jobs:
       - name: Build
         shell: bash
         run: |
+          # The SDK's clang/LLVM and Qt host tools (moc/rcc/qmlimportscanner)
+          # need their runtime DLLs from these dirs on PATH.
+          export PATH="/c/ossia-sdk-x86_64/qt6-static/bin:/c/ossia-sdk-x86_64/llvm/bin:$PATH"
           cmake -G Ninja -S src -B build \
             -DCMAKE_BUILD_TYPE=Release \
             -DOSSIA_SDK=c:/ossia-sdk-x86_64 \
