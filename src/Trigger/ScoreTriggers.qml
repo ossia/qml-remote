@@ -49,11 +49,24 @@ Rectangle {
     radius: 9
     color: Skin.darkGray
 
+    // Panel header
+    Text {
+        id: header
+        anchors { top: parent.top; left: parent.left; right: parent.right
+                  topMargin: 6; leftMargin: 8; rightMargin: 8 }
+        text: qsTr("Triggers")
+        color: Skin.lightGray
+        font.pointSize: Skin.fontCaption
+        font.capitalization: Font.AllUppercase
+        font.bold: true
+        elide: Text.ElideRight
+    }
+
     ListView {
         id: triggerList
 
-        height: parent.height
-        anchors {left: parent.left; right: scrollBar.left; rightMargin: 5}
+        anchors { top: header.bottom; bottom: parent.bottom; topMargin: 4; bottomMargin: 4
+                  left: parent.left; right: scrollBar.left; rightMargin: 5 }
         orientation: ListView.Vertical
         clip: true
         spacing: 10
@@ -74,8 +87,9 @@ Rectangle {
     ScrollBar {
         id: scrollBar
 
-        width: window.width <= 500 ? 20 : 30; height: parent.height
-        anchors.right: parent.right
+        width: window.width <= 500 ? 20 : 30
+        anchors { top: header.bottom; bottom: parent.bottom; topMargin: 4; bottomMargin: 4
+                  right: parent.right }
         active: triggerList.count > 0
         visible: triggerList.count > 0
         policy: ScrollBar.AsNeeded

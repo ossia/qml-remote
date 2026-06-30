@@ -67,10 +67,10 @@ Column {
                 text: name
                 color: controlSurfaceNameButton.pressed ? Skin.orange : Skin.white
                 font.pointSize:  window.width <= 500
-                                 ? 10
+                                 ? Skin.fontCaption
                                  : window.width <= 1200
-                                   ? 12
-                                   : 15
+                                   ? Skin.fontBody
+                                   : Skin.fontTitle
             }
 
             Image {

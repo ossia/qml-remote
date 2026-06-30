@@ -29,4 +29,13 @@ QtObject {
 
     // Layout metrics — minimum interactive size for touch (Apple HIG 44 / Material 48)
     readonly property int minTouch: 44
+
+    // Typography scale (point sizes) — a small, fixed set of steps so chrome
+    // text stays consistent across desktop / web / tablet instead of ad-hoc
+    // magic numbers. Roughly a 1.2 ratio: caption / body / label / title / heading.
+    readonly property int fontCaption: 10  // panel headers, fine print
+    readonly property int fontBody: 12     // secondary / supporting text
+    readonly property int fontLabel: 14    // default control label
+    readonly property int fontTitle: 16    // surface / section titles, empty-state heading
+    readonly property int fontHeading: 18  // largest emphasis
 }

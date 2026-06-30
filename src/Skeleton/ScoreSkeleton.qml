@@ -173,7 +173,7 @@ Item {
                     text: window.connected ? qsTr("Waiting for control surfaces…")
                                            : qsTr("Not connected to score")
                     color: Skin.lightGray
-                    font.pointSize: 15
+                    font.pointSize: Skin.fontTitle
                 }
                 Text {
                     width: parent.width
@@ -182,7 +182,7 @@ Item {
                     visible: !window.connected
                     text: qsTr("Use the connection button at the top-left to set the IP address and connect.")
                     color: Skin.gray3
-                    font.pointSize: 11
+                    font.pointSize: Skin.fontBody
                 }
             }
         }
