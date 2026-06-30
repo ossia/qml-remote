@@ -82,7 +82,10 @@ Item  {
         spacing: 5
         orientation: ListView.Vertical
         clip: true
-        snapMode: ListView.SnapToItem
+        // No snapMode (= NoSnap): control surfaces are large, variable-height
+        // items often taller than the viewport. SnapToItem would snap to item
+        // boundaries on every wheel tick, making the wheel lurch a whole surface
+        // at a time. NoSnap gives smooth pixel scrolling.
         ScrollBar.vertical: scrollBar
 
         // ObjectModel's "model" data is the actual item that is going to be displayed
@@ -122,7 +125,6 @@ Item  {
         active: true
         visible: scoreControlSurfaceListView.count > 0
         policy: ScrollBar.AsNeeded
-        snapMode: ScrollBar.SnapAlways
 
         contentItem: Rectangle {
             id: scrollBarContentItem
