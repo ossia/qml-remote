@@ -46,7 +46,7 @@ jobs:
       # (27.2.12479018). Pin it so the build is reproducible.
       - name: Install Android NDK 27.2.12479018
         run: |
-          sdkmanager --install "ndk;27.2.12479018"
+          "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --install "ndk;27.2.12479018"
           echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/27.2.12479018" >> "$GITHUB_ENV"
 
       - name: Build
