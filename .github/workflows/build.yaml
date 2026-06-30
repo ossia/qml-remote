@@ -11,10 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Qt 6.11
+      - name: Install Qt 6.12
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.11.*'
+          version: '6.12.*'
           host: linux
           target: desktop
           arch: linux_gcc_64
@@ -39,8 +39,10 @@ jobs:
           export QT_QPA_PLATFORM=offscreen
           export QT_QUICK_BACKEND=software
           export QT_FORCE_STDERR_LOGGING=1
-          timeout 8 ./build/ossia_remote
-          code=$?
+          # GitHub runs steps with `bash -eo pipefail`; capture timeout's exit
+          # without letting set -e abort on it (124 = ran to timeout = OK).
+          code=0
+          timeout 8 ./build/ossia_remote || code=$?
           if [ "$code" -eq 124 ]; then
             echo "QML scene loaded and ran until timeout — OK"
             exit 0
