@@ -11,8 +11,10 @@ jobs:
       matrix:
         include:
           # SDK asset uses aarch64/x86_64; CMAKE_OSX_ARCHITECTURES uses arm64/x86_64.
+          # Both build on the Apple-Silicon runner; x86_64 cross-compiles (as
+          # ossia/score does), avoiding the scarce/slow Intel runners.
           - { osx_arch: arm64,  sdk_arch: aarch64, runner: macos-latest }
-          - { osx_arch: x86_64, sdk_arch: x86_64,  runner: macos-13 }
+          - { osx_arch: x86_64, sdk_arch: x86_64,  runner: macos-latest }
 
     steps:
       - name: Checkout code
