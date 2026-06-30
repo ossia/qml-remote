@@ -40,7 +40,7 @@ Rectangle {
 
         anchors { left: positionName.left; top: positionName.bottom}
         color: Skin.white
-        text: "x,y:" + positionButton.controlX.toFixed(2) + "," + positionButton.controlY.toFixed(2)
+        text: "x,y " + positionButton.controlX.toFixed(2) + "," + positionButton.controlY.toFixed(2)
         font.pointSize: parent.height * (9 / 40)
     }
 

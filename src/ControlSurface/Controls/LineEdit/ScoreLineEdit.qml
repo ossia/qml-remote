@@ -34,7 +34,7 @@ Item {
 
         Text {
             Layout.leftMargin: 4
-            text: root.controlCustom + ':'
+            text: root.controlCustom
             color: Skin.white
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter

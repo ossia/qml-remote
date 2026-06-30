@@ -34,6 +34,8 @@ Item {
     readonly property bool compact: width < 720
     // Whether the trigger / speed panels are shown (toggled by the hide button).
     property bool panelsVisible: true
+    // Whether the websocket is connected to score.
+    readonly property bool connected: socket.status === WebSocket.Open
     // Transport button size (touch-friendly, capped so it isn't huge on big screens).
     readonly property int btn: Math.max(Skin.minTouch, Math.min(72, Math.round(width / 18)))
     readonly property int panelHeight: Math.max(Skin.minTouch * 2, Math.round(height * 0.16))
@@ -122,7 +124,8 @@ Item {
             id: panels
             Layout.fillWidth: true
             spacing: 8
-            visible: window.panelsVisible
+            // Only take space when shown and there is something to show.
+            visible: window.panelsVisible && (scoreTriggers.count > 0 || scoreSpeeds.count > 0)
 
             ScoreTriggers {
                 id: scoreTriggers
@@ -146,6 +149,7 @@ Item {
 
         // ===== CONTROL SURFACES (fill remaining space) =====
         Item {
+            id: csArea
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -153,6 +157,33 @@ Item {
                 id: scoreControlSurfaceList
                 signal controlSurfacesMessageReceived(var n)
                 signal clearControlSurfaceList()
+            }
+
+            // Empty / disconnected guidance
+            Column {
+                anchors.centerIn: parent
+                width: Math.min(csArea.width - 40, 360)
+                spacing: 10
+                visible: scoreControlSurfaceList.surfaceCount === 0
+
+                Text {
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                    text: window.connected ? qsTr("Waiting for control surfaces…")
+                                           : qsTr("Not connected to score")
+                    color: Skin.lightGray
+                    font.pointSize: 15
+                }
+                Text {
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                    visible: !window.connected
+                    text: qsTr("Use the connection button at the top-left to set the IP address and connect.")
+                    color: Skin.gray3
+                    font.pointSize: 11
+                }
             }
         }
 

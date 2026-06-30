@@ -50,7 +50,7 @@ Item {
     Text {
         id: label
         anchors { left: parent.left; top: parent.top; leftMargin: 4 }
-        text: ' ' + root.controlCustom + ':'
+        text: ' ' + root.controlCustom
         color: Skin.white
         font.pointSize: root.width <= 200 ? 10 : 12
     }
@@ -106,7 +106,7 @@ Item {
                         Rectangle {
                             width: axisSlider.visualPosition * parent.width
                             height: parent.height
-                            color: Skin.brown
+                            color: Skin.orange
                         }
                     }
                 }

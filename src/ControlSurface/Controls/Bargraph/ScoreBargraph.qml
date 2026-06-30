@@ -42,6 +42,7 @@ Item {
         anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: 6 }
         text: root.controlCustom
         color: Skin.white
+        style: Text.Outline; styleColor: Skin.dark
         font.pointSize: root.width <= 200 ? 10 : 12
     }
 
@@ -49,6 +50,7 @@ Item {
         anchors { right: parent.right; verticalCenter: parent.verticalCenter; rightMargin: 6 }
         text: root.value.toFixed(2)
         color: Skin.white
+        style: Text.Outline; styleColor: Skin.dark
         font.pointSize: root.width <= 200 ? 10 : 12
     }
 }

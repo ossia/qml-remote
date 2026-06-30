@@ -25,8 +25,9 @@ Slider {
     // Slider name
     Text {
         anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-        text: ' ' + controlName + ':'
+        text: ' ' + controlName
         color: Skin.white
+        style: Text.Outline; styleColor: Skin.dark
         font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
                         ? parent.height / 2
                         : (parent.height + parent.width) / 30.0
@@ -37,6 +38,7 @@ Slider {
         anchors { right: parent.right; verticalCenter: parent.verticalCenter }
         text: control.value.toFixed(3) + ' ' + controlUnit
         color: Skin.white
+        style: Text.Outline; styleColor: Skin.dark
         font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
                         ? parent.height / 2
                         : (parent.height + parent.width) / 30.0
@@ -52,7 +54,7 @@ Slider {
 
         Rectangle {
             width: control.visualPosition * parent.width - y; height: parent.height
-            color: controlColor
+            color: Skin.orange
         }
     }
 }
