@@ -1,16 +1,15 @@
 /*
-  * Slider skeleton used by
-  * - ScoreSpeed.qml
-  * - ScoreVolume.qml
+  * Slider skeleton (refined) used by ScoreSpeed / ScoreVolume / ScoreSpeeds.
+  * Same layout as ScoreSlider: label + value on the row, slim accent fill and
+  * a small grip along the bottom.
   */
-  
+
 import QtQuick
 import QtQuick.Controls
 
 import Variable.Global 1.0
 
 Slider {
-
     id: control
 
     property string controlName: "ControlName"
@@ -22,44 +21,47 @@ Slider {
 
     implicitWidth: 300; implicitHeight: 20
 
-    // Slider name
-    Text {
-        anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-        text: ' ' + controlName
-        color: Skin.white
-        style: Text.Outline; styleColor: Skin.dark
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
-                        ? parent.height / 2
-                        : (parent.height + parent.width) / 30.0
-    }
-
-    // Slider value
-    Text {
-        anchors { right: parent.right; verticalCenter: parent.verticalCenter }
-        text: control.value.toFixed(3) + ' ' + controlUnit
-        color: Skin.white
-        style: Text.Outline; styleColor: Skin.dark
-        font.pointSize: ((parent.height + parent.width) / 30) >= parent.height / 2
-                        ? parent.height / 2
-                        : (parent.height + parent.width) / 30.0
-    }
-
-    // Visible grip so the slider reads as draggable
-    handle: Rectangle {
-        x: control.visualPosition * (control.width - width)
-        width: 6; height: control.height; radius: 2
-        color: Skin.white
-        border { color: Skin.dark; width: 1 }
-    }
+    readonly property int labelSize: height <= 34 ? Skin.fontCaption : Skin.fontBody
 
     background: Rectangle {
         implicitWidth: parent.width; implicitHeight: parent.height
         color: Skin.gray2
-        border { width: 1; color: controlColor }
+        radius: 4
 
         Rectangle {
-            width: control.visualPosition * parent.width - y; height: parent.height
-            color: Skin.orange
+            anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: 4 }
+            height: 5; radius: 2
+            color: Skin.gray3
+            Rectangle {
+                width: control.visualPosition * parent.width
+                height: parent.height; radius: 2
+                color: control.controlColor
+            }
         }
+    }
+
+    handle: Rectangle {
+        x: 4 + control.visualPosition * (control.width - 8 - width)
+        y: control.height - height - 1
+        width: 10; height: 10; radius: 5
+        color: Skin.white
+        border { color: control.controlColor; width: 2 }
+    }
+
+    Text {
+        anchors { left: parent.left; leftMargin: 6
+                  verticalCenter: parent.verticalCenter; verticalCenterOffset: -3 }
+        width: parent.width * 0.6
+        text: control.controlName
+        color: Skin.white
+        elide: Text.ElideRight
+        font.pointSize: control.labelSize
+    }
+    Text {
+        anchors { right: parent.right; rightMargin: 6
+                  verticalCenter: parent.verticalCenter; verticalCenterOffset: -3 }
+        text: control.value.toFixed(3) + (control.controlUnit ? ' ' + control.controlUnit : '')
+        color: Skin.white
+        font.pointSize: control.labelSize
     }
 }
