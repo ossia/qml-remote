@@ -1,8 +1,8 @@
 /*
-  * Slider control  :
-  * - in a list of sliders in a control surface
-  * - modify slider value in the remote modify
-  * the value of this slider in score
+  * Slider control (refined):
+  * - label (left) and value (right) sit on the row, on a neutral surface
+  * - a slim accent fill + a small grip run along the bottom edge, so the
+  *   handle never crosses the label and the accent stays calm
   */
 
 import QtQuick
@@ -25,48 +25,51 @@ Slider {
 
     implicitWidth: 300; implicitHeight: 20
 
-    // Visible grip so the slider reads as draggable
-    handle: Rectangle {
-        x: slider.visualPosition * (slider.width - width)
-        width: 6; height: slider.height; radius: 2
-        color: Skin.white
-        border { color: Skin.dark; width: 1 }
-    }
+    readonly property string valueText: controlUuid === Uuid.logFloatSliderUUID
+                                        ? Utility.logSlider(value, from, to).toFixed(3)
+                                        : value.toFixed(3)
+    readonly property int labelSize: height <= 34 ? Skin.fontCaption : Skin.fontBody
 
     background: Rectangle {
         implicitWidth: parent.width; implicitHeight: parent.height
         color: Skin.gray2
-        border { color: controlColor; width: 1 }
+        radius: 4
 
+        // Slim value track along the bottom
         Rectangle {
-            height: parent.height; width: slider.visualPosition * parent.width - y
-            color: Skin.orange
+            anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: 4 }
+            height: 5; radius: 2
+            color: Skin.gray3
+            Rectangle {
+                width: slider.visualPosition * parent.width
+                height: parent.height; radius: 2
+                color: slider.controlColor
+            }
         }
     }
 
-    Text {
-        anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-        text: ' ' + controlCustom
+    handle: Rectangle {
+        x: 4 + slider.visualPosition * (slider.width - 8 - width)
+        y: slider.height - height - 1
+        width: 10; height: 10; radius: 5
         color: Skin.white
-        style: Text.Outline; styleColor: Skin.dark
-        font.pointSize: parent.width <= 200
-                        ? 10
-                        : parent.width >= 500
-                          ? parent.height / 2
-                          : 15
+        border { color: slider.controlColor; width: 2 }
     }
 
     Text {
-        anchors { right: parent.right; verticalCenter: parent.verticalCenter }
-        text: slider.controlUuid === Uuid.logFloatSliderUUID
-              ? Utility.logSlider(slider.value, slider.from, slider.to).toFixed(3) + " "
-              : slider.value.toFixed(3) + " "
+        anchors { left: parent.left; leftMargin: 6
+                  verticalCenter: parent.verticalCenter; verticalCenterOffset: -3 }
+        width: parent.width * 0.6
+        text: slider.controlCustom
         color: Skin.white
-        style: Text.Outline; styleColor: Skin.dark
-        font.pointSize: parent.width <= 200
-                        ? 10
-                        : parent.width >= 500
-                          ? parent.height / 2
-                          : 15
+        elide: Text.ElideRight
+        font.pointSize: slider.labelSize
+    }
+    Text {
+        anchors { right: parent.right; rightMargin: 6
+                  verticalCenter: parent.verticalCenter; verticalCenterOffset: -3 }
+        text: slider.valueText
+        color: Skin.white
+        font.pointSize: slider.labelSize
     }
 }
