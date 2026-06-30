@@ -78,6 +78,7 @@ Item {
                 Slider {
                     id: axisSlider
                     width: parent.width - 24
+                    height: Skin.minTouch
                     anchors.verticalCenter: parent.verticalCenter
                     from: root.from
                     to: root.to

@@ -29,7 +29,7 @@ Item {
                     : controlSurfaceListColumn.width >= 1200
                       ? 400
                       : controlSurfaceListColumn.width / 3)
-    implicitHeight: window.height <= 500 ? 36 : 8 + window.height / 22
+    implicitHeight: Math.max(Skin.minTouch, window.height <= 500 ? 36 : 8 + window.height / 22)
 
     function send() {
         var lo = root.isInt ? Math.round(slider.first.value) : Number(slider.first.value.toFixed(3))

@@ -46,7 +46,7 @@ Slider {
 
     value: 0
     implicitWidth: window.width
-    implicitHeight: window.height <= 600 ? 25 : 5 + window.height / 25
+    implicitHeight: Math.max(Skin.minTouch, window.height <= 600 ? 25 : 5 + window.height / 25)
 
     // Sends a message to Score to update its progress' timeline
     onMoved: {

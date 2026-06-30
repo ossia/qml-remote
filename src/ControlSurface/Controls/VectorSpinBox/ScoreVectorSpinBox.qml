@@ -74,7 +74,7 @@ Item {
 
                 TextField {
                     width: (row.width / root.current.length) - 24
-                    height: 32
+                    height: Skin.minTouch
                     text: root.isInt ? String(Math.round(root.current[index]))
                                      : Number(root.current[index]).toFixed(3)
                     color: Skin.white

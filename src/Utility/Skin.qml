@@ -26,4 +26,7 @@ QtObject {
     readonly property color purple: "#FF00FF"
     readonly property color transparent: "transparent"
     readonly property color transparentPurple: "#a7dd0dFF"
+
+    // Layout metrics — minimum interactive size for touch (Apple HIG 44 / Material 48)
+    readonly property int minTouch: 44
 }

@@ -113,7 +113,7 @@ Rectangle {
             property double controlProgress: progressValue
             property double controlDefaultDuration: defaultDurationValue
 
-            height: 5 + window.height / 25; width: lView.width
+            height: Math.max(Skin.minTouch, 5 + window.height / 25); width: lView.width
             controlName: name
             from: -120; value: speedValue; to: 600
             controlColor: Skin.brown
