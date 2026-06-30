@@ -41,6 +41,9 @@ Item {
     readonly property int panelHeight: Math.max(Skin.minTouch * 2, Math.round(height * 0.16))
     readonly property int speedWidth: compact ? Math.max(Skin.minTouch, width - btn - 28)
                                               : Math.round(width / 3)
+    // How many side panels actually have content (empty ones are hidden).
+    readonly property int visiblePanelCount: (scoreTriggers.count > 0 ? 1 : 0)
+                                           + (scoreSpeeds.count > 0 ? 1 : 0)
 
     // Called when the remote is disconnected from score
     function disconnect() {
@@ -132,7 +135,9 @@ Item {
                 signal triggerMessageReceived(var n)
                 signal clearTriggerList()
 
-                width: window.compact ? panels.width : (panels.width - panels.spacing) / 2
+                visible: count > 0
+                width: (window.compact || window.visiblePanelCount < 2)
+                       ? panels.width : (panels.width - panels.spacing) / 2
                 height: window.panelHeight
             }
 
@@ -142,7 +147,9 @@ Item {
                 signal intervalsMessageReceived(var n)
                 signal clearSpeedList()
 
-                width: window.compact ? panels.width : (panels.width - panels.spacing) / 2
+                visible: count > 0
+                width: (window.compact || window.visiblePanelCount < 2)
+                       ? panels.width : (panels.width - panels.spacing) / 2
                 height: window.panelHeight
             }
         }
