@@ -1,13 +1,11 @@
 /*
-  * Skeleton of the app all objects which are displayed
-  * - Buttons (top left) :
-  *     - Play, Pause, stop
-  *     - IP, connection, disconnection
-  * - list of triggers (top left)
-  * - main speed (top right)
-  * - list of speeds (top right)
-  * - list of control surface (in the middle)
-  * - time line (bottom)
+  * Skeleton of the app — a single responsive layout that adapts to
+  * desktop / web / tablet (landscape and portrait):
+  * - top bar: transport (connect / play-pause / stop) + main speed + hide,
+  *   wrapping when the width is small
+  * - collapsible trigger + speed panels
+  * - control surfaces filling the remaining space
+  * - timeline pinned to the bottom
   */
 
 import QtQuick
@@ -32,174 +30,138 @@ import "qrc:/Timeline"
 Item {
     id: window
 
+    // Narrow screens (phone / tablet portrait) stack the top bar vertically.
+    readonly property bool compact: width < 720
+    // Whether the trigger / speed panels are shown (toggled by the hide button).
+    property bool panelsVisible: true
+    // Transport button size (touch-friendly, capped so it isn't huge on big screens).
+    readonly property int btn: Math.max(Skin.minTouch, Math.min(72, Math.round(width / 18)))
+    readonly property int panelHeight: Math.max(Skin.minTouch * 2, Math.round(height * 0.16))
+    readonly property int speedWidth: compact ? Math.max(Skin.minTouch, width - btn - 28)
+                                              : Math.round(width / 3)
+
     // Called when the remote is disconnected from score
     function disconnect() {
-
-        // Clear trigger, speed, control surface... lists
         scoreTriggers.clearTriggerList()
         scoreSpeeds.clearSpeedList()
         scoreControlSurfaceList.clearControlSurfaceList()
-
-        // Reset timeline
         scoreTimeline.stopTimeline()
     }
 
     anchors {
         fill: parent
-        // The timeline it does not appear on the screen when the application
-        // is used on a device other than the computer
+        // Reserve space at the bottom on mobile so the timeline isn't hidden
+        // behind the browser / system chrome.
         bottomMargin: is_mobile ? 50 : 0
     }
 
     // A field to save the IP address
     Settings {
         id: settings
-
         property string ip_address: "127.0.0.1"
     }
 
-    // Creating the websocket
+    // The websocket
     ScoreWebSocket {
         id: socket
     }
 
-    // Creating the IP address button object
-    ScoreIpAddress {
-        id: ipAddress
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 5
+        spacing: 5
 
-        signal playPauseStopMessageReceived(var n)
+        // ===== TOP BAR (wraps on narrow screens) =====
+        Flow {
+            Layout.fillWidth: true
+            spacing: 8
 
-        anchors { left: parent.left; top: parent.top }
-        width: 20 + ( ( 0.3 * window.width + 0.7 * window.height ) / 20 )
-    }
+            // Transport: connect / play-pause / stop, laid out horizontally
+            Row {
+                spacing: 4
 
-    // Creating play, pause and stop button objects
-    ScorePlayPauseStop {
-        id: scorePlayPauseStop
-        
-        signal playPauseStopMessageReceived(var n)
-        signal scorePlayPauseStopMessageReceived(var n)
-        signal connectedToScore()
-        signal disconnectedFromScore()
+                ScoreIpAddress {
+                    id: ipAddress
+                    signal playPauseStopMessageReceived(var n)
+                    width: window.btn
+                }
 
-        height: 2 * this.width; width: ipAddress.width
-        anchors { left: ipAddress.left; top: ipAddress.bottom }
-    }
+                ScorePlayPauseStop {
+                    id: scorePlayPauseStop
+                    signal playPauseStopMessageReceived(var n)
+                    signal scorePlayPauseStopMessageReceived(var n)
+                    signal connectedToScore()
+                    signal disconnectedFromScore()
 
-    /*
-    // TODO : Creating the volume slider object
-    ScoreVolume {
-        id: scoreVolume
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 5
-        signal intervalMessageReceived(var n)
-        signal intervalsMessageReceived(var n)
+                    state: "hidden" // horizontal arrangement: play | stop
+                    width: 2 * window.btn; height: window.btn
+                }
+            }
 
-    }*/
+            // Main speed + hide button
+            Row {
+                spacing: 4
 
-    // Creating the trigger list
-    ScoreTriggers {
-        id: scoreTriggers
-        
-        signal triggerMessageReceived(var n)
-        signal clearTriggerList()
+                ScoreSpeed {
+                    id: scoreSpeed
+                    signal intervalMessageReceived(var n)
+                    signal intervalsMessageReceived(var n)
 
-        anchors {
-            left: ipAddress.right; right: scoreSpeed.left
-            top: parent.top; bottom: scorePlayPauseStop.bottom; margins: 5
-        }
-    }
+                    width: window.speedWidth; height: window.btn
+                }
 
-    // Creating the button to hide the top panel (triggers, speeds)
-    ScoreHideButton {
-        id: scoreHideButton
-
-        anchors {
-            right: parent.right
-            top: parent.top; bottom: scoreSpeed.bottom
-            rightMargin: 5; topMargin: 5
-        }
-    }
-
-    // Creating the speed list
-    ScoreSpeeds {
-        id: scoreSpeeds
-
-        signal intervalMessageReceived(var n)
-        signal intervalsMessageReceived(var n)
-        signal clearSpeedList()
-
-        anchors {
-            left: scoreSpeed.left; right: parent.right
-            top: scoreSpeed.bottom; bottom: scorePlayPauseStop.bottom
-            rightMargin: 5; topMargin: 5
-        }
-    }
-
-    // Creating the main scenario speed slider object
-    ScoreSpeed {
-        id: scoreSpeed
-
-        signal intervalMessageReceived(var n)
-        signal intervalsMessageReceived(var n)
-
-        anchors {
-            right: scoreHideButton.left; top: parent.top
-            rightMargin: 5; topMargin: 5
-        }
-    }
-
-    // Creating the control surface list
-    ScoreControlSurfaceList {
-        id: scoreControlSurfaceList
-
-        signal controlSurfacesMessageReceived(var n)
-        signal clearControlSurfaceList()
-
-        anchors {
-            left: parent.left; right: parent.right
-            top: scorePlayPauseStop.bottom; bottom: scoreTimeline.top
-            topMargin: 5
-        }
-    }
-
-    // Creating the timeline slider object
-    ScoreTimeline {
-        id: scoreTimeline
-
-        signal intervalsMessageReceived(var n)
-
-        anchors.bottom: parent.bottom
-    }
-
-    // State in which the top panel (triggers, speeds) is hidden
-    states: State {
-        name: "hidden"
-
-        PropertyChanges {
-            target: ipAddress
-            width: 1.4 * scoreHideButton.height
-        }
-
-        PropertyChanges {
-            target: scorePlayPauseStop
-            width: 2 * ipAddress.width; height: ipAddress.width
-            anchors { left: window.left; top: window.top }
-        }
-
-        PropertyChanges {
-            target: scoreTriggers
-            anchors {
-                left: scorePlayPauseStop.right; right: scoreSpeed.left
-                top: parent.top; bottom: scorePlayPauseStop.bottom
-                margins: 5
+                ScoreHideButton {
+                    id: scoreHideButton
+                    width: window.btn; height: window.btn
+                }
             }
         }
 
-        PropertyChanges {
-            target: scoreControlSurfaceList
-            anchors.top: scoreHideButton.bottom
+        // ===== TRIGGER + SPEED PANELS (collapsible) =====
+        Flow {
+            id: panels
+            Layout.fillWidth: true
+            spacing: 8
+            visible: window.panelsVisible
+
+            ScoreTriggers {
+                id: scoreTriggers
+                signal triggerMessageReceived(var n)
+                signal clearTriggerList()
+
+                width: window.compact ? panels.width : (panels.width - panels.spacing) / 2
+                height: window.panelHeight
+            }
+
+            ScoreSpeeds {
+                id: scoreSpeeds
+                signal intervalMessageReceived(var n)
+                signal intervalsMessageReceived(var n)
+                signal clearSpeedList()
+
+                width: window.compact ? panels.width : (panels.width - panels.spacing) / 2
+                height: window.panelHeight
+            }
+        }
+
+        // ===== CONTROL SURFACES (fill remaining space) =====
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            ScoreControlSurfaceList {
+                id: scoreControlSurfaceList
+                signal controlSurfacesMessageReceived(var n)
+                signal clearControlSurfaceList()
+            }
+        }
+
+        // ===== TIMELINE (bottom) =====
+        ScoreTimeline {
+            id: scoreTimeline
+            signal intervalsMessageReceived(var n)
+
+            Layout.fillWidth: true
         }
     }
 }

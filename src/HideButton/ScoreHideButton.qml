@@ -25,7 +25,7 @@ Button {
 
         sourceSize { width: parent.width; height: parent.width }
         fillMode: Image.PreserveAspectFit
-        source: !scoreTriggers.visible
+        source: !window.panelsVisible
                 ? scoreHideButton.pressed
                   ? "../Icons/indicator_on.png"
                   : "../Icons/indicator.png"
@@ -34,10 +34,5 @@ Button {
                   : "../Icons/indicator_hidden.png"
     }
 
-    onReleased: {
-        scoreTriggers.visible = ! scoreTriggers.visible
-        scoreSpeeds.visible = ! scoreSpeeds.visible
-        window.state = scoreSpeeds.visible ? "" : "hidden"
-        scorePlayPauseStop.state = scoreSpeeds.visible ? "" : "hidden"
-    }
+    onClicked: window.panelsVisible = !window.panelsVisible
 }
