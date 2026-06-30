@@ -15,36 +15,39 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
 
       # Host Qt: androiddeployqt + qt-cmake host tools. Installed alongside the
-      # android Qt so qt-cmake auto-detects QT_HOST_PATH from the sibling.
+      # android Qt so qt-cmake auto-detects QT_HOST_PATH from the sibling. The
+      # host version must match the Android Qt version (6.12.0).
       - name: Install Qt (host)
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.11.*'
+          version: '6.12.0'
           host: linux
           target: desktop
           arch: linux_gcc_64
           modules: qtwebsockets
           dir: ${{ runner.temp }}/qt
 
+      # Qt 6.8+ publishes Android under the unified "all_os" host (the "linux"
+      # host only goes up to 6.7.x).
       - name: Install Qt (android arm64)
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.11.*'
-          host: linux
+          version: '6.12.0'
+          host: all_os
           target: android
           arch: android_arm64_v8a
           modules: qtwebsockets
           dir: ${{ runner.temp }}/qt
 
-      # ubuntu-latest ships an Android SDK/NDK; Qt 6.11 expects NDK r26b (26.1.x).
-      # Pin it so the build is reproducible.
-      - name: Install Android NDK 26.1.10909125
+      # ubuntu-latest ships an Android SDK/NDK; Qt 6.12 expects NDK r27c
+      # (27.2.12479018). Pin it so the build is reproducible.
+      - name: Install Android NDK 27.2.12479018
         run: |
-          sdkmanager --install "ndk;26.1.10909125"
-          echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> "$GITHUB_ENV"
+          sdkmanager --install "ndk;27.2.12479018"
+          echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/27.2.12479018" >> "$GITHUB_ENV"
 
       - name: Build
         run: |
