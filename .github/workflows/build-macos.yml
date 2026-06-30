@@ -4,14 +4,15 @@ on: push
 
 jobs:
   macos:
-    name: macOS build (${{ matrix.arch }})
+    name: macOS build (${{ matrix.osx_arch }})
     runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - { arch: arm64,  runner: macos-latest }
-          - { arch: x86_64, runner: macos-13 }
+          # SDK asset uses aarch64/x86_64; CMAKE_OSX_ARCHITECTURES uses arm64/x86_64.
+          - { osx_arch: arm64,  sdk_arch: aarch64, runner: macos-latest }
+          - { osx_arch: x86_64, sdk_arch: x86_64,  runner: macos-13 }
 
     steps:
       - name: Checkout code
@@ -25,21 +26,21 @@ jobs:
       - name: Fetch ossia SDK
         run: |
           curl -L --retry 3 -o sdk.tar.xz \
-            "https://github.com/ossia/sdk/releases/download/sdk37/sdk-macOS-${{ matrix.arch }}.tar.xz"
-          sudo mkdir -p "/opt/ossia-sdk-${{ matrix.arch }}"
-          sudo tar -xf sdk.tar.xz --strip-components=2 -C "/opt/ossia-sdk-${{ matrix.arch }}"
+            "https://github.com/ossia/sdk/releases/download/sdk37/sdk-macOS-${{ matrix.sdk_arch }}.tar.xz"
+          sudo mkdir -p "/opt/ossia-sdk-${{ matrix.sdk_arch }}"
+          sudo tar -xf sdk.tar.xz --strip-components=2 -C "/opt/ossia-sdk-${{ matrix.sdk_arch }}"
 
       - name: Build
         run: |
           cmake -G Ninja -S src -B build \
             -DCMAKE_BUILD_TYPE=Release \
-            -DOSSIA_SDK="/opt/ossia-sdk-${{ matrix.arch }}" \
-            -DCMAKE_OSX_ARCHITECTURES=${{ matrix.arch }} \
+            -DOSSIA_SDK="/opt/ossia-sdk-${{ matrix.sdk_arch }}" \
+            -DCMAKE_OSX_ARCHITECTURES=${{ matrix.osx_arch }} \
             -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0
           cmake --build build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macOS ${{ matrix.arch }}
+          name: macOS ${{ matrix.osx_arch }}
           path: build/ossia_remote
