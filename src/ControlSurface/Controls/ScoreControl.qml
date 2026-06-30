@@ -21,6 +21,7 @@ import "qrc:/ControlSurface/Controls/VectorSlider"
 import "qrc:/ControlSurface/Controls/VectorSpinBox"
 import "qrc:/ControlSurface/Controls/Bargraph"
 import "qrc:/ControlSurface/Controls/XYList"
+import "qrc:/ControlSurface/Controls/Generic"
 
 import Variable.Global 1.0
 
@@ -66,6 +67,7 @@ Loader {
         case Uuid.bargraphUUID:         return c_bargraphs
         case Uuid.multiSliderXYUUID:
         case Uuid.pathGeneratorXYUUID:  return c_xylists
+        case Uuid.controlInletUUID:     return c_generic
         default:                        return null
         }
     }
@@ -164,6 +166,13 @@ Loader {
             signal appendXYList(var msg, var ind); signal modifyXYList(var msg)
             Component.onCompleted: appendXYList(ctrl.m, 0)
             Connections { target: ctrl; function onDoModify(msg) { modifyXYList(msg) } }
+        }
+    }
+    Component { id: c_generic
+        ScoreGenericControls {
+            signal appendGeneric(var msg, var ind); signal modifyGeneric(var msg)
+            Component.onCompleted: appendGeneric(ctrl.m, 0)
+            Connections { target: ctrl; function onDoModify(msg) { modifyGeneric(msg) } }
         }
     }
 }
