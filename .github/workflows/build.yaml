@@ -14,7 +14,7 @@ jobs:
       - name: Install Qt 6.12
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.12.*'
+          version: '6.12.0'
           host: linux
           target: desktop
           arch: linux_gcc_64
@@ -23,7 +23,9 @@ jobs:
       - name: Install build tools
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y ninja-build libgl1-mesa-dev
+          # Qt 6.12 Qt6Gui resolves GL/EGL/xkb/Vulkan dev deps at find_package time.
+          sudo apt-get install -y ninja-build \
+            libgl1-mesa-dev libegl1-mesa-dev libxkbcommon-dev libvulkan-dev
 
       - name: Build
         run: |
