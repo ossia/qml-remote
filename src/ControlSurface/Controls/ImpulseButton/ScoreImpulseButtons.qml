@@ -54,7 +54,6 @@ Flow {
     }
 
     spacing: 5
-    width: parent.width
 
     Repeater {
         id: impulseButtonList

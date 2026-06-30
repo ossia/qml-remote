@@ -31,10 +31,11 @@ Item {
         color: Skin.gray2
         border.color: Skin.brown
 
+        // Green level fill (distinct from the orange, draggable sliders)
         Rectangle {
             anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
             width: parent.width * root.ratio
-            color: Skin.orange
+            color: Skin.green2
         }
     }
 
