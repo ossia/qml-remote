@@ -17,7 +17,7 @@ jobs:
       - name: Install Qt (host)
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.11.*'
+          version: '6.12.*'
           host: linux
           target: desktop
           arch: linux_gcc_64
@@ -27,18 +27,20 @@ jobs:
       - name: Install Qt (wasm)
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.11.*'
+          version: '6.12.*'
           host: linux
           target: wasm
           arch: wasm_singlethread
           modules: qtwebsockets
           dir: ${{ runner.temp }}/qt
 
-      # Qt 6.11 targets Emscripten 4.0.7 exactly (no ABI guarantee across versions).
-      - name: Setup Emscripten 4.0.7
+      # Qt 6.12 pins Emscripten 5.0.5 exactly: qt-cmake aborts configuration if
+      # QT_EMCC_VERSION ("5.0.5") doesn't match the active emcc (no ABI guarantee
+      # across emscripten versions). Host and wasm Qt must share the same minor.
+      - name: Setup Emscripten 5.0.5
         uses: mymindstorm/setup-emsdk@v14
         with:
-          version: 4.0.7
+          version: 5.0.5
 
       - name: Build
         run: |
