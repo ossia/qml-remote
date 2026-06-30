@@ -59,8 +59,8 @@ Slider {
 
     background: Rectangle {
         implicitWidth: parent.width; implicitHeight: parent.height
-        color: Skin.blue2
-        border { width: 1; color: Skin.blue2}
+        color: Skin.gray2
+        border { width: 1; color: Skin.gray3 }
 
         Rectangle {
             width: time.visualPosition * parent.width - y; height: parent.height

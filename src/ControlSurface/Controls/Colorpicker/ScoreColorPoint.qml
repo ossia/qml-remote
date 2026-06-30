@@ -22,7 +22,7 @@ Rectangle {
     property color controlColor
     property color displayedColor: Skin.transparentPurple
 
-    color: Skin.brown
+    color: Skin.gray2
 
     Text {
         id: colorName

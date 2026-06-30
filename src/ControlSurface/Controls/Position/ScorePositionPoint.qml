@@ -23,7 +23,7 @@ Rectangle {
     property real controlDomain
     property real controlMin
 
-    color: Skin.brown
+    color: Skin.gray2
 
     Text {
         id: positionName
