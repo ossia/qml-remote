@@ -46,7 +46,7 @@ Item {
         background: Rectangle {
             radius: width / 2
             color: Skin.gray2
-            border { color: Skin.brown; width: 1 }
+            border { color: Skin.gray3; width: 1 }
         }
 
         handle: Rectangle {

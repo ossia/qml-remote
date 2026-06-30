@@ -94,8 +94,9 @@ Item {
 
             // --- App-Skin styling (darkGray field like the other text inputs) ---
             background: Rectangle {
-                color: Skin.darkGray
-                border.color: Skin.brown
+                color: Skin.gray2
+                radius: 4
+                border.color: Skin.gray3
             }
 
             contentItem: TextInput {
@@ -115,8 +116,8 @@ Item {
                 x: spin.width - width
                 height: spin.height
                 implicitWidth: spin.height
-                color: spin.up.pressed ? Skin.brown : Skin.gray1
-                border.color: Skin.brown
+                color: spin.up.pressed ? Skin.orange : Skin.gray1
+                border.color: Skin.gray3
                 Text {
                     text: "+"
                     color: Skin.white
@@ -129,8 +130,8 @@ Item {
                 x: 0
                 height: spin.height
                 implicitWidth: spin.height
-                color: spin.down.pressed ? Skin.brown : Skin.gray1
-                border.color: Skin.brown
+                color: spin.down.pressed ? Skin.orange : Skin.gray1
+                border.color: Skin.gray3
                 Text {
                     text: "−"
                     color: Skin.white
