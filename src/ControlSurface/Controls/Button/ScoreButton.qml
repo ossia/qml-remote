@@ -24,19 +24,19 @@ Button {
     property bool pressedFromScore
     property bool pressedFromRemote: false
 
-    implicitWidth: (window.width <= 500
-                    ? 75
-                    : (window.width <= 1200
-                       ? 100
-                       : 100 + ((window.width + window.height) / 100)))
-    implicitHeight: implicitWidth
+    // Same row height as the other control widgets (no oversized squares).
+    implicitHeight: Math.max(Skin.minTouch, window.height <= 500 ? 30 : 5 + window.height / 25)
+    implicitWidth: Math.round(implicitHeight * 2.4)
 
     contentItem: Text {
         text: button.controlCustom
         color: button.isPressed ? Skin.dark : Skin.white
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.pointSize: parent.height === 0 ? 1 : parent.height / 9
+        // Shrink the label to fit rather than eliding it.
+        fontSizeMode: Text.Fit
+        minimumPointSize: 6
+        font.pointSize: parent.height <= 34 ? Skin.fontCaption : Skin.fontBody
         elide: Text.ElideRight
     }
 
