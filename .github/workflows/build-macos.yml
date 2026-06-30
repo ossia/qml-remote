@@ -1,0 +1,44 @@
+name: Build macOS app
+
+on: push
+
+jobs:
+  macos:
+    name: macOS build (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { arch: arm64,  runner: macos-latest }
+          - { arch: x86_64, runner: macos-13 }
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ninja
+        run: brew install ninja
+
+      # Static ossia SDK: bundles a static Qt6 (clang/libc++) + deps. The archive
+      # is prefixed with opt/ossia-sdk-<arch>/, stripped off on extraction.
+      - name: Fetch ossia SDK
+        run: |
+          curl -L --retry 3 -o sdk.tar.xz \
+            "https://github.com/ossia/sdk/releases/download/sdk37/sdk-macOS-${{ matrix.arch }}.tar.xz"
+          sudo mkdir -p "/opt/ossia-sdk-${{ matrix.arch }}"
+          sudo tar -xf sdk.tar.xz --strip-components=2 -C "/opt/ossia-sdk-${{ matrix.arch }}"
+
+      - name: Build
+        run: |
+          cmake -G Ninja -S src -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH="/opt/ossia-sdk-${{ matrix.arch }}/qt6-static" \
+            -DCMAKE_OSX_ARCHITECTURES=${{ matrix.arch }}
+          cmake --build build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS ${{ matrix.arch }}
+          path: build/ossia_remote

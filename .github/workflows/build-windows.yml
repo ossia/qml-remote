@@ -1,0 +1,42 @@
+name: Build Windows app
+
+on: push
+
+jobs:
+  windows:
+    name: Windows build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ninja
+        run: choco install ninja -y --no-progress
+
+      # Static ossia SDK: bundles a static Qt6 + a self-contained clang/LLVM.
+      - name: Fetch ossia SDK
+        shell: bash
+        run: |
+          mkdir -p /c/ossia-sdk-x86_64
+          cd /c/ossia-sdk-x86_64
+          curl -L --retry 3 -o sdk.7z \
+            "https://github.com/ossia/sdk/releases/download/sdk37/sdk-mingw-x86_64.7z"
+          7z x -y sdk.7z >/dev/null
+          rm sdk.7z
+
+      - name: Build
+        shell: bash
+        run: |
+          cmake -G Ninja -S src -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER=c:/ossia-sdk-x86_64/llvm/bin/clang.exe \
+            -DCMAKE_CXX_COMPILER=c:/ossia-sdk-x86_64/llvm/bin/clang++.exe \
+            -DCMAKE_PREFIX_PATH=c:/ossia-sdk-x86_64/qt6-static
+          cmake --build build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows build
+          path: build/ossia_remote.exe
