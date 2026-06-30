@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=ossia score remote
+GenericName=Remote control
+Comment=Remote control for ossia score
+Exec=ossia_remote
+Icon=ossia_remote
+Categories=AudioVideo;Audio;
+Terminal=false

@@ -1,0 +1,79 @@
+name: Build Linux AppImage
+
+on: push
+
+permissions:
+  contents: write
+
+jobs:
+  appimage:
+    name: Linux AppImage
+    # Older glibc -> the AppImage runs on a wider range of distributions.
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          # Qt6 GUI find-deps for the static build (same as the desktop job).
+          sudo apt-get install -y ninja-build \
+            libgl1-mesa-dev libegl1-mesa-dev libxkbcommon-dev libvulkan-dev \
+            libwayland-dev wayland-protocols libxcb-cursor-dev
+
+      # Static ossia SDK. The archive carries an opt/ossia-sdk-x86_64/ prefix, so
+      # extracting at / lands it at /opt/ossia-sdk-x86_64 (its baked-in path).
+      - name: Fetch ossia SDK
+        run: |
+          curl -L --retry 3 -o sdk.tar.xz \
+            "https://github.com/ossia/sdk/releases/download/sdk37/sdk-linux-x86_64.tar.xz"
+          sudo tar xaf sdk.tar.xz -C /
+
+      - name: Build (static)
+        run: |
+          OSSIA_SDK=/opt/ossia-sdk-x86_64
+          cmake -G Ninja -S src -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DOSSIA_SDK="$OSSIA_SDK" \
+            -DCMAKE_C_COMPILER="$OSSIA_SDK/llvm/bin/clang" \
+            -DCMAKE_CXX_COMPILER="$OSSIA_SDK/llvm/bin/clang++"
+          cmake --build build
+
+      - name: Package AppImage
+        run: |
+          # AppImage tools need FUSE; extract-and-run avoids installing libfuse2.
+          export APPIMAGE_EXTRACT_AND_RUN=1
+          curl -L -o linuxdeploy \
+            https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          chmod +x linuxdeploy
+          ./linuxdeploy --appdir AppDir \
+            -e build/ossia_remote \
+            -d packaging/ossia_remote.desktop \
+            -i packaging/ossia_remote.png \
+            --output appimage
+          mv ./*.AppImage ossia-remote-x86_64.AppImage
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux AppImage
+          path: ossia-remote-x86_64.AppImage
+
+      - name: Continuous release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Continuous
+          tag_name: continuous
+          prerelease: true
+          body: "Rolling build from the latest commit on `main`. For stable versions, see the tagged releases."
+          files: ossia-remote-x86_64.AppImage
+
+      - name: Tagged release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true
+          files: ossia-remote-x86_64.AppImage
