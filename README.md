@@ -26,13 +26,43 @@ All files are located in the `src/` directory, which itself is divided into seve
 Getting Started
 ===
 
-* Download the latest release : https://github.com/ossia/qml-remote/releases/latest
-* Unzip the release
-* Run these commands
+Pre-built applications for every platform are published on the [releases page](https://github.com/ossia/qml-remote/releases). There are two channels:
+
+- **[Continuous](https://github.com/ossia/qml-remote/releases/tag/continuous)** — a rolling build of the latest commit on `main`. It is flagged as a *pre-release*, but it is the actively maintained build and the recommended download for most users.
+- **[Tagged releases](https://github.com/ossia/qml-remote/releases/latest)** — stable, versioned snapshots.
+
+Download the artifact for your platform and run it:
+
+| Platform | Artifact | How to run |
+| --- | --- | --- |
+| **Linux** | `ossia-remote-x86_64.AppImage` | `chmod +x ossia-remote-x86_64.AppImage`, then launch it |
+| **Windows** | `ossia-remote-windows-x86_64.exe` | Run it directly |
+| **macOS** | `ossia-remote-macos-arm64.tar.gz` (Apple Silicon) or `ossia-remote-macos-x86_64.tar.gz` (Intel) | Extract, then run the `ossia_remote` binary. The build is unsigned, so you may need to allow it under *System Settings → Privacy & Security* |
+| **Android** | `ossia-remote.apk` | Install the APK on your device |
+| **Web (WebAssembly)** | `ossia-remote-wasm.tar.gz` | Serve over HTTP — see below |
+
+Once running, enter the IP address of the machine hosting [ossia score](https://github.com/ossia/score); the remote connects to it over WebSocket to drive playback and controls.
+
+### Running the WebAssembly build
+
+The Web build must be served over HTTP (opening the `.html` straight from disk will not work):
+
+```bash
+mkdir ossia-remote-wasm && tar -xzf ossia-remote-wasm.tar.gz -C ossia-remote-wasm
+cd ossia-remote-wasm
+python -m http.server 8087
 ```
-    cd path/to/dir
-    tar -xzvf build-wasm.tar.gz
-    cd build-wasm/
-    python -m SimpleHTTPServer 8087 // python -m http.server 8087 for windows
+
+Then browse to `http://<ip-address>:8087/ossia_remote.html`.
+
+Building from source
+===
+
+The application is a standard CMake + Qt 6 project (Qt ≥ 6.11, with the Quick, Qml and WebSockets modules):
+
+```bash
+cmake -S src -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
 ```
-* Go to : http://[ipAdress]:8087/ossia_remote.html
+
+The releases above are built against ossia's static Qt SDK; see the workflows in `.github/workflows/` for the exact per-platform build and packaging steps.
