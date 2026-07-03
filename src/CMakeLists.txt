@@ -55,6 +55,7 @@ qt_add_executable(ossia_remote
   main.cpp
   qml.qrc
   fonts.qrc
+  icon.qrc
 )
 
 # Build a GUI-subsystem executable on Windows so no console window is spawned
