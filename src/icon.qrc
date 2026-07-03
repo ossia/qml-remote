@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="ossia_remote.png">../packaging/ossia_remote.png</file>
+    </qresource>
+</RCC>

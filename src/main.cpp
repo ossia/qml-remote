@@ -4,6 +4,7 @@
 #include <QDirIterator>
 #include <QFont>
 #include <QFontDatabase>
+#include <QIcon>
 
 // Register every bundled font (fonts.qrc -> :/fonts) with the application font
 // database. Mirrors ossia score (src/app/Application.cpp): a blanket walk of the
@@ -33,6 +34,12 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
+
+    // Window-manager / taskbar / dock icon for the running app. Bundled via
+    // icon.qrc so it is embedded in the (static) binary on every platform,
+    // rather than relying on a system icon theme. The Linux .desktop + AppImage
+    // wire the same file for their own launcher integration.
+    app.setWindowIcon(QIcon(QStringLiteral(":/ossia_remote.png")));
 
     qmlRegisterSingletonType(QUrl("qrc:///Utility/Uuid.qml"), "Variable.Global", 1, 0, "Uuid");
     qmlRegisterSingletonType(QUrl("qrc:///Utility/Skin.qml"), "Variable.Global", 1, 0, "Skin");

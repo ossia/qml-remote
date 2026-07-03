@@ -55,6 +55,7 @@ qt_add_executable(ossia_remote
   main.cpp
   qml.qrc
   fonts.qrc
+  icon.qrc
 )
 
 target_link_libraries(ossia_remote PRIVATE
