@@ -1,5 +1,18 @@
 name: Spellcheck Action
-on: push
+on:
+  # Run only for pull requests, pushes to the default branch (i.e. merged
+  # PRs) and version tags — mirrors ossia/score.
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Spellcheck

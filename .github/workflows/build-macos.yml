@@ -1,6 +1,19 @@
 name: Build macOS app
 
-on: push
+on:
+  # Build only for pull requests, pushes to the default branch (i.e. merged
+  # PRs) and version tags — mirrors ossia/score. No builds on arbitrary
+  # branch pushes.
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
