@@ -32,18 +32,24 @@ Item {
 
     // Narrow screens (phone / tablet portrait) stack the top bar vertically.
     readonly property bool compact: width < 720
-    // Whether the trigger / speed panels are shown (toggled by the hide button).
-    property bool panelsVisible: true
+    // Each section has an always-visible top-bar toggle (Triggers / Speeds /
+    // Controls) that shows or hides it independently.
+    property bool triggersEnabled: true
+    property bool speedsEnabled: true
+    property bool controlsEnabled: true
+    // The trigger / speed panels additionally need score to have sent content.
+    readonly property bool trigShown: triggersEnabled && scoreTriggers.count > 0
+    readonly property bool speedShown: speedsEnabled && scoreSpeeds.count > 0
+    readonly property bool dualPanels: trigShown && speedShown
     // Whether the websocket is connected to score.
     readonly property bool connected: socket.status === WebSocket.Open
     // Transport button size (touch-friendly, capped so it isn't huge on big screens).
     readonly property int btn: Math.max(Skin.minTouch, Math.min(72, Math.round(width / 18)))
-    readonly property int panelHeight: Math.max(Skin.minTouch * 2, Math.round(height * 0.16))
+    // Floor height for the trigger / speed panels; they grow above this so as
+    // many cues as possible are visible at once (see the panels Item below).
+    readonly property int panelHeight: Math.max(Skin.minTouch * 2, Math.round(height * 0.18))
     readonly property int speedWidth: compact ? Math.max(Skin.minTouch, width - btn - 28)
                                               : Math.round(width / 3)
-    // How many side panels actually have content (empty ones are hidden).
-    readonly property int visiblePanelCount: (scoreTriggers.count > 0 ? 1 : 0)
-                                           + (scoreSpeeds.count > 0 ? 1 : 0)
 
     // Called when the remote is disconnected from score
     function disconnect() {
@@ -95,12 +101,16 @@ Item {
         anchors.bottomMargin: is_mobile ? 50 : 5
         spacing: 5
 
-        // ===== TOP BAR (wraps on narrow screens) =====
-        Flow {
+        // ===== TOP BAR =====
+        // Line 1: transport (left) + the view toggles (right, flush). In wide
+        // (landscape) mode the main speed sits inline in the middle; in compact
+        // (portrait) mode it drops to its own full-width line below so the
+        // toggles stay on the transport line.
+        RowLayout {
             Layout.fillWidth: true
             spacing: 8
 
-            // Transport: connect / play-pause / stop, laid out horizontally
+            // Transport: connect / play-pause / stop
             Row {
                 spacing: 4
 
@@ -122,42 +132,82 @@ Item {
                 }
             }
 
-            // Main speed + hide button
+            // Inline main-speed slot (landscape only). The ScoreSpeed instance is
+            // reparented in here (see below); in portrait it moves to its own line.
+            Item {
+                id: wideSpeedSlot
+                visible: !window.compact
+                Layout.preferredWidth: window.speedWidth
+                Layout.preferredHeight: window.btn
+            }
+
+            // Spacer: pushes the toggles to the right edge in both layouts.
+            Item { Layout.fillWidth: true }
+
+            // View toggles (right): each shows/hides its section. Always visible.
             Row {
                 spacing: 4
 
-                ScoreSpeed {
-                    id: scoreSpeed
-                    signal intervalMessageReceived(var n)
-                    signal intervalsMessageReceived(var n)
-
-                    width: window.speedWidth; height: window.btn
+                ScoreViewToggle {
+                    label: qsTr("Triggers")
+                    height: window.btn
+                    Component.onCompleted: checked = window.triggersEnabled
+                    onToggled: window.triggersEnabled = checked
                 }
 
-                ScoreHideButton {
-                    id: scoreHideButton
-                    width: window.btn; height: window.btn
+                ScoreViewToggle {
+                    label: qsTr("Speeds")
+                    height: window.btn
+                    Component.onCompleted: checked = window.speedsEnabled
+                    onToggled: window.speedsEnabled = checked
+                }
+
+                ScoreViewToggle {
+                    label: qsTr("Controls")
+                    height: window.btn
+                    Component.onCompleted: checked = window.controlsEnabled
+                    onToggled: window.controlsEnabled = checked
                 }
             }
         }
 
-        // ===== TRIGGER + SPEED PANELS (collapsible) =====
-        Flow {
-            id: panels
+        // Line 2 (portrait only): the main speed on its own full-width line.
+        Item {
+            id: compactSpeedSlot
+            visible: window.compact
             Layout.fillWidth: true
-            spacing: 8
-            // Only take space when shown and there is something to show.
-            visible: window.panelsVisible && (scoreTriggers.count > 0 || scoreSpeeds.count > 0)
+            Layout.preferredHeight: window.btn
+        }
+
+        // ===== TRIGGER + SPEED PANELS =====
+        // Grows to share the vertical space with the control surfaces (capped so
+        // the surfaces keep a fair share) so as many cues as possible are shown
+        // at once. Laid out by hand (not a Flow) to keep the child heights from
+        // feeding back into the container height.
+        Item {
+            id: panels
+            property int spacing: 8
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.minimumHeight: window.panelHeight
+            // Capped so the control surfaces keep a fair share — but when the
+            // Controls view is hidden, let the panels use the freed space.
+            Layout.maximumHeight: window.controlsEnabled ? Math.round(window.height * 0.55)
+                                                         : window.height
+            visible: window.trigShown || window.speedShown
 
             ScoreTriggers {
                 id: scoreTriggers
                 signal triggerMessageReceived(var n)
                 signal clearTriggerList()
 
-                visible: count > 0
-                width: (window.compact || window.visiblePanelCount < 2)
+                visible: window.trigShown
+                x: 0; y: 0
+                width: (window.compact || !window.dualPanels)
                        ? panels.width : (panels.width - panels.spacing) / 2
-                height: window.panelHeight
+                height: (window.compact && window.dualPanels)
+                        ? (panels.height - panels.spacing) / 2 : panels.height
             }
 
             ScoreSpeeds {
@@ -166,16 +216,22 @@ Item {
                 signal intervalsMessageReceived(var n)
                 signal clearSpeedList()
 
-                visible: count > 0
-                width: (window.compact || window.visiblePanelCount < 2)
+                visible: window.speedShown
+                x: (window.dualPanels && !window.compact)
+                   ? (panels.width + panels.spacing) / 2 : 0
+                y: (window.dualPanels && window.compact)
+                   ? (panels.height + panels.spacing) / 2 : 0
+                width: (window.compact || !window.dualPanels)
                        ? panels.width : (panels.width - panels.spacing) / 2
-                height: window.panelHeight
+                height: (window.compact && window.dualPanels)
+                        ? (panels.height - panels.spacing) / 2 : panels.height
             }
         }
 
         // ===== CONTROL SURFACES (fill remaining space) =====
         Item {
             id: csArea
+            visible: window.controlsEnabled
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -215,6 +271,15 @@ Item {
             }
         }
 
+        // Filler that absorbs the slack (keeping the top bar at the top and the
+        // timeline at the bottom) when every section above is hidden and nothing
+        // else is filling the vertical space.
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            visible: !panels.visible && !csArea.visible
+        }
+
         // ===== TIMELINE (bottom) =====
         ScoreTimeline {
             id: scoreTimeline
@@ -222,5 +287,17 @@ Item {
 
             Layout.fillWidth: true
         }
+    }
+
+    // The single main-speed slider, reparented into whichever slot is active:
+    // inline on the top bar (landscape) or its own line below (portrait). One
+    // instance so its score message handlers stay wired to `scoreSpeed` by id.
+    ScoreSpeed {
+        id: scoreSpeed
+        signal intervalMessageReceived(var n)
+        signal intervalsMessageReceived(var n)
+
+        parent: window.compact ? compactSpeedSlot : wideSpeedSlot
+        anchors.fill: parent
     }
 }

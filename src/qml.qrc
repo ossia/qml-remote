@@ -101,7 +101,7 @@
         <file>Icons/indicator_hidden_on.svg</file>
         <file>Icons/indicator_on.svg</file>
         <file>Utility/Skin.qml</file>
-        <file>HideButton/ScoreHideButton.qml</file>
+        <file>HideButton/ScoreViewToggle.qml</file>
         <file>Icons/ip_address.png</file>
         <file>Icons/ip_address.svg</file>
         <file>Icons/ip_address_on.png</file>
