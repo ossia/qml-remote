@@ -1,6 +1,30 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QDirIterator>
+#include <QFont>
+#include <QFontDatabase>
+
+// Register every bundled font (fonts.qrc -> :/fonts) with the application font
+// database. Mirrors ossia score (src/app/Application.cpp): a blanket walk of the
+// resource tree rather than a hand-maintained list, done before the QML engine
+// starts so any family is usable from QML by its family string. This is the only
+// way the UI gets a real typeface against the static ossia SDK Qt, which ships
+// no system fonts.
+static void loadApplicationFonts()
+{
+    QDirIterator it(":/fonts", QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        const QString font = it.next();
+        if (font.endsWith("ttf", Qt::CaseInsensitive)
+         || font.endsWith("otf", Qt::CaseInsensitive)
+         || font.endsWith("bdf", Qt::CaseInsensitive))
+        {
+            QFontDatabase::addApplicationFont(font);
+        }
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +39,18 @@ int main(int argc, char *argv[])
 
     app.setOrganizationName("ossia.io");
     app.setOrganizationDomain("Remote Control");
+
+    loadApplicationFonts();
+
+    // Ubuntu is the general UI font (Ubuntu Mono is used for numeric readouts,
+    // set per-element in QML via Skin.monoFont). Setting the app default here
+    // also covers any control internals not bound explicitly in QML, from the
+    // very first frame.
+    {
+        QFont f("Ubuntu", 10);
+        f.setHintingPreference(QFont::HintingPreference::PreferVerticalHinting);
+        app.setFont(f);
+    }
 
     QQmlApplicationEngine engine;
     const bool debugEnabled = qEnvironmentVariableIntValue("SCORE_QML_REMOTE_DEBUG") > 0;

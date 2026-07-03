@@ -38,4 +38,12 @@ QtObject {
     readonly property int fontLabel: 14    // default control label
     readonly property int fontTitle: 16    // surface / section titles, empty-state heading
     readonly property int fontHeading: 18  // largest emphasis
+
+    // ---- Application fonts ----------------------------------------------
+    // Bundled in fonts.qrc and registered in main.cpp before the engine starts
+    // (the static ossia SDK Qt ships no system fonts). `font` is the general UI
+    // typeface; `monoFont` is used for numeric value readouts / editable number
+    // fields so digits stay aligned and legible.
+    readonly property string font: "Ubuntu"
+    readonly property string monoFont: "Ubuntu Mono"
 }

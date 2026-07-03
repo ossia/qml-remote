@@ -48,6 +48,7 @@ Button {
         Label {
             width: parent.width
             text: qsTr("Do you really want to disconnect?")
+            font.family: Skin.font
             color: Skin.white
             wrapMode: Text.WordWrap
         }

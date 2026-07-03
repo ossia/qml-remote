@@ -64,6 +64,7 @@ Slider {
         color: Skin.white
         elide: Text.ElideRight
         font.pointSize: slider.labelSize
+        font.family: Skin.font
     }
     Text {
         anchors { right: parent.right; rightMargin: 6
@@ -71,5 +72,6 @@ Slider {
         text: slider.valueText
         color: Skin.white
         font.pointSize: slider.labelSize
+        font.family: Skin.monoFont
     }
 }

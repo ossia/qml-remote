@@ -52,6 +52,7 @@ Button {
 
             Label {
                 text: qsTr("IP address")
+                font.family: Skin.font
                 color: Skin.white
             }
 
@@ -59,7 +60,7 @@ Button {
                 id: ipInput
                 Layout.fillWidth: true
                 text: settings.ip_address
-                placeholderText: "127.0.0.1"
+                font.family: Skin.font
                 color: Skin.white
                 verticalAlignment: TextInput.AlignVCenter
                 inputMethodHints: Qt.ImhPreferNumbers
@@ -67,6 +68,17 @@ Button {
                 background: Rectangle {
                     color: Skin.darkGray
                     border.color: Skin.brown
+                    // Non-floating placeholder (see ScoreLineEdit): empty-only.
+                    Text {
+                        anchors.fill: parent
+                        leftPadding: ipInput.leftPadding; rightPadding: ipInput.rightPadding
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+                        text: "127.0.0.1"
+                        color: Skin.gray3
+                        font: ipInput.font
+                        visible: ipInput.text.length === 0
+                    }
                 }
             }
         }

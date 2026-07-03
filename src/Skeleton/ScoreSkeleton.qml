@@ -200,6 +200,7 @@ Item {
                                            : qsTr("Not connected to score")
                     color: Skin.lightGray
                     font.pointSize: Skin.fontTitle
+                    font.family: Skin.font
                 }
                 Text {
                     width: parent.width
@@ -209,6 +210,7 @@ Item {
                     text: qsTr("Use the connection button at the top-left to set the IP address and connect.")
                     color: Skin.gray3
                     font.pointSize: Skin.fontBody
+                    font.family: Skin.font
                 }
             }
         }

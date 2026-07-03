@@ -36,6 +36,7 @@ Item {
         text: ' ' + root.controlCustom + ' (' + root.points.length + ' pts)'
         color: Skin.white
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.font
     }
 
     Canvas {

@@ -44,6 +44,7 @@ Item {
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
             font.pointSize: root.width <= 200 ? 10 : 12
+            font.family: Skin.font
         }
 
         SpinBox {
@@ -110,6 +111,7 @@ Item {
                 inputMethodHints: Qt.ImhFormattedNumbersOnly
                 selectByMouse: true
                 font.pointSize: root.width <= 200 ? 10 : 12
+                font.family: Skin.monoFont
             }
 
             up.indicator: Rectangle {
@@ -123,6 +125,7 @@ Item {
                     color: Skin.white
                     anchors.centerIn: parent
                     font.pointSize: 14
+                    font.family: Skin.font
                 }
             }
 
@@ -137,6 +140,7 @@ Item {
                     color: Skin.white
                     anchors.centerIn: parent
                     font.pointSize: 14
+                    font.family: Skin.font
                 }
             }
         }

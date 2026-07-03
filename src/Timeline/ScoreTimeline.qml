@@ -84,6 +84,7 @@ Slider {
             text: msToTime(time.value * totalTime)
             color: Skin.white
             font.pointSize: time.height <= 0 ? 1 : Math.max(8, time.height / 2.8)
+            font.family: Skin.monoFont
         }
     }
 }

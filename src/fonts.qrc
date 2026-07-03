@@ -1,0 +1,14 @@
+<RCC>
+    <!--
+      Bundled UI fonts. The static ossia SDK Qt ships no fonts, so main.cpp
+      registers everything under :/fonts with QFontDatabase::addApplicationFont()
+      before the QML engine starts (mirroring ossia score's Application.cpp).
+      Ubuntu is the general typeface; Ubuntu Mono is used for numeric readouts.
+    -->
+    <qresource prefix="/">
+        <file>fonts/Ubuntu-Regular.ttf</file>
+        <file>fonts/Ubuntu-Bold.ttf</file>
+        <file>fonts/UbuntuMono-Regular.ttf</file>
+        <file>fonts/UbuntuMono-Bold.ttf</file>
+    </qresource>
+</RCC>

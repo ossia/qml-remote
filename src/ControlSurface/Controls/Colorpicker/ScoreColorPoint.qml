@@ -30,6 +30,7 @@ Rectangle {
         anchors { left: colorButton.left; leftMargin: 5; horizontalCenter: colorButton.horizontalCenter }
         text: controlCustom
         font.pointSize: parent.width <= 200 ? 8 : 10
+        font.family: Skin.font
         color: Skin.white
     }
 

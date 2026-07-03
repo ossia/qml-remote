@@ -32,6 +32,7 @@ Rectangle {
         anchors.horizontalCenter: positionButton.horizontalCenter
         text: controlCustom
         font.pointSize: parent.height * (9 / 40)
+        font.family: Skin.font
         color: Skin.white
     }
 
@@ -42,6 +43,7 @@ Rectangle {
         color: Skin.white
         text: "x,y " + positionButton.controlX.toFixed(2) + "," + positionButton.controlY.toFixed(2)
         font.pointSize: parent.height * (9 / 40)
+        font.family: Skin.monoFont
     }
 
     MouseArea {

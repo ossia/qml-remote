@@ -39,6 +39,7 @@ Item {
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
             font.pointSize: root.width <= 200 ? 10 : 12
+            font.family: Skin.font
         }
 
         TextField {
@@ -46,15 +47,27 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: root.controlValue
+            font.family: Skin.font
             color: Skin.white
             verticalAlignment: TextInput.AlignVCenter
             topPadding: 0; bottomPadding: 0
             selectByMouse: true
-            placeholderText: qsTr("set value…")
-            placeholderTextColor: Skin.gray3
             background: Rectangle {
                 color: Skin.gray2; radius: 4
                 border.color: field.activeFocus ? Skin.orange : Skin.gray3
+                // Non-floating placeholder: lives in the background (so it never
+                // blocks input) and shows only while empty — unlike Material's
+                // floating label, which overlaps the text once there is content.
+                Text {
+                    anchors.fill: parent
+                    leftPadding: field.leftPadding; rightPadding: field.rightPadding
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                    text: qsTr("set value…")
+                    color: Skin.gray3
+                    font: field.font
+                    visible: field.text.length === 0
+                }
             }
 
             onEditingFinished: socket.sendTextMessage(

@@ -93,6 +93,7 @@ ComboBox {
 
         contentItem: Text {
             text: name
+            font.family: Skin.font
             color: delegateItem.highlighted ? Skin.dark : Skin.white
             font.pointSize: parent.width <= 200
                             ? 10
@@ -126,6 +127,7 @@ ComboBox {
         leftPadding: 5
         rightPadding: comboBox.indicator.width + comboBox.spacing
         text: qsTr(controlCustom) + " " + comboBox.displayText
+        font.family: Skin.font
         color: Skin.white
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight

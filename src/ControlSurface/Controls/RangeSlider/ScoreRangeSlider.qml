@@ -46,6 +46,7 @@ Item {
               + (root.isInt ? Math.round(slider.second.value) : slider.second.value.toFixed(2)) + ']'
         color: Skin.white
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.font
     }
 
     RangeSlider {

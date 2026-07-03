@@ -35,6 +35,7 @@ Item {
         text: ' ' + root.controlCustom
         color: Skin.white
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.font
     }
 
     Dial {
@@ -71,5 +72,6 @@ Item {
         text: dial.value.toFixed(3)
         color: Skin.white
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.monoFont
     }
 }
