@@ -53,6 +53,7 @@ Item {
         text: ' ' + root.controlCustom
         color: Skin.white
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.font
     }
 
     Column {
@@ -72,6 +73,7 @@ Item {
                     text: root.isTuple ? index : (root.axisNames[index] || index)
                     color: Skin.white
                     font.pointSize: root.width <= 200 ? 9 : 11
+                    font.family: Skin.font
                     anchors.verticalCenter: parent.verticalCenter
                 }
 

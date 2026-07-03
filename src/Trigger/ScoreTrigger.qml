@@ -16,6 +16,7 @@ Button {
         color: Skin.white
         verticalAlignment: Text.AlignVCenter
         font.pointSize: window.width <= 500 ? 8 : parent.height / 2
+        font.family: Skin.font
         elide: Text.ElideRight
     }
 

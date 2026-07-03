@@ -52,6 +52,7 @@ Item {
         text: ' ' + root.controlCustom
         color: Skin.white
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.font
     }
 
     Row {
@@ -69,6 +70,7 @@ Item {
                     text: root.axisNames[index] || index
                     color: Skin.white
                     font.pointSize: root.width <= 200 ? 9 : 11
+                    font.family: Skin.font
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
@@ -77,6 +79,7 @@ Item {
                     height: Skin.minTouch
                     text: root.isInt ? String(Math.round(root.current[index]))
                                      : Number(root.current[index]).toFixed(3)
+                    font.family: Skin.monoFont
                     color: Skin.white
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: TextInput.AlignVCenter

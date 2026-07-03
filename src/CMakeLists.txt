@@ -54,6 +54,7 @@ qt_standard_project_setup(REQUIRES 6.11)
 qt_add_executable(ossia_remote
   main.cpp
   qml.qrc
+  fonts.qrc
 )
 
 target_link_libraries(ossia_remote PRIVATE

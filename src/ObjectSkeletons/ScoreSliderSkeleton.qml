@@ -56,6 +56,7 @@ Slider {
         color: Skin.white
         elide: Text.ElideRight
         font.pointSize: control.labelSize
+        font.family: Skin.font
     }
     Text {
         anchors { right: parent.right; rightMargin: 6
@@ -63,5 +64,6 @@ Slider {
         text: control.value.toFixed(3) + (control.controlUnit ? ' ' + control.controlUnit : '')
         color: Skin.white
         font.pointSize: control.labelSize
+        font.family: Skin.monoFont
     }
 }

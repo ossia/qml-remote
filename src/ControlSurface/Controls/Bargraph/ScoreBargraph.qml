@@ -45,6 +45,7 @@ Item {
         color: Skin.white
         style: Text.Outline; styleColor: Skin.dark
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.font
     }
 
     Text {
@@ -53,5 +54,6 @@ Item {
         color: Skin.white
         style: Text.Outline; styleColor: Skin.dark
         font.pointSize: root.width <= 200 ? 10 : 12
+        font.family: Skin.monoFont
     }
 }

@@ -99,6 +99,7 @@ Rectangle {
         text: qsTr("Speeds")
         color: Skin.lightGray
         font.pointSize: Skin.fontCaption
+        font.family: Skin.font
         font.capitalization: Font.AllUppercase
         font.bold: true
         elide: Text.ElideRight

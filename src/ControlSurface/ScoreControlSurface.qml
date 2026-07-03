@@ -71,6 +71,7 @@ Column {
                                  : window.width <= 1200
                                    ? Skin.fontBody
                                    : Skin.fontTitle
+                font.family: Skin.font
             }
 
             Image {

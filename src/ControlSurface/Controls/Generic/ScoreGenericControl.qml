@@ -96,6 +96,7 @@ Item {
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
             font.pointSize: root.width <= 200 ? Skin.fontCaption : Skin.fontBody
+            font.family: Skin.font
         }
 
         TextField {
@@ -104,11 +105,25 @@ Item {
             Layout.fillHeight: true
             text: root.displayText(root._v)
             color: Skin.white
+            font.family: Skin.monoFont
             verticalAlignment: TextInput.AlignVCenter
             topPadding: 0; bottomPadding: 0
             selectByMouse: true
-            placeholderText: qsTr("value")
-            background: Rectangle { color: Skin.darkGray; border.color: root.controlColor }
+            background: Rectangle {
+                color: Skin.darkGray; border.color: root.controlColor
+                // Non-floating placeholder (see ScoreLineEdit): empty-only, behind
+                // the text, so Material's floating label can't overlap the value.
+                Text {
+                    anchors.fill: parent
+                    leftPadding: field.leftPadding; rightPadding: field.rightPadding
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                    text: qsTr("value")
+                    color: Skin.gray3
+                    font: field.font
+                    visible: field.text.length === 0
+                }
+            }
 
             onEditingFinished: socket.sendTextMessage(
                 `{ "Message": "ControlSurface","Path": ${root.controlSurfacePath}, "id": ${root.controlId}, "Value": ${root.toValueJson(field.text, root.valueType(root._v))} }`)
