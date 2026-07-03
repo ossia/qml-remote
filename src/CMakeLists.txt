@@ -57,6 +57,12 @@ qt_add_executable(ossia_remote
   fonts.qrc
 )
 
+# Build a GUI-subsystem executable on Windows so no console window is spawned
+# next to the app. qt_add_executable already links Qt's entry-point shim
+# (Qt6::EntryPointPrivate), which supplies the WinMain that forwards to main(),
+# so flipping the subsystem is all that is needed. Ignored on other platforms.
+set_target_properties(ossia_remote PROPERTIES WIN32_EXECUTABLE TRUE)
+
 target_link_libraries(ossia_remote PRIVATE
   Qt6::Quick
   Qt6::Gui
