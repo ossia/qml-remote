@@ -9,6 +9,7 @@ jobs:
     - uses: rojopolis/spellcheck-github-actions@0.14.0
       name: Spellcheck
       with:
+        # The action passes source_files verbatim to pyspelling; a glob like
+        # `src/*` is never expanded, so it was silently skipped and nothing got
+        # checked. Let the config's own `sources:` (src/**/*.qml) drive it.
         config_path: config/.spellcheck.yml # path to configuration file here
-        source_files: src/*
-        task_name: Qml

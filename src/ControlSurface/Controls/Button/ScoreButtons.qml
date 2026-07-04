@@ -15,7 +15,7 @@ import "qrc:/Utility/utility.js" as Utility
 
 Flow {
 
-    // Receving informations about buttons in control surface from score
+    // Receiving information about buttons in control surface from score
     Connections {
 
         // Adding a button in the control surface
