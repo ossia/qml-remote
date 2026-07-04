@@ -7,7 +7,18 @@ matrix:
     - .wordlist.txt
     encoding: utf-8
   pipeline:
+  # Only spell-check comment prose. Code identifiers, string literals, colour
+  # codes and UUIDs are not natural language and would drown real typos in
+  # noise, so restrict aspell to the text inside // line and /* */ block
+  # comments.
+  - pyspelling.filters.context:
+      context_visible_first: false
+      delimiters:
+        - open: '/\*'
+          close: '\*/'
+        - open: '//'
+          close: '$'
   - pyspelling.filters.text:
   sources:
-  - '**/*.qml'
+  - 'src/**/*.qml'
   default_encoding: utf-8

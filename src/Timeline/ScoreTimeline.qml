@@ -68,7 +68,7 @@ Slider {
         }
     }
 
-    // Basically the slider's ratio times the totalTime (ms) gives the elasped time (ms)
+    // Basically the slider's ratio times the totalTime (ms) gives the elapsed time (ms)
     // Which must then be converted into a date type
     // Readable time chip (legible over both the track and the progress fill)
     Rectangle {
