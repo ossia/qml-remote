@@ -11,7 +11,7 @@ WebSocket {
     id: socket
 
     url: "ws://" + settings.ip_address + ":10212"
-    active: false
+    active: (typeof auto_connect !== "undefined") && auto_connect
 
     // Handling message from score
     onTextMessageReceived: {
