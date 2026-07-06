@@ -1,3 +1,7 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten/val.h>
+#endif
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -68,10 +72,14 @@ int main(int argc, char *argv[])
     const bool tmp_is_mobile = qEnvironmentVariableIsSet("IS_MOBILE") ? qEnvironmentVariableIntValue("IS_MOBILE") > 0 : false;
     engine.rootContext()->setContextProperty("is_mobile", tmp_is_mobile);
 
-    // Score injects its own address via SCORE_IP_ADDRESS when it serves or
-    // launches the remote, so the connection can default to it (empty when
-    // unset, in which case the saved IP / localhost is used).
-    engine.rootContext()->setContextProperty("score_ip_address", qEnvironmentVariable("SCORE_IP_ADDRESS"));
+#ifdef __EMSCRIPTEN__
+    // Retrive the sever's address from "emscripten". Copied from
+    // stackoverflow.com/questions/55793546/is-there-any-possibility-to-pass-data-from-browser-to-a-qt-webassembly-app-may#67634393
+    emscripten::val location{emscripten::val::global("location")};
+    QString host{QString::fromStdString(location["hostname"].as<std::string>())};
+    engine.rootContext()->setContextProperty("score_ip_address", host);
+    engine.rootContext()->setContextProperty("auto_connect", true);
+#endif
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
