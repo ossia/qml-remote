@@ -132,8 +132,8 @@ Item {
                 }
             }
 
-            // Inline main-speed slot (landscape only). The ScoreSpeed instance is
-            // reparented in here (see below); in portrait it moves to its own line.
+            // Inline main-speed slot (landscape only). The `ScoreSpeed` instance is
+            // repeated here (see below); in portrait it moves to its own line.
             Item {
                 id: wideSpeedSlot
                 visible: !window.compact
@@ -289,7 +289,7 @@ Item {
         }
     }
 
-    // The single main-speed slider, reparented into whichever slot is active:
+    // The single main-speed slider, repeated into whichever slot is active:
     // inline on the top bar (landscape) or its own line below (portrait). One
     // instance so its score message handlers stay wired to `scoreSpeed` by id.
     ScoreSpeed {
