@@ -23,8 +23,8 @@ Button {
     leftPadding: 10; rightPadding: 10
     topInset: 0; bottomInset: 0; leftInset: 0; rightInset: 0
 
-    // Width from the label's natural size (TextMetrics, so it doesn't collapse
-    // under the contentItem's own elide) plus the horizontal padding.
+    // Width from the label's natural size (`TextMetrics`, so it doesn't collapse
+    // under the `contentItem`'s own elide) plus the horizontal padding.
     implicitWidth: Math.max(height, Math.ceil(labelMetrics.width) + leftPadding + rightPadding)
 
     TextMetrics {

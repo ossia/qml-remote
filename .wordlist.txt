@@ -165,3 +165,10 @@ xy
 XYSlider
 zz
 ObjectModel's
+
+paddings
+padding
+TextMetrics
+contentItem
+ScoreSpeed
+scoreSpeed
